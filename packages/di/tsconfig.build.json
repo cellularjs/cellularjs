@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src/",
+    "outDir": "dist",
+    "baseUrl": "./src/",
+    "sourceMap": false,
+    "removeComments": false,
+    "module": "commonjs",
+    "target": "es2017",
+    "declaration": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es7"
+    ],
+    "moduleResolution": "node"
+  },
+  "include": [
+    "./src/**/*.ts"
+  ]
+}

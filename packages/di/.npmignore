@@ -1,0 +1,6 @@
+node_modules
+test
+src
+tsconfig.json
+tsconfig.build.json
+readme.md
