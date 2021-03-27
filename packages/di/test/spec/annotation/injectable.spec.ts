@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Container } from "../../../src";
+import { Container, getInjectable } from "../../../src";
 import { Connection } from "../../fixture/pkg/mongo/connection";
 
 describe("Annotation - Injectable(): decorate a class to make its dependencies injectable", () => {
@@ -23,5 +23,9 @@ describe("Annotation - Injectable(): decorate a class to make its dependencies i
     expect(connection.mongoUrl).to.equal("mongodb://neverland");
     expect(connection.mongoUsr).to.equal("guest");
     expect(connection.mongoPwd).to.equal("*********");
+  });
+
+  it("can be detected as cellularjs injectable", () => {
+    expect(getInjectable(Connection)).to.true;
   });
 });

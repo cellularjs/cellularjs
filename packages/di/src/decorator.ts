@@ -1,4 +1,4 @@
-import { CLL_MODULE, CLL_TOKEN } from "./meta-key";
+import { CLL_MODULE, CLL_INJECTABLE, CLL_TOKEN } from "./meta-key";
 import { ModuleMeta, Token } from "./index";
 
 /**
@@ -6,6 +6,7 @@ import { ModuleMeta, Token } from "./index";
  * *Technically, typescript require using a decorator to emit type.*
  */
 export const Injectable = () => target => {
+  Reflect.defineMetadata(CLL_INJECTABLE, true, target);
   return target;
 }
 
@@ -13,7 +14,7 @@ export const Injectable = () => target => {
  * Allow to inject dependency with specific token.  
  * *For now, it only support inject dependency via constructor.*
  */
-export const Inject = (token: Token) => (target, key, index) => {
+export const Inject = (token: Token) => (target, _, index) => {
   Reflect.defineMetadata(CLL_TOKEN, token, target, `${index}`);
   return target;
 }

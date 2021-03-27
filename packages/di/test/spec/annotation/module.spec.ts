@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Module, Container, DiErrorCode, Injectable } from "../../../src";
+import { Module, Container, DiErrorCode, Injectable, getModuleMeta } from "../../../src";
 import { JwtModule } from "../../fixture/pkg/jwt/jwt.module";
 import { JwtService } from "../../fixture/pkg/jwt/jwt.service";
 import { MongoService } from "../../fixture/pkg/mongo/mongo.service";
@@ -181,5 +181,9 @@ describe("Annotation - Module(): define modular dependency injection", () => {
 
     expect(barService.run()).to.equal("barService");
     expect(barService.runFoo()).to.equal("fooService");
+  });
+
+  it("can be detected as cellularjs module", () => {
+    expect(getModuleMeta(JwtModule)).to.exist;
   });
 });
