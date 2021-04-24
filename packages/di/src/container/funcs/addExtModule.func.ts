@@ -1,0 +1,29 @@
+import { ExtModuleMeta, ClassType } from "../../type";
+import { getModuleMeta } from "../../utils";
+import { Container } from '../../'
+
+export function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
+  this.addModule(extModuleMeta.extModule);
+
+  const extModule = new Container();
+  extModule.addProviders(extModuleMeta.providers);
+
+  (extModuleMeta.exports || []).forEach(exportCnf => {
+    const moduleMeta = getModuleMeta(exportCnf);
+    if (moduleMeta) {
+      this.addModule(exportCnf);
+      return;
+    }
+
+    this.addProvider({
+      token: exportCnf,
+      useModule: extModuleMeta.extModule,
+    });
+
+    extModule.addProvider(exportCnf as ClassType<any>);
+  });
+
+  extModule.addModules(extModuleMeta.imports);
+
+  this._extModules.set(extModuleMeta.extModule, extModule);
+}
