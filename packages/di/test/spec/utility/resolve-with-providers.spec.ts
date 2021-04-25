@@ -5,11 +5,6 @@ import { request } from "../../fixture/const/data.const";
 import { CreateProfileReq } from "../../fixture/user/services/create-profile.req";
 
 describe("Utility - resolveWithProviders():", () => {
-  beforeEach(() => {
-    // clean static _ModuleMap
-    (Container as any)._ModuleMap = new Map();
-  });
-
   it("can resolve with temporary providers", () => {
     // can resolve with temporary providers
     const container = new Container;

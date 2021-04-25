@@ -14,9 +14,6 @@ describe("Utility - extend module: extend, override module", () => {
   let container: Container;
 
   beforeEach(() => {
-    // clean static _ModuleMap
-    (Container as any)._ModuleMap = new Map();
-
     container = new Container();
   });
 

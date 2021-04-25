@@ -8,9 +8,6 @@ describe("Provider - useFunc", () => {
   let container: Container;
 
   beforeEach(() => {
-    // clean static _ModuleMap
-    (Container as any)._ModuleMap = new Map();
-
     container = new Container();
   });
 
