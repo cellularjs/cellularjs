@@ -1,5 +1,6 @@
 import { Container } from '../../';
-import { AdjustedProvider, PermanentCycle } from '../../type'
+import { PermanentCycle } from "../../consts/cycle.const"
+import { AdjustedProvider } from '../../types'
 
 export function resolveFuncProvider(this: Container, provider: AdjustedProvider<any>) {
   if (this._resolvedValues.has(provider.token)) {

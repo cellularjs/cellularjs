@@ -1,5 +1,5 @@
 import { Container } from '../../'
-import { AdjustedProvider } from '../../type'
+import { AdjustedProvider } from '../../types'
 import { moduleMap } from '../props/module-map.static'
 
 export function resolveModuleProvider(this: Container, provider: AdjustedProvider<any>) {

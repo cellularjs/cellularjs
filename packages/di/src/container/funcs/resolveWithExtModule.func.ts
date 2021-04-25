@@ -1,5 +1,5 @@
 import { Container } from '../../';
-import { Token } from "../../type";
+import { Token } from "../../types";
 
 export function resolveWithExtModule<T>(this: Container, token: Token, extModule: Container): T {
   this._extModule = extModule;

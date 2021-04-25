@@ -1,4 +1,4 @@
-import { getVarName } from "./utils";
+import { getVarName } from "../utils";
 
 export enum DiErrorCode {
   NoProviderForToken = 'DI_NO_PROVIDER_FOR_TOKEN',

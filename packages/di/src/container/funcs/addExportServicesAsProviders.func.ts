@@ -1,5 +1,5 @@
 import { getModuleMeta } from '../../utils'
-import { ClassType, ExportableCnf } from "../../type";
+import { ClassType, ExportableCnf } from "../../types";
 import { Container } from '../../'
 
 export function addExportServicesAsProviders<T>(this: Container, exports: ExportableCnf[] = []): void {

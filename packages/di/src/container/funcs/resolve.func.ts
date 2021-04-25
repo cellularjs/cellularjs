@@ -1,5 +1,5 @@
 import { Errors, Container } from "../../";
-import { Token } from "../../type";
+import { Token } from "../../types";
 
 export function resolve<T>(this: Container, token: Token): T {
   if (this._extModule && this._extModule.has(token)) {

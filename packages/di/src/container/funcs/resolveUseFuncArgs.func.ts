@@ -1,5 +1,5 @@
 import { Container } from '../../';
-import { AdjustedDep } from "../../type";
+import { AdjustedDep } from "../../types";
 
 export function resolveUseFuncArgs(this: Container, deps: AdjustedDep[]): any[] {
   return deps.map(dep => {

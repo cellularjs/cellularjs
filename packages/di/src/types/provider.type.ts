@@ -1,20 +1,6 @@
-export type ClassType<T> = { new(...args: any[]): T };
-
-export type FuncType<T> = (...args: any[]) => T;
-
-export type ValueType<T> = T;
-
-export type Token = any;
-
-export type CycleType = "permanent" | "transient";
-
-export const PermanentCycle = 1;
-export const TransientCycle = 2;
-
-export enum CycleTypeMap {
-  permanent = PermanentCycle,
-  transient = TransientCycle,
-}
+import { CycleTypeMap } from '../consts/cycle.const';
+import { DiResolvers } from '../consts/di-resolver.const';
+import { ClassType, CycleType, Token, FuncType, ValueType } from './';
 
 export interface ProviderHasCycle {
   /**
@@ -74,16 +60,6 @@ export type GenericProvider<T> = UseModuleProvider | UseClassProvider<T> | Class
 /**
  * @package
  */
-export enum DiResolvers {
-  useModuleResolver = 0,
-  useClassResolver = 1,
-  useFuncResolver = 2,
-  useValueResolver = 3,
-}
-
-/**
- * @package
- */
 export interface AdjustedProvider<T> extends BaseProvider {
   resolver: DiResolvers;
   useModule?: ClassType<any>,
@@ -97,21 +73,4 @@ export interface AdjustedProvider<T> extends BaseProvider {
 export interface AdjustedDep {
   value: any,
   isClass: boolean | undefined,
-}
-
-export type ImportableCnf = ClassType<any> | ExtModuleMeta;
-
-export type ExportableCnf = ClassType<any> | ExtModuleMeta;
-
-export interface ModuleMeta {
-  providers?: GenericProvider<any>[];
-  imports?: ImportableCnf[];
-  exports?: ExportableCnf[];
-}
-
-export interface ExtModuleMeta extends ModuleMeta {
-  /**
-   * Module class that you want to extend
-   */ 
-  extModule: ClassType<any>;
 }

@@ -1,5 +1,5 @@
-import { ModuleMeta } from "../";
-import { CLL_MODULE, CLL_INJECTABLE, CLL_PARAM_TYPES, CLL_TOKEN } from "../meta-key";
+import { ModuleMeta } from "..";
+import { CLL_MODULE, CLL_INJECTABLE, CLL_PARAM_TYPES, CLL_TOKEN } from "../consts/meta-key.const";
 
 /**
  * @param moduleClass Module class is a class decorated by `@Module` annotation

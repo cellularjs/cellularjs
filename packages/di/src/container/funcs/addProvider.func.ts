@@ -1,7 +1,7 @@
-import { Errors } from "../../error";
-import { GenericProvider, AdjustedProvider } from "../../type";
-import { classifyProvider } from '../../utils'
-import { Container } from '../../'
+import { Container } from '../../';
+import { Errors } from "../../consts/error.const";
+import { GenericProvider, AdjustedProvider } from "../../types";
+import { classifyProvider } from '../../utils';
 
 export function addProvider<T>(this: Container, genericProvider: GenericProvider<T>) {
   const token = (genericProvider as AdjustedProvider<T>).token ||  genericProvider;

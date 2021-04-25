@@ -1,6 +1,8 @@
-import { GenericProvider, AdjustedProvider, DiResolvers, AdjustedDep, CycleTypeMap } from "../";
-import { isClass } from "./is-class";
-import { ProviderHasCycle } from "../type";
+import { GenericProvider, AdjustedProvider, AdjustedDep } from "../";
+import { DiResolvers } from "../consts/di-resolver.const"
+import { CycleTypeMap } from "../consts/cycle.const"
+import { BaseProvider, ProviderHasCycle } from "../types";
+import { isClass } from "./isClass.func";
 
 /**
  * Classify provider into useModule, useClass, useFunc or useValue provider
@@ -9,7 +11,7 @@ import { ProviderHasCycle } from "../type";
 export function classifyProvider<T>(genericProvider: GenericProvider<T>): AdjustedProvider<T> {
   let adjustedProvider: AdjustedProvider<T>;
 
-  if ((genericProvider as AdjustedProvider<T>).token) {
+  if ((genericProvider as BaseProvider).token) {
     adjustedProvider = { ...genericProvider } as AdjustedProvider<T>;
   } else {
     adjustedProvider = {
