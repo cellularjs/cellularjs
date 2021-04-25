@@ -4,7 +4,7 @@ import { Container, DiErrorCode } from "../../../src";
 import { request } from "../../fixture/const/data.const";
 import { CreateProfileReq } from "../../fixture/user/services/create-profile.req";
 
-describe("Utility - resolveWithProviders():", () => {
+describe("Container - resolveWithProviders():", () => {
   it("can resolve with temporary providers", () => {
     // can resolve with temporary providers
     const container = new Container;
