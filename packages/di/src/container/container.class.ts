@@ -1,5 +1,7 @@
 import { GenericProvider, Token, ExportableCnf, ImportableCnf } from "../types";
 import { DiResolvers} from '../consts/di-resolver.const'
+import { moduleMap } from './props/module-map.static'
+import { GlobalModule } from '../consts/global-module.const'
 import { ContainerBag } from './props/container-bag.prop'
 import { addExtModule } from './funcs/addExtModule.func'
 import { addModuleToMap } from './funcs/addModuleToMap.func'
@@ -17,6 +19,7 @@ import { resolveModuleProvider } from './funcs/resolveModuleProvider.func'
 import { resolveClassProvider } from './funcs/resolveClassProvider.func'
 import { resolveFuncProvider } from './funcs/resolveFuncProvider.func'
 import { resolveValueProvider } from './funcs/resolveValueProvider.func'
+import { resolveWithTmpGlobalProviders } from './funcs/resolveWithTmpGlobalProviders.func'
 
 export class Container extends ContainerBag {
   /**
@@ -50,6 +53,10 @@ export class Container extends ContainerBag {
     return this._providers.has(token);
   }
 
+  public remove(token: Token) {
+    this._providers.delete(token);
+  }
+
   /**
    * Resolve value by token.
    */
@@ -60,15 +67,14 @@ export class Container extends ContainerBag {
    */
   public resolveWithProviders = resolveWithProviders;
 
+  public resolveWithTmpGlobalProviders = resolveWithTmpGlobalProviders;
+
   protected _resolveWithRefModule = resolveWithRefModule;
 
   protected _resolveWithExtModule = resolveWithExtModule;
 
   protected _addExtModule = addExtModule;
 
-  /**
-   * @param moduleClass Module class is a class decorated by `@Module` annotation.
-   */
   protected _addModuleToMap = addModuleToMap;
 
   protected _addModuleExports = addModuleExports;
@@ -90,3 +96,7 @@ export class Container extends ContainerBag {
 
   protected [DiResolvers.useValueResolver] = resolveValueProvider;
 }
+
+export const globalContainer = new Container();
+
+moduleMap.set(GlobalModule, globalContainer);

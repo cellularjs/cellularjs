@@ -1,1 +1,1 @@
-export { Container } from './container.class'
+export { Container, globalContainer } from './container.class'
