@@ -1,7 +1,6 @@
-import { Errors, Container } from "../../";
+import { Errors } from "../../";
 import { Token } from "../../types";
-import { moduleMap } from "../props/module-map.static"
-import { GlobalModule } from "../../consts/global-module.const"
+import { Container, globalContainer } from "../"
 
 export function resolve<T>(this: Container, token: Token): T {
   if (this._extModule && this._extModule.has(token)) {
@@ -19,10 +18,9 @@ function tryAgain<T>(this: Container, token) {
   if (this._refModule && this._refModule.has(token)) {
     return this._refModule.resolve<T>(token);
   }
-
-  const globalModule = moduleMap.get(GlobalModule);
-  if (globalModule.has(token)) {
-    return globalModule.resolve<T>(token);
+ 
+  if (globalContainer.has(token)) {
+    return globalContainer.resolve<T>(token);
   }
 
   throw Errors.NoProviderForToken(token);
