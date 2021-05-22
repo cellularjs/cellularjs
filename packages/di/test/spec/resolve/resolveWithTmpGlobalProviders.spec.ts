@@ -14,19 +14,19 @@ beforeEach(() => {
 });
 
 describe("Container - resolveWithTmpGlobalProviders():", () => {
-  it("can resolve temporary global providers", () => {
-    container.resolveWithTmpGlobalProviders(UpdateProfile, [
+  it("can resolve temporary global providers", async () => {
+    await container.resolveWithTmpGlobalProviders(UpdateProfile, [
       { token: request, useValue: { name: 'foo', userId: 1, token: dummyAccessToken } },
     ]);
   });
 
-  it("will remove temporary global provider after resolve value when provider has token", () => {
-    container.resolveWithTmpGlobalProviders(UpdateProfile, [
+  it("will remove temporary global provider after resolve value when provider has token", async  () => {
+    await container.resolveWithTmpGlobalProviders(UpdateProfile, [
       { token: request, useValue: { name: 'foo', userId: 1, token: dummyAccessToken } },
     ]);
 
     try {
-      container.resolve(UpdateProfile);
+      await container.resolve(UpdateProfile);
 
       throw new Error();
     } catch (err) {
@@ -34,26 +34,26 @@ describe("Container - resolveWithTmpGlobalProviders():", () => {
     }
   });
 
-  it("will remove temporary global provider after resolve value even if provider is a class", () => {
+  it("will remove temporary global provider after resolve value even if provider is a class", async () => {
     class Foo { }
 
-    container.resolveWithTmpGlobalProviders(CreateProfile, [
+    await container.resolveWithTmpGlobalProviders(CreateProfile, [
       { token: request, useValue: { token: dummyAccessToken } },
       Foo
     ]);
 
-    container.resolveWithTmpGlobalProviders(CreateProfile, [
+    await container.resolveWithTmpGlobalProviders(CreateProfile, [
       { token: request, useValue: { token: dummyAccessToken } },
       Foo
     ]);
   })
 
-  it("will remove temporary global provider when error occurs", () => {
+  it("will remove temporary global provider when error occurs", async () => {
     const container = new Container();
     container.addModule(UserModule);
 
     try {
-      container.resolveWithTmpGlobalProviders(UpdateProfile, [
+      await container.resolveWithTmpGlobalProviders(UpdateProfile, [
         { token: request, useValue: { name: 'foo', userId: 1, token: 'bar' } },
       ]);
     } catch (e) {

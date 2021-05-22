@@ -1,7 +1,7 @@
 import { Container } from '../../';
 import { GenericProvider, Token } from "../../types";
 
-export function resolveWithProviders<T>(this: Container, token: Token, providers: GenericProvider<any>[]): T {
+export function resolveWithProviders<T>(this: Container, token: Token, providers: GenericProvider<any>[]): Promise<T> {
   const extModule = new Container();
   extModule.addProviders(providers);
 

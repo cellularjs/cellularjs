@@ -1,9 +1,6 @@
 import "mocha";
 import { expect } from "chai";
 import { Container, DiErrorCode } from "../../../src";
-import { SharedModule } from "../../fixture/pkg/shared.module"
-import { MongoService } from "../../fixture/pkg/mongo/mongo.service"
-import { Connection } from "../../fixture/pkg/mongo/connection"
 
 let container: Container;
 
@@ -12,9 +9,9 @@ beforeEach(() => {
 });
 
 describe("Container - resolve:", () => {
-  it("can not resole value by token that is not exist", () => {
+  it("can not resole value by token that is not exist", async () => {
     try {
-      container.resolve(123);
+      await container.resolve(123);
 
       expect(true).to.false;
     } catch (err) {

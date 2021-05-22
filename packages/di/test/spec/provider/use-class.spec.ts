@@ -9,35 +9,38 @@ describe("Provider - class/useClass", () => {
     container = new Container();
   });
 
-  it("can resolve value from useClass provider", () => {
+  it("can resolve value from useClass provider", async () => {
     container.addProvider({
       token: Container,
       useClass: Container,
     });
 
-    const firstContainer = container.resolve(Container);
-    const secondContainer = container.resolve(Container);
+    const [firstContainer, secondContainer] = await Promise.all([
+      container.resolve(Container),
+      container.resolve(Container),
+    ]);
 
     expect(firstContainer).to.instanceOf(Container);
     expect(firstContainer === secondContainer).to.false;
   });
 
-  it("can cache resolved value when using useClass provider with permanent cycle", () => {
+  it("can cache resolved value when using useClass provider with permanent cycle", async () => {
     container.addProvider({
       token: Container,
       useClass: Container,
       cycle: "permanent",
     });
 
-    const firstResolvedValue = container.resolve(Container);
-    const secondResolvedValue = container.resolve(Container);
+    // TODO: could DI support permerant async provider
+    const firstResolvedValue = await container.resolve(Container);
+    const secondResolvedValue = await container.resolve(Container);
 
     expect(firstResolvedValue === secondResolvedValue).to.true;
   });
 
-  it("can resolve class as useClass provider", () => {
+  it("can resolve class as useClass provider", async () => {
     container.addProvider(Container);
 
-    expect(container.resolve(Container)).to.instanceOf(Container);
+    expect(await container.resolve(Container)).to.instanceOf(Container);
   });
 });

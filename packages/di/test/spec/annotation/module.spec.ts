@@ -18,34 +18,34 @@ describe("Annotation - Module(): define modular dependency injection", () => {
     container = new Container();
   });
 
-  it("can use a class as useClass provider inside providers", () => {
+  it("can use a class as useClass provider inside providers", async () => {
     container.addModule(JwtModule);
 
-    const jwtService = container.resolve<JwtService>(JwtService);
+    const jwtService = await container.resolve<JwtService>(JwtService);
 
     jwtService.md5Hash("run without crash");
   });
 
-  it("can use useClass provider inside providers", () => {
+  it("can use useClass provider inside providers", async () => {
     container.addModule(JwtModule);
 
-    const jwtService = container.resolve<JwtService>(JwtService);
+    const jwtService = await container.resolve<JwtService>(JwtService);
 
     jwtService.sha1Hash("run without crash");
   });
 
-  it("can use useFunc provider inside providers", () => {
+  it("can use useFunc provider inside providers", async () => {
     container.addModule(JwtModule);
 
-    const jwtService = container.resolve<JwtService>(JwtService);
+    const jwtService = await container.resolve<JwtService>(JwtService);
 
     jwtService.sha256Hash("run without crash");
   });
 
-  it("can use useValue provider inside providers", () => {
+  it("can use useValue provider inside providers", async () => {
     container.addModule(JwtModule);
 
-    const jwtService = container.resolve<JwtService>(JwtService);
+    const jwtService = await container.resolve<JwtService>(JwtService);
 
     jwtService.md2Hash("run without crash");
   });
@@ -53,7 +53,7 @@ describe("Annotation - Module(): define modular dependency injection", () => {
   it("can import other modules", async () => {
     container.addModule(AuthModule);
 
-    const verifyHanlder = container.resolve<Verify>(Verify);
+    const verifyHanlder = await container.resolve<Verify>(Verify);
 
     expect(await verifyHanlder.handle()).to.true;
   });
@@ -67,7 +67,7 @@ describe("Annotation - Module(): define modular dependency injection", () => {
       ],
     });
 
-    const createProfile = container.resolve<CreateProfile>(CreateProfile);
+    const createProfile = await container.resolve<CreateProfile>(CreateProfile);
 
     const expectedRs = { ...createProfileData, id: 1 };
     const actualRs = await createProfile.handle();
@@ -75,11 +75,11 @@ describe("Annotation - Module(): define modular dependency injection", () => {
     expect(actualRs).to.eqls(expectedRs);
   });
 
-  it("can not resolve provider that import from other module", () => {
+  it("can not resolve provider that import from other module", async () => {
     container.addModule(AuthModule);
 
     try {
-      container.resolve(JwtService);
+      await container.resolve(JwtService);
 
       expect(true).to.false;
     } catch (err) {
@@ -87,26 +87,26 @@ describe("Annotation - Module(): define modular dependency injection", () => {
     }
   });
 
-  it("can export services from module", () => {
+  it("can export services from module", async () => {
     container.addModule(JwtModule);
 
-    const jwtService = container.resolve(JwtService);
+    const jwtService = await container.resolve(JwtService);
 
     expect(jwtService).to.instanceOf(JwtService);
   });
 
-  it("can export other modules", () => {
+  it("can export other modules", async () => {
     container.addModule(SharedModule);
 
-    const jwtService = container.resolve(JwtService);
+    const jwtService = await container.resolve(JwtService);
 
     expect(jwtService).to.instanceOf(JwtService);
   });
 
-  it("can add a extend module into exports config", () => {
+  it("can add a extend module into exports config", async () => {
     container.addModule(SharedModule);
 
-    const mongoService = container.resolve(MongoService);
+    const mongoService = await container.resolve(MongoService);
 
     expect(mongoService).to.instanceOf(MongoService);
   });
@@ -151,7 +151,7 @@ describe("Annotation - Module(): define modular dependency injection", () => {
     }
   });
 
-  it("there is no need to add service class - that is also exported into providers before resolving", () => {
+  it("there is no need to add service class - that is also exported into providers before resolving", async () => {
     class FooService {
       run = () => "fooService";
     }
@@ -174,7 +174,7 @@ describe("Annotation - Module(): define modular dependency injection", () => {
 
     container.addModule(FooBarModule);
 
-    const barService = container.resolve<BarService>(BarService);
+    const barService = await container.resolve<BarService>(BarService);
 
     expect(barService.run()).to.equal("barService");
     expect(barService.runFoo()).to.equal("fooService");

@@ -1,7 +1,7 @@
 import { Container, globalContainer } from '../';
 import { Token, GenericProvider, BaseProvider } from "../../types";
 
-export function resolveWithTmpGlobalProviders<T>(this: Container, token: Token, providers: GenericProvider<any>[]): T {
+export function resolveWithTmpGlobalProviders<T>(this: Container, token: Token, providers: GenericProvider<any>[]): Promise<T> {
   try {
     globalContainer.addProviders(providers);
 

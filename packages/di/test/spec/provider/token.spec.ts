@@ -10,43 +10,43 @@ beforeEach(() => {
 });
 
 describe("Provider - token: unique identifier for provider inside a container", () => {
-  it("can be a string", () => {
+  it("can be a string", async () => {
     container.addProvider({ token: "foo", useValue: "bar" });
 
-    expect(container.resolve("foo")).to.equal("bar");
+    expect(await container.resolve("foo")).to.equal("bar");
   });
 
-  it("can be a number", () => {
+  it("can be a number", async () => {
     container.addProvider({ token: 1, useValue: "foo" });
     container.addProvider({ token: 1.1, useValue: "bar" });
 
-    expect(container.resolve(1)).to.equal("foo");
-    expect(container.resolve(1.1)).to.equal("bar");
+    expect(await container.resolve(1)).to.equal("foo");
+    expect(await container.resolve(1.1)).to.equal("bar");
   });
 
-  it("can be an object", () => {
+  it("can be an object", async () => {
     const foo = {}, bar = {};
     container.addProviders([
       { token: foo, useValue: "foo" },
       { token: bar, useValue: "bar" },
     ]);
 
-    expect(container.resolve(foo)).to.equal("foo");
-    expect(container.resolve(bar)).to.equal("bar");
+    expect(await container.resolve(foo)).to.equal("foo");
+    expect(await container.resolve(bar)).to.equal("bar");
   });
 
-  it("can be a Symbol", () => {
+  it("can be a Symbol", async () => {
     const symToken = Symbol();
     container.addProvider({ token: symToken, useValue: "bar" });
 
-    const actualResult = container.resolve(symToken);
+    const actualResult = await container.resolve(symToken);
     expect(actualResult).to.equal("bar");
   });
 
-  it("can be a class", () => {
+  it("can be a class", async () => {
     container.addProvider({ token: MongoService, useValue: "foo" });
 
-    const actualResult = container.resolve(MongoService);
+    const actualResult = await container.resolve(MongoService);
 
     expect(actualResult).to.equal("foo");
   });

@@ -13,20 +13,22 @@ describe("Provider - useModule", () => {
     container = new Container();
   });
 
-  it("can resolve provider from other module without importing into container", () => {
+  it("can resolve provider from other module without importing into container", async () => {
     container.addProviders([
       { token: Md2Service, useModule: JwtModule },
       { token: Md5Service, useModule: JwtModule },
     ]);
 
-    const md2Service = container.resolve<Md2Service>(Md2Service);
-    const md5Service = container.resolve<Md5Service>(Md5Service);
+    const [md2Service, md5Service] = await Promise.all([
+      container.resolve<Md2Service>(Md2Service),
+      container.resolve<Md5Service>(Md5Service),
+    ]);
 
     md2Service.hash("run without crash");
     md5Service.hash("run without crash");
 
     try {
-      container.resolve(Sha1Service);
+      await container.resolve(Sha1Service);
 
       expect(true).to.false;
     } catch (err) {

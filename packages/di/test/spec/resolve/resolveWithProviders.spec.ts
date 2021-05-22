@@ -5,13 +5,13 @@ import { request } from "../../fixture/const/data.const";
 import { CreateProfileReq } from "../../fixture/user/services/create-profile.req";
 
 describe("Container - resolveWithProviders():", () => {
-  it("can resolve with temporary providers", () => {
+  it("can resolve with temporary providers", async () => {
     // can resolve with temporary providers
     const container = new Container;
     container.addProvider(CreateProfileReq);
 
     const createProfileData = { name: "X", age: 999 };
-    const actualRs = container.resolveWithProviders(CreateProfileReq, [
+    const actualRs = await container.resolveWithProviders(CreateProfileReq, [
       { token: request, useValue: createProfileData },
     ]);
 
@@ -19,7 +19,7 @@ describe("Container - resolveWithProviders():", () => {
 
     // make sure providers is really temporary.
     try {
-      container.resolve(CreateProfileReq);
+      await container.resolve(CreateProfileReq);
 
       expect(false).to.true;
     } catch (err) {

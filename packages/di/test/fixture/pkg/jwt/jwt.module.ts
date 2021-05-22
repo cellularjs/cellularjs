@@ -12,7 +12,7 @@ import { JwtSignService } from "./jwt-sign.service";
     Md5Service,
     { token: Md2Service, useValue: new Md2Service() },
     { token: Sha1Service, useClass: Sha1Service },
-    { token: Sha256Service, useFunc: () => new Sha256Service() },
+    { token: Sha256Service, useFunc: async () => new Sha256Service() },
   ],
   exports: [JwtService],
 })

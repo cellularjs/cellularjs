@@ -10,7 +10,7 @@ describe("Annotation - Injectable(): decorate a class to make its dependencies i
     container = new Container();
   });
 
-  it("can decorate a class to make its dependencies in constructor become injectable", () => {
+  it("can decorate a class to make its dependencies in constructor become injectable", async () => {
     container.addProviders([
       { token: Connection, useClass: Connection },
       { token: "mongoUrl", useValue: "mongodb://neverland" },
@@ -18,7 +18,7 @@ describe("Annotation - Injectable(): decorate a class to make its dependencies i
       { token: "mongoPwd", useValue: "*********" },
     ]);
 
-    const connection = container.resolve<Connection>(Connection);
+    const connection = await container.resolve<Connection>(Connection);
 
     expect(connection.mongoUrl).to.equal("mongodb://neverland");
     expect(connection.mongoUsr).to.equal("guest");

@@ -2,7 +2,7 @@ import { Errors } from "../../";
 import { Token } from "../../types";
 import { Container, globalContainer } from "../"
 
-export function resolve<T>(this: Container, token: Token): T {
+export async function resolve<T>(this: Container, token: Token): Promise<T> {
   if (this._extModule && this._extModule.has(token)) {
     return this._extModule._resolveWithRefModule(token, this);
   }
@@ -11,7 +11,7 @@ export function resolve<T>(this: Container, token: Token): T {
   
   if (!provider) return tryAgain.bind(this)(token);
 
-  return this[provider.resolver](provider);
+  return this[provider.resolver].call(this, provider);
 }
 
 function tryAgain<T>(this: Container, token) {

@@ -14,7 +14,7 @@ describe("Annotation - Inject(): inject dependency base on token", () => {
     container = new Container();
   });
 
-  it("can use string as token", () => {
+  it("can use string as token", async () => {
     container.addProviders([
       Connection,
       { token: "mongoUrl", useValue: "neverland" },
@@ -22,43 +22,43 @@ describe("Annotation - Inject(): inject dependency base on token", () => {
       { token: "mongoPwd", useValue: "**********" },
     ]);
 
-    const conn = container.resolve<Connection>(Connection);
+    const conn = await container.resolve<Connection>(Connection);
 
     expect(conn.mongoUrl).to.equal("neverland");
     expect(conn.mongoUsr).to.equal("guest");
     expect(conn.mongoPwd).to.equal("**********");
   });
 
-  it("can use Symbol as token", () => {
+  it("can use Symbol as token", async () => {
     const mockReq = { name: "X", age: 99 };
     container.addProviders([
       CreateProfileReq,
       { token: request, useValue: mockReq }
     ]);
 
-    const createPostReq = container.resolve(CreateProfileReq);
+    const createPostReq = await container.resolve(CreateProfileReq);
 
     expect(createPostReq).to.eqls(mockReq);
   });
 
-  it("can use class as token", () => {
+  it("can use class as token", async () => {
     container.addProviders([
       UserRepository,
       { token: MongoService, useValue: "foobar" },
     ]);
 
-    const postRepository = container.resolve<UserRepository>(UserRepository);
+    const postRepository = await container.resolve<UserRepository>(UserRepository);
 
     expect(postRepository.mongoService).to.equal("foobar");
   });
 
-  it("have higher priority than type hint", () => {
+  it("have higher priority than type hint", async () => {
     container.addProviders([
       UserRepository,
       { token: MongoService, useValue: "foobar" },
     ]);
 
-    const postRepository = container.resolve<UserRepository>(UserRepository);
+    const postRepository = await container.resolve<UserRepository>(UserRepository);
 
     expect(postRepository.mongoService instanceof MongoService).to.false;
   });

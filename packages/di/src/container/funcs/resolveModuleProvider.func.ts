@@ -2,7 +2,7 @@ import { Container } from '../../'
 import { AdjustedProvider } from '../../types'
 import { moduleMap } from '../props/module-map.static'
 
-export function resolveModuleProvider(this: Container, provider: AdjustedProvider<any>) {
+export function resolveModuleProvider<T>(this: Container, provider: AdjustedProvider<any>): Promise<T> {
   const moduleFromMap = moduleMap.get(provider.useModule);
 
   if (this._extModules.has(provider.useModule)) {

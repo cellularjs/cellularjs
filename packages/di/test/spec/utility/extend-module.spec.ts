@@ -17,23 +17,23 @@ describe("Utility - extend module: extend, override module", () => {
     container = new Container();
   });
 
-  it("can inherit all providers from parent module", () => {
+  it("can inherit all providers from parent module", async () => {
     container.addModule({
       extModule: JwtModule,
     });
 
-    const jwtService = container.resolve<JwtService>(JwtService);
+    const jwtService = await container.resolve<JwtService>(JwtService);
 
     jwtService.md5Hash("run without crash");
   });
 
-  it("can add more provider without affect parent module", () => {
+  it("can add more provider without affect parent module", async () => {
     // can add more provider ...
     container.addModule(MongoModule.config({
       mongoUrl: "neverland", user: "guest", password: "********"
     }));
 
-    const mongoService = container.resolve<MongoService>(MongoService);
+    const mongoService = await container.resolve<MongoService>(MongoService);
     const conn = mongoService.connection;
 
     expect(conn.mongoUrl).to.equal("neverland");
@@ -45,7 +45,7 @@ describe("Utility - extend module: extend, override module", () => {
     newContaier.addModule(MongoModule);
 
     try {
-      newContaier.resolve(MongoService);
+      await newContaier.resolve(MongoService);
       expect(true).to.false;
 
     } catch (err) {
@@ -53,7 +53,7 @@ describe("Utility - extend module: extend, override module", () => {
     }
   });
 
-  it("can override provider from parent module", () => {
+  it("can override provider from parent module", async () => {
     container.addModule({
       extModule: MongoModule,
       providers: [
@@ -61,7 +61,7 @@ describe("Utility - extend module: extend, override module", () => {
       ],
     });
 
-    const mongoService = container.resolve<MongoService>(MongoService);
+    const mongoService = await container.resolve<MongoService>(MongoService);
 
     expect(mongoService.connection).to.equal("new value");
   });
@@ -71,17 +71,17 @@ describe("Utility - extend module: extend, override module", () => {
       extModule: AuthModule,
     });
 
-    const verifyHandler = container.resolve<Verify>(Verify);
+    const verifyHandler = await container.resolve<Verify>(Verify);
 
     expect(await verifyHandler.handle()).to.true;
   });
 
-  it("can add more module to imports config", () => {
+  it("can add more module to imports config", async () => {
     // container have extend module can resolve JwtSignService
     const containerHaveCustomHash = new Container();
     containerHaveCustomHash.addModule(JwtModule.withSignService());
 
-    const jwtSignService = containerHaveCustomHash.resolve<JwtSignService>(JwtSignService);
+    const jwtSignService = await containerHaveCustomHash.resolve<JwtSignService>(JwtSignService);
     jwtSignService.sign("run without crash");
 
     // container have no extend module can not resolve JwtSignService
@@ -89,24 +89,24 @@ describe("Utility - extend module: extend, override module", () => {
     containerHaveNoCustomHash.addModule(JwtModule);
 
     try {
-      containerHaveNoCustomHash.resolve(JwtSignService);
+      await containerHaveNoCustomHash.resolve(JwtSignService);
       expect(false).to.true;
     } catch (err) {
       expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
     }
   });
 
-  it("can inherit all exports config from parent module", () => {
+  it("can inherit all exports config from parent module", async () => {
     container.addModule({
       extModule: JwtModule,
     });
 
-    const jwtService = container.resolve(JwtService);
+    const jwtService = await container.resolve(JwtService);
 
     expect(jwtService).to.instanceOf(JwtService);
   });
 
-  it("can add more module to exports config", () => {
+  it("can add more module to exports config", async () => {
     @Module({})
     class DummyModule { }
 
@@ -115,12 +115,12 @@ describe("Utility - extend module: extend, override module", () => {
       exports: [JwtModule],
     });
 
-    const jwtService = container.resolve(JwtService);
+    const jwtService = await container.resolve(JwtService);
 
     expect(jwtService).to.instanceOf(JwtService);
   });
 
-  it("can add more service to exports config", () => {
+  it("can add more service to exports config", async () => {
     @Module({})
     class DummyModule { }
 
@@ -135,7 +135,7 @@ describe("Utility - extend module: extend, override module", () => {
       exports: [DummyService],
     });
 
-    const dummyService = container.resolve<DummyService>(DummyService);
+    const dummyService = await container.resolve<DummyService>(DummyService);
 
     expect(dummyService.run()).to.equal("run DummyService");
   });

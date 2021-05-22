@@ -11,16 +11,16 @@ describe("Provider - useFunc", () => {
     container = new Container();
   });
 
-  it("can resolve useFunc provider", () => {
+  it("can resolve useFunc provider", async () => {
     container.addProvider({
       token: "con",
       useFunc: () => new Container,
     });
 
-    expect(container.resolve("con")).to.instanceOf(Container);
+    expect(await container.resolve("con")).to.instanceOf(Container);
   });
 
-  it("can inject dependencies when resolving useFunc provider", () => {
+  it("can inject dependencies when resolving useFunc provider", async () => {
     container.addProviders([
       Container,
       CreateProfileReq,
@@ -53,7 +53,7 @@ describe("Provider - useFunc", () => {
       string,
       number,
       float,
-    ] = container.resolve("strToken");
+    ] = await container.resolve("strToken");
 
     expect(objectFromClassHasAnnotation).to.eqls({ name: "X", age: 999 });
     expect(objectFromClass).to.instanceOf(Container);
@@ -66,15 +66,15 @@ describe("Provider - useFunc", () => {
     expect(float).to.equal(99.99);
   });
 
-  it("can cache resolved value when using useFunc provider with permanent cycle", () => {
+  it("can cache resolved value when using useFunc provider with permanent cycle", async () => {
     container.addProvider({
       token: Container,
       useFunc: () => new Container(),
       cycle: "permanent",
     });
 
-    const firstContainer = container.resolve(Container);
-    const secondContainer = container.resolve(Container);
+    const firstContainer = await container.resolve(Container);
+    const secondContainer = await container.resolve(Container);
 
     expect(firstContainer === secondContainer).to.true;
   });

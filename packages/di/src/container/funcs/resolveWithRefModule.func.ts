@@ -1,9 +1,8 @@
 import { Container } from '../../';
 import { Token } from "../../types";
 
-export function resolveWithRefModule<T>(this: Container, token: Token, refModule: Container): T {
+export function resolveWithRefModule<T>(this: Container, token: Token, refModule: Container): Promise<T> {
   this._refModule = refModule;
-  const resolvedValue = this.resolve<T>(token);
 
-  return resolvedValue;
+  return this.resolve<T>(token);
 }
