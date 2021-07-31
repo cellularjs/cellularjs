@@ -16,7 +16,7 @@
     "prepublishOnly": "npm run build",
     "build": "tsc -b ./tsconfig.build.json",
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "test-coverage": "nyc npm test"
+    "code-coverage": "nyc npm test"
   },
   "author": "Great Elephant",
   "license": "MIT",
