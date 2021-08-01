@@ -1,6 +1,8 @@
 import "mocha";
 import { expect } from "chai";
 import { Container, DiErrorCode } from "../../../src";
+import { request } from "../../fixture/const/data.const";
+import { CreateProfileReq } from "../../fixture/user/services/create-profile.req";
 import { MongoService } from "../../fixture/pkg/mongo/mongo.service";
 
 let container: Container;
@@ -56,6 +58,22 @@ describe("Provider - token: unique identifier for provider inside a container", 
 
     try {
       container.addProvider({ token: "foo", useValue: "bar" });
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.code).to.equal(DiErrorCode.DuplicateToken);
+    }
+  });
+
+  it("can not use duplicate Symbol as token", async () => {
+    const mockReq = { name: "X", age: 99 };
+
+    try {
+      container.addProviders([
+        CreateProfileReq,
+        { token: request, useValue: mockReq },
+        { token: request, useValue: mockReq },
+      ]);
 
       expect(true).to.false;
     } catch (err) {
