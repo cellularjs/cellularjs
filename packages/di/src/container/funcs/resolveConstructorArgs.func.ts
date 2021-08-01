@@ -1,14 +1,15 @@
-import { Container } from '../../';
+import { Container, ResolveOptions } from '../../';
 import { getParamTypes, getToken } from "../../utils";
 
-export async function resolveConstructorArgs(this: Container, target): Promise<any[]> {
-  const args = [];
-  const params = getParamTypes(target);
-
-  for (let i = 0; i < params.length; i++) {
-    const paramType = getToken(target, i) || params[i];
-    args.push(this.resolve(paramType));
-  }
+export async function resolveConstructorArgs(
+  this: Container,
+  target,
+  options: ResolveOptions,
+): Promise<any[]> {
+  const args = getParamTypes(target).map((param, i) => {
+    const paramType = getToken(target, i) || param;
+    return this.resolve(paramType, options);
+  });
 
   return Promise.all(args);
 }

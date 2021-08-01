@@ -1,19 +1,15 @@
-import { Container } from '../../';
-import { AdjustedDep } from "../../types";
+import { Container, ResolveOptions, AdjustedDep } from '../../';
 
-export async function resolveUseFuncArgs(this: Container, deps: AdjustedDep[]): Promise<any[]> {
-  const resolvedDeps = [];
+export async function resolveUseFuncArgs(
+  this: Container,
+  deps: AdjustedDep[],
+  options: ResolveOptions,
+): Promise<any[]> {
+  const resolvingDeps = deps.map(dep =>
+    dep.isClass
+      ? this.resolve(dep.value, options)
+      : dep.value,
+  );
 
-  for (let i = 0; i < deps.length; i++) {
-    const dep = deps[i];
-
-    if (!dep.isClass) {
-      resolvedDeps.push(dep.value);
-      continue;
-    }
-
-    resolvedDeps.push(this.resolve(dep.value));
-  }
-
-  return Promise.all(resolvedDeps);
+  return Promise.all(resolvingDeps);
 }

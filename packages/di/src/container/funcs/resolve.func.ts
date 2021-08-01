@@ -1,27 +1,33 @@
-import { Errors } from "../../";
-import { Token } from "../../types";
-import { Container, globalContainer } from "../"
+import { Errors, Container, Token, ResolveOptions } from "../../";
 
-export async function resolve<T>(this: Container, token: Token): Promise<T> {
-  if (this._extModule && this._extModule.has(token)) {
-    return this._extModule._resolveWithRefModule(token, this);
+export function resolve<T>(
+  this: Container,
+  token: Token,
+  options: ResolveOptions = {},
+): Promise<T> {
+  // B1: extModule has highest priority, so check it first. 
+  const { extModule, global } = options;
+  if (extModule?.has(token)) {
+    return extModule._resolveWithRefModule<T>(token, this, global);
   }
 
+  // B2: if provider for this token exists in this container,
+  // use normalized resolver to resolve it.
   const provider = this._providers.get(token);
-  
-  if (!provider) return tryAgain.bind(this)(token);
-
-  return this[provider.resolver].call(this, provider);
-}
-
-function tryAgain<T>(this: Container, token) {
-  if (this._refModule && this._refModule.has(token)) {
-    return this._refModule.resolve<T>(token);
-  }
- 
-  if (globalContainer.has(token)) {
-    return globalContainer.resolve<T>(token);
+  if (provider) {
+    return this[provider.resolver].call(this, provider, options);
   }
 
+  // B3: provider for this token exists in parent module.
+  if (this._refModule?.has(token)) {
+    return this._refModule.resolve<T>(token, options);
+  }
+
+  // B4: provider for this token exists in global module.
+  if (global?.has(token)) {
+    return global.resolve(token);
+  }
+
+  // B5:
   throw Errors.NoProviderForToken(token);
 }

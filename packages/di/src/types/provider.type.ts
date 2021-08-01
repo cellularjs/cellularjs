@@ -1,3 +1,4 @@
+import { Container } from '../'
 import { CycleTypeMap } from '../consts/cycle.const';
 import { DiResolvers } from '../consts/di-resolver.const';
 import { ClassType, CycleType, Token, FuncType, ValueType } from './';
@@ -73,4 +74,19 @@ export interface AdjustedProvider<T> extends BaseProvider {
 export interface AdjustedDep {
   value: any,
   isClass: boolean | undefined,
+}
+
+export interface ResolveOptions {
+  // This stuff may be hidden from client later(alpha).
+  extModule?: Container;
+
+  /**
+   * Global container.
+   * 
+   * When there is no provider matching with the given token,
+   * it will find provider from this global container.
+   * 
+   * _Note:_ global container has lower priority than normal container.
+   */
+  global?: Container;
 }

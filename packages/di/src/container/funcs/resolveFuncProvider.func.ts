@@ -1,13 +1,16 @@
-import { Container } from '../../';
+import { Container, AdjustedProvider, ResolveOptions } from '../../';
 import { PermanentCycle } from "../../consts/cycle.const"
-import { AdjustedProvider } from '../../types'
 
-export async function resolveFuncProvider<T>(this: Container, provider: AdjustedProvider<any>): Promise<T> {
+export async function resolveFuncProvider<T>(
+  this: Container,
+  provider: AdjustedProvider<any>,
+  options: ResolveOptions,
+): Promise<T> {
   if (this._resolvedValues.has(provider.token)) {
     return this._resolvedValues.get(provider.token);
   }
 
-  const useFuncArgs = await this._resolveUseFuncArgs(provider.deps);
+  const useFuncArgs = await this._resolveUseFuncArgs(provider.deps, options);
   const resolvedValue = await provider.useFunc(...useFuncArgs);
 
   if (provider.cycle === PermanentCycle) {

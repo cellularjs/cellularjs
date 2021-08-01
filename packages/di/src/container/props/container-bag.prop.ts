@@ -18,14 +18,7 @@ export class ContainerBag {
   protected _extModules = new Map<ClassType<any>, Container>();
 
   /**
-   * _refModule is a module that _extModule extend from. It help "extend" become real.
+   * `_refModule` is a module that this module extend from.
    */
   protected _refModule: Container;
-
-  /**
-   * _extModule hold "extend stuffs"(Eg: providers).
-   * 
-   * **Notice**: *this temporay property will be deleted right after resolving value.*
-   */
-  protected _extModule: Container;
 }

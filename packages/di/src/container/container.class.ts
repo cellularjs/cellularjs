@@ -1,7 +1,5 @@
 import { GenericProvider, Token, ExportableCnf, ImportableCnf } from "../types";
-import { DiResolvers} from '../consts/di-resolver.const'
-import { moduleMap } from './props/module-map.static'
-import { GlobalModule } from '../consts/global-module.const'
+import { DiResolvers } from '../consts/di-resolver.const'
 import { ContainerBag } from './props/container-bag.prop'
 import { addExtModule } from './funcs/addExtModule.func'
 import { addModuleToMap } from './funcs/addModuleToMap.func'
@@ -10,16 +8,13 @@ import { addProvider } from './funcs/addProvider.func'
 import { addExportServicesAsProviders } from './funcs/addExportServicesAsProviders.func'
 import { addModuleExports } from './funcs/addModuleExports.func'
 import { resolve } from './funcs/resolve.func'
-import { resolveWithProviders } from './funcs/resolveWithProviders.func'
 import { resolveUseFuncArgs } from './funcs/resolveUseFuncArgs.func'
 import { resolveWithRefModule } from './funcs/resolveWithRefModule.func'
-import { resolveWithExtModule } from './funcs/resolveWithExtModule.func'
 import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func'
 import { resolveModuleProvider } from './funcs/resolveModuleProvider.func'
 import { resolveClassProvider } from './funcs/resolveClassProvider.func'
 import { resolveFuncProvider } from './funcs/resolveFuncProvider.func'
 import { resolveValueProvider } from './funcs/resolveValueProvider.func'
-import { resolveWithTmpGlobalProviders } from './funcs/resolveWithTmpGlobalProviders.func'
 
 export class Container extends ContainerBag {
   /**
@@ -62,17 +57,6 @@ export class Container extends ContainerBag {
    */
   public resolve = resolve;
 
-  /**
-   * Resolve value by token and temporary providers.
-   */
-  public resolveWithProviders = resolveWithProviders;
-
-  public resolveWithTmpGlobalProviders = resolveWithTmpGlobalProviders;
-
-  protected _resolveWithRefModule = resolveWithRefModule;
-
-  protected _resolveWithExtModule = resolveWithExtModule;
-
   protected _addExtModule = addExtModule;
 
   protected _addModuleToMap = addModuleToMap;
@@ -88,6 +72,8 @@ export class Container extends ContainerBag {
 
   protected _resolveUseFuncArgs = resolveUseFuncArgs;
 
+  protected _resolveWithRefModule = resolveWithRefModule;
+
   protected [DiResolvers.useModuleResolver] = resolveModuleProvider;
 
   protected [DiResolvers.useClassResolver] = resolveClassProvider;
@@ -96,7 +82,3 @@ export class Container extends ContainerBag {
 
   protected [DiResolvers.useValueResolver] = resolveValueProvider;
 }
-
-export const globalContainer = new Container();
-
-moduleMap.set(GlobalModule, globalContainer);
