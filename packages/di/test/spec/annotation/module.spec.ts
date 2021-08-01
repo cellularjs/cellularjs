@@ -58,7 +58,7 @@ describe("Annotation - Module(): define modular dependency injection", () => {
     expect(await verifyHanlder.handle()).to.true;
   });
 
-  it("can add a extend module into imports config", async () => {
+  it("can add an extend module", async () => {
     const createProfileData = { name: "X", age: 999 };
     container.addModule({
       extModule: UserModule,
