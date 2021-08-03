@@ -9,7 +9,7 @@ import { addExportServicesAsProviders } from './funcs/addExportServicesAsProvide
 import { addModuleExports } from './funcs/addModuleExports.func'
 import { resolve } from './funcs/resolve.func'
 import { resolveUseFuncArgs } from './funcs/resolveUseFuncArgs.func'
-import { resolveWithRefModule } from './funcs/resolveWithRefModule.func'
+import { resolveWithParentModule } from './funcs/resolveWithParentModule.func'
 import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func'
 import { resolveModuleProvider } from './funcs/resolveModuleProvider.func'
 import { resolveClassProvider } from './funcs/resolveClassProvider.func'
@@ -72,7 +72,7 @@ export class Container extends ContainerBag {
 
   protected _resolveUseFuncArgs = resolveUseFuncArgs;
 
-  protected _resolveWithRefModule = resolveWithRefModule;
+  protected _resolveWithParentModule = resolveWithParentModule;
 
   protected [DiResolvers.useModuleResolver] = resolveModuleProvider;
 

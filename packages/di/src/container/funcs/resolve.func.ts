@@ -8,7 +8,7 @@ export function resolve<T>(
   // B1: extModule has highest priority, so check it first. 
   const { extModule, global } = options;
   if (extModule?.has(token)) {
-    return extModule._resolveWithRefModule<T>(token, this, global);
+    return extModule._resolveWithParentModule<T>(token, this, global);
   }
 
   // B2: if provider for this token exists in this container,
@@ -19,8 +19,8 @@ export function resolve<T>(
   }
 
   // B3: provider for this token exists in parent module.
-  if (this._refModule?.has(token)) {
-    return this._refModule.resolve<T>(token, options);
+  if (this._parentModule?.has(token)) {
+    return this._parentModule.resolve<T>(token, options);
   }
 
   // B4: provider for this token exists in global module.

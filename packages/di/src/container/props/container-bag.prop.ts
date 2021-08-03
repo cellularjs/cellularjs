@@ -18,7 +18,7 @@ export class ContainerBag {
   protected _extModules = new Map<ClassType<any>, Container>();
 
   /**
-   * `_refModule` is a module that this module extend from.
+   * `_parentModule` is a module that this module extend from.
    */
-  protected _refModule: Container;
+  protected _parentModule: Container;
 }
