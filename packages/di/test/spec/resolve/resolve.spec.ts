@@ -89,4 +89,36 @@ describe("Container - resolve:", () => {
     const foobar = await container.resolve<FooBar>(FooBar, { global });
     expect(foobar.foo).to.equal('foo');
   });
+
+  it("create only one value for provider has cycle is permanent when resolving value in sync", async () => {
+    class Foo { }
+
+    container.addProvider({
+      token: Foo,
+      useClass: Foo,
+      cycle: 'permanent',
+    });
+
+    const foo1 = await container.resolve<Foo>(Foo);
+    const foo2 = await container.resolve<Foo>(Foo);
+
+    expect(foo1 === foo2).to.be.true;
+  });
+
+  it("create other value when resolving value in async even if provider's cycle is permanent", async () => {
+    class Foo { }
+
+    container.addProvider({
+      token: Foo,
+      useClass: Foo,
+      cycle: 'permanent',
+    });
+
+    const [foo1, foo2] = await Promise.all([
+      container.resolve<Foo>(Foo),
+      container.resolve<Foo>(Foo),
+    ]);
+
+    expect(foo1 !== foo2).to.be.true;
+  });
 });
