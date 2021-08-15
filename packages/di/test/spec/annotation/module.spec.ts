@@ -78,13 +78,11 @@ describe("Annotation - Module(): define modular dependency injection", () => {
   it("can not resolve provider that import from other module", async () => {
     container.addModule(AuthModule);
 
-    try {
-      await container.resolve(JwtService);
+    const errorFunc = () => container.resolve(JwtService);
 
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
-    }
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.NoProviderForToken);
   });
 
   it("can export services from module", async () => {
@@ -112,25 +110,21 @@ describe("Annotation - Module(): define modular dependency injection", () => {
   });
 
   it("can not import a class has not been decorated by @Module annotation", () => {
-    try {
-      container.addModule(JwtService);
+    const errorFunc = () => container.addModule(JwtService);
 
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.InvalidModuleClass);
-    }
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.InvalidModuleClass);
   });
 
   it("can not import same module because that module may export same service causing duplicate token", () => {
     container.addModule(SharedModule);
 
-    try {
-      container.addModule(SharedModule);
-
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.DuplicateToken);
-    }
+    const errorFunc = () => container.addModule(SharedModule);
+  
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.DuplicateToken);
   });
 
   it("service class can not exist in both providers and exports", () => {
@@ -142,13 +136,11 @@ describe("Annotation - Module(): define modular dependency injection", () => {
     })
     class FooBarModule { }
 
-    try {
-      container.addModule(FooBarModule)
+    const errorFunc = () => container.addModule(FooBarModule);
 
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.DuplicateToken);
-    }
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.DuplicateToken);
   });
 
   it("there is no need to add service class - that is also exported into providers before resolving", async () => {

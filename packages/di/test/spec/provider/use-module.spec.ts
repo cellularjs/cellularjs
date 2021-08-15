@@ -27,24 +27,20 @@ describe("Provider - useModule", () => {
     md2Service.hash("run without crash");
     md5Service.hash("run without crash");
 
-    try {
-      await container.resolve(Sha1Service);
+    const errorFunc = () => container.resolve(Sha1Service);
 
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
-    }
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.NoProviderForToken);
   });
 
   it("can not use invalid module as argument for useModule", () => {
-    try {
-      container.addProviders([
-        { token: Md2Service, useModule: Md2Service },
-      ]);
+    const errorFunc = () => container.addProviders([
+      { token: Md2Service, useModule: Md2Service },
+    ]);
 
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.InvalidModuleClass);
-    }
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.InvalidModuleClass);
   });
 })

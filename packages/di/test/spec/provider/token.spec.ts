@@ -54,30 +54,24 @@ describe("Provider - token: unique identifier for provider inside a container", 
   });
 
   it("can not be duplicated", () => {
-    container.addProvider({ token: "foo", useValue: "foo" });
+    const addProviderFunc = () => container.addProvider({ token: "foo", useValue: "foo" });
+    addProviderFunc();
 
-    try {
-      container.addProvider({ token: "foo", useValue: "bar" });
-
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.DuplicateToken);
-    }
+    expect(addProviderFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.DuplicateToken);
   });
 
   it("can not use duplicate Symbol as token", async () => {
     const mockReq = { name: "X", age: 99 };
+    const errorFunc = () => container.addProviders([
+      CreateProfileReq,
+      { token: request, useValue: mockReq },
+      { token: request, useValue: mockReq },
+    ]);
 
-    try {
-      container.addProviders([
-        CreateProfileReq,
-        { token: request, useValue: mockReq },
-        { token: request, useValue: mockReq },
-      ]);
-
-      expect(true).to.false;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.DuplicateToken);
-    }
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.DuplicateToken);
   });
 });

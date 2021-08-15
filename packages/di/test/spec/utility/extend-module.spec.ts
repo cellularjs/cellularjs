@@ -46,7 +46,7 @@ describe("Utility - extend module: extend, override module", () => {
 
     try {
       await newContaier.resolve(MongoService);
-      expect(true).to.false;
+      throw new Error();
 
     } catch (err) {
       expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
@@ -88,12 +88,11 @@ describe("Utility - extend module: extend, override module", () => {
     const containerHaveNoCustomHash = new Container();
     containerHaveNoCustomHash.addModule(JwtModule);
 
-    try {
-      await containerHaveNoCustomHash.resolve(JwtSignService);
-      expect(false).to.true;
-    } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
-    }
+    const errorFunc = () => containerHaveNoCustomHash.resolve(JwtSignService);
+
+    expect(errorFunc)
+      .to.throw()
+      .with.property('code', DiErrorCode.NoProviderForToken);
   });
 
   it("can inherit all exports config from parent module", async () => {
