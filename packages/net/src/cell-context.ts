@@ -1,18 +1,12 @@
-import { Container } from "@cellularjs/di";
-
 /**
  * Cell context hold information of current cell.
+ * 
+ * **Notice:** *Because `cellName` value is only binded after creating object,
+ * so it is not available in `constructor`.*
  */
 export class CellContext {
   /**
-   * `cellName` will be auto binded when initializing network.  
-   * **This is reserved property, DO NOT override it.**
+   * Cell name or cell type, it must be unique.
    */
   readonly cellName: string;
-
-  /**
-   * `container` will be auto binded when initializing network.  
-   * **This is reserved property, DO NOT override it.**
-   */
-  readonly container: Container;
 }

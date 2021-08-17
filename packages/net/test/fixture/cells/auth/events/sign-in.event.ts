@@ -1,7 +1,7 @@
-import { Event, EventHandler, CellularIRS } from "../../../../../src";
+import { Service, ServiceHandler, CellularIRS } from "../../../../../src";
 
-@Event()
-export class SignIn implements EventHandler {
+@Service({ scope: "public" })
+export class SignIn implements ServiceHandler {
   async handle(): Promise<CellularIRS> {
     return new CellularIRS();
   }

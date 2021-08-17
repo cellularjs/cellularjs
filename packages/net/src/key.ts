@@ -1,20 +1,21 @@
-export const TRANSPORTOR_EVENT = {
-  RequestStart: Symbol(),
-  RequestEnd: Symbol(),
-  RequestFailed: Symbol(),
-};
+/**
+ * Cell options token
+ */
+export const CLL_CELL_OPTS = "cll:net:cell:opts";
 
 /**
- * Cell options
+ * Service options token
  */
-export const CLL_CELL_OPTS = Symbol("cll.cell.opts");
+export const CLL_EVENT_OPTS = "cll:net:event:opts";
 
 /**
- * Cell context instance
+ * Cell context instance token
  */
-export const CLL_CELL_CTX = Symbol("cll.cell.ctx");
+export const CLL_CELL_CTX = "cll:net:cell:ctx";
 
 /**
- * CellularIrs instance
+ * CellularIrs instance token
  */
-export const CLL_IRQ = Symbol('cll.irq');
+export const CLL_IRQ = 'cll:net:irq';
+
+export const CLL_NET_HANDLER = 'cll:net:handler';

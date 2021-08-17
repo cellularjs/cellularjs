@@ -1,31 +1,58 @@
-import { CellConfig, NetworkConfig } from "../../../src";
+import { CellConfig, NetworkConfig, Transportor } from "../../../src";
+import { AuthCell } from '../cells/auth';
+import { DummyCell } from '../cells/dummy'
+import { IMSCell } from '../app/ims'
+import { AuthHttpDriver } from '../remote-drivers/auth/http';
+import { GoogleAuth } from '../remote-drivers/gg-auth';
+import { LoggerCell } from '../cells/logger';
+import { UserCell } from '../cells/user';
 
-const cellConfigs: {[key: string]: CellConfig} = {
-  Auth: {
-    name: "Auth",
-    space: "neverland",
-    driver: {
-      local: __dirname + "/../cells/auth#AuthCell",
-      http: __dirname + "/../remote-drivers/auth#AuthCell",
-    },
+export const authCellCnf: CellConfig = {
+  name: "Auth",
+  space: "neverland",
+  driver: {
+    local: AuthCell,
+    http: AuthHttpDriver,
   },
-  User: {
-    name: "User",
-    space: "neverland",
-    driver: __dirname + "/../cells/user#UserCell",
+};
+
+export const dummyCellCnf: CellConfig = {
+  name: "Dummy",
+  space: "neverland",
+  driver: DummyCell,
+};
+
+export const googleAuthCnf: CellConfig = {
+  name: "GoogleAuth",
+  space: '?',
+  driver: {
+    XProtocol: GoogleAuth
   },
-  IMS: {
-    name: "IMS",
-    space: "neverwood",
-    driver: __dirname + "/../app/sso-form#UserCell",
-  },
-  GoogleAuth: {
-    name: "GoogleAuth",
-    space: '?',
-    driver: __dirname + "/../remote-drivers/gg-auth#GgAuth",
-  },
-}
+};
+
+export const imsCellCnf: CellConfig = {
+  name: "IMS",
+  space: "neverwood",
+  driver: IMSCell,
+
+};
+
+export const loggerCellCnf: CellConfig = {
+  name: "Logger",
+  space: "neverland",
+  driver: LoggerCell,
+};
+
+export const userCellCnf: CellConfig = {
+  name: "User",
+  space: "neverland",
+  driver: UserCell,
+};
 
 export const imsNetwork: NetworkConfig = [
-  cellConfigs.Auth,
+  authCellCnf,
+  googleAuthCnf,
+  imsCellCnf,
+  loggerCellCnf,
+  userCellCnf,
 ];

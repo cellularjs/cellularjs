@@ -1,8 +1,25 @@
-import { Event, EventHandler, CellularIRS } from "../../../../../src";
+import { Inject } from "@cellularjs/di";
+import { Service, ServiceHandler, CellularIRS, CellularIRQ, CLL_IRQ, CLL_CELL_CTX, Transportor } from "../../../../../src";
+import { CreateProfileReq } from "../services/create-profile.req";
 
-@Event()
-export class CreateProfile implements EventHandler {
-  async handle(): Promise<CellularIRS> {
-    return new CellularIRS();
+@Service({ scope: "public" })
+export class CreateProfile implements ServiceHandler {
+  constructor(
+    @Inject(CLL_IRQ) private irq: CellularIRQ,
+    @Inject(CLL_CELL_CTX) private ctx,
+    private createProfileReq: CreateProfileReq,
+  ) { }
+
+  async handle() {
+    if (this.irq.body.shouldThrow) {
+      throw new CellularIRS({ status: 400000 });
+    }
+
+    const sendMailIrq = new CellularIRQ({ unicast: 'User:SendMail' });
+    await Transportor.send(sendMailIrq, { refererCell: this.ctx })
+
+    return new CellularIRS(
+      { newUser: this.createProfileReq.usr },
+    );
   }
 }

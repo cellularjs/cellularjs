@@ -1,0 +1,1 @@
+export { ScopeConstaint } from './scope-constaint'

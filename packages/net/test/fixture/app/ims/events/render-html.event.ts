@@ -1,8 +1,19 @@
-import { Event, EventHandler, CellularIRS } from "../../../../../src";
+import { Inject } from "@cellularjs/di";
+import { Service, ServiceHandler, Transportor, CellularIRS, CellularIRQ, CLL_CELL_CTX } from "../../../../../src";
 
-@Event()
-export class RenderHtml implements EventHandler {
-  async handle(): Promise<CellularIRS> {
-    return new CellularIRS();
+@Service({
+  scope: "public",
+})
+export class RenderHtml implements ServiceHandler {
+  constructor(
+    @Inject(CLL_CELL_CTX) private ctx,
+  ) { }
+
+  handle(): Promise<CellularIRS> {
+    const cacheHtmlIrq = new CellularIRQ(
+      { unicast: "IMS:CacheHtml" },
+    );
+
+    return Transportor.send(cacheHtmlIrq, { refererCell: this.ctx });
   }
 }
