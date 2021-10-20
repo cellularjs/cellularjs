@@ -1,0 +1,20 @@
+0 silly argv {
+0 silly argv   _: [ 'import' ],
+0 silly argv   lernaVersion: '4.0.0',
+0 silly argv   '$0': '..\\..\\..\\..\\AppData\\Local\\Yarn\\Data\\global\\node_modules\\lerna\\cli.js',
+0 silly argv   dir: '../pkg/cellularjs/di'
+0 silly argv }
+1 notice cli v4.0.0
+2 verbose rootPath C:\Users\DevZone\Desktop\Projects\cellular framework\cellularjs_tmp
+3 error Error: Command failed with exit code 128: git rev-parse HEAD
+3 error fatal: ambiguous argument 'HEAD': unknown revision or path not in the working tree.
+3 error Use '--' to separate paths from revisions, like this:
+3 error 'git <command> [<revision>...] -- [<file>...]'
+3 error HEAD
+3 error     at makeError (C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\execa\lib\error.js:59:11)
+3 error     at Function.module.exports.sync (C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\execa\index.js:186:17)
+3 error     at Object.execSync (C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\@lerna\child-process\index.js:39:16)
+3 error     at ImportCommand.execSync (C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\@lerna\import\index.js:141:25)
+3 error     at ImportCommand.getCurrentSHA (C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\@lerna\import\index.js:133:17)
+3 error     at ImportCommand.initialize (C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\@lerna\import\index.js:102:31)
+3 error     at C:\Users\DevZone\AppData\Local\Yarn\Data\global\node_modules\@lerna\command\index.js:274:24
