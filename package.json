@@ -1,7 +1,40 @@
 {
-  "name": "root",
+  "name": "cellularjs",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "cmd:lint": "eslint --ext .ts -c .eslintrc.js ./packages/**/src/**/*.ts  ./packages/**/test/**/*.ts --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint --config ./commitlint.config.js -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.ts": "eslint --ext .ts -c .eslintrc.js"
+  },
   "devDependencies": {
-    "lerna": "^4.0.0"
-  }
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^12.1.0",
+    "@types/benchmark": "^2.1.1",
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^14.0.26",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "benchmark": "^2.1.4",
+    "chai": "^4.2.0",
+    "eslint": "^6.7.2",
+    "husky": "^7.0.1",
+    "lerna": "^4.0.0",
+    "lint-staged": "^11.1.2",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0",
+    "ts-node": "^8.10.2",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {}
 }
