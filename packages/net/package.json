@@ -15,7 +15,7 @@
   "author": "Great Elephant",
   "license": "MIT",
   "types": "./dist/",
-  "dependencies": {
+  "peerDependencies": {
     "@cellularjs/di": "file:../di"
   }
 }
