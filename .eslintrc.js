@@ -10,7 +10,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    "indent": "off",
+    "indent": ["error", 2],
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/explicit-function-return-type": ["error"],
