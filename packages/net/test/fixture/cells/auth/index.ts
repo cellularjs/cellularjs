@@ -1,6 +1,6 @@
-import { Cell } from "../../../../src";
+import { Cell } from '../../../../src';
 
 @Cell({
-  listen: "./events",
+  listen: './events',
 })
 export class AuthCell { }

@@ -1,28 +1,27 @@
-import { afterEach } from "mocha";
-import { ControlPlane, Hook, Cell, Transportor, CellularIRQ } from "../../../src";
+import { afterEach } from 'mocha';
+import { createNetWork, cleanNetwork, Hook, Cell, send, CellularIRQ } from '../../../src';
 import { EditFooService, Session } from '../../fixture/hook';
 
-
-describe("Hook - addServiceProviders()", () => {
+describe('Hook - addServiceProviders()', () => {
   beforeEach(async () => {
     @Cell({
-      listen: { EditFooService }
+      listen: { EditFooService },
     })
     class LocalDriver { }
 
-    await ControlPlane.createNetwork([
+    await createNetWork([
       { name: 'Provider', driver: LocalDriver },
     ]);
   });
 
   afterEach(async () => {
-    await ControlPlane.clean();
+    await cleanNetwork();
   })
 
-  it("can add provider for resolving service handler", async () => {
+  it('can add provider for resolving service handler', async () => {
     Hook.addServiceProviders(EditFooService, [Session]);
 
     const irq = new CellularIRQ({ unicast: 'Provider:EditFooService' });
-    await Transportor.send(irq, { throwOnError: true});
+    await send(irq, { throwOnError: true});
   });
 });

@@ -1,6 +1,6 @@
-import { Service, ServiceHandler, CellularIRS } from "../../../../../src";
+import { Service, ServiceHandler, CellularIRS } from '../../../../../src';
 
-@Service({ scope: "private" })
+@Service({ scope: 'private' })
 export class CacheHtml implements ServiceHandler {
   async handle(): Promise<CellularIRS> {
     return new CellularIRS({

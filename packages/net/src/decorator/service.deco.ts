@@ -1,5 +1,5 @@
-import { ServiceMeta, ServiceScopeMap, RoutingTypeMap, AjustedServiceMeta } from "..";
-import { CLL_EVENT_OPTS } from "..";
+import { ServiceMeta, ServiceScopeMap, RoutingTypeMap, AjustedServiceMeta } from '..';
+import { CLL_EVENT_OPTS } from '..';
 
 /**
  * Mark a class as event handler.

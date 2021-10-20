@@ -1,8 +1,10 @@
-import { Injectable } from "@cellularjs/di";
+import { Injectable } from '@cellularjs/di';
 
 @Injectable()
 export class UserRepo { }
 
-export function getUserAgent() {}
+export function getUserAgent() {
+  return 'web';
+}
 
 export const DUMMY = 'dummy';

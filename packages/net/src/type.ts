@@ -1,10 +1,10 @@
-import { GenericProvider, ImportableCnf, ClassType, FuncType, Container } from "@cellularjs/di";
-import { CellContext } from "./";
-import { CellularIRS } from "./message";
+import { GenericProvider, ImportableCnf, ClassType, FuncType, Container } from '@cellularjs/di';
+import { CellContext } from './';
+import { CellularIRS } from './message';
 
 export type PipeData = {
-  irq: CellularIRS,
-  state: ObjectType
+  irq: CellularIRS;
+  state: ObjectType;
 }
 
 /**
@@ -71,7 +71,7 @@ export interface ServiceMeta {
    * Service handler pipeline(or middlewares), it will run before event handler.
    */
   pipes?: GenericPipe[];
-};
+}
 
 export interface AjustedServiceMeta {
   scope: ServiceScopeMap;
@@ -115,7 +115,7 @@ export interface CellMeta {
   context?: ClassType<CellContext>;
 
   /**
-   * If argument is a string, it will be treated as a path to a folder. ControlPlane
+   * If argument is a string, it will be treated as a path to a folder. It
    * will scan that folder(include sub folder) to get event handler automatically.
    * Service name in this case will be same as class name.<br/>
    * *Example: `"./events"`*<br/>
@@ -132,20 +132,20 @@ export interface CellMeta {
    * _CellularJS support many type but it is better to use a consistent type._
    */
   listen: string | { [eventName: string]: ClassType<ServiceHandler> };
-};
+}
 
 /**
  * Draft
  */
 export type IrqHeader = {
-  unicast?: `${string}:${string}`,
-  multicast?: string,
-  [key: string]: any,
+  unicast?: `${string}:${string}`;
+  multicast?: string;
+  [key: string]: any;
 };
 
 export type IrsHeader = {
-  status: number,
-  [key: string]: any,
+  status: number;
+  [key: string]: any;
 };
 
 /**
@@ -157,7 +157,7 @@ export interface ServiceHandler {
 
 /**
  * Cell config contain cell infomation. You can get a cell config by invoking
- * `ControlPlane.getResolvedCell('cell name')`.
+ * `getResolvedCell('cell name')`.
  */
 export interface CellConfig {
   /**
@@ -165,7 +165,7 @@ export interface CellConfig {
    * unicast routing request.
    * 
    * **TIP**: *For better performance when comparing 2 cell name, let use `cellId`
-   * (call `ControlPlane.getResolvedCell(cellName)` to get `cellId`).*
+   * (call `getResolvedCell(cellName)` to get `cellId`).*
    */
   name: string;
 
@@ -174,7 +174,7 @@ export interface CellConfig {
    * space, they are considered as in the same location and vice versa.
    * 
    * **TIP**: *For better performance when comparing 2 space, let use `spaceId`
-   * (call `ControlPlane.getResolvedCell(cellName)` to get `spaceId`).*
+   * (call `getResolvedCell(cellName)` to get `spaceId`).*
    */
   space?: string;
 
@@ -198,52 +198,52 @@ export interface CellConfig {
    * ```
    */
   driver: {
-    local?: { new() },
-    [driverName: string]: { new() }
+    local?: { new() };
+    [driverName: string]: { new() };
   } | { new() };
 
   /**
    * In additional to reserved property defined by @cellularjs/net, you can add
    * more custom data with this property.
    * 
-   * You can get your customData by calling `ControlPlane.getResolvedCell(cellNamme)`.
+   * You can get your customData by calling `getResolvedCell(cellNamme)`.
    */
   customData?: { [key: string]: any };
-};
+}
 
 /**
  * If you have a cell, you have a network. If you have many cells, you have a big network.
  */
-export interface NetworkConfig extends Array<CellConfig> { };
+export type NetworkConfig = Array<CellConfig>;
 
-export interface ServiceHandlerMap extends Map<string, ClassType<ServiceHandler>> { }
+export type ServiceHandlerMap = Map<string, ClassType<ServiceHandler>>
 
 export interface ResolvedDriver {
-  container: Container,
+  container: Container;
   listener: ServiceHandlerMap;
-};
+}
 
 export interface ResolvedCell {
   /**
    * `cellId` is short version of `CellConfig.name`. It is usefull for task
    * like cell comparation.
    */
-  cellId: number,
+  cellId: number;
 
   /**
    * `spaceId` is short version of `CellConfig.space`. It is usefull for task
    * like space comparation.
    */
-  spaceId: number,
+  spaceId: number;
 
   cellConfig: CellConfig;
 
   drivers: Map<string, ResolvedDriver>;
-};
+}
 
 export type NetworkOptions = {
   /**
    * Number of thread to create network.
    */
-  thread?: number,
+  thread?: number;
 }

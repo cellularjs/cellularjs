@@ -1,6 +1,6 @@
-import { Service, ServiceHandler, CellularIRS } from "../../../../../src";
+import { Service, ServiceHandler, CellularIRS } from '../../../../../src';
 
-@Service({ scope: "space" })
+@Service({ scope: 'space' })
 export class SendMail implements ServiceHandler {
   handle() {
     return new CellularIRS();

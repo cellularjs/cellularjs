@@ -1,5 +1,5 @@
-import { Module } from "@cellularjs/di";
-import { JwtService } from "../jwt/jwt.service";
+import { Module } from '@cellularjs/di';
+import { JwtService } from './jwt.service';
 
 @Module({
   exports: [JwtService],

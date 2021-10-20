@@ -1,17 +1,21 @@
 import {
-  ControlPlane, ServiceHandler,
+  getResolvedCell, ServiceHandler,
   CellContext, CellularIRQ,
   CLL_IRQ, Errors, CLL_NET_HANDLER,
-} from "..";
-import { ScopeConstaint } from "../scope";
-import { getServiceMeta } from "../utils";
-import { Hook } from "../hook"
-import { ClassType, Container, GenericProvider } from "@cellularjs/di";
-import { ResolvedDriver } from "type";
+} from '..';
+import { scopeContraints } from '../scope';
+import { getServiceMeta } from '../utils';
+import { Hook } from '../hook'
+import { ClassType, Container, GenericProvider } from '@cellularjs/di';
+import { ResolvedDriver } from 'type';
 
-export async function resolveServiceHandler(irq: CellularIRQ, refererCell: CellContext, driverType: string): Promise<ServiceHandler> {
-  const [destCellName, eventName] = irq.header.unicast.split(":");
-  const destResolvedCell = ControlPlane.getResolvedCell(destCellName);
+export async function resolveServiceHandler(
+  irq: CellularIRQ,
+  refererCell: CellContext,
+  driverType: string,
+): Promise<ServiceHandler> {
+  const [destCellName, eventName] = irq.header.unicast.split(':');
+  const destResolvedCell = getResolvedCell(destCellName);
 
   if (!destResolvedCell) {
     throw Errors.NoResolvedCell(destCellName, driverType);
@@ -30,7 +34,7 @@ export async function resolveServiceHandler(irq: CellularIRQ, refererCell: CellC
   const serviceMeta = getServiceMeta(DestServiceHandler);
 
   // DO: check event scope constraint
-  ScopeConstaint[serviceMeta.scope](destResolvedCell, refererCell);
+  scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
   const serviceProviders = Hook.getServiceProviders(DestServiceHandler);
   const providers: GenericProvider<any>[] = [
     ...serviceProviders,

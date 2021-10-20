@@ -1,19 +1,19 @@
-import "mocha";
-import { expect } from "chai";
-import { ControlPlane } from "../../../src";
-import { imsNetwork } from "../../fixture/share/network";
+import 'mocha';
+import { expect } from 'chai';
+import { createNetWork, cleanNetwork, getResolvedCell } from '../../../src';
+import { imsNetwork } from '../../fixture/share/network';
 
-describe("CellConfig - cell space:", () => {
+describe('CellConfig - cell space:', () => {
   beforeEach(async () => {
-    await ControlPlane.clean();
+    await cleanNetwork();
   });
 
-  it("space is comparable", async () => {
-    await ControlPlane.createNetwork(imsNetwork);
+  it('space is comparable', async () => {
+    await createNetWork(imsNetwork);
 
-    const authCell = ControlPlane.getResolvedCell('Auth');
-    const userCell = ControlPlane.getResolvedCell('User');
-    const imsCell = ControlPlane.getResolvedCell('IMS');
+    const authCell = getResolvedCell('Auth');
+    const userCell = getResolvedCell('User');
+    const imsCell = getResolvedCell('IMS');
 
     expect(authCell.cellConfig.space === userCell.cellConfig.space).to.true;
     expect(authCell.spaceId === userCell.spaceId).to.true;

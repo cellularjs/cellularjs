@@ -1,4 +1,4 @@
-import { CellConfig, NetworkConfig, Transportor } from "../../../src";
+import { CellConfig, NetworkConfig } from '../../../src';
 import { AuthCell } from '../cells/auth';
 import { DummyCell } from '../cells/dummy'
 import { IMSCell } from '../app/ims'
@@ -8,8 +8,8 @@ import { LoggerCell } from '../cells/logger';
 import { UserCell } from '../cells/user';
 
 export const authCellCnf: CellConfig = {
-  name: "Auth",
-  space: "neverland",
+  name: 'Auth',
+  space: 'neverland',
   driver: {
     local: AuthCell,
     http: AuthHttpDriver,
@@ -17,35 +17,35 @@ export const authCellCnf: CellConfig = {
 };
 
 export const dummyCellCnf: CellConfig = {
-  name: "Dummy",
-  space: "neverland",
+  name: 'Dummy',
+  space: 'neverland',
   driver: DummyCell,
 };
 
 export const googleAuthCnf: CellConfig = {
-  name: "GoogleAuth",
+  name: 'GoogleAuth',
   space: '?',
   driver: {
-    XProtocol: GoogleAuth
+    XProtocol: GoogleAuth,
   },
 };
 
 export const imsCellCnf: CellConfig = {
-  name: "IMS",
-  space: "neverwood",
+  name: 'IMS',
+  space: 'neverwood',
   driver: IMSCell,
 
 };
 
 export const loggerCellCnf: CellConfig = {
-  name: "Logger",
-  space: "neverland",
+  name: 'Logger',
+  space: 'neverland',
   driver: LoggerCell,
 };
 
 export const userCellCnf: CellConfig = {
-  name: "User",
-  space: "neverland",
+  name: 'User',
+  space: 'neverland',
   driver: UserCell,
 };
 

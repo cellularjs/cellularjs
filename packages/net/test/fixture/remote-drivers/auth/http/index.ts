@@ -1,4 +1,4 @@
-import { Cell } from "../../../../../src";
+import { Cell } from '../../../../../src';
 
 @Cell({
   listen: {},

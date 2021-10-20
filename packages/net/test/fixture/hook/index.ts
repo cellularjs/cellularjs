@@ -1,8 +1,8 @@
-import { Inject } from "@cellularjs/di"
-import { ControlPlane, Hook, Cell, ServiceHandler, CellularIRS, CLL_NET_HANDLER, Service } from "../../../src";
+import { Inject } from '@cellularjs/di'
+import { ServiceHandler, CellularIRS, CLL_NET_HANDLER, Service } from '../../../src';
 
 @Service({
-  scope: 'public'
+  scope: 'public',
 })
 export class Original implements ServiceHandler {
   handle() {
@@ -51,7 +51,7 @@ export class Bar implements ServiceHandler {
 export class Session { }
 
 @Service({
-  scope: 'public'
+  scope: 'public',
 })
 export class EditFooService implements ServiceHandler {
   constructor(public session: Session) { }

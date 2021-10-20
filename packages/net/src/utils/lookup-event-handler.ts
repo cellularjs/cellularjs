@@ -1,10 +1,10 @@
-import { Errors, CellConfig } from "../";
-import { getServiceMeta, scanJs } from "./";
+import { Errors, CellConfig } from '../';
+import { getServiceMeta, scanJs } from './';
 
 export function scanForServiceHandler(basePath: string, cellCnf: CellConfig, eventHandlers): void {
   scanJs(basePath, (exports) => {
     Object.keys(exports).map(propKey => handleExportProp(
-      exports, propKey, cellCnf, eventHandlers
+      exports, propKey, cellCnf, eventHandlers,
     ));
   });
 }
@@ -12,7 +12,7 @@ export function scanForServiceHandler(basePath: string, cellCnf: CellConfig, eve
 function handleExportProp(moduleExports, propKey, cellCnf: CellConfig, eventHandlers): void {
   const exportProp = moduleExports[propKey];
 
-  if (typeof exportProp !== "function") {
+  if (typeof exportProp !== 'function') {
     return;
   }
 

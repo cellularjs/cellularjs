@@ -1,7 +1,7 @@
-import { Service, ServiceHandler, CellularIRS } from "../../../../../../src";
+import { Service, ServiceHandler, CellularIRS } from '../../../../../../src';
 
 @Service({
-  route: "multicast",
+  route: 'multicast',
 })
 export class UserProfileCreated implements ServiceHandler {
   async handle(): Promise<CellularIRS> {

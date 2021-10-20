@@ -32,22 +32,22 @@ export const Errors= {
   ),
 
   AnonymousAccessPrivateService: () => new NetError(
-    `Service handler has private scope is not accessible from anonymous caller`,
+    'Service handler has private scope is not accessible from anonymous caller',
     ErrorCode.AnonymousAccessPrivateService,
   ),
 
   OtherCellAccessPrivateService: () => new NetError(
-    `Service handler has private scope is only accessible from owner cell`,
+    'Service handler has private scope is only accessible from owner cell',
     ErrorCode.OtherCellAccessPrivateService,
   ),
 
   AnonymousAccessSpaceService: () => new NetError(
-    `Service handler has space scope is not accessible from anonymous caller`,
+    'Service handler has space scope is not accessible from anonymous caller',
     ErrorCode.AnonymousAccessSpaceService,
   ),
 
   SpaceScopeForbidden: () => new NetError(
-    `Service handler has space scope is only accessible from cells having same space`,
+    'Service handler has space scope is only accessible from cells having same space',
     ErrorCode.SpaceScopeForbidden,
   ),
 };

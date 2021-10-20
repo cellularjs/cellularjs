@@ -1,36 +1,35 @@
 import {
-  ControlPlane,
+  getResolvedCell,
   CellContext, ResolvedCell, Errors,
-  ServiceScopeMap
-} from "../";
+  ServiceScopeMap,
+} from '../';
 
-/**
- * Service scope constraint
- */
-export class ScopeConstaint {
-  public static [ServiceScopeMap.private](targetResolvedCell: ResolvedCell, refererCell?: CellContext) {
-    if (!refererCell) {
-      throw Errors.AnonymousAccessPrivateService();
-    }
+export const scopeContraints = {
+  [ServiceScopeMap.private]: privateContraint,
+  [ServiceScopeMap.space]: spaceConstaint,
+  [ServiceScopeMap.public]: () => {},
+}
 
-    const refererResolvedCell = ControlPlane.getResolvedCell(refererCell.cellName);
-
-    if (refererResolvedCell.cellId !== targetResolvedCell.cellId) {
-      throw Errors.OtherCellAccessPrivateService();
-    }
+function privateContraint(targetResolvedCell: ResolvedCell, refererCell?: CellContext) {
+  if (!refererCell) {
+    throw Errors.AnonymousAccessPrivateService();
   }
 
-  public static [ServiceScopeMap.space](targetResolvedCell: ResolvedCell, refererCell?: CellContext) {
-    if (!refererCell) {
-      throw Errors.AnonymousAccessSpaceService();
-    }
+  const refererResolvedCell = getResolvedCell(refererCell.cellName);
 
-    const refererResolvedCell = ControlPlane.getResolvedCell(refererCell.cellName);
+  if (refererResolvedCell.cellId !== targetResolvedCell.cellId) {
+    throw Errors.OtherCellAccessPrivateService();
+  }
+}
 
-    if (refererResolvedCell.spaceId !== targetResolvedCell.spaceId) {
-      throw Errors.SpaceScopeForbidden();
-    }
+function spaceConstaint(targetResolvedCell: ResolvedCell, refererCell?: CellContext) {
+  if (!refererCell) {
+    throw Errors.AnonymousAccessSpaceService();
   }
 
-  public static [ServiceScopeMap.public]() { }
+  const refererResolvedCell = getResolvedCell(refererCell.cellName);
+
+  if (refererResolvedCell.spaceId !== targetResolvedCell.spaceId) {
+    throw Errors.SpaceScopeForbidden();
+  }
 }

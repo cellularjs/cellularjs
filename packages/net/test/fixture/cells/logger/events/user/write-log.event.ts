@@ -1,8 +1,8 @@
-import { Inject } from "@cellularjs/di";
-import { Service, ServiceHandler, CellularIRS, CellularIRQ, CLL_IRQ } from "../../../../../../src";
+import { Inject } from '@cellularjs/di';
+import { Service, ServiceHandler, CellularIRS, CellularIRQ, CLL_IRQ } from '../../../../../../src';
 
 @Service({
-  scope: "space",
+  scope: 'space',
 })
 export class WriteLog implements ServiceHandler {
   constructor(

@@ -1,4 +1,4 @@
-import { Service, ServiceHandler, CellularIRS } from "../../../../../src";
+import { Service, ServiceHandler, CellularIRS } from '../../../../../src';
 
 @Service()
 export class DummyService implements ServiceHandler {

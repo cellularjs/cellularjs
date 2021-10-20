@@ -1,19 +1,19 @@
-import "mocha";
-import { expect } from "chai";
-import { ControlPlane } from "../../../../src";
-import { userCellCnf } from "../../../fixture/share/network";
-import { JwtService } from "../../../fixture/pkg/jwt/jwt.service";
+import 'mocha';
+import { expect } from 'chai';
+import { DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell } from '../../../../src';
+import { userCellCnf } from '../../../fixture/share/network';
+import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
 
-describe("Decorator - @Cell annotation - imports property:", () => {
+describe('Decorator - @Cell annotation - imports property:', () => {
   beforeEach(async () => {
-    await ControlPlane.clean();
+    await cleanNetwork();
   });
 
-  it("can make use of @cellularjs/di to add module", async () => {
-    await ControlPlane.createNetwork([userCellCnf]);
+  it('can make use of @cellularjs/di to add module', async () => {
+    await createNetWork([userCellCnf]);
 
-    const resolvedCell = ControlPlane.getResolvedCell('User');
-    const localDriver = resolvedCell.drivers.get(ControlPlane.DEFAULT_DRIVER);
+    const resolvedCell = getResolvedCell('User');
+    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
 
     const jwtService = await localDriver.container.resolve<JwtService>(JwtService);
 

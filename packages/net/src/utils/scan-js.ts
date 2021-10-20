@@ -1,5 +1,5 @@
-import { readdirSync, statSync } from "fs";
-import * as path from "path";
+import { readdirSync, statSync } from 'fs';
+import * as path from 'path';
 
 type ResolveFactory = (data: { [key: string]: any }) => void;
 

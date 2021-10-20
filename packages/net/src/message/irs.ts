@@ -1,4 +1,4 @@
-import { IrqHeader, IrsHeader, CellularIRQ } from "..";
+import { IrsHeader } from '..';
 
 /**
  * Cellular Internal Response

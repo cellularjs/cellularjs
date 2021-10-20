@@ -1,8 +1,8 @@
-import { Container, GenericProvider } from "@cellularjs/di";
-import { ControlPlane } from ".";
-import { CellContext, CLL_CELL_CTX, Errors } from "..";
-import { CellConfig, ResolvedDriver, CellMeta, ServiceHandlerMap } from "../type";
-import { freezeProperty, getCellMeta, scanForServiceHandler, scanForProviders } from "../utils";
+import { Container, GenericProvider } from '@cellularjs/di';
+import { DEFAULT_DRIVER } from '.';
+import { CellContext, CLL_CELL_CTX, Errors } from '..';
+import { CellConfig, ResolvedDriver, CellMeta, ServiceHandlerMap } from '../type';
+import { freezeProperty, getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {
   const drivers = new Map<string, ResolvedDriver>();
@@ -10,7 +10,7 @@ export async function resolveDrivers(cellConfig: CellConfig) {
   if (typeof cellConfig.driver !== 'object') {
     const driver = await resolveDriver(cellConfig, cellConfig.driver);
 
-    return drivers.set(ControlPlane.DEFAULT_DRIVER, driver);
+    return drivers.set(DEFAULT_DRIVER, driver);
   }
 
   const resolveDriverTasks = Object.keys(cellConfig.driver).map(async driverType => {
@@ -83,14 +83,14 @@ async function resolveCellCtx(
   container: Container,
   cellConfig: CellConfig,
 ): Promise<CellContext> {
-  const ctxClass = cellMeta.context || CellContext;
+  const ContextClass = cellMeta.context || CellContext;
   const extModule = new Container();
-  extModule.addProvider(ctxClass);
-  const cellCtx: CellContext = await container.resolve(ctxClass, {
-    extModule
+  extModule.addProvider(ContextClass);
+  const cellCtx: CellContext = await container.resolve(ContextClass, {
+    extModule,
   });
 
-  freezeProperty(cellCtx, "cellName", cellConfig.name);
+  freezeProperty(cellCtx, 'cellName', cellConfig.name);
 
   return cellCtx;
 }

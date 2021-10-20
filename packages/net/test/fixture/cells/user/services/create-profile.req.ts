@@ -1,5 +1,5 @@
-import { Injectable, Inject } from "@cellularjs/di";
-import { CLL_IRQ, CellularIRQ, CellularIRS } from "../../../../../src";
+import { Injectable, Inject } from '@cellularjs/di';
+import { CLL_IRQ, CellularIRQ, CellularIRS } from '../../../../../src';
 
 @Injectable()
 export class CreateProfileReq {

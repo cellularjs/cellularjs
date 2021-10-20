@@ -1,11 +1,11 @@
-import { getInjectable } from "@cellularjs/di"
-import { scanJs } from "./";
+import { getInjectable } from '@cellularjs/di'
+import { scanJs } from './';
 
 export function scanForProviders(basePath: string) {
   const providers = [];
   scanJs(basePath, (exports) => {
     Object.keys(exports).map(propKey => handleExportProp(
-      exports, propKey, providers
+      exports, propKey, providers,
     ));
   });
 
@@ -15,7 +15,7 @@ export function scanForProviders(basePath: string) {
 function handleExportProp(moduleExports, propKey, providers: any[]): void {
   const exportProp = moduleExports[propKey];
 
-  if (typeof exportProp !== "function") {
+  if (typeof exportProp !== 'function') {
     return;
   }
 

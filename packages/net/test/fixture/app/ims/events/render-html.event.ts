@@ -1,8 +1,8 @@
-import { Inject } from "@cellularjs/di";
-import { Service, ServiceHandler, Transportor, CellularIRS, CellularIRQ, CLL_CELL_CTX } from "../../../../../src";
+import { Inject } from '@cellularjs/di';
+import { Service, ServiceHandler, send, CellularIRS, CellularIRQ, CLL_CELL_CTX } from '../../../../../src';
 
 @Service({
-  scope: "public",
+  scope: 'public',
 })
 export class RenderHtml implements ServiceHandler {
   constructor(
@@ -11,9 +11,9 @@ export class RenderHtml implements ServiceHandler {
 
   handle(): Promise<CellularIRS> {
     const cacheHtmlIrq = new CellularIRQ(
-      { unicast: "IMS:CacheHtml" },
+      { unicast: 'IMS:CacheHtml' },
     );
 
-    return Transportor.send(cacheHtmlIrq, { refererCell: this.ctx });
+    return send(cacheHtmlIrq, { refererCell: this.ctx });
   }
 }

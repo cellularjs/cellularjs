@@ -1,1 +1,1 @@
-export { Transportor } from './transportor'
+export { send } from './send.func'

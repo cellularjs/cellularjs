@@ -1,14 +1,14 @@
-import "mocha";
-import { expect } from "chai";
-import { CellConfig, ControlPlane, ErrorCode } from "../../../src";
-import { authCellCnf, userCellCnf } from "../../fixture/share/network";
+import 'mocha';
+import { expect } from 'chai';
+import { CellConfig, DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode } from '../../../src';
+import { authCellCnf, userCellCnf } from '../../fixture/share/network';
 
-describe("CellConfig - cell driver:", () => {
+describe('CellConfig - cell driver:', () => {
   beforeEach(async () => {
-    await ControlPlane.clean();
+    await cleanNetwork();
   });
 
-  it("can not resolve driver which is not decorated by @Cell annotation", async () => {
+  it('can not resolve driver which is not decorated by @Cell annotation', async () => {
     try {
       class DummyClass {}
       const invalidCellClassCnf: CellConfig = {
@@ -17,7 +17,7 @@ describe("CellConfig - cell driver:", () => {
         space: 'DummyClass',
       };
 
-      await ControlPlane.createNetwork([invalidCellClassCnf]);
+      await createNetWork([invalidCellClassCnf]);
 
       expect(true).to.false;
     } catch(err) {
@@ -25,22 +25,22 @@ describe("CellConfig - cell driver:", () => {
     }
   });
 
-  it("driver config is a string will be treated as local driver", async () => {
-    await ControlPlane.createNetwork([userCellCnf]);
+  it('driver config is a string will be treated as local driver', async () => {
+    await createNetWork([userCellCnf]);
 
-    const resolvedCell = ControlPlane.getResolvedCell('User');
+    const resolvedCell = getResolvedCell('User');
 
     expect(resolvedCell.cellConfig).to.eqls(userCellCnf);
-    expect(resolvedCell.drivers.has(ControlPlane.DEFAULT_DRIVER)).to.true;
+    expect(resolvedCell.drivers.has(DEFAULT_DRIVER)).to.true;
   });
 
-  it("can add a cell which has multiple types of driver into network", async () => {
-    await ControlPlane.createNetwork([authCellCnf]);
+  it('can add a cell which has multiple types of driver into network', async () => {
+    await createNetWork([authCellCnf]);
 
-    const resolvedCell = ControlPlane.getResolvedCell('Auth');
+    const resolvedCell = getResolvedCell('Auth');
 
     expect(resolvedCell.cellConfig).to.eqls(authCellCnf);
-    expect(resolvedCell.drivers.has(ControlPlane.DEFAULT_DRIVER)).to.true;
+    expect(resolvedCell.drivers.has(DEFAULT_DRIVER)).to.true;
     expect(resolvedCell.drivers.has('http')).to.true;
   });
 });

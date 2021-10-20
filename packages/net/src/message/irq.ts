@@ -1,4 +1,4 @@
-import { IrqHeader } from "..";
+import { IrqHeader } from '..';
 
 /**
  * Cellular Internal Request

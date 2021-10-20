@@ -1,6 +1,6 @@
-import * as path from "path";
-import { CellMeta } from "..";
-import { CLL_CELL_OPTS } from "..";
+import * as path from 'path';
+import { CellMeta } from '..';
+import { CLL_CELL_OPTS } from '..';
 
 /**
  * Config cell with meta data.
@@ -10,7 +10,6 @@ export const Cell = (rawCellMeta: CellMeta) => (target) => {
     ...rawCellMeta,
     providers: rawCellMeta.providers || [],
   };
-
   
   const stackArr = new Error().stack.split('\n');
 
@@ -25,10 +24,10 @@ export const Cell = (rawCellMeta: CellMeta) => (target) => {
 
   const basePath = callerPathArr.join(path.sep);
 
-  if (typeof cellDriverMeta.listen === "string") {
+  if (typeof cellDriverMeta.listen === 'string') {
     cellDriverMeta.listen = path.resolve(
       basePath,
-      path.normalize(cellDriverMeta.listen)
+      path.normalize(cellDriverMeta.listen),
     );
   }
 
