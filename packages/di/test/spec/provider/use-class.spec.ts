@@ -1,15 +1,15 @@
-import "mocha";
-import { expect } from "chai";
-import { Container } from "../../../src";
+import 'mocha';
+import { expect } from 'chai';
+import { Container } from '../../../src';
 
-describe("Provider - class/useClass", () => {
+describe('Provider - class/useClass', () => {
   let container: Container;
 
   beforeEach(() => {
     container = new Container();
   });
 
-  it("can resolve value from useClass provider", async () => {
+  it('can resolve value from useClass provider', async () => {
     container.addProvider({
       token: Container,
       useClass: Container,
@@ -24,11 +24,11 @@ describe("Provider - class/useClass", () => {
     expect(firstContainer === secondContainer).to.false;
   });
 
-  it("can cache resolved value when using useClass provider with permanent cycle", async () => {
+  it('can cache resolved value when using useClass provider with permanent cycle', async () => {
     container.addProvider({
       token: Container,
       useClass: Container,
-      cycle: "permanent",
+      cycle: 'permanent',
     });
 
     // TODO: could DI support permerant async provider
@@ -38,7 +38,7 @@ describe("Provider - class/useClass", () => {
     expect(firstResolvedValue === secondResolvedValue).to.true;
   });
 
-  it("can resolve class as useClass provider", async () => {
+  it('can resolve class as useClass provider', async () => {
     container.addProvider(Container);
 
     expect(await container.resolve(Container)).to.instanceOf(Container);

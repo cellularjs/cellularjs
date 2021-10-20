@@ -1,6 +1,6 @@
-import { Injectable } from "../../../../src";
-import { MongoService } from "../../pkg/mongo/mongo.service";
-import { CreateProfileReq } from "./create-profile.req";
+import { Injectable } from '../../../../src';
+import { MongoService } from '../../pkg/mongo/mongo.service';
+import { CreateProfileReq } from './create-profile.req';
 
 @Injectable()
 export class UserRepository {

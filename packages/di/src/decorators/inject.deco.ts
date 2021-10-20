@@ -1,5 +1,5 @@
-import { CLL_TOKEN } from "../consts/meta-key.const";
-import { Token } from "../";
+import { CLL_TOKEN } from '../consts/meta-key.const';
+import { Token } from '../';
 
 /**
  * Allow to inject dependency with specific token.  

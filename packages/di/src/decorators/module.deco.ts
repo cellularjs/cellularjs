@@ -1,5 +1,5 @@
-import { CLL_MODULE } from "../consts/meta-key.const";
-import { ModuleMeta } from "../";
+import { CLL_MODULE } from '../consts/meta-key.const';
+import { ModuleMeta } from '../';
 
 /**
  * Config module with meta data.

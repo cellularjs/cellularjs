@@ -1,4 +1,4 @@
-import { GenericProvider, Token, ExportableCnf, ImportableCnf } from "../types";
+import { GenericProvider, Token, ExportableCnf, ImportableCnf } from '../types';
 import { DiResolvers } from '../consts/di-resolver.const'
 import { ContainerBag } from './props/container-bag.prop'
 import { addExtModule } from './funcs/addExtModule.func'

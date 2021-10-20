@@ -46,7 +46,7 @@ export interface UseFuncProvider<T> extends BaseProvider, ProviderHasCycle {
    * - Dependencies order must be same as useFunc parameters order.
    * - Class will be use as token for provider, so you need to define its provider.
    */
-  deps?: any[],
+  deps?: any[];
 }
 
 export interface UseValueProvider<T> extends BaseProvider {
@@ -56,14 +56,16 @@ export interface UseValueProvider<T> extends BaseProvider {
   useValue: ValueType<T>;
 }
 
-export type GenericProvider<T> = UseModuleProvider | UseClassProvider<T> | ClassType<T> | UseFuncProvider<T> | UseValueProvider<T>;
+export type GenericProvider<T> =
+  UseModuleProvider | UseClassProvider<T> |
+  ClassType<T> | UseFuncProvider<T> | UseValueProvider<T>;
 
 /**
  * @package
  */
 export interface AdjustedProvider<T> extends BaseProvider {
   resolver: DiResolvers;
-  useModule?: ClassType<any>,
+  useModule?: ClassType<any>;
   useClass?: ClassType<T>;
   useFunc?: FuncType<T>;
   useValue?: ValueType<T>;
@@ -72,8 +74,8 @@ export interface AdjustedProvider<T> extends BaseProvider {
 }
 
 export interface AdjustedDep {
-  value: any,
-  isClass: boolean | undefined,
+  value: any;
+  isClass: boolean | undefined;
 }
 
 export interface ResolveOptions {

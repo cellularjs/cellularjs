@@ -1,4 +1,4 @@
-import { CLL_INJECTABLE } from "../consts/meta-key.const";
+import { CLL_INJECTABLE } from '../consts/meta-key.const';
 
 /**
  * Make class's dependencies become injectable.  

@@ -1,5 +1,5 @@
-import { Inject, Injectable } from "../../../../src";
-import { request } from "../../const/data.const";
+import { Inject, Injectable } from '../../../../src';
+import { request } from '../../const/data.const';
 
 @Injectable()
 export class UpdateProfileReq {

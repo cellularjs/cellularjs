@@ -1,8 +1,8 @@
-import { GenericProvider, AdjustedProvider, AdjustedDep } from "../";
-import { DiResolvers } from "../consts/di-resolver.const"
-import { CycleTypeMap } from "../consts/cycle.const"
-import { BaseProvider, ProviderHasCycle } from "../types";
-import { isClass } from "./isClass.func";
+import { GenericProvider, AdjustedProvider, AdjustedDep } from '../';
+import { DiResolvers } from '../consts/di-resolver.const'
+import { CycleTypeMap } from '../consts/cycle.const'
+import { BaseProvider, ProviderHasCycle } from '../types';
+import { isClass } from './isClass.func';
 
 /**
  * Classify provider into useModule, useClass, useFunc or useValue provider

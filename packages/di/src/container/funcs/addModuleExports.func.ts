@@ -1,6 +1,6 @@
 import { Container } from '../../';
-import { ClassType, ExportableCnf, ExtModuleMeta } from "../../types";
-import { getModuleMeta } from "../../utils";
+import { ClassType, ExportableCnf, ExtModuleMeta } from '../../types';
+import { getModuleMeta } from '../../utils';
 
 export function addModuleExports(this: Container, moduleClass: ClassType<any>, exports: ExportableCnf[] = []) {
   exports.forEach((exportCnf: ExportableCnf) => {

@@ -1,5 +1,5 @@
-import { Injectable } from "../../../../src";
-import { Connection } from "./connection";
+import { Injectable } from '../../../../src';
+import { Connection } from './connection';
 
 @Injectable()
 export class MongoService {

@@ -1,7 +1,7 @@
-import { Injectable } from "../../../../src";
-import { CustomHashService } from "../custom-hash/custom-hash.service";
-import { JwtService } from "./jwt.service";
-import { Md5Service } from "./md5.service";
+import { Injectable } from '../../../../src';
+import { CustomHashService } from '../custom-hash/custom-hash.service';
+import { JwtService } from './jwt.service';
+import { Md5Service } from './md5.service';
 
 @Injectable()
 export class JwtSignService {

@@ -1,6 +1,6 @@
 import { Container } from '../../';
-import { Errors } from "../../consts/error.const";
-import { GenericProvider, AdjustedProvider } from "../../types";
+import { Errors } from '../../consts/error.const';
+import { GenericProvider, AdjustedProvider } from '../../types';
 import { classifyProvider } from '../../utils';
 
 export function addProvider<T>(this: Container, genericProvider: GenericProvider<T>) {

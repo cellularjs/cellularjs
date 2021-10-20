@@ -1,8 +1,8 @@
-import { Injectable } from "../../../../src";
-import { Md2Service } from "./md2.service";
-import { Md5Service } from "./md5.service";
-import { Sha1Service } from "./sha1.service";
-import { Sha256Service } from "./sha256.service";
+import { Injectable } from '../../../../src';
+import { Md2Service } from './md2.service';
+import { Md5Service } from './md5.service';
+import { Sha1Service } from './sha1.service';
+import { Sha256Service } from './sha256.service';
 
 @Injectable()
 export class JwtService {
@@ -14,7 +14,7 @@ export class JwtService {
   ) { }
 
   verify(token) {
-    if (token !== "pass") {
+    if (token !== 'pass') {
       return false
     }
 

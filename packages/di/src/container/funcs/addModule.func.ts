@@ -1,7 +1,7 @@
 import { Container } from '../../';
-import { Errors } from "../../consts/error.const";
-import { ClassType, ImportableCnf, ExportableCnf, ExtModuleMeta } from "../../types";
-import { getModuleMeta } from "../../utils";
+import { Errors } from '../../consts/error.const';
+import { ClassType, ImportableCnf, ExportableCnf, ExtModuleMeta } from '../../types';
+import { getModuleMeta } from '../../utils';
 
 export function addModule(this: Container, moduleCnf: ImportableCnf | ExportableCnf): void {
   if ((moduleCnf as ExtModuleMeta).extModule) {

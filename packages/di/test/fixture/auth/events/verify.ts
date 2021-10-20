@@ -1,5 +1,5 @@
-import { Injectable } from "../../../../src";
-import { JwtService } from "../../pkg/jwt/jwt.service";
+import { Injectable } from '../../../../src';
+import { JwtService } from '../../pkg/jwt/jwt.service';
 
 @Injectable()
 export class Verify {
@@ -8,6 +8,6 @@ export class Verify {
   ) {}
 
   async handle() {
-    return this.jwtService.verify("pass");
+    return this.jwtService.verify('pass');
   }
 }

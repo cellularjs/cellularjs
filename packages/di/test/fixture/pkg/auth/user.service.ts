@@ -1,5 +1,5 @@
-import { Injectable, Inject } from "../../../../src";
-import { request, dummyAccessToken } from "../../const/data.const"
+import { Injectable, Inject } from '../../../../src';
+import { request, dummyAccessToken } from '../../const/data.const'
 
 @Injectable()
 export class UserService {

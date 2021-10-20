@@ -1,8 +1,8 @@
-import { Module } from "../../../src";
-import { JwtModule } from "../pkg/jwt/jwt.module"
-import { MongoModule } from "../pkg/mongo/mongo.module";
-import { Verify } from "./events/verify";
-import { AuthRepository } from "./services/auth.repository";
+import { Module } from '../../../src';
+import { JwtModule } from '../pkg/jwt/jwt.module'
+import { MongoModule } from '../pkg/mongo/mongo.module';
+import { Verify } from './events/verify';
+import { AuthRepository } from './services/auth.repository';
 
 @Module({
   providers: [
@@ -11,9 +11,9 @@ import { AuthRepository } from "./services/auth.repository";
   imports: [
     JwtModule,
     MongoModule.config({
-      mongoUrl: "neverland",
-      user: "auth",
-      password: "********",
+      mongoUrl: 'neverland',
+      user: 'auth',
+      password: '********',
     }),
   ],
   exports: [Verify],

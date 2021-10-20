@@ -1,5 +1,5 @@
-import { Injectable } from "../../../../src";
-import { UserService } from "../../pkg/auth/user.service"
+import { Injectable } from '../../../../src';
+import { UserService } from '../../pkg/auth/user.service'
 
 @Injectable()
 export class UpdateProfile {

@@ -1,6 +1,6 @@
 import { Container } from '../../';
-import { ExtModuleMeta, ClassType } from "../../types";
-import { getModuleMeta } from "../../utils";
+import { ExtModuleMeta, ClassType } from '../../types';
+import { getModuleMeta } from '../../utils';
 
 export function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
   this.addModule(extModuleMeta.extModule);

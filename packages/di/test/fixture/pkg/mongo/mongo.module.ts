@@ -1,6 +1,6 @@
-import { Module, ExtModuleMeta } from "../../../../src";
-import { Connection } from "./connection";
-import { MongoService } from "./mongo.service";
+import { Module, ExtModuleMeta } from '../../../../src';
+import { Connection } from './connection';
+import { MongoService } from './mongo.service';
 
 @Module({
   providers: [Connection],
@@ -13,9 +13,9 @@ export class MongoModule {
     return {
       extModule: MongoModule,
       providers: [
-        { token: "mongoUrl", useValue: mongoUrl },
-        { token: "mongoUsr", useValue: user },
-        { token: "mongoPwd", useValue: password },
+        { token: 'mongoUrl', useValue: mongoUrl },
+        { token: 'mongoUsr', useValue: user },
+        { token: 'mongoPwd', useValue: password },
       ],
     };
   }

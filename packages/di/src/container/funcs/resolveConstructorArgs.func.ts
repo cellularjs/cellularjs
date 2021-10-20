@@ -1,5 +1,5 @@
 import { Container, ResolveOptions } from '../../';
-import { getParamTypes, getToken } from "../../utils";
+import { getParamTypes, getToken } from '../../utils';
 
 export async function resolveConstructorArgs(
   this: Container,

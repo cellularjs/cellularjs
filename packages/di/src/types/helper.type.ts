@@ -6,4 +6,4 @@ export type ValueType<T> = T;
 
 export type Token = any;
 
-export type CycleType = "permanent" | "transient";
+export type CycleType = 'permanent' | 'transient';
