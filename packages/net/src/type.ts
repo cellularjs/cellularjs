@@ -243,7 +243,7 @@ export interface ResolvedCell {
 
 export type NetworkOptions = {
   /**
-   * Number of thread to create network.
+   * Number of worker will be spawned when creating network.
    */
-  thread?: number;
+  worker?: number;
 }
