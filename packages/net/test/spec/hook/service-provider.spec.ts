@@ -1,5 +1,5 @@
 import { afterEach } from 'mocha';
-import { createNetWork, cleanNetwork, Hook, Cell, send, CellularIRQ } from '../../../src';
+import { createNetWork, cleanNetwork, Hook, Cell, send, IRQ } from '../../../src';
 import { EditFooService, Session } from '../../fixture/hook';
 
 describe('Hook - addServiceProviders()', () => {
@@ -21,7 +21,7 @@ describe('Hook - addServiceProviders()', () => {
   it('can add provider for resolving service handler', async () => {
     Hook.addServiceProviders(EditFooService, [Session]);
 
-    const irq = new CellularIRQ({ unicast: 'Provider:EditFooService' });
+    const irq = new IRQ({ unicast: 'Provider:EditFooService' });
     await send(irq, { throwOnError: true});
   });
 });

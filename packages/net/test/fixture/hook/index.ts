@@ -1,12 +1,12 @@
 import { Inject } from '@cellularjs/di'
-import { ServiceHandler, CellularIRS, CLL_NET_HANDLER, Service } from '../../../src';
+import { ServiceHandler, IRS, CLL_NET_HANDLER, Service } from '../../../src';
 
 @Service({
   scope: 'public',
 })
 export class Original implements ServiceHandler {
   handle() {
-    return new CellularIRS({ original: true });
+    return new IRS({ original: true });
   }
 }
 
@@ -19,7 +19,7 @@ export class Foo implements ServiceHandler {
   async handle() {
     const rs = await this.handler.handle();
 
-    return new CellularIRS({ ...rs.body, foo: true });
+    return new IRS({ ...rs.body, foo: true });
   }
 }
 @Service()
@@ -31,7 +31,7 @@ export class FooOverride implements ServiceHandler {
   async handle() {
     const rs = await this.handler.handle();
 
-    return new CellularIRS({ ...rs.body, foo: false });
+    return new IRS({ ...rs.body, foo: false });
   }
 }
 
@@ -44,7 +44,7 @@ export class Bar implements ServiceHandler {
   async handle() {
     const rs = await this.handler.handle();
 
-    return new CellularIRS({ ...rs.body, bar: true });
+    return new IRS({ ...rs.body, bar: true });
   }
 }
 
@@ -57,6 +57,6 @@ export class EditFooService implements ServiceHandler {
   constructor(public session: Session) { }
 
   handle() {
-    return new CellularIRS();
+    return new IRS();
   }
 }

@@ -1,8 +1,8 @@
-import { Service, ServiceHandler, CellularIRS } from '../../../../../src';
+import { Service, ServiceHandler, IRS } from '../../../../../src';
 
 @Service({ scope: 'space' })
 export class SendMail implements ServiceHandler {
   handle() {
-    return new CellularIRS();
+    return new IRS();
   }
 }

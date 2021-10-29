@@ -3,7 +3,7 @@ import { IrqHeader } from '..';
 /**
  * Cellular Internal Request
  */
-export class CellularIRQ {
+export class IRQ {
   public readonly header: IrqHeader;
   public readonly body;
 

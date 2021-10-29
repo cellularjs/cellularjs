@@ -3,7 +3,7 @@ import { IrsHeader } from '..';
 /**
  * Cellular Internal Response
  */
-export class CellularIRS {
+export class IRS {
   readonly header: IrsHeader = {
     status: 200000,
   };
@@ -12,7 +12,7 @@ export class CellularIRS {
 
   constructor(
     body?: any,
-    header: any = {},
+    header: IrsHeader = {} as IrsHeader,
   ) {
     this.header = {
       ...this.header,
@@ -22,8 +22,8 @@ export class CellularIRS {
     this.body = body || {};
   }
 
-  static unexpectedError(): CellularIRS {
-    const unexpectedRrrorIrs = new CellularIRS(
+  static unexpectedError(): IRS {
+    const unexpectedRrrorIrs = new IRS(
       { error: 'Unexpected error has occurred' },
       { status: 500000 },
     );

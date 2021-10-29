@@ -14,7 +14,7 @@ export const CLL_EVENT_OPTS = 'cll:net:event:opts';
 export const CLL_CELL_CTX = 'cll:net:cell:ctx';
 
 /**
- * CellularIrs instance token
+ * IRQ instance token
  */
 export const CLL_IRQ = 'cll:net:irq';
 

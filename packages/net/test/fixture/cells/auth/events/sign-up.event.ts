@@ -1,18 +1,18 @@
 import { Inject } from '@cellularjs/di';
 import {
-  Service, ServiceHandler, CellularIRQ, CellularIRS, CLL_IRQ, send, CLL_CELL_CTX,
+  Service, ServiceHandler, IRQ, IRS, CLL_IRQ, send, CLL_CELL_CTX,
 } from '../../../../../src';
 
 @Service({ scope: 'public' })
 export class SignUp implements ServiceHandler {
   constructor(
-    @Inject(CLL_IRQ) private irq: CellularIRQ,
+    @Inject(CLL_IRQ) private irq: IRQ,
     @Inject(CLL_CELL_CTX) private ctx,
   ) { }
 
-  async handle(): Promise<CellularIRS> {
+  async handle(): Promise<IRS> {
     return new Promise(async resolve => {
-      const createProfileIrq = new CellularIRQ(
+      const createProfileIrq = new IRQ(
         { unicast: 'User:CreateProfile' },
         this.irq.body,
       );

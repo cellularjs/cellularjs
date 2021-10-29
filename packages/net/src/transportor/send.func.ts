@@ -1,5 +1,5 @@
 import {
-  CellContext, CellularIRQ, CellularIRS,
+  CellContext, IRQ, IRS,
   DEFAULT_DRIVER,
 } from '..';
 import { resolveServiceHandler } from './resolve-service-handler.func'
@@ -17,7 +17,7 @@ interface RequestOptions {
   throwOnError?: boolean;
 }
 
-export async function send(irq: CellularIRQ, opts?: RequestOptions): Promise<CellularIRS> {
+export async function send(irq: IRQ, opts?: RequestOptions): Promise<IRS> {
   const {
     refererCell,
     driverType = DEFAULT_DRIVER,
@@ -35,10 +35,10 @@ export async function send(irq: CellularIRQ, opts?: RequestOptions): Promise<Cel
       throw error;
     }
 
-    if (error instanceof CellularIRS) {
+    if (error instanceof IRS) {
       return error;
     }
 
-    return CellularIRS.unexpectedError();
+    return IRS.unexpectedError();
   }
 }

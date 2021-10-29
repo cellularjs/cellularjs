@@ -1,15 +1,15 @@
 import { Inject } from '@cellularjs/di';
-import { Service, ServiceHandler, CellularIRS, CellularIRQ, CLL_IRQ } from '../../../../../../src';
+import { Service, ServiceHandler, IRS, IRQ, CLL_IRQ } from '../../../../../../src';
 
 @Service({
   scope: 'space',
 })
 export class WriteLog implements ServiceHandler {
   constructor(
-    @Inject(CLL_IRQ) private irq: CellularIRQ,
+    @Inject(CLL_IRQ) private irq: IRQ,
   ) { }
 
   handle() {
-    return new CellularIRS({ ...this.irq.body, writeLog: true });
+    return new IRS({ ...this.irq.body, writeLog: true });
   }
 }

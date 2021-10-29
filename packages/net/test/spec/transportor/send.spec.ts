@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, cleanNetwork, send, CellularIRQ, ErrorCode, CellularIRS } from '../../../src';
+import { createNetWork, cleanNetwork, send, IRQ, ErrorCode, IRS } from '../../../src';
 import { imsNetwork } from '../../fixture/share/network'
 
 describe('Transportor - send(): send request', () => {
@@ -13,12 +13,12 @@ describe('Transportor - send(): send request', () => {
   })
 
   it('will return/throw error in case of sending request to non-exist cell', async () => {
-    const irq = new CellularIRQ({ unicast: 'NotExist:Bar' });
+    const irq = new IRQ({ unicast: 'NotExist:Bar' });
     const irs = await send(irq);
     expect(irs.header.status === 500000).to.true;
 
     try {
-      const irq = new CellularIRQ({ unicast: 'NotExist:Bar' });
+      const irq = new IRQ({ unicast: 'NotExist:Bar' });
       await send(irq, { throwOnError: true });
 
       expect(true).to.false;
@@ -27,28 +27,28 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('will return/throw CellularIRS object if it throw CellularIRS object', async () => {
-    const irq = new CellularIRQ({ unicast: 'User:CreateProfile' }, { shouldThrow: true });
+  it('will return/throw IRS object if it throw IRS object', async () => {
+    const irq = new IRQ({ unicast: 'User:CreateProfile' }, { shouldThrow: true });
     const rs = await send(irq);
     expect(rs.header.status === 400000).to.true;
 
     try {
-      const irq = new CellularIRQ({ unicast: 'User:CreateProfile' }, { shouldThrow: true });
+      const irq = new IRQ({ unicast: 'User:CreateProfile' }, { shouldThrow: true });
       await send(irq, { throwOnError: true });
 
       expect(true).to.false;
     } catch (err) {
-      expect(err).to.instanceOf(CellularIRS);
+      expect(err).to.instanceOf(IRS);
     }
   });
 
   it('if driver is not exist, it will return/throw error', async () => {
-    const irq = new CellularIRQ({ unicast: 'User:CreateProfile' });
+    const irq = new IRQ({ unicast: 'User:CreateProfile' });
     const irs = await send(irq, { driverType: 'not exist' });
     expect(irs.header.status === 500000).to.true;
 
     try {
-      const irq = new CellularIRQ({ unicast: 'User:CreateProfile' });
+      const irq = new IRQ({ unicast: 'User:CreateProfile' });
       await send(irq, { throwOnError: true, driverType: 'not exist' });
 
       expect(true).to.false;
@@ -58,12 +58,12 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if service handler is not exist, it will return/throw error', async () => {
-    const irq = new CellularIRQ({ unicast: 'User:not-exist' });
+    const irq = new IRQ({ unicast: 'User:not-exist' });
     const irs = await send(irq);
     expect(irs.header.status === 500000).to.true;
 
     try {
-      const irq = new CellularIRQ({ unicast: 'User:not-exist' });
+      const irq = new IRQ({ unicast: 'User:not-exist' });
       await send(irq, { throwOnError: true });
 
       expect(true).to.false;
@@ -73,7 +73,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is private, it is accessible from owner cell', async () => {
-    const renderHtmlIrq = new CellularIRQ(
+    const renderHtmlIrq = new IRQ(
       { unicast: 'IMS:RenderHtml' },
     );
 
@@ -83,7 +83,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is private, it is not accessible from other cells', async () => {
-    const renderHtmlIrq = new CellularIRQ(
+    const renderHtmlIrq = new IRQ(
       { unicast: 'User:DelegateCacheHtml' },
     );
 
@@ -97,7 +97,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is private, it is not accessible from anonymous caller', async () => {
-    const cacheHtmlIrq = new CellularIRQ(
+    const cacheHtmlIrq = new IRQ(
       { unicast: 'IMS:CacheHtml' },
     );
 
@@ -111,7 +111,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is accessible from cells having same space', async () => {
-    const signUpIrq = new CellularIRQ(
+    const signUpIrq = new IRQ(
       { unicast: 'User:CreateProfile' },
       { usr: 'foo', pwd: '***********' },
     );
@@ -120,7 +120,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is not accessible from cells having different space', async () => {
-    const irq = new CellularIRQ(
+    const irq = new IRQ(
       { unicast: 'IMS:DelegateSendMail' },
     );
 
@@ -134,7 +134,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is not accessible from anonymous caller', async () => {
-    const irq = new CellularIRQ(
+    const irq = new IRQ(
       { unicast: 'User:SendMail' },
     );
 
@@ -148,7 +148,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is not accessible from cells that don\'t have same space', async () => {
-    const irq = new CellularIRQ(
+    const irq = new IRQ(
       { unicast: 'IMS:DelegateSendMail' },
     );
 
@@ -162,7 +162,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if scope is public, event handler is accessible from every cells', async () => {
-    const delegateSignInIrq = new CellularIRQ(
+    const delegateSignInIrq = new IRQ(
       { unicast: 'User:DelegateSignIn' },
     );
 
@@ -172,7 +172,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if scope is public, event handler is accessible from anonymous caller', async () => {
-    const signInIrq = new CellularIRQ(
+    const signInIrq = new IRQ(
       { unicast: 'Auth:SignIn' },
     );
 
@@ -182,7 +182,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler don\'t specify scope then default scope is space', async () => {
-    const delegateUnlockAccountIrq = new CellularIRQ(
+    const delegateUnlockAccountIrq = new IRQ(
       { unicast: 'IMS:DelegateUnlockAccount' },
     );
 

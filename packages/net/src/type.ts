@@ -1,9 +1,9 @@
 import { GenericProvider, ImportableCnf, ClassType, FuncType, Container } from '@cellularjs/di';
 import { CellContext } from './';
-import { CellularIRS } from './message';
+import { IRS } from './message';
 
 export type PipeData = {
-  irq: CellularIRS;
+  irq: IRS;
   state: ObjectType;
 }
 
@@ -152,7 +152,7 @@ export type IrsHeader = {
  * Cell service handler.
  */
 export interface ServiceHandler {
-  handle(): CellularIRS | Promise<CellularIRS>;
+  handle(): IRS | Promise<IRS>;
 }
 
 /**

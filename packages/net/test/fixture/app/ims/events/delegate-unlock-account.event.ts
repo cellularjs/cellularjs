@@ -1,5 +1,5 @@
 import { Inject } from '@cellularjs/di';
-import { Service, ServiceHandler, CellularIRQ, CellContext, CLL_CELL_CTX, send } from '../../../../../src';
+import { Service, ServiceHandler, IRQ, CellContext, CLL_CELL_CTX, send } from '../../../../../src';
 
 @Service({ scope: 'public' })
 export class DelegateUnlockAccount implements ServiceHandler {
@@ -8,7 +8,7 @@ export class DelegateUnlockAccount implements ServiceHandler {
   ) {}
 
   handle() {
-    const delegateUnlockAccountIrq = new CellularIRQ(
+    const delegateUnlockAccountIrq = new IRQ(
       { unicast: 'Auth:UnlockAccount' },
     );
 

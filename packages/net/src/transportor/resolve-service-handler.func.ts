@@ -1,6 +1,6 @@
 import {
   getResolvedCell, ServiceHandler,
-  CellContext, CellularIRQ,
+  CellContext, IRQ,
   CLL_IRQ, Errors, CLL_NET_HANDLER,
 } from '..';
 import { scopeContraints } from '../scope';
@@ -10,7 +10,7 @@ import { ClassType, Container, GenericProvider } from '@cellularjs/di';
 import { ResolvedDriver } from 'type';
 
 export async function resolveServiceHandler(
-  irq: CellularIRQ,
+  irq: IRQ,
   refererCell: CellContext,
   driverType: string,
 ): Promise<ServiceHandler> {

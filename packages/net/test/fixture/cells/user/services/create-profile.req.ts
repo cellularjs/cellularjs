@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@cellularjs/di';
-import { CLL_IRQ, CellularIRQ, CellularIRS } from '../../../../../src';
+import { CLL_IRQ, IRQ, IRS } from '../../../../../src';
 
 @Injectable()
 export class CreateProfileReq {
@@ -7,10 +7,10 @@ export class CreateProfileReq {
   public readonly pwd;
 
   constructor(
-    @Inject(CLL_IRQ) irq: CellularIRQ,
+    @Inject(CLL_IRQ) irq: IRQ,
   ) {
     if (!irq.body.usr || !irq.body.pwd) {
-      throw new CellularIRS(null, { status: 400000 });
+      throw new IRS(null, { status: 400000 });
     }
 
     Object.assign(this, irq.body);

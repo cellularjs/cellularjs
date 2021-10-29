@@ -1,6 +1,6 @@
 import { Inject } from '@cellularjs/di';
 import {
-  Service, ServiceHandler, CellularIRQ, CellularIRS,
+  Service, ServiceHandler, IRQ, IRS,
   CellContext, CLL_CELL_CTX, CLL_IRQ, send,
 } from '../../../../../src';
 
@@ -8,11 +8,11 @@ import {
 export class DelegateSendMail implements ServiceHandler {
   constructor(
     @Inject(CLL_CELL_CTX) private ctx: CellContext,
-    @Inject(CLL_IRQ) private irq: CellularIRQ,
+    @Inject(CLL_IRQ) private irq: IRQ,
   ) {}
 
-  async handle(): Promise<CellularIRS> {
-    const irq = new CellularIRQ(
+  async handle(): Promise<IRS> {
+    const irq = new IRQ(
       { unicast: 'User:SendMail' },
     );
 

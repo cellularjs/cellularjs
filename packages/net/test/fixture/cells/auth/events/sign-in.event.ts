@@ -1,8 +1,8 @@
-import { Service, ServiceHandler, CellularIRS } from '../../../../../src';
+import { Service, ServiceHandler, IRS } from '../../../../../src';
 
 @Service({ scope: 'public' })
 export class SignIn implements ServiceHandler {
-  async handle(): Promise<CellularIRS> {
-    return new CellularIRS();
+  async handle(): Promise<IRS> {
+    return new IRS();
   }
 }

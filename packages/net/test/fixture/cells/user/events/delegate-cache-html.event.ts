@@ -1,5 +1,5 @@
 import { Inject } from '@cellularjs/di';
-import { Service, ServiceHandler, send, CellularIRQ, CLL_CELL_CTX } from '../../../../../src';
+import { Service, ServiceHandler, send, IRQ, CLL_CELL_CTX } from '../../../../../src';
 
 @Service({ scope: 'public' })
 export class DelegateCacheHtml implements ServiceHandler {
@@ -8,7 +8,7 @@ export class DelegateCacheHtml implements ServiceHandler {
   ) { }
 
   handle() {
-    const cacheHtmlIrq = new CellularIRQ({ unicast: 'IMS:CacheHtml' });
+    const cacheHtmlIrq = new IRQ({ unicast: 'IMS:CacheHtml' });
 
     return send(cacheHtmlIrq, { refererCell: this.ctx, throwOnError: true });
   }

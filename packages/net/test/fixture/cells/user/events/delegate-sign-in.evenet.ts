@@ -1,5 +1,5 @@
 import { Inject } from '@cellularjs/di';
-import { Service, ServiceHandler, send, CellularIRQ, CLL_CELL_CTX } from '../../../../../src';
+import { Service, ServiceHandler, send, IRQ, CLL_CELL_CTX } from '../../../../../src';
 
 @Service({ scope: 'public' })
 export class DelegateSignIn implements ServiceHandler {
@@ -8,7 +8,7 @@ export class DelegateSignIn implements ServiceHandler {
   ) { }
 
   handle() {
-    const signInIrq = new CellularIRQ({ unicast: 'Auth:SignIn' });
+    const signInIrq = new IRQ({ unicast: 'Auth:SignIn' });
 
     return send(signInIrq, { refererCell: this.ctx });
   }

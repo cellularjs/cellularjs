@@ -1,5 +1,5 @@
 import { Inject } from '@cellularjs/di';
-import { Service, ServiceHandler, send, CellularIRS, CellularIRQ, CLL_CELL_CTX } from '../../../../../src';
+import { Service, ServiceHandler, send, IRS, IRQ, CLL_CELL_CTX } from '../../../../../src';
 
 @Service({
   scope: 'public',
@@ -9,8 +9,8 @@ export class RenderHtml implements ServiceHandler {
     @Inject(CLL_CELL_CTX) private ctx,
   ) { }
 
-  handle(): Promise<CellularIRS> {
-    const cacheHtmlIrq = new CellularIRQ(
+  handle(): Promise<IRS> {
+    const cacheHtmlIrq = new IRQ(
       { unicast: 'IMS:CacheHtml' },
     );
 
