@@ -1,29 +1,6 @@
-import { GenericProvider, ImportableCnf, ClassType, FuncType, Container } from '@cellularjs/di';
+import { GenericProvider, ImportableCnf, ClassType, Container } from '@cellularjs/di';
 import { CellContext } from './';
 import { IRS } from './message';
-
-export type PipeData = {
-  irq: IRS;
-  state: ObjectType;
-}
-
-/**
- * *Pros:
- * - it support dependency injection.
- * 
- * *Cons:
- * - can not pass argument.
- */
-export interface PipeAsClass {
-  process(next: FuncType<void>, pipeData: PipeData): void;
-}
-
-/**
- * Simple pipe
- */
-export type PipeAsFunc = (next: FuncType<void>, pipeData: PipeData) => void;
-
-export type GenericPipe = ClassType<PipeAsClass> | PipeAsFunc;
 
 export type ObjectType = { [key: string]: any };
 
@@ -59,6 +36,7 @@ export interface ServiceMeta {
   scope?: ServiceScope;
 
   /**
+   * DRAFT
    * Route specify how Transportor deliver message to event handler(s).
    * - "unicast": send message to a specific event handler of a cell.
    * - "multicast": send message to all event handlers interesting in the event.
@@ -66,17 +44,11 @@ export interface ServiceMeta {
    * *By default, the route value is "unicast".*
    */
   route?: RoutingType;
-
-  /**
-   * Service handler pipeline(or middlewares), it will run before event handler.
-   */
-  pipes?: GenericPipe[];
 }
 
 export interface AjustedServiceMeta {
   scope: ServiceScopeMap;
   route: RoutingTypeMap;
-  pipes: GenericPipe[];
 }
 
 export type CellProviderConfig = GenericProvider<any> | string;
@@ -95,18 +67,6 @@ export interface CellMeta {
 
   // exports?: []; Noop. You can consider cell as a root container so it does not
   // have any exports at all.
-
-  /**
-   * DRAFT
-   * 
-   * Cell pipeline, it run before all pipes of event handler.
-   * 
-   * Pipe is basic component for creating a pipeline(or middlewares). Pipe is only
-   * allowed to modified shared state which is explicitly declared(`data.state`).
-   * To breaking pipeline you can throw an error inside pipe. And as usual, error
-   * will be transformed into error IRS.
-   */
-  pipes?: GenericPipe[];
 
   /**
    * Cell context hold information of current cell. With this property, you can

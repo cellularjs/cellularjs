@@ -11,7 +11,6 @@ export const Service = (eventMeta?: ServiceMeta) => (target) => {
     ...meta,
     scope: ServiceScopeMap[meta.scope] || ServiceScopeMap.space,
     route: RoutingTypeMap[meta.route] || RoutingTypeMap.unicast,
-    pipes: meta.pipes || [],
   };
 
   Reflect.defineMetadata(CLL_EVENT_OPTS, adjustedMeta, target);
