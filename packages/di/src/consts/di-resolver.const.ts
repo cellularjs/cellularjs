@@ -1,4 +1,4 @@
- export enum DiResolvers {
+export enum DiResolvers {
   useModuleResolver,
   useClassResolver,
   useFuncResolver,
