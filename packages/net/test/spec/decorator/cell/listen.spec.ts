@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode } from '../../../../src';
+import { DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode, Cell } from '../../../../src';
 import { userCellCnf, authCellCnf, dummyCellCnf } from '../../../fixture/share/network';
 import { CreateProfile } from '../../../fixture/cells/user/events/create-profile.event';
 import { SignIn } from '../../../fixture/cells/auth/events/sign-in.event';
@@ -44,6 +44,22 @@ describe('Decorator - @Cell annotation - listen property:', () => {
       expect(true).to.false;
     } catch (err) {
       expect(err.code).to.equal(ErrorCode.DuplicateServiceHandlerName)
+    }
+  });
+
+  it('will throw error if listen path is not exist', async () => {
+    try {
+      @Cell({ listen: './not-exist' })
+      class FooCell { }
+
+      await createNetWork([{
+        name: 'Foo',
+        driver: FooCell,
+      }]);
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.code).to.equal('ENOENT')
     }
   });
 });
