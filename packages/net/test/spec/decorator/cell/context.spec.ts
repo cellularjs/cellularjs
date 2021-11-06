@@ -1,11 +1,10 @@
 import 'mocha';
 import { expect } from 'chai';
 import {
-  DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, CellContext, CLL_CELL_CTX,
+  DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, CellContext,
 } from '../../../../src';
-import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
+// import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
 import { authCellCnf, userCellCnf } from '../../../fixture/share/network';
-import { CustomContext } from '../../../fixture/share/custom-context';
 
 describe('Decorator - @Cell annotation - context property:', () => {
   beforeEach(async () => {
@@ -18,7 +17,7 @@ describe('Decorator - @Cell annotation - context property:', () => {
     const resolvedCell = getResolvedCell('Auth');
     const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
 
-    const cellContext: CellContext = await localDriver.container.resolve(CLL_CELL_CTX);
+    const cellContext: CellContext = await localDriver.container.resolve(CellContext);
 
     expect(cellContext).to.instanceOf(CellContext);
     expect(cellContext.cellName).to.equal('Auth');
@@ -30,20 +29,20 @@ describe('Decorator - @Cell annotation - context property:', () => {
     const resolvedCell = getResolvedCell('User');
     const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
 
-    const cellCtx: CustomContext = await localDriver.container.resolve(CLL_CELL_CTX);
+    const cellCtx = await localDriver.container.resolve<CellContext>(CellContext);
 
-    expect(cellCtx).to.instanceOf(CustomContext);
+    expect(cellCtx).to.instanceOf(CellContext);
     expect(cellCtx.cellName).to.equal('User');
   });
 
-  it('custom cell context can leverage @cellularjs/di for dependency injection', async () => {
-    await createNetWork([userCellCnf]);
+  // it('custom cell context can leverage @cellularjs/di for dependency injection', async () => {
+  //   await createNetWork([userCellCnf]);
 
-    const resolvedCell = getResolvedCell('User');
-    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+  //   const resolvedCell = getResolvedCell('User');
+  //   const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
 
-    const cellCtx: CustomContext = await localDriver.container.resolve(CLL_CELL_CTX);
+  //   const cellCtx = await localDriver.container.resolve<CellContext>(CellContext);
 
-    expect(cellCtx.jwtService).to.instanceOf(JwtService);
-  });
+  //   expect(cellCtx.jwtService).to.instanceOf(JwtService);
+  // });
 });

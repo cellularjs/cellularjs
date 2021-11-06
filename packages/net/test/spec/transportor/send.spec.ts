@@ -77,7 +77,8 @@ describe('Transportor - send(): send request', () => {
       { to: 'IMS:RenderHtml' },
     );
 
-    const renderHtmlIrs = await send(renderHtmlIrq);
+    const renderHtmlIrs = await send(renderHtmlIrq, { throwOnError: true});
+    console.log('renderHtmlIrs', renderHtmlIrs)
 
     expect(renderHtmlIrs.body.cached).to.equal(true);
   });

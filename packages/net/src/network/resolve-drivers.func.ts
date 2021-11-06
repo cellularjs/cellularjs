@@ -1,6 +1,6 @@
 import { Container, GenericProvider } from '@cellularjs/di';
 import { DEFAULT_DRIVER } from '.';
-import { CellContext, CLL_CELL_CTX, Errors } from '..';
+import { CellContext, Errors } from '..';
 import { CellConfig, ResolvedDriver, CellMeta, ServiceHandlerMap } from '../type';
 import { freezeProperty, getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
 
@@ -71,22 +71,20 @@ async function createContainer(cellMeta: CellMeta, cellConfig: CellConfig): Prom
   container.addProviders(providers);
   container.addModules(cellMeta.imports);
   container.addProvider({
-    token: CLL_CELL_CTX,
-    useValue: await resolveCellCtx(cellMeta, container, cellConfig),
+    token: CellContext,
+    useValue: await resolveCellCtx(container, cellConfig),
   });
 
   return container;
 }
 
 async function resolveCellCtx(
-  cellMeta: CellMeta,
   container: Container,
   cellConfig: CellConfig,
 ): Promise<CellContext> {
-  const ContextClass = cellMeta.context || CellContext;
   const extModule = new Container();
-  extModule.addProvider(ContextClass);
-  const cellCtx: CellContext = await container.resolve(ContextClass, {
+  extModule.addProvider(CellContext);
+  const cellCtx: CellContext = await container.resolve(CellContext, {
     extModule,
   });
 

@@ -47,14 +47,8 @@ export interface CellMeta {
    */
   imports?: ImportableCnf[];
 
-  // exports?: []; Noop. You can consider cell as a root container so it does not
+  // exports?: []; Nope. You can consider cell as a root container so it does not
   // have any exports at all.
-
-  /**
-   * Cell context hold information of current cell. With this property, you can
-   * define your own custom cell context(extended from CellContext).
-   */
-  context?: ClassType<CellContext>;
 
   /**
    * If argument is a string, it will be treated as a path to a folder. It
