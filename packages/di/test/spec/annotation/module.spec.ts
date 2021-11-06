@@ -143,7 +143,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
       .with.property('code', DiErrorCode.DuplicateToken);
   });
 
-  it('there is no need to add service class - that is also exported into providers before resolving', async () => {
+  it('there is no need to add service class into providers before using if it is also exported', async () => {
     class FooService {
       run = () => 'fooService';
     }
@@ -160,6 +160,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
     }
 
     @Module({
+      // providers: [FooService], There is no need to do this.
       exports: [FooService, BarService],
     })
     class FooBarModule { }
@@ -174,5 +175,6 @@ describe('Annotation - Module(): define modular dependency injection', () => {
 
   it('can be detected as cellularjs module', () => {
     expect(getModuleMeta(JwtModule)).to.exist;
+    expect(getModuleMeta(Verify)).to.undefined;
   });
 });
