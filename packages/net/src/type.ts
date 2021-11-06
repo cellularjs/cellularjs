@@ -12,13 +12,6 @@ export enum ServiceScopeMap {
 
 export type ServiceScope = keyof typeof ServiceScopeMap;
 
-export enum RoutingTypeMap {
-  unicast = 1,
-  multicast = 2,
-}
-
-export type RoutingType = keyof typeof RoutingTypeMap;
-
 /**
  * Service handler meta data.
  */
@@ -34,21 +27,10 @@ export interface ServiceMeta {
    * *By default, the scope value is "space".*
    */
   scope?: ServiceScope;
-
-  /**
-   * DRAFT
-   * Route specify how Transportor deliver message to event handler(s).
-   * - "unicast": send message to a specific event handler of a cell.
-   * - "multicast": send message to all event handlers interesting in the event.
-   * 
-   * *By default, the route value is "unicast".*
-   */
-  route?: RoutingType;
 }
 
 export interface AjustedServiceMeta {
   scope: ServiceScopeMap;
-  route: RoutingTypeMap;
 }
 
 export type CellProviderConfig = GenericProvider<any> | string;
@@ -98,8 +80,7 @@ export interface CellMeta {
  * Draft
  */
 export type IrqHeader = {
-  unicast?: `${string}:${string}`;
-  multicast?: string;
+  to?: `${string}:${string}`;
   [key: string]: any;
 };
 
@@ -122,7 +103,7 @@ export interface ServiceHandler {
 export interface CellConfig {
   /**
    * Cell name or cell type, it must be unique. Cell name are able to be used for
-   * unicast routing request.
+   * to routing request.
    * 
    * **TIP**: *For better performance when comparing 2 cell name, let use `cellId`
    * (call `getResolvedCell(cellName)` to get `cellId`).*

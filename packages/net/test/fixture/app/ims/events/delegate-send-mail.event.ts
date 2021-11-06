@@ -13,7 +13,7 @@ export class DelegateSendMail implements ServiceHandler {
 
   async handle(): Promise<IRS> {
     const irq = new IRQ(
-      { unicast: 'User:SendMail' },
+      { to: 'User:SendMail' },
     );
 
     const createProfileIrs = await send(irq, { refererCell: this.ctx, throwOnError: true });

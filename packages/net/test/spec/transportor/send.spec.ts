@@ -13,12 +13,12 @@ describe('Transportor - send(): send request', () => {
   })
 
   it('will return/throw error in case of sending request to non-exist cell', async () => {
-    const irq = new IRQ({ unicast: 'NotExist:Bar' });
+    const irq = new IRQ({ to: 'NotExist:Bar' });
     const irs = await send(irq);
     expect(irs.header.status === 500000).to.true;
 
     try {
-      const irq = new IRQ({ unicast: 'NotExist:Bar' });
+      const irq = new IRQ({ to: 'NotExist:Bar' });
       await send(irq, { throwOnError: true });
 
       expect(true).to.false;
@@ -28,12 +28,12 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('will return/throw IRS object if it throw IRS object', async () => {
-    const irq = new IRQ({ unicast: 'User:CreateProfile' }, { shouldThrow: true });
+    const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
     const rs = await send(irq);
     expect(rs.header.status === 400000).to.true;
 
     try {
-      const irq = new IRQ({ unicast: 'User:CreateProfile' }, { shouldThrow: true });
+      const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
       await send(irq, { throwOnError: true });
 
       expect(true).to.false;
@@ -43,12 +43,12 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if driver is not exist, it will return/throw error', async () => {
-    const irq = new IRQ({ unicast: 'User:CreateProfile' });
+    const irq = new IRQ({ to: 'User:CreateProfile' });
     const irs = await send(irq, { driverType: 'not exist' });
     expect(irs.header.status === 500000).to.true;
 
     try {
-      const irq = new IRQ({ unicast: 'User:CreateProfile' });
+      const irq = new IRQ({ to: 'User:CreateProfile' });
       await send(irq, { throwOnError: true, driverType: 'not exist' });
 
       expect(true).to.false;
@@ -58,12 +58,12 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if service handler is not exist, it will return/throw error', async () => {
-    const irq = new IRQ({ unicast: 'User:not-exist' });
+    const irq = new IRQ({ to: 'User:not-exist' });
     const irs = await send(irq);
     expect(irs.header.status === 500000).to.true;
 
     try {
-      const irq = new IRQ({ unicast: 'User:not-exist' });
+      const irq = new IRQ({ to: 'User:not-exist' });
       await send(irq, { throwOnError: true });
 
       expect(true).to.false;
@@ -74,7 +74,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is private, it is accessible from owner cell', async () => {
     const renderHtmlIrq = new IRQ(
-      { unicast: 'IMS:RenderHtml' },
+      { to: 'IMS:RenderHtml' },
     );
 
     const renderHtmlIrs = await send(renderHtmlIrq);
@@ -84,7 +84,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is private, it is not accessible from other cells', async () => {
     const renderHtmlIrq = new IRQ(
-      { unicast: 'User:DelegateCacheHtml' },
+      { to: 'User:DelegateCacheHtml' },
     );
 
     try {
@@ -98,7 +98,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is private, it is not accessible from anonymous caller', async () => {
     const cacheHtmlIrq = new IRQ(
-      { unicast: 'IMS:CacheHtml' },
+      { to: 'IMS:CacheHtml' },
     );
 
     try {
@@ -112,7 +112,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is space, it is accessible from cells having same space', async () => {
     const signUpIrq = new IRQ(
-      { unicast: 'User:CreateProfile' },
+      { to: 'User:CreateProfile' },
       { usr: 'foo', pwd: '***********' },
     );
 
@@ -121,7 +121,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is space, it is not accessible from cells having different space', async () => {
     const irq = new IRQ(
-      { unicast: 'IMS:DelegateSendMail' },
+      { to: 'IMS:DelegateSendMail' },
     );
 
     try {
@@ -135,7 +135,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is space, it is not accessible from anonymous caller', async () => {
     const irq = new IRQ(
-      { unicast: 'User:SendMail' },
+      { to: 'User:SendMail' },
     );
 
     try {
@@ -149,7 +149,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler scope is space, it is not accessible from cells that don\'t have same space', async () => {
     const irq = new IRQ(
-      { unicast: 'IMS:DelegateSendMail' },
+      { to: 'IMS:DelegateSendMail' },
     );
 
     try {
@@ -163,7 +163,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if scope is public, event handler is accessible from every cells', async () => {
     const delegateSignInIrq = new IRQ(
-      { unicast: 'User:DelegateSignIn' },
+      { to: 'User:DelegateSignIn' },
     );
 
     const delegateSignInIrs = await send(delegateSignInIrq);
@@ -173,7 +173,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if scope is public, event handler is accessible from anonymous caller', async () => {
     const signInIrq = new IRQ(
-      { unicast: 'Auth:SignIn' },
+      { to: 'Auth:SignIn' },
     );
 
     const signInIrs = await send(signInIrq);
@@ -183,7 +183,7 @@ describe('Transportor - send(): send request', () => {
 
   it('if event handler don\'t specify scope then default scope is space', async () => {
     const delegateUnlockAccountIrq = new IRQ(
-      { unicast: 'IMS:DelegateUnlockAccount' },
+      { to: 'IMS:DelegateUnlockAccount' },
     );
 
     try {

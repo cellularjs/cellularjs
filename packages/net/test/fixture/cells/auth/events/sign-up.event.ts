@@ -13,7 +13,7 @@ export class SignUp implements ServiceHandler {
   async handle(): Promise<IRS> {
     return new Promise(async resolve => {
       const createProfileIrq = new IRQ(
-        { unicast: 'User:CreateProfile' },
+        { to: 'User:CreateProfile' },
         this.irq.body,
       );
 

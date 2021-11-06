@@ -1,4 +1,4 @@
-import { ServiceMeta, ServiceScopeMap, RoutingTypeMap, AjustedServiceMeta } from '..';
+import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta } from '..';
 import { CLL_EVENT_OPTS } from '..';
 
 /**
@@ -10,7 +10,6 @@ export const Service = (eventMeta?: ServiceMeta) => (target) => {
   const adjustedMeta: AjustedServiceMeta = {
     ...meta,
     scope: ServiceScopeMap[meta.scope] || ServiceScopeMap.space,
-    route: RoutingTypeMap[meta.route] || RoutingTypeMap.unicast,
   };
 
   Reflect.defineMetadata(CLL_EVENT_OPTS, adjustedMeta, target);

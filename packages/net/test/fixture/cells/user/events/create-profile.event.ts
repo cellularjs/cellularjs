@@ -17,7 +17,7 @@ export class CreateProfile implements ServiceHandler {
       throw new IRS({ status: 400000 });
     }
 
-    const sendMailIrq = new IRQ({ unicast: 'User:SendMail' });
+    const sendMailIrq = new IRQ({ to: 'User:SendMail' });
     await send(sendMailIrq, { refererCell: this.ctx })
 
     return new IRS(

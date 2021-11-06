@@ -21,7 +21,7 @@ describe('Hook - addServiceProviders()', () => {
   it('can add provider for resolving service handler', async () => {
     Hook.addServiceProviders(EditFooService, [Session]);
 
-    const irq = new IRQ({ unicast: 'Provider:EditFooService' });
+    const irq = new IRQ({ to: 'Provider:EditFooService' });
     await send(irq, { throwOnError: true});
   });
 });

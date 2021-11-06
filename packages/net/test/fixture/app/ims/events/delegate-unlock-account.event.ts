@@ -9,7 +9,7 @@ export class DelegateUnlockAccount implements ServiceHandler {
 
   handle() {
     const delegateUnlockAccountIrq = new IRQ(
-      { unicast: 'Auth:UnlockAccount' },
+      { to: 'Auth:UnlockAccount' },
     );
 
     return send(delegateUnlockAccountIrq, { refererCell: this.ctx, throwOnError: true });

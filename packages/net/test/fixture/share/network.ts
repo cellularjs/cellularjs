@@ -4,7 +4,6 @@ import { DummyCell } from '../cells/dummy'
 import { IMSCell } from '../app/ims'
 import { AuthHttpDriver } from '../remote-drivers/auth/http';
 import { GoogleAuth } from '../remote-drivers/gg-auth';
-import { LoggerCell } from '../cells/logger';
 import { UserCell } from '../cells/user';
 
 export const authCellCnf: CellConfig = {
@@ -37,12 +36,6 @@ export const imsCellCnf: CellConfig = {
 
 };
 
-export const loggerCellCnf: CellConfig = {
-  name: 'Logger',
-  space: 'neverland',
-  driver: LoggerCell,
-};
-
 export const userCellCnf: CellConfig = {
   name: 'User',
   space: 'neverland',
@@ -53,6 +46,5 @@ export const imsNetwork: NetworkConfig = [
   authCellCnf,
   googleAuthCnf,
   imsCellCnf,
-  loggerCellCnf,
   userCellCnf,
 ];

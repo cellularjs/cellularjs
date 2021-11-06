@@ -22,7 +22,7 @@ describe('Hook - addServiceProxies():', () => {
   it('can use multiple proxies class', async () => {
     Hook.addServiceProxies(Original, [Foo, Bar]);
 
-    const irq = new IRQ({ unicast: 'Proxy:Original' });
+    const irq = new IRQ({ to: 'Proxy:Original' });
     const rs = await send(irq);
 
     expect(rs.body.original).to.true;
@@ -33,7 +33,7 @@ describe('Hook - addServiceProxies():', () => {
   it('proxies class can override previous result', async () => {
     Hook.addServiceProxies(Original, [Foo, FooOverride]);
 
-    const irq = new IRQ({ unicast: 'Proxy:Original' });
+    const irq = new IRQ({ to: 'Proxy:Original' });
     const rs = await send(irq);
 
     expect(rs.body.foo).to.false;

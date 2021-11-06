@@ -14,7 +14,7 @@ export async function resolveServiceHandler(
   refererCell: CellContext,
   driverType: string,
 ): Promise<ServiceHandler> {
-  const [destCellName, eventName] = irq.header.unicast.split(':');
+  const [destCellName, eventName] = irq.header.to.split(':');
   const destResolvedCell = getResolvedCell(destCellName);
 
   if (!destResolvedCell) {
@@ -23,12 +23,12 @@ export async function resolveServiceHandler(
 
   const resolvedDriver = destResolvedCell.drivers.get(driverType);
   if (!resolvedDriver) {
-    throw Errors.NoResolvedDriver(driverType, irq.header.unicast);
+    throw Errors.NoResolvedDriver(driverType, irq.header.to);
   }
 
   const DestServiceHandler = resolvedDriver.listener.get(eventName);
   if (!DestServiceHandler) {
-    throw Errors.NoServiceHandler(driverType, irq.header.unicast);
+    throw Errors.NoServiceHandler(driverType, irq.header.to);
   }
 
   const serviceMeta = getServiceMeta(DestServiceHandler);
