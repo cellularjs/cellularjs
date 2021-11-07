@@ -16,7 +16,7 @@ export class DelegateSendMail implements ServiceHandler {
       { to: 'User:SendMail' },
     );
 
-    const createProfileIrs = await send(irq, { refererCell: this.ctx, throwOnError: true });
+    const createProfileIrs = await send(irq, { refererCell: this.ctx, throwOriginalError: true });
 
     return createProfileIrs;
   }

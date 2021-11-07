@@ -10,6 +10,6 @@ export class DelegateCacheHtml implements ServiceHandler {
   handle() {
     const cacheHtmlIrq = new IRQ({ to: 'IMS:CacheHtml' });
 
-    return send(cacheHtmlIrq, { refererCell: this.ctx, throwOnError: true });
+    return send(cacheHtmlIrq, { refererCell: this.ctx, throwOriginalError: true });
   }
 }

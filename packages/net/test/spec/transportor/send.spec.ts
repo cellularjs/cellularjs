@@ -12,14 +12,19 @@ describe('Transportor - send(): send request', () => {
     await cleanNetwork();
   })
 
-  it('will return/throw error in case of sending request to non-exist cell', async () => {
-    const irq = new IRQ({ to: 'NotExist:Bar' });
-    const irs = await send(irq);
-    expect(irs.header.status === 500000).to.true;
+  it('will throw error in case of sending request to non-exist cell', async () => {
+    try {
+      const irq = new IRQ({ to: 'NotExist:Bar' });
+      await send(irq);
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.header.status === 500000).to.true;
+    }
 
     try {
       const irq = new IRQ({ to: 'NotExist:Bar' });
-      await send(irq, { throwOnError: true });
+      await send(irq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -27,14 +32,19 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('will return/throw IRS object if it throw IRS object', async () => {
-    const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
-    const rs = await send(irq);
-    expect(rs.header.status === 400000).to.true;
+  it('will throw IRS object if it throw IRS object', async () => {
+    try {
+      const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
+      await send(irq);
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.header.status === 400000).to.true;
+    }
 
     try {
       const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
-      await send(irq, { throwOnError: true });
+      await send(irq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -42,14 +52,19 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('if driver is not exist, it will return/throw error', async () => {
-    const irq = new IRQ({ to: 'User:CreateProfile' });
-    const irs = await send(irq, { driverType: 'not exist' });
-    expect(irs.header.status === 500000).to.true;
+  it('if driver is not exist, it will throw error', async () => {
+    try {
+      const irq = new IRQ({ to: 'User:CreateProfile' });
+      await send(irq, { driverType: 'not exist' });
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.header.status === 500000).to.true;
+    }
 
     try {
       const irq = new IRQ({ to: 'User:CreateProfile' });
-      await send(irq, { throwOnError: true, driverType: 'not exist' });
+      await send(irq, { throwOriginalError: true, driverType: 'not exist' });
 
       expect(true).to.false;
     } catch (err) {
@@ -57,14 +72,19 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('if service handler is not exist, it will return/throw error', async () => {
-    const irq = new IRQ({ to: 'User:not-exist' });
-    const irs = await send(irq);
-    expect(irs.header.status === 500000).to.true;
+  it('if service handler is not exist, it will throw error', async () => {
+    try {
+      const irq = new IRQ({ to: 'User:not-exist' });
+      await send(irq);
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.header.status === 500000).to.true;
+    }
 
     try {
       const irq = new IRQ({ to: 'User:not-exist' });
-      await send(irq, { throwOnError: true });
+      await send(irq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -77,8 +97,7 @@ describe('Transportor - send(): send request', () => {
       { to: 'IMS:RenderHtml' },
     );
 
-    const renderHtmlIrs = await send(renderHtmlIrq, { throwOnError: true});
-    console.log('renderHtmlIrs', renderHtmlIrs)
+    const renderHtmlIrs = await send(renderHtmlIrq, { throwOriginalError: true });
 
     expect(renderHtmlIrs.body.cached).to.equal(true);
   });
@@ -89,7 +108,7 @@ describe('Transportor - send(): send request', () => {
     );
 
     try {
-      await send(renderHtmlIrq, { throwOnError: true });
+      await send(renderHtmlIrq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -103,7 +122,7 @@ describe('Transportor - send(): send request', () => {
     );
 
     try {
-      await send(cacheHtmlIrq, { throwOnError: true });
+      await send(cacheHtmlIrq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -126,7 +145,7 @@ describe('Transportor - send(): send request', () => {
     );
 
     try {
-      await send(irq, { throwOnError: true });
+      await send(irq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -140,7 +159,7 @@ describe('Transportor - send(): send request', () => {
     );
 
     try {
-      await send(irq, { throwOnError: true });
+      await send(irq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -154,7 +173,7 @@ describe('Transportor - send(): send request', () => {
     );
 
     try {
-      await send(irq, { throwOnError: true });
+      await send(irq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {
@@ -188,7 +207,7 @@ describe('Transportor - send(): send request', () => {
     );
 
     try {
-      await send(delegateUnlockAccountIrq, { throwOnError: true });
+      await send(delegateUnlockAccountIrq, { throwOriginalError: true });
 
       expect(true).to.false;
     } catch (err) {

@@ -1,47 +1,47 @@
-import {
-  CellContext, IRQ, IRS,
-  DEFAULT_DRIVER,
-} from '..';
-import { resolveServiceHandler } from './resolve-service-handler.func'
+import { IRQ, IRS, DEFAULT_DRIVER } from '..';
+import { transportEmitter } from './transport-emitter';
+import { resolveServiceHandler } from './resolve-service-handler.func';
+import { RequestContext } from './request-context';
+import { RequestOptions } from './type';
 
-interface RequestOptions {
-  /**
-   * `refererCell` allow CellularJS to get information of cell that send this request.
-   */
-  refererCell?: CellContext;
+export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
+  const reqOpts = ajustOptions(rawOpts);
+  const { refererCell, throwOriginalError, driverType } = reqOpts;
 
-  /**
-   * By default, driver type is 'local'.
-   */
-  driverType?: string;
-
-  // By default, all exception will be treated as error response(without throwing).
-  // This flag is helpfull for debugging.
-  throwOnError?: boolean;
-}
-
-export async function send(irq: IRQ, opts?: RequestOptions): Promise<IRS> {
-  const {
-    refererCell,
-    driverType = DEFAULT_DRIVER,
-    throwOnError,
-  } = opts || {};
+  const requestCtx = new RequestContext();
+  requestCtx.irq = irq;
+  requestCtx.reqOpts = reqOpts;
 
   try {
-    const eventHandler = await resolveServiceHandler(irq, refererCell, driverType);
+    transportEmitter.emit('start', requestCtx);
 
+    const eventHandler = await resolveServiceHandler(irq, refererCell, driverType);
     const irs = await eventHandler.handle();
 
-    return irs;
+    requestCtx.irs = irs;
+    transportEmitter.emit('success', requestCtx);
+
+    return requestCtx.irs;
   } catch (error) {
-    if (throwOnError) {
-      throw error;
-    }
+    requestCtx.originalError = error;
+    requestCtx.irs = error instanceof IRS ? error : IRS.unexpectedError();
+    transportEmitter.emit('fail', requestCtx);
 
-    if (error instanceof IRS) {
-      return error;
-    }
+    if (throwOriginalError) throw error;
 
-    return IRS.unexpectedError();
+    throw requestCtx.irs;
+  }
+}
+
+function ajustOptions(rawOpts: RequestOptions) {
+  if (!rawOpts) {
+    return {
+      driverType: DEFAULT_DRIVER,
+    };
+  }
+
+  return {
+    ...rawOpts,
+    driverType: rawOpts.driverType || DEFAULT_DRIVER,
   }
 }

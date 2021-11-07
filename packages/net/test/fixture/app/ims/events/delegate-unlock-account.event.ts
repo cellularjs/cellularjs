@@ -12,6 +12,6 @@ export class DelegateUnlockAccount implements ServiceHandler {
       { to: 'Auth:UnlockAccount' },
     );
 
-    return send(delegateUnlockAccountIrq, { refererCell: this.ctx, throwOnError: true });
+    return send(delegateUnlockAccountIrq, { refererCell: this.ctx, throwOriginalError: true });
   }
 }

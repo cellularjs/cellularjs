@@ -1,1 +1,2 @@
-export { send } from './send.func'
+export { send } from './send.func';
+export { transportEmitter } from './transport-emitter';

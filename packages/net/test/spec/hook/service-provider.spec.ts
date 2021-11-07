@@ -22,6 +22,6 @@ describe('Hook - addServiceProviders()', () => {
     Hook.addServiceProviders(EditFooService, [Session]);
 
     const irq = new IRQ({ to: 'Provider:EditFooService' });
-    await send(irq, { throwOnError: true});
+    await send(irq, { throwOriginalError: true});
   });
 });
