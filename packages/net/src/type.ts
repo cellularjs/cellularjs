@@ -87,7 +87,7 @@ export type IrsHeader = {
  * Cell service handler.
  */
 export interface ServiceHandler {
-  handle(): IRS | Promise<IRS>;
+  handle(): any | Promise<any>;
 }
 
 /**

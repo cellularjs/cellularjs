@@ -20,8 +20,6 @@ export class CreateProfile implements ServiceHandler {
     const sendMailIrq = new IRQ({ to: 'User:SendMail' });
     await send(sendMailIrq, { refererCell: this.ctx })
 
-    return new IRS(
-      { newUser: this.createProfileReq.usr },
-    );
+    return { newUser: this.createProfileReq.usr };
   }
 }
