@@ -1,4 +1,3 @@
-import { Inject } from '@cellularjs/di';
 import { Service, ServiceHandler, send, IRQ, CellContext } from '../../../../../src';
 
 @Service({ scope: 'public' })

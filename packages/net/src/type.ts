@@ -1,8 +1,4 @@
 import { GenericProvider, ImportableCnf, ClassType, Container } from '@cellularjs/di';
-import { CellContext } from './';
-import { IRS } from './message';
-
-export type ObjectType = { [key: string]: any };
 
 export enum ServiceScopeMap {
   public = 1,
