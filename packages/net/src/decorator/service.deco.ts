@@ -1,5 +1,5 @@
 import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta } from '..';
-import { CLL_EVENT_OPTS } from '..';
+import { CLL_SERVICE_OPTS } from '..';
 
 /**
  * Mark a class as event handler.
@@ -12,7 +12,7 @@ export const Service = (eventMeta?: ServiceMeta) => (target) => {
     scope: ServiceScopeMap[meta.scope] || ServiceScopeMap.space,
   };
 
-  Reflect.defineMetadata(CLL_EVENT_OPTS, adjustedMeta, target);
+  Reflect.defineMetadata(CLL_SERVICE_OPTS, adjustedMeta, target);
 
   return target;
 }
