@@ -1,9 +1,9 @@
 import { afterEach } from 'mocha';
 import { expect } from 'chai';
-import { createNetWork, cleanNetwork, Hook, Cell, send, IRQ } from '../../../src';
-import { Original, Foo, FooOverride, Bar } from '../../fixture/hook';
+import { createNetWork, cleanNetwork, addServiceProxies, Cell, send, IRQ } from '../../../src';
+import { Original, Foo, FooOverride, Bar } from '../../fixture/serivce-helper';
 
-describe('Hook - addServiceProxies():', () => {
+describe('Service helper - addServiceProxies():', () => {
   beforeEach(async () => {
     @Cell({
       listen: { Original },
@@ -20,7 +20,7 @@ describe('Hook - addServiceProxies():', () => {
   })
 
   it('can use multiple proxies class', async () => {
-    Hook.addServiceProxies(Original, [Foo, Bar]);
+    addServiceProxies(Original, [Foo, Bar]);
 
     const irq = new IRQ({ to: 'Proxy:Original' });
     const rs = await send(irq);
@@ -31,7 +31,7 @@ describe('Hook - addServiceProxies():', () => {
   });
 
   it('proxies class can override previous result', async () => {
-    Hook.addServiceProxies(Original, [Foo, FooOverride]);
+    addServiceProxies(Original, [Foo, FooOverride]);
 
     const irq = new IRQ({ to: 'Proxy:Original' });
     const rs = await send(irq);

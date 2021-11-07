@@ -48,15 +48,17 @@ export class Bar implements ServiceHandler {
   }
 }
 
-export class Session { }
+export class Session {
+  injected() { }
+}
 
 @Service({
   scope: 'public',
 })
 export class EditFooService implements ServiceHandler {
-  constructor(public session: Session) { }
+  constructor(private session: Session) { }
 
   handle() {
-    return new IRS();
+    this.session.injected();
   }
 }

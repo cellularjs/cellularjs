@@ -1,7 +1,8 @@
-import { Hook } from '..'
-import { cleanResolvedCells } from './resolved-cell.data'
+import { cleanServiceProviders, cleanServiceProxies } from '../service-helper';
+import { cleanResolvedCells } from './resolved-cell.data';
 
 export async function cleanNetwork() {
   cleanResolvedCells();
-  Hook.clean();
+  cleanServiceProviders();
+  cleanServiceProxies();
 }

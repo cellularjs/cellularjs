@@ -4,9 +4,9 @@ import {
   CLL_IRQ, Errors, CLL_NET_HANDLER,
 } from '..';
 import { scopeContraints } from '../scope';
+import { getServiceProviders, getServiceProxies } from '../service-helper';
 import { getServiceMeta } from '../utils';
-import { Hook } from '../hook'
-import { ClassType, Container, GenericProvider } from '@cellularjs/di';
+import { Container, GenericProvider } from '@cellularjs/di';
 import { ResolvedDriver } from 'type';
 
 export async function resolveServiceHandler(
@@ -35,7 +35,7 @@ export async function resolveServiceHandler(
 
   // DO: check event scope constraint
   scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
-  const serviceProviders = Hook.getServiceProviders(DestServiceHandler);
+  const serviceProviders = getServiceProviders(DestServiceHandler);
   const providers: GenericProvider<any>[] = [
     ...serviceProviders,
     { token: CLL_IRQ, useValue: irq },
@@ -47,7 +47,7 @@ export async function resolveServiceHandler(
     DestServiceHandler, { global },
   );
 
-  const proxyClasses = Hook.getServiceProxies(DestServiceHandler);
+  const proxyClasses = getServiceProxies(DestServiceHandler);
   if (!proxyClasses.length) {
     return eventHandler;
   }
@@ -58,12 +58,12 @@ export async function resolveServiceHandler(
 async function resolveProxyInstance(
   resolvedDriver: ResolvedDriver,
   providers: GenericProvider<any>[],
-  proxyClasses: ClassType<ServiceHandler>[],
+  proxyClasses: { new(...args: any[]): ServiceHandler }[],
   eventHandler: ServiceHandler,
 ) {
   let proxyInstance: ServiceHandler;
 
-  for(let i = 0; i < proxyClasses.length; i++) {
+  for (let i = 0; i < proxyClasses.length; i++) {
     const proxyClass = proxyClasses[i];
     const extModule = new Container();
 

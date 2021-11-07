@@ -1,6 +1,6 @@
 export * from './cell-context';
 export * from './error';
-export * from './hook';
+export { addServiceProviders, addServiceProxies } from './service-helper';
 export * from './type';
 export * from './key';
 export * from './decorator';

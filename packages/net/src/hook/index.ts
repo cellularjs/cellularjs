@@ -1,1 +1,0 @@
-export { Hook } from './hook.class';
