@@ -4,7 +4,7 @@ import {
 } from '../../../../../src';
 import { CreateProfileReq } from '../services/create-profile.req';
 
-@Service({ scope: 'public' })
+@Service({ scope: 'publish' })
 export class CreateProfile implements ServiceHandler {
   constructor(
     @Inject(CLL_IRQ) private irq: IRQ,

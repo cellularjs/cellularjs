@@ -1,6 +1,6 @@
 import { Service, ServiceHandler, send, IRQ, CellContext } from '../../../../../src';
 
-@Service({ scope: 'public' })
+@Service({ scope: 'publish' })
 export class DelegateCacheHtml implements ServiceHandler {
   constructor(
     private ctx: CellContext,

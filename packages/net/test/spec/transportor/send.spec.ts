@@ -181,7 +181,7 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('if scope is public, event handler is accessible from every cells', async () => {
+  it('if scope is publish, event handler is accessible from every cells', async () => {
     const delegateSignInIrq = new IRQ(
       { to: 'User:DelegateSignIn' },
     );
@@ -191,7 +191,7 @@ describe('Transportor - send(): send request', () => {
     expect(delegateSignInIrs.header.status).to.equal(200000);
   });
 
-  it('if scope is public, event handler is accessible from anonymous caller', async () => {
+  it('if scope is publish, event handler is accessible from anonymous caller', async () => {
     const signInIrq = new IRQ(
       { to: 'Auth:SignIn' },
     );

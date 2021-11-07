@@ -1,7 +1,7 @@
 import { GenericProvider, ImportableCnf, ClassType, Container } from '@cellularjs/di';
 
 export enum ServiceScopeMap {
-  public = 1,
+  publish = 1,
   space = 2,
   private = 4,
 }
@@ -16,7 +16,7 @@ export interface ServiceMeta {
    * Scope define accessibility for event handler. It make event handler look
    * like a method in a class with access modifier.
    * 
-   * - "public": accessible from anywhere.
+   * - "publish": accessible from anywhere.
    * - "space": limit access only to cells having same space.
    * - "private": limit access to owner cell only.
    * 

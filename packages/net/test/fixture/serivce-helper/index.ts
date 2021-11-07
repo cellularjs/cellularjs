@@ -2,7 +2,7 @@ import { Inject } from '@cellularjs/di'
 import { ServiceHandler, IRS, CLL_NET_HANDLER, Service } from '../../../src';
 
 @Service({
-  scope: 'public',
+  scope: 'publish',
 })
 export class Original implements ServiceHandler {
   handle() {
@@ -53,7 +53,7 @@ export class Session {
 }
 
 @Service({
-  scope: 'public',
+  scope: 'publish',
 })
 export class EditFooService implements ServiceHandler {
   constructor(private session: Session) { }

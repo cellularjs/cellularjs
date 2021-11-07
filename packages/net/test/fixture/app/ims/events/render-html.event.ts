@@ -1,7 +1,7 @@
 import { Service, ServiceHandler, CellContext, send, IRS, IRQ } from '../../../../../src';
 
 @Service({
-  scope: 'public',
+  scope: 'publish',
 })
 export class RenderHtml implements ServiceHandler {
   constructor(

@@ -4,7 +4,7 @@ import {
   CellContext, CLL_IRQ, send,
 } from '../../../../../src';
 
-@Service({ scope: 'public' })
+@Service({ scope: 'publish' })
 export class DelegateSendMail implements ServiceHandler {
   constructor(
     private ctx: CellContext,

@@ -7,7 +7,7 @@ import {
 export const scopeContraints = {
   [ServiceScopeMap.private]: privateContraint,
   [ServiceScopeMap.space]: spaceConstaint,
-  [ServiceScopeMap.public]: () => {},
+  [ServiceScopeMap.publish]: () => {},
 }
 
 function privateContraint(targetResolvedCell: ResolvedCell, refererCell?: CellContext) {

@@ -3,7 +3,7 @@ import {
   Service, ServiceHandler, IRQ, IRS, CLL_IRQ, CellContext, send,
 } from '../../../../../src';
 
-@Service({ scope: 'public' })
+@Service({ scope: 'publish' })
 export class SignUp implements ServiceHandler {
   constructor(
     @Inject(CLL_IRQ) private irq: IRQ,
@@ -26,8 +26,8 @@ export class SignUp implements ServiceHandler {
   }
 }
 
-// Ignored when scanning folder for event handler
+// Ignored when scanning folder for event handler because it is a variable.
 export const DummyConst = 0;
 
-// Ignored when scanning folder for event handler
+// Ignored when scanning folder for event handler because it is not decorated by @Service.
 export class SignIn { }
