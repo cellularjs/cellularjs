@@ -1,7 +1,7 @@
 import {
   getResolvedCell, ServiceHandler,
   CellContext, IRQ,
-  Errors, CLL_NET_HANDLER,
+  Errors,
 } from '..';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
@@ -68,7 +68,7 @@ async function resolveProxyInstance(
     const extModule = new Container();
 
     extModule.addProviders(providers.concat([
-      { token: CLL_NET_HANDLER, useValue: proxyInstance || eventHandler },
+      { token: ServiceHandler, useValue: proxyInstance || eventHandler },
       { token: proxyClass, useClass: proxyClass },
     ]));
 

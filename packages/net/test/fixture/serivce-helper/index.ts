@@ -1,5 +1,4 @@
-import { Inject } from '@cellularjs/di'
-import { ServiceHandler, IRS, CLL_NET_HANDLER, Service } from '../../../src';
+import { ServiceHandler, IRS, Service } from '../../../src';
 
 @Service({
   scope: 'publish',
@@ -13,7 +12,7 @@ export class Original implements ServiceHandler {
 @Service()
 export class Foo implements ServiceHandler {
   constructor(
-    @Inject(CLL_NET_HANDLER) private handler: ServiceHandler,
+    private handler: ServiceHandler,
   ) { }
 
   async handle() {
@@ -25,7 +24,7 @@ export class Foo implements ServiceHandler {
 @Service()
 export class FooOverride implements ServiceHandler {
   constructor(
-    @Inject(CLL_NET_HANDLER) private handler: ServiceHandler,
+    private handler: ServiceHandler,
   ) { }
 
   async handle() {
@@ -38,7 +37,7 @@ export class FooOverride implements ServiceHandler {
 @Service()
 export class Bar implements ServiceHandler {
   constructor(
-    @Inject(CLL_NET_HANDLER) private handler: ServiceHandler,
+    private handler: ServiceHandler,
   ) { }
 
   async handle() {
