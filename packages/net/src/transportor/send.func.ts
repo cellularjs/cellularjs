@@ -6,7 +6,7 @@ import { RequestOptions } from './type';
 
 export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
   const reqOpts = ajustOptions(rawOpts);
-  const { refererCell, throwOriginalError, driverType } = reqOpts;
+  const { refererCell, throwOriginalError, driver } = reqOpts;
 
   const requestCtx = new RequestContext();
   requestCtx.irq = irq;
@@ -15,7 +15,7 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
   try {
     transportEmitter.emit('start', requestCtx);
 
-    const eventHandler = await resolveServiceHandler(irq, refererCell, driverType);
+    const eventHandler = await resolveServiceHandler(irq, refererCell, driver);
     const irs = await eventHandler.handle();
 
     requestCtx.irs = irs instanceof IRS ? irs : new IRS(irs, { status: 200 });
@@ -36,12 +36,12 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
 function ajustOptions(rawOpts: RequestOptions) {
   if (!rawOpts) {
     return {
-      driverType: DEFAULT_DRIVER,
+      driver: DEFAULT_DRIVER,
     };
   }
 
   return {
     ...rawOpts,
-    driverType: rawOpts.driverType || DEFAULT_DRIVER,
+    driver: rawOpts.driver || DEFAULT_DRIVER,
   }
 }

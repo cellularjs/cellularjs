@@ -16,18 +16,18 @@ export const Errors= {
     ErrorCode.DuplicateServiceHandlerName,
   ),
 
-  NoResolvedCell: (targetCellName, driverType) => new NetError(
-    `There is no resolved cell(${targetCellName}) for '${driverType}' driver`,
+  NoResolvedCell: (targetCellName, driver) => new NetError(
+    `There is no resolved cell(${targetCellName}) for '${driver}' driver`,
     ErrorCode.NoResolvedCell,
   ),
 
-  NoResolvedDriver: (driverType, dest) => new NetError(
-    `There is no resolved driver(${driverType}) for sending request to '${dest}'`,
+  NoResolvedDriver: (driver, dest) => new NetError(
+    `There is no resolved driver(${driver}) for sending request to '${dest}'`,
     ErrorCode.NoResolvedDriver,
   ),
 
-  NoServiceHandler: (driverType, dest) => new NetError(
-    `Service handler(driver: ${driverType}) is not defined for '${dest}'`,
+  NoServiceHandler: (driver, dest) => new NetError(
+    `Service handler(driver: ${driver}) is not defined for '${dest}'`,
     ErrorCode.NoServiceHandler,
   ),
 

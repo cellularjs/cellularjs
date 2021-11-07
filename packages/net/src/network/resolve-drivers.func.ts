@@ -13,11 +13,10 @@ export async function resolveDrivers(cellConfig: CellConfig) {
     return drivers.set(DEFAULT_DRIVER, driver);
   }
 
-  const resolveDriverTasks = Object.keys(cellConfig.driver).map(async driverType => {
-    const driverClass = cellConfig.driver[driverType];
-    const driver = await resolveDriver(cellConfig, driverClass);
+  const resolveDriverTasks = Object.keys(cellConfig.driver).map(async driver => {
+    const driverClass = cellConfig.driver[driver];
 
-    drivers.set(driverType, driver);
+    drivers.set(driver, await resolveDriver(cellConfig, driverClass));
   });
 
   await Promise.all(resolveDriverTasks);

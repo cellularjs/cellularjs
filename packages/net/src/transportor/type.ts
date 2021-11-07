@@ -9,7 +9,7 @@ export interface RequestOptions {
   /**
    * By default, driver type is 'local'.
    */
-  driverType?: string;
+  driver?: string;
 
   /**
    * By default, all exception will be treated as error response.

@@ -55,7 +55,7 @@ describe('Transportor - send(): send request', () => {
   it('if driver is not exist, it will throw error', async () => {
     try {
       const irq = new IRQ({ to: 'User:CreateProfile' });
-      await send(irq, { driverType: 'not exist' });
+      await send(irq, { driver: 'not exist' });
 
       expect(true).to.false;
     } catch (err) {
@@ -64,7 +64,7 @@ describe('Transportor - send(): send request', () => {
 
     try {
       const irq = new IRQ({ to: 'User:CreateProfile' });
-      await send(irq, { throwOriginalError: true, driverType: 'not exist' });
+      await send(irq, { throwOriginalError: true, driver: 'not exist' });
 
       expect(true).to.false;
     } catch (err) {
