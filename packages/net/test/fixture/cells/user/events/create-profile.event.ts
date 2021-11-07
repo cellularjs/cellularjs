@@ -1,5 +1,5 @@
 import {
-  Service, ServiceHandler, IRS, IRQ, CellContext, send,
+  Service, ServiceHandler, IRQ, CellContext, send,
 } from '../../../../../src';
 import { CreateProfileReq } from '../services/create-profile.req';
 
