@@ -34,7 +34,7 @@ describe('Transportor - send(): send request', () => {
 
   it('will throw IRS object if it throw IRS object', async () => {
     try {
-      const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
+      const irq = new IRQ({ to: 'User:CreateProfile' });
       await send(irq);
 
       expect(true).to.false;
@@ -43,8 +43,8 @@ describe('Transportor - send(): send request', () => {
     }
 
     try {
-      const irq = new IRQ({ to: 'User:CreateProfile' }, { shouldThrow: true });
-      await send(irq, { throwOriginalError: true });
+      const irq = new IRQ({ to: 'User:CreateProfile' });
+      await send(irq);
 
       expect(true).to.false;
     } catch (err) {
