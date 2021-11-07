@@ -24,8 +24,8 @@ export class IRS {
 
   static unexpectedError(): IRS {
     const unexpectedRrrorIrs = new IRS(
-      { error: 'Unexpected error has occurred' },
-      { status: 500000 },
+      undefined,
+      { status: 500 },
     );
 
     return unexpectedRrrorIrs;

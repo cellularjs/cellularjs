@@ -14,7 +14,7 @@ export class CreateProfile implements ServiceHandler {
 
   async handle() {
     if (this.irq.body.shouldThrow) {
-      throw new IRS({ status: 400000 });
+      throw new IRS({ status: 400 });
     }
 
     const sendMailIrq = new IRQ({ to: 'User:SendMail' });

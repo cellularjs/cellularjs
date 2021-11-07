@@ -19,7 +19,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.header.status === 500000).to.true;
+      expect(err.header.status === 500).to.true;
     }
 
     try {
@@ -39,7 +39,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.header.status === 400000).to.true;
+      expect(err.header.status === 400).to.true;
     }
 
     try {
@@ -59,7 +59,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.header.status === 500000).to.true;
+      expect(err.header.status === 500).to.true;
     }
 
     try {
@@ -79,7 +79,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.header.status === 500000).to.true;
+      expect(err.header.status === 500).to.true;
     }
 
     try {

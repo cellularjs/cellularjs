@@ -10,7 +10,7 @@ export class DummySignInReq {
     @Inject(CLL_IRQ) irq: IRQ,
   ) {
     if (!irq.body.usr || !irq.body.pwd) {
-      throw new IRS(null, { status: 400000 });
+      throw new IRS(null, { status: 400 });
     }
 
     Object.assign(this, irq.body);
