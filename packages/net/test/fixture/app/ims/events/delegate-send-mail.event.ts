@@ -1,14 +1,12 @@
-import { Inject } from '@cellularjs/di';
 import {
   Service, ServiceHandler, IRQ, IRS,
-  CellContext, CLL_IRQ, send,
+  CellContext, send,
 } from '../../../../../src';
 
 @Service({ scope: 'publish' })
 export class DelegateSendMail implements ServiceHandler {
   constructor(
     private ctx: CellContext,
-    @Inject(CLL_IRQ) private irq: IRQ,
   ) {}
 
   async handle(): Promise<IRS> {

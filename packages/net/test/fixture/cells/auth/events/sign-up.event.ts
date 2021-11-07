@@ -1,12 +1,11 @@
-import { Inject } from '@cellularjs/di';
 import {
-  Service, ServiceHandler, IRQ, IRS, CLL_IRQ, CellContext, send,
+  Service, ServiceHandler, IRQ, IRS, CellContext, send,
 } from '../../../../../src';
 
 @Service({ scope: 'publish' })
 export class SignUp implements ServiceHandler {
   constructor(
-    @Inject(CLL_IRQ) private irq: IRQ,
+    private irq: IRQ,
     private ctx: CellContext,
   ) { }
 

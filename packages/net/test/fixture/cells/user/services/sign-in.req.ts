@@ -1,14 +1,12 @@
-import { Injectable, Inject } from '@cellularjs/di';
-import { CLL_IRQ, IRQ, IRS } from '../../../../../src';
+import { Injectable } from '@cellularjs/di';
+import { IRQ, IRS } from '../../../../../src';
 
 @Injectable()
 export class DummySignInReq {
   public readonly usr;
   public readonly pwd;
 
-  constructor(
-    @Inject(CLL_IRQ) irq: IRQ,
-  ) {
+  constructor(irq: IRQ) {
     if (!irq.body.usr || !irq.body.pwd) {
       throw new IRS(null, { status: 400 });
     }

@@ -1,7 +1,7 @@
 import {
   getResolvedCell, ServiceHandler,
   CellContext, IRQ,
-  CLL_IRQ, Errors, CLL_NET_HANDLER,
+  Errors, CLL_NET_HANDLER,
 } from '..';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
@@ -38,7 +38,7 @@ export async function resolveServiceHandler(
   const serviceProviders = getServiceProviders(DestServiceHandler);
   const providers: GenericProvider<any>[] = [
     ...serviceProviders,
-    { token: CLL_IRQ, useValue: irq },
+    { token: IRQ, useValue: irq },
   ];
 
   const global = new Container();
