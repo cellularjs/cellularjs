@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell } from '../../../src';
+import { LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell } from '../../../src';
 import { userCellCnf } from '../../fixture/share/network';
 
 describe('Network - getResolvedCell:', () => {
@@ -14,7 +14,7 @@ describe('Network - getResolvedCell:', () => {
     const resolvedCell = getResolvedCell('User');
 
     expect(resolvedCell.cellConfig).to.eqls(userCellCnf);
-    expect(resolvedCell.drivers.has(DEFAULT_DRIVER)).to.true;
+    expect(resolvedCell.drivers.has(LOCAL_DRIVER)).to.true;
   });
 
   it('will return undefined if resolved cell is not exist', async () => {

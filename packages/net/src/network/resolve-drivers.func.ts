@@ -1,5 +1,5 @@
 import { Container, GenericProvider } from '@cellularjs/di';
-import { DEFAULT_DRIVER } from '.';
+import { LOCAL_DRIVER } from '.';
 import { CellContext, Errors } from '..';
 import { CellConfig, ResolvedDriver, CellMeta, ServiceHandlerMap } from '../type';
 import { freezeProperty, getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
@@ -10,7 +10,7 @@ export async function resolveDrivers(cellConfig: CellConfig) {
   if (typeof cellConfig.driver !== 'object') {
     const driver = await resolveDriver(cellConfig, cellConfig.driver);
 
-    return drivers.set(DEFAULT_DRIVER, driver);
+    return drivers.set(LOCAL_DRIVER, driver);
   }
 
   const resolveDriverTasks = Object.keys(cellConfig.driver).map(async driver => {

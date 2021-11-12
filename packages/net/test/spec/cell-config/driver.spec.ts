@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { CellConfig, DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode } from '../../../src';
+import { CellConfig, LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode } from '../../../src';
 import { authCellCnf, userCellCnf } from '../../fixture/share/network';
 
 describe('CellConfig - cell driver:', () => {
@@ -31,7 +31,7 @@ describe('CellConfig - cell driver:', () => {
     const resolvedCell = getResolvedCell('User');
 
     expect(resolvedCell.cellConfig).to.eqls(userCellCnf);
-    expect(resolvedCell.drivers.has(DEFAULT_DRIVER)).to.true;
+    expect(resolvedCell.drivers.has(LOCAL_DRIVER)).to.true;
   });
 
   it('can add a cell which has multiple types of driver into network', async () => {
@@ -40,7 +40,7 @@ describe('CellConfig - cell driver:', () => {
     const resolvedCell = getResolvedCell('Auth');
 
     expect(resolvedCell.cellConfig).to.eqls(authCellCnf);
-    expect(resolvedCell.drivers.has(DEFAULT_DRIVER)).to.true;
+    expect(resolvedCell.drivers.has(LOCAL_DRIVER)).to.true;
     expect(resolvedCell.drivers.has('http')).to.true;
   });
 });

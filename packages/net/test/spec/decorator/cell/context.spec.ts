@@ -1,7 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
 import {
-  DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, CellContext,
+  LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell, CellContext,
 } from '../../../../src';
 // import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
 import { authCellCnf, userCellCnf } from '../../../fixture/share/network';
@@ -15,7 +15,7 @@ describe('Decorator - @Cell annotation - context property:', () => {
     await createNetWork([authCellCnf]);
 
     const resolvedCell = getResolvedCell('Auth');
-    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+    const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
     const cellContext: CellContext = await localDriver.container.resolve(CellContext);
 
@@ -27,7 +27,7 @@ describe('Decorator - @Cell annotation - context property:', () => {
     await createNetWork([userCellCnf]);
 
     const resolvedCell = getResolvedCell('User');
-    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+    const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
     const cellCtx = await localDriver.container.resolve<CellContext>(CellContext);
 
@@ -39,7 +39,7 @@ describe('Decorator - @Cell annotation - context property:', () => {
   //   await createNetWork([userCellCnf]);
 
   //   const resolvedCell = getResolvedCell('User');
-  //   const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+  //   const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
   //   const cellCtx = await localDriver.container.resolve<CellContext>(CellContext);
 

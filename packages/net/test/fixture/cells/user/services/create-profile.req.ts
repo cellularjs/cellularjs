@@ -1,5 +1,5 @@
 import { Injectable } from '@cellularjs/di';
-import { IRQ, IRS } from '../../../../../src';
+import { IRS, IRQ } from '../../../../../src';
 
 @Injectable()
 export class CreateProfileReq {

@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell } from '../../../../src';
+import { LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell } from '../../../../src';
 import { userCellCnf } from '../../../fixture/share/network';
 import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
 
@@ -13,7 +13,7 @@ describe('Decorator - @Cell annotation - imports property:', () => {
     await createNetWork([userCellCnf]);
 
     const resolvedCell = getResolvedCell('User');
-    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+    const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
     const jwtService = await localDriver.container.resolve<JwtService>(JwtService);
 

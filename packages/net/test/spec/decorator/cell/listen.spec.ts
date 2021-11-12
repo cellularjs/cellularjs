@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { DEFAULT_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode, Cell } from '../../../../src';
+import { LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode, Cell } from '../../../../src';
 import { userCellCnf, authCellCnf, dummyCellCnf } from '../../../fixture/share/network';
 import { CreateProfile } from '../../../fixture/cells/user/events/create-profile.event';
 import { SignIn } from '../../../fixture/cells/auth/events/sign-in.event';
@@ -15,7 +15,7 @@ describe('Decorator - @Cell annotation - listen property:', () => {
     await createNetWork([userCellCnf]);
 
     const resolvedCell = getResolvedCell('User');
-    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+    const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
     const createProfileServiceHandler = localDriver.listener.get('CreateProfile');
 
@@ -27,7 +27,7 @@ describe('Decorator - @Cell annotation - listen property:', () => {
     await createNetWork([authCellCnf]);
 
     const resolvedCell = getResolvedCell('Auth');
-    const localDriver = resolvedCell.drivers.get(DEFAULT_DRIVER);
+    const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
     const signInServiceHandler = localDriver.listener.get('SignIn');
     const lockAccountServiceHandler = localDriver.listener.get('LockAccount');

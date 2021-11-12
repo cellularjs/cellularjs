@@ -1,4 +1,4 @@
-import { IRQ, IRS, DEFAULT_DRIVER } from '..';
+import { IRQ, IRS, LOCAL_DRIVER } from '..';
 import { transportEmitter } from './transport-emitter';
 import { resolveServiceHandler } from './resolve-service-handler.func';
 import { RequestContext } from './request-context';
@@ -36,12 +36,12 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
 function ajustOptions(rawOpts: RequestOptions) {
   if (!rawOpts) {
     return {
-      driver: DEFAULT_DRIVER,
+      driver: LOCAL_DRIVER,
     };
   }
 
   return {
     ...rawOpts,
-    driver: rawOpts.driver || DEFAULT_DRIVER,
+    driver: rawOpts.driver || LOCAL_DRIVER,
   }
 }
