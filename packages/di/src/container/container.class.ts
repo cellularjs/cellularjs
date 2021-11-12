@@ -20,7 +20,7 @@ export class Container extends ContainerBag {
   /**
    * Convenient method for adding multiple providers into this container.
    */
-  public addProviders(providers: GenericProvider<any>[] = []): void {
+  public addProviders(providers: GenericProvider[] = []): void {
     providers.forEach(provider => this.addProvider(provider));
   }
 

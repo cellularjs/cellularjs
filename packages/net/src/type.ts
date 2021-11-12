@@ -29,7 +29,7 @@ export interface AjustedServiceMeta {
   scope: ServiceScopeMap;
 }
 
-export type CellProviderConfig = GenericProvider<any> | string;
+export type CellProviderConfig = GenericProvider | string;
 
 export interface CellMeta {
   /**

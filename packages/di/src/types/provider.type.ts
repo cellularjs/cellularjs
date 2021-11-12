@@ -56,7 +56,7 @@ export interface UseValueProvider<T> extends BaseProvider {
   useValue: ValueType<T>;
 }
 
-export type GenericProvider<T> =
+export type GenericProvider<T = any> =
   UseModuleProvider | UseClassProvider<T> |
   ClassType<T> | UseFuncProvider<T> | UseValueProvider<T>;
 

@@ -1,8 +1,8 @@
 import { GenericProvider } from '@cellularjs/di';
 
-let serviceProviders = new Map<any, GenericProvider<any>[]>();
+let serviceProviders = new Map<any, GenericProvider[]>();
 
-export function addServiceProviders(service, newProviders: GenericProvider<any>[]) {
+export function addServiceProviders(service, newProviders: GenericProvider[]) {
   const providers = serviceProviders.get(service) || [];
   serviceProviders.set(service, providers.concat(newProviders));
 }

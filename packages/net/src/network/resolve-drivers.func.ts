@@ -56,7 +56,7 @@ function resolveListener(cellMeta: CellMeta, cellCnf: CellConfig): ServiceHandle
 
 async function createContainer(cellMeta: CellMeta, cellConfig: CellConfig): Promise<Container> {
   let providers = cellMeta.providers
-    .filter(provider => typeof provider !== 'string') as GenericProvider<any>[];
+    .filter(provider => typeof provider !== 'string') as GenericProvider[];
 
   cellMeta.providers.forEach(provider => {
     if (typeof provider !== 'string') {

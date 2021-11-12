@@ -5,7 +5,7 @@ export type ImportableCnf = ClassType<any> | ExtModuleMeta;
 export type ExportableCnf = ClassType<any> | ExtModuleMeta;
 
 export interface ModuleMeta {
-  providers?: GenericProvider<any>[];
+  providers?: GenericProvider[];
   imports?: ImportableCnf[];
   exports?: ExportableCnf[];
 }
