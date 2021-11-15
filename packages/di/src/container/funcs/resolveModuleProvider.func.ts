@@ -1,4 +1,5 @@
-import { Container, AdjustedProvider, ResolveOptions } from '../../'
+import { Container, ResolveOptions } from '../../'
+import { AdjustedProvider } from '../../internal'
 import { moduleMap } from '../props/module-map.static'
 
 export function resolveModuleProvider<T>(

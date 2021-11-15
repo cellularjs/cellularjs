@@ -1,4 +1,5 @@
-import { Container, ResolveOptions, AdjustedDep } from '../../';
+import { Container, ResolveOptions } from '../../';
+import { AdjustedDep } from '../../internal';
 
 export async function resolveUseFuncArgs(
   this: Container,

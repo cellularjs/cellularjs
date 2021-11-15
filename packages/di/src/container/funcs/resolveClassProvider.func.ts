@@ -1,5 +1,6 @@
-import { Container, AdjustedProvider, ResolveOptions } from '../../'
-import { PermanentCycle } from '../../consts/cycle.const'
+import { Container, ResolveOptions } from '../../';
+import { AdjustedProvider } from '../../internal';
+import { PermanentCycle } from '../../consts/cycle.const';
 
 export async function resolveClassProvider(
   this: Container,

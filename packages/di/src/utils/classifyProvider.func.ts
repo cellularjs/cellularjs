@@ -1,4 +1,4 @@
-import { GenericProvider, AdjustedProvider, AdjustedDep } from '../';
+import { GenericProvider, AdjustedProvider, AdjustedDep } from '../internal';
 import { DiResolvers } from '../consts/di-resolver.const'
 import { CycleTypeMap } from '../consts/cycle.const'
 import { BaseProvider, ProviderHasCycle } from '../types';

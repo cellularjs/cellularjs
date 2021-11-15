@@ -1,4 +1,5 @@
-import { Errors, Container, Token, ResolveOptions } from '../../';
+import { Container, Token, ResolveOptions } from '../../';
+import { Errors } from '../../internal';
 
 export function resolve<T>(
   this: Container,

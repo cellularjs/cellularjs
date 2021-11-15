@@ -1,4 +1,5 @@
-import { Errors, ClassType, Container } from '../../'
+import { Container } from '../../'
+import { Errors, ClassType } from '../../internal'
 import { getModuleMeta } from '../../utils';
 import { moduleMap } from '../props/module-map.static'
 
