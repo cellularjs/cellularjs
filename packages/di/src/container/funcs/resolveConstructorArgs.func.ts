@@ -7,7 +7,9 @@ export async function resolveConstructorArgs(
   options: ResolveOptions,
 ): Promise<any[]> {
   const args = getParamTypes(target).map((param, i) => {
-    const paramType = getToken(target, i) || param;
+    const token = getToken(target, i);
+    const paramType = token ? token() : param;
+
     return this.resolve(paramType, options);
   });
 
