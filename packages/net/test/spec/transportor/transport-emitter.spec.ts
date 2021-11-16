@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { EventEmitter } from 'events';
-import { createNetWork, cleanNetwork, transportEmitter, send, IRQ } from '../../../src';
+import { createNetWork, transportEmitter, send, IRQ } from '../../../src';
+import { cleanNetwork } from '../../../src/internal';
 import { imsNetwork } from '../../fixture/share/network'
 
 describe('Transportor - transportEmitter', () => {

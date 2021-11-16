@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, cleanNetwork, getResolvedCell } from '../../../src';
+import { createNetWork, getResolvedCell } from '../../../src';
+import { cleanNetwork } from '../../../src/internal';
 import { imsNetwork } from '../../fixture/share/network';
 
 describe('CellConfig - cell space:', () => {

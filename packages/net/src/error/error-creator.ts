@@ -1,4 +1,4 @@
-import { ErrorCode, NetError } from '.'
+import { ErrorCode, NetError } from '..'
 
 export const Errors= {
   DuplicateCellName: (cellName) => new NetError(

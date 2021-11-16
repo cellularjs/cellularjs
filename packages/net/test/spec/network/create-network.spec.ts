@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, cleanNetwork, getResolvedCell, ErrorCode } from '../../../src';
+import { createNetWork, getResolvedCell, ErrorCode } from '../../../src';
+import { cleanNetwork } from '../../../src/internal';
 import { userCellCnf } from '../../fixture/share/network';
 
 describe('Network - createNetwork:', () => {

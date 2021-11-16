@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode, Cell } from '../../../../src';
+import { LOCAL_DRIVER, createNetWork, getResolvedCell, ErrorCode, Cell } from '../../../../src';
+import { cleanNetwork } from '../../../../src/internal';
 import { userCellCnf, authCellCnf, dummyCellCnf } from '../../../fixture/share/network';
 import { CreateProfile } from '../../../fixture/cells/user/events/create-profile.event';
 import { SignIn } from '../../../fixture/cells/auth/events/sign-in.event';

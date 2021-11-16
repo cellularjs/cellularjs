@@ -1,6 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
-import { CellConfig, LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell, ErrorCode } from '../../../src';
+import { CellConfig, LOCAL_DRIVER, createNetWork, getResolvedCell, ErrorCode } from '../../../src';
+import { cleanNetwork } from '../../../src/internal';
 import { authCellCnf, userCellCnf } from '../../fixture/share/network';
 
 describe('CellConfig - cell driver:', () => {

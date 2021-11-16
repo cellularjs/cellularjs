@@ -1,4 +1,4 @@
-import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta } from '..';
+import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta } from '../internal';
 import { CLL_SERVICE_OPTS } from '..';
 
 /**

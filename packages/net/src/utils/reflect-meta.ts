@@ -1,4 +1,5 @@
-import { CLL_CELL_OPTS, CLL_SERVICE_OPTS, CellMeta, AjustedServiceMeta } from '..';
+import { CLL_CELL_OPTS, CLL_SERVICE_OPTS } from '../'
+import { CellMeta, AjustedServiceMeta } from '../internal';
 
 export function getCellMeta(driverClass): CellMeta {
   return Reflect.getMetadata(CLL_CELL_OPTS, driverClass);

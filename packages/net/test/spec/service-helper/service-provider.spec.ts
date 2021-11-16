@@ -1,5 +1,6 @@
 import { afterEach } from 'mocha';
-import { createNetWork, cleanNetwork, addServiceProviders, Cell, send, IRQ } from '../../../src';
+import { createNetWork, addServiceProviders, Cell, send, IRQ } from '../../../src';
+import { cleanNetwork } from '../../../src/internal';
 import { EditFooService, Session } from '../../fixture/serivce-helper';
 
 describe('Service helper - addServiceProviders()', () => {

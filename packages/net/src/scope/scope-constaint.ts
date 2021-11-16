@@ -2,7 +2,7 @@ import {
   getResolvedCell,
   CellContext, ResolvedCell, Errors,
   ServiceScopeMap,
-} from '../';
+} from '../internal';
 
 export const scopeContraints = {
   [ServiceScopeMap.private]: privateContraint,

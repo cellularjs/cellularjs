@@ -1,8 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
 import {
-  LOCAL_DRIVER, createNetWork, cleanNetwork, getResolvedCell, CellContext,
+  LOCAL_DRIVER, createNetWork, getResolvedCell, CellContext,
 } from '../../../../src';
+import { cleanNetwork } from '../../../../src/internal';
 // import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
 import { authCellCnf, userCellCnf } from '../../../fixture/share/network';
 

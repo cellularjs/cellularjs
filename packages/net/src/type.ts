@@ -1,4 +1,6 @@
-import { GenericProvider, ImportableCnf, ClassType, Container } from '@cellularjs/di';
+import { GenericProvider, ImportableCnf, Container } from '@cellularjs/di';
+
+type ClassType<T> = { new(...args: any[]): T };
 
 export enum ServiceScopeMap {
   publish = 1,
@@ -75,7 +77,7 @@ export type IrqHeader = {
 };
 
 export type IrsHeader = {
-  status: number;
+  status?: number;
   [key: string]: any;
 };
 
@@ -180,3 +182,5 @@ export type NetworkOptions = {
    */
   worker?: number;
 }
+
+export type ServiceHandlerClass = { new(...args: any[]): ServiceHandler };

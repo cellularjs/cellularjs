@@ -1,15 +1,13 @@
-import { ServiceHandler } from '../'
+import { ServiceHandlerClass } from '../internal';
 
-type ClassType<T> = { new(...args: any[]): T };
+let serviceProxies = new Map<any, ServiceHandlerClass[]>();
 
-let serviceProxies = new Map<any, ClassType<ServiceHandler>[]>();
-
-export function addServiceProxies(service, newProxies: ClassType<ServiceHandler>[]) {
+export function addServiceProxies(service: ServiceHandlerClass, newProxies: ServiceHandlerClass[]) {
   const proxies = serviceProxies.get(service) || [];
   serviceProxies.set(service, proxies.concat(newProxies));
 }
 
-export function getServiceProxies(service) {
+export function getServiceProxies(service: ServiceHandlerClass) {
   return serviceProxies.get(service) || [];
 }
 

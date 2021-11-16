@@ -1,7 +1,7 @@
 import { Container, GenericProvider } from '@cellularjs/di';
-import { LOCAL_DRIVER } from '.';
-import { CellContext, Errors } from '..';
-import { CellConfig, ResolvedDriver, CellMeta, ServiceHandlerMap } from '../type';
+import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
+import { CellContext, Errors } from '../internal';
+import { ResolvedDriver, ServiceHandlerMap } from '../type';
 import { freezeProperty, getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {

@@ -1,4 +1,4 @@
-import { Errors, CellConfig } from '../';
+import { Errors, CellConfig } from '../internal';
 import { getServiceMeta, scanJs } from './';
 
 export function scanForServiceHandler(basePath: string, cellCnf: CellConfig, eventHandlers): void {

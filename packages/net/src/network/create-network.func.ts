@@ -1,4 +1,4 @@
-import { Errors } from '..';
+import { Errors } from '../internal';
 import { NetworkConfig, CellConfig, ResolvedCell } from '../type';
 import { uniqId } from '../utils';
 import { resolveDrivers } from './resolve-drivers.func'

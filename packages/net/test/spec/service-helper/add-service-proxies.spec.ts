@@ -1,6 +1,7 @@
 import { afterEach } from 'mocha';
 import { expect } from 'chai';
-import { createNetWork, cleanNetwork, addServiceProxies, Cell, send, IRQ } from '../../../src';
+import { createNetWork, addServiceProxies, Cell, send, IRQ } from '../../../src';
+import { cleanNetwork } from '../../../src/internal';
 import { Original, Foo, FooOverride, Bar } from '../../fixture/serivce-helper';
 
 describe('Service helper - addServiceProxies():', () => {
