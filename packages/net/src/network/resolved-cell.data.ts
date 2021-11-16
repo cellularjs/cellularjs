@@ -3,8 +3,8 @@ import { ResolvedCell } from '../type';
 
 const resolvedCells = new Map<string, ResolvedCell>();
 
-export function setResolvedCell(name: string, instance: ResolvedCell) {
-  resolvedCells.set(name, instance)
+export function setResolvedCell(cellName: string, resolvedCell: ResolvedCell) {
+  resolvedCells.set(cellName, resolvedCell);
 }
 
 export function getResolvedCell(cellName: string): ResolvedCell | undefined {
