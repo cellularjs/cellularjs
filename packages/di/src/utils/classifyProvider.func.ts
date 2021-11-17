@@ -1,4 +1,4 @@
-import { GenericProvider, AdjustedProvider, AdjustedDep } from '../internal';
+import { GenericProvider, AdjustedProvider, AdjustedDep, ForwardRef } from '../internal';
 import { DiResolvers } from '../consts/di-resolver.const'
 import { CycleTypeMap } from '../consts/cycle.const'
 import { BaseProvider, ProviderHasCycle } from '../types';
@@ -33,7 +33,7 @@ export function classifyProvider<T>(genericProvider: GenericProvider<T>): Adjust
 
   else if (adjustedProvider.useFunc !== undefined) {
     adjustedProvider.resolver = DiResolvers.useFuncResolver;
-    adjustedProvider.deps = classifyUseFuncDeps(adjustedProvider.deps);
+    adjustedProvider.deps = classifyUseFuncDeps(adjustedProvider,adjustedProvider.deps);
   }
 
   else adjustedProvider.resolver = DiResolvers.useValueResolver;
@@ -41,12 +41,16 @@ export function classifyProvider<T>(genericProvider: GenericProvider<T>): Adjust
   return adjustedProvider;
 }
 
-function classifyUseFuncDeps(deps): AdjustedDep[] {
+function classifyUseFuncDeps(adjustedProvider, deps): AdjustedDep[] {
   return (deps || []).map(dep => {
-    if(!isClass(dep)) {
-      return { value: dep };
+    if(isClass(dep)) {
+      return { value: () => dep, shouldResolve: true };
     }
 
-    return { value: dep, isClass: true };
+    if (dep instanceof ForwardRef) {
+      return { value: dep.callback, shouldResolve: true };
+    }
+
+    return { value: dep, shouldResolve: false };
   });
 }

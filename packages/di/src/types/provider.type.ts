@@ -75,7 +75,7 @@ export interface AdjustedProvider<T> extends BaseProvider {
 
 export interface AdjustedDep {
   value: any;
-  isClass: boolean | undefined;
+  shouldResolve: boolean;
 }
 
 export interface ResolveOptions {

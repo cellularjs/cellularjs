@@ -7,8 +7,8 @@ export async function resolveUseFuncArgs(
   options: ResolveOptions,
 ): Promise<any[]> {
   const resolvingDeps = deps.map(dep =>
-    dep.isClass
-      ? this.resolve(dep.value, options)
+    dep.shouldResolve
+      ? this.resolve(dep.value(), options)
       : dep.value,
   );
 
