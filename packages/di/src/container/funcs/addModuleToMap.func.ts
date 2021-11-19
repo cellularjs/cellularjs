@@ -3,7 +3,7 @@ import { Errors, ClassType } from '../../internal'
 import { getModuleMeta } from '../../utils';
 import { moduleMap } from '../props/module-map.static'
 
-export function addModuleToMap(this: Container, moduleClass: ClassType<any>): void {
+export function addModuleToMap(this: Container, moduleClass: ClassType): void {
   if (moduleMap.has(moduleClass)) {
     return;
   }

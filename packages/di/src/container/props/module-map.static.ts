@@ -29,4 +29,4 @@ import { ClassType } from '../../internal';
  * };
  * ```
  */
-export const moduleMap = new Map<(ClassType<any>), Container>();
+export const moduleMap = new Map<(ClassType), Container>();

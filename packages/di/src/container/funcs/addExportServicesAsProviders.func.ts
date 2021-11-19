@@ -8,8 +8,8 @@ export function addExportServicesAsProviders(this: Container, exports: Exportabl
     // if ((provider as ExtModuleMeta).extModule) throw;
 
     // ignore module class
-    if (getModuleMeta(provider)) return;
+    if (getModuleMeta(provider as ClassType)) return;
 
-    this.addProvider(provider as ClassType<any>);
+    this.addProvider(provider as ClassType);
   });
 }

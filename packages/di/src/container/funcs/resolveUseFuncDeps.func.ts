@@ -1,9 +1,9 @@
-import { Container, ResolveOptions } from '../../';
-import { AdjustedDep } from '../../internal';
+import { Container, ResolveOptions } from '../..';
+import { ClassifiedUseFuncDep } from '../../internal';
 
-export async function resolveUseFuncArgs(
+export async function resolveUseFuncDeps(
   this: Container,
-  deps: AdjustedDep[],
+  deps: ClassifiedUseFuncDep[],
   options: ResolveOptions,
 ): Promise<any[]> {
   const resolvingDeps = deps.map(dep =>

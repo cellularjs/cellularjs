@@ -1,5 +1,5 @@
 import { Container } from '../../'
-import { Token, AdjustedProvider, ClassType } from '../../internal'
+import { Token, ClassifiedProvider, ClassType } from '../../internal'
 
 export class ContainerBag {
   /**
@@ -10,13 +10,13 @@ export class ContainerBag {
   /**
    * List of providers containing information for how to create dependency value.
    */
-  protected _providers = new Map<Token, AdjustedProvider<any>>();
+  protected _providers = new Map<Token, ClassifiedProvider>();
 
   /**
    * List of modules that current module/container use as reference for resolving
    * dependency value.
    */
-  protected _extModules = new Map<ClassType<any>, Container>();
+  protected _extModules = new Map<ClassType, Container>();
 
   /**
    * `_parentModule` is a module that this module extend from.

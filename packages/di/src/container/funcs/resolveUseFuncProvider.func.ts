@@ -1,10 +1,10 @@
 import { Container, ResolveOptions } from '../../';
-import { AdjustedProvider } from '../../internal';
+import { ClassifiedProvider } from '../../internal';
 import { PermanentCycle } from '../../consts/cycle.const'
 
-export async function resolveFuncProvider<T>(
+export async function resolveUseFuncProvider<T>(
   this: Container,
-  provider: AdjustedProvider<any>,
+  provider: ClassifiedProvider,
   options: ResolveOptions,
 ): Promise<T> {
   if (this._resolvedValues.has(provider.token)) {

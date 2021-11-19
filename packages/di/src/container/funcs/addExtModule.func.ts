@@ -9,7 +9,7 @@ export function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
   extModule.addProviders(extModuleMeta.providers);
 
   (extModuleMeta.exports || []).forEach(exportCnf => {
-    const moduleMeta = getModuleMeta(exportCnf);
+    const moduleMeta = getModuleMeta(exportCnf as ClassType);
     if (moduleMeta) {
       this.addModule(exportCnf);
       return;
@@ -20,7 +20,7 @@ export function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
       useModule: extModuleMeta.extModule,
     });
 
-    extModule.addProvider(exportCnf as ClassType<any>);
+    extModule.addProvider(exportCnf as ClassType);
   });
 
   extModule.addModules(extModuleMeta.imports);

@@ -1,10 +1,10 @@
-import { Container, ResolveOptions } from '../../'
-import { AdjustedProvider } from '../../internal'
+import { Container, ResolveOptions } from '../..'
+import { ClassifiedProvider } from '../../internal'
 import { moduleMap } from '../props/module-map.static'
 
-export function resolveModuleProvider<T>(
+export function resolveUseModuleProvider<T>(
   this: Container,
-  provider: AdjustedProvider<any>,
+  provider: ClassifiedProvider,
   options: ResolveOptions,
 ): Promise<T> {
   const moduleFromMap = moduleMap.get(provider.useModule);

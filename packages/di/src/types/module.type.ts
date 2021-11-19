@@ -1,8 +1,8 @@
 import { ClassType, GenericProvider } from './';
 
-export type ImportableCnf = ClassType<any> | ExtModuleMeta;
+export type ImportableCnf = ClassType | ExtModuleMeta;
 
-export type ExportableCnf = ClassType<any> | ExtModuleMeta;
+export type ExportableCnf = ClassType | ExtModuleMeta;
 
 export interface ModuleMeta {
   providers?: GenericProvider[];
@@ -14,5 +14,5 @@ export interface ExtModuleMeta extends ModuleMeta {
   /**
    * Module class that you want to extend
    */ 
-  extModule: ClassType<any>;
+  extModule: ClassType;
 }

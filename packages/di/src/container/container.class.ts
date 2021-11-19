@@ -8,13 +8,13 @@ import { addProvider } from './funcs/addProvider.func'
 import { addExportServicesAsProviders } from './funcs/addExportServicesAsProviders.func'
 import { addModuleExports } from './funcs/addModuleExports.func'
 import { resolve } from './funcs/resolve.func'
-import { resolveUseFuncArgs } from './funcs/resolveUseFuncArgs.func'
+import { resolveUseFuncDeps } from './funcs/resolveUseFuncDeps.func'
 import { resolveWithParentModule } from './funcs/resolveWithParentModule.func'
 import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func'
-import { resolveModuleProvider } from './funcs/resolveModuleProvider.func'
-import { resolveClassProvider } from './funcs/resolveClassProvider.func'
-import { resolveFuncProvider } from './funcs/resolveFuncProvider.func'
-import { resolveValueProvider } from './funcs/resolveValueProvider.func'
+import { resolveUseModuleProvider } from './funcs/resolveUseModuleProvider.func'
+import { resolveUseClassProvider } from './funcs/resolveUseClassProvider.func'
+import { resolveUseFuncProvider } from './funcs/resolveUseFuncProvider.func'
+import { resolveUseValueProvider } from './funcs/resolveUseValueProvider.func'
 
 export class Container extends ContainerBag {
   /**
@@ -68,17 +68,17 @@ export class Container extends ContainerBag {
    */
   protected _addExportServicesAsProviders = addExportServicesAsProviders;
 
-  protected _resolveConstructorArgs = resolveConstructorArgs;
-
-  protected _resolveUseFuncArgs = resolveUseFuncArgs;
-
   protected _resolveWithParentModule = resolveWithParentModule;
 
-  protected [DiResolvers.useModuleResolver] = resolveModuleProvider;
+  protected _resolveConstructorArgs = resolveConstructorArgs;
 
-  protected [DiResolvers.useClassResolver] = resolveClassProvider;
+  protected _resolveUseFuncArgs = resolveUseFuncDeps;
 
-  protected [DiResolvers.useFuncResolver] = resolveFuncProvider;
+  protected [DiResolvers.useModuleResolver] = resolveUseModuleProvider;
 
-  protected [DiResolvers.useValueResolver] = resolveValueProvider;
+  protected [DiResolvers.useClassResolver] = resolveUseClassProvider;
+
+  protected [DiResolvers.useFuncResolver] = resolveUseFuncProvider;
+
+  protected [DiResolvers.useValueResolver] = resolveUseValueProvider;
 }

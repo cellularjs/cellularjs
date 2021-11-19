@@ -23,7 +23,7 @@ export interface UseModuleProvider extends BaseProvider {
   /**
    * Use a module as reference to resolve dependency value without import that module into current container.
    */
-  useModule: ClassType<any>;
+  useModule: ClassType;
 }
 
 export interface UseClassProvider<T> extends BaseProvider, ProviderHasCycle {
@@ -63,17 +63,17 @@ export type GenericProvider<T = any> =
 /**
  * @package
  */
-export interface AdjustedProvider<T> extends BaseProvider {
+export interface ClassifiedProvider<T = any> extends BaseProvider {
   resolver: DiResolvers;
-  useModule?: ClassType<any>;
+  useModule?: ClassType;
   useClass?: ClassType<T>;
   useFunc?: FuncType<T>;
   useValue?: ValueType<T>;
-  deps?: AdjustedDep[];
+  deps?: ClassifiedUseFuncDep[];
   cycle?: CycleTypeMap;
 }
 
-export interface AdjustedDep {
+export interface ClassifiedUseFuncDep {
   value: any;
   shouldResolve: boolean;
 }

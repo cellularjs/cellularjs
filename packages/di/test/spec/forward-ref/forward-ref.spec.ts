@@ -12,7 +12,7 @@ describe('forwardRef', () => {
 
     container.addProviders([
       { token: Bar, useClass: Bar },
-      { token: FooWithoutForwardRef, useClass: FooWithoutForwardRef }
+      { token: FooWithoutForwardRef, useClass: FooWithoutForwardRef },
     ]);
 
     try {
@@ -58,7 +58,7 @@ describe('forwardRef', () => {
     expect(bar instanceof Bar).to.true;
   });
 
-  it("use returned value from forwardRef's callback(declare in useFunc's deps) as a token", async () => {
+  it('use returned value from forwardRef\'s callback(declare in useFunc\'s deps) as a token', async () => {
     const container = new Container();
     container.addProviders([
       { token: 'foo', useValue: 'it is a token' },

@@ -9,11 +9,11 @@ export function addModule(this: Container, moduleCnf: ImportableCnf | Exportable
     return;
   }
 
-  const moduleMeta = getModuleMeta(moduleCnf);
+  const moduleMeta = getModuleMeta(moduleCnf as ClassType);
   if (!moduleMeta) {
     throw Errors.InvalidModuleClass(moduleCnf);
   }
 
-  this._addModuleExports(moduleCnf as ClassType<any>, moduleMeta.exports);
-  this._addModuleToMap(moduleCnf as ClassType<any>);
+  this._addModuleExports(moduleCnf as ClassType, moduleMeta.exports);
+  this._addModuleToMap(moduleCnf as ClassType);
 }

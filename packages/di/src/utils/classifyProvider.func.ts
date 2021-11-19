@@ -1,47 +1,47 @@
-import { GenericProvider, AdjustedProvider, AdjustedDep, ForwardRef } from '../internal';
+import { GenericProvider, ClassifiedProvider, ClassifiedUseFuncDep, ForwardRef } from '../internal';
 import { DiResolvers } from '../consts/di-resolver.const'
 import { CycleTypeMap } from '../consts/cycle.const'
 import { BaseProvider, ProviderHasCycle } from '../types';
 import { isClass } from './isClass.func';
 
 /**
- * Classify provider into useModule, useClass, useFunc or useValue provider
+ * Classify provider into useModule, useClass, useFunc, useValue provider,...
  * and assign appropriate resolver for resolving dependency later.
  */
-export function classifyProvider<T>(genericProvider: GenericProvider<T>): AdjustedProvider<T> {
-  let adjustedProvider: AdjustedProvider<T>;
+export function classifyProvider<T>(genericProvider: GenericProvider<T>): ClassifiedProvider<T> {
+  let classifiedProvider: ClassifiedProvider<T>;
 
   if ((genericProvider as BaseProvider).token) {
-    adjustedProvider = { ...genericProvider } as AdjustedProvider<T>;
+    classifiedProvider = { ...genericProvider } as ClassifiedProvider<T>;
   } else {
-    adjustedProvider = {
+    classifiedProvider = {
       token: genericProvider,
       useClass: genericProvider,
-    } as AdjustedProvider<T>;
+    } as ClassifiedProvider<T>;
   }
 
   // convert cycle(string) to cycle(number)
   if ((genericProvider as ProviderHasCycle).cycle) {
-    adjustedProvider.cycle = CycleTypeMap[(genericProvider as ProviderHasCycle).cycle];
+    classifiedProvider.cycle = CycleTypeMap[(genericProvider as ProviderHasCycle).cycle];
   }
 
-  if (adjustedProvider.useModule !== undefined)
-    adjustedProvider.resolver = DiResolvers.useModuleResolver;
+  if (classifiedProvider.useModule !== undefined)
+    classifiedProvider.resolver = DiResolvers.useModuleResolver;
 
-  else if (adjustedProvider.useClass !== undefined)
-    adjustedProvider.resolver = DiResolvers.useClassResolver;
+  else if (classifiedProvider.useClass !== undefined)
+    classifiedProvider.resolver = DiResolvers.useClassResolver;
 
-  else if (adjustedProvider.useFunc !== undefined) {
-    adjustedProvider.resolver = DiResolvers.useFuncResolver;
-    adjustedProvider.deps = classifyUseFuncDeps(adjustedProvider,adjustedProvider.deps);
+  else if (classifiedProvider.useFunc !== undefined) {
+    classifiedProvider.resolver = DiResolvers.useFuncResolver;
+    classifiedProvider.deps = classifyUseFuncDeps(classifiedProvider.deps);
   }
 
-  else adjustedProvider.resolver = DiResolvers.useValueResolver;
+  else classifiedProvider.resolver = DiResolvers.useValueResolver;
 
-  return adjustedProvider;
+  return classifiedProvider;
 }
 
-function classifyUseFuncDeps(adjustedProvider, deps): AdjustedDep[] {
+function classifyUseFuncDeps(deps: any[]): ClassifiedUseFuncDep[] {
   return (deps || []).map(dep => {
     if(isClass(dep)) {
       return { value: () => dep, shouldResolve: true };

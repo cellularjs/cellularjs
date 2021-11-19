@@ -1,10 +1,10 @@
 import { Container } from '../../';
 import { Errors } from '../../consts/error.const';
-import { GenericProvider, AdjustedProvider } from '../../types';
+import { GenericProvider, ClassifiedProvider } from '../../types';
 import { classifyProvider } from '../../utils';
 
 export function addProvider<T>(this: Container, genericProvider: GenericProvider<T>) {
-  const token = (genericProvider as AdjustedProvider<T>).token ||  genericProvider;
+  const token = (genericProvider as ClassifiedProvider<T>).token ||  genericProvider;
   if (this._providers.has(token)) {
     throw Errors.DuplicateToken(token);
   }

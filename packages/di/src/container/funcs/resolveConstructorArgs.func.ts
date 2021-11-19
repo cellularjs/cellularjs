@@ -1,14 +1,15 @@
 import { Container, ResolveOptions } from '../../';
-import { getParamTypes, getToken } from '../../utils';
+import { ClassType } from '../../internal';
+import { getParamTypes, getForwardRefCallback } from '../../utils';
 
 export async function resolveConstructorArgs(
   this: Container,
-  target,
+  target: ClassType,
   options: ResolveOptions,
 ): Promise<any[]> {
-  const args = getParamTypes(target).map((param, i) => {
-    const token = getToken(target, i);
-    const paramType = token ? token() : param;
+  const args = getParamTypes(target).map((type, index) => {
+    const forwardRefCallback = getForwardRefCallback(target, index);
+    const paramType = forwardRefCallback ? forwardRefCallback() : type;
 
     return this.resolve(paramType, options);
   });

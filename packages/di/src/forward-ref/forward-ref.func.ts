@@ -1,7 +1,4 @@
-import { Token } from '../';
-import { ForwardRef } from './forward-ref.class';
-
-type ForwardRefCallback = () => Token;
+import { ForwardRef, ForwardRefCallback } from './';
 
 /**
  * Circular dependency injection helper.
