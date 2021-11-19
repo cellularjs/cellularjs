@@ -48,10 +48,6 @@ export class Container extends ContainerBag {
     return this._providers.has(token);
   }
 
-  public remove(token: Token) {
-    this._providers.delete(token);
-  }
-
   /**
    * Resolve value by token.
    */
