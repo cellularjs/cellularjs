@@ -1,4 +1,5 @@
 import { Container, ResolveOptions } from '../../';
+import { DiError, DiErrorCode } from '../../../dist';
 import { ClassType } from '../../internal';
 import { getParamTypes, getForwardRefCallback, getOptionalData } from '../../utils';
 
@@ -29,6 +30,10 @@ async function resolveArg(
 
   } catch (err) {
     if (type === undefined) {
+      throw err;
+    }
+
+    if ((<DiError>err).code !== DiErrorCode.NoProviderForToken) {
       throw err;
     }
 

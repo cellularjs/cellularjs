@@ -43,4 +43,31 @@ describe('Annotation - Optional():', () => {
     // If there is no provider it will return undefined
     expect(foo.bar).to.be.undefined;
   });
+
+  it('can not prevent throwing error if that error is not NoProviderForToken error', async () => {
+    const errorMsg = 'error X'
+    class Bar {
+      constructor() {
+        throw errorMsg
+      }
+    }
+
+    @Injectable()
+    class FooWithOptional {
+      constructor(
+        @Optional() public bar: Bar,
+      ) { }
+    }
+
+    const container = new Container();
+    container.addProviders([FooWithOptional, Bar]);
+
+    try {
+      await container.resolve<FooWithOptional>(FooWithOptional);
+
+      expect(true).false;
+    } catch (err) {
+      expect(err).to.equal(errorMsg);
+    }
+  });
 });
