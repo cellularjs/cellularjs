@@ -12,28 +12,28 @@ export interface ProviderHasCycle {
   cycle?: CycleType;
 }
 
-export interface BaseProvider {
+export interface ProviderHasToken {
   /**
    * Unique identifier for a provider inside container.
    */
   token: Token;
 }
 
-export interface UseModuleProvider extends BaseProvider {
+export interface UseModuleProvider extends ProviderHasToken {
   /**
    * Use a module as reference to resolve dependency value without import that module into current container.
    */
   useModule: ClassType;
 }
 
-export interface UseClassProvider<T> extends BaseProvider, ProviderHasCycle {
+export interface UseClassProvider<T> extends ProviderHasToken, ProviderHasCycle {
   /**
    * Use a class to resolve dependency value.
    */
   useClass: ClassType<T>;
 }
 
-export interface UseFuncProvider<T> extends BaseProvider, ProviderHasCycle {
+export interface UseFuncProvider<T> extends ProviderHasToken, ProviderHasCycle {
   /**
    * Use a function as factory to assemble dependency value.
    */
@@ -49,7 +49,7 @@ export interface UseFuncProvider<T> extends BaseProvider, ProviderHasCycle {
   deps?: any[];
 }
 
-export interface UseValueProvider<T> extends BaseProvider {
+export interface UseValueProvider<T> extends ProviderHasToken {
   /**
    * Use a value as dependency value
    */
@@ -63,7 +63,7 @@ export type GenericProvider<T = any> =
 /**
  * @package
  */
-export interface ClassifiedProvider<T = any> extends BaseProvider {
+export interface ClassifiedProvider<T = any> extends ProviderHasToken {
   resolver: DiResolvers;
   useModule?: ClassType;
   useClass?: ClassType<T>;

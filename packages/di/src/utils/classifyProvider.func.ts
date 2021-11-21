@@ -1,7 +1,7 @@
 import { GenericProvider, ClassifiedProvider, ClassifiedUseFuncDep, ForwardRef } from '../internal';
 import { DiResolvers } from '../consts/di-resolver.const'
 import { CycleTypeMap } from '../consts/cycle.const'
-import { BaseProvider, ProviderHasCycle } from '../types';
+import { ProviderHasToken, ProviderHasCycle } from '../types';
 import { isClass } from './isClass.func';
 
 /**
@@ -11,7 +11,7 @@ import { isClass } from './isClass.func';
 export function classifyProvider<T>(genericProvider: GenericProvider<T>): ClassifiedProvider<T> {
   let classifiedProvider: ClassifiedProvider<T>;
 
-  if ((genericProvider as BaseProvider).token) {
+  if ((<ProviderHasToken>genericProvider).token) {
     classifiedProvider = { ...genericProvider } as ClassifiedProvider<T>;
   } else {
     classifiedProvider = {

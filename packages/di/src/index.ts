@@ -7,6 +7,6 @@ export { getModuleMeta, getInjectable } from './utils'
 export {
   ModuleMeta, ExtModuleMeta, ResolveOptions,
   CycleType, Token, ImportableCnf, ExportableCnf,
-  ProviderHasCycle, GenericProvider, BaseProvider,
+  ProviderHasCycle, GenericProvider, ProviderHasToken,
   UseFuncProvider, UseClassProvider, UseModuleProvider, UseValueProvider,
 } from './types';
