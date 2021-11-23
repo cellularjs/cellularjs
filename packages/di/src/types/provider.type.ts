@@ -56,9 +56,20 @@ export interface UseValueProvider<T> extends ProviderHasToken {
   useValue: ValueType<T>;
 }
 
+export interface UseExistingProvider extends ProviderHasToken {
+  /**
+   * Token of exist provider.
+   */
+  useExisting: Token;
+}
+
 export type GenericProvider<T = any> =
-  UseModuleProvider | UseClassProvider<T> |
-  ClassType<T> | UseFuncProvider<T> | UseValueProvider<T>;
+  UseModuleProvider |
+  UseClassProvider<T> |
+  ClassType<T> |
+  UseFuncProvider<T> |
+  UseValueProvider<T> |
+  UseExistingProvider;
 
 /**
  * @package
@@ -69,6 +80,7 @@ export interface ClassifiedProvider<T = any> extends ProviderHasToken {
   useClass?: ClassType<T>;
   useFunc?: FuncType<T>;
   useValue?: ValueType<T>;
+  useExisting?: Token;
   deps?: ClassifiedUseFuncDep[];
   cycle?: CycleTypeMap;
 }

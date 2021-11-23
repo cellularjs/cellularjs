@@ -36,6 +36,9 @@ export function classifyProvider<T>(genericProvider: GenericProvider<T>): Classi
     classifiedProvider.deps = classifyUseFuncDeps(classifiedProvider.deps);
   }
 
+  else if (classifiedProvider.useExisting !== undefined)
+    classifiedProvider.resolver = DiResolvers.useExistingResolver;
+
   else classifiedProvider.resolver = DiResolvers.useValueResolver;
 
   return classifiedProvider;
@@ -43,7 +46,7 @@ export function classifyProvider<T>(genericProvider: GenericProvider<T>): Classi
 
 function classifyUseFuncDeps(deps: any[]): ClassifiedUseFuncDep[] {
   return (deps || []).map(dep => {
-    if(isClass(dep)) {
+    if (isClass(dep)) {
       return { value: () => dep, shouldResolve: true };
     }
 

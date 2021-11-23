@@ -15,6 +15,7 @@ import { resolveUseModuleProvider } from './funcs/resolveUseModuleProvider.func'
 import { resolveUseClassProvider } from './funcs/resolveUseClassProvider.func'
 import { resolveUseFuncProvider } from './funcs/resolveUseFuncProvider.func'
 import { resolveUseValueProvider } from './funcs/resolveUseValueProvider.func'
+import { resolveUseExistingProvider } from './funcs/resolveUseExistingProvider.func'
 
 export class Container extends ContainerBag {
   /**
@@ -77,4 +78,6 @@ export class Container extends ContainerBag {
   protected [DiResolvers.useFuncResolver] = resolveUseFuncProvider;
 
   protected [DiResolvers.useValueResolver] = resolveUseValueProvider;
+
+  protected [DiResolvers.useExistingResolver] = resolveUseExistingProvider;
 }

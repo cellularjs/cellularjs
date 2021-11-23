@@ -3,4 +3,5 @@ export enum DiResolvers {
   useClassResolver,
   useFuncResolver,
   useValueResolver,
+  useExistingResolver,
 }

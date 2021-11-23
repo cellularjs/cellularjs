@@ -9,4 +9,5 @@ export {
   CycleType, Token, ImportableCnf, ExportableCnf,
   ProviderHasCycle, GenericProvider, ProviderHasToken,
   UseFuncProvider, UseClassProvider, UseModuleProvider, UseValueProvider,
+  UseExistingProvider,
 } from './types';
