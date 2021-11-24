@@ -1,5 +1,4 @@
-import { Container, ResolveOptions } from '../../';
-import { DiError, DiErrorCode } from '../../../dist';
+import { Container, ResolveOptions, DiError, DiErrorCode } from '../../';
 import { ClassType } from '../../internal';
 import { getParamTypes, getForwardRefCallback, getOptionalData } from '../../utils';
 
