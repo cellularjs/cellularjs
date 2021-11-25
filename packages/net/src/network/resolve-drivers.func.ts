@@ -1,8 +1,8 @@
 import { Container, GenericProvider } from '@cellularjs/di';
 import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
-import { CellContext, Errors } from '../internal';
+import { Errors } from '../internal';
 import { ResolvedDriver, ServiceHandlerMap } from '../type';
-import { freezeProperty, getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
+import { getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {
   const drivers = new Map<string, ResolvedDriver>();
@@ -31,13 +31,13 @@ async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<Resolved
   }
 
   const listener = resolveListener(driverMeta, cellCnf);
-  const container = await createContainer(driverMeta, cellCnf);
+  const driverContainer = await createDriverContainer(driverMeta);
 
-  container.addProviders(Array.from(listener.values()));
+  driverContainer.addProviders(Array.from(listener.values()));
 
   return {
     listener,
-    container,
+    container: driverContainer,
   };
 }
 
@@ -54,11 +54,11 @@ function resolveListener(cellMeta: CellMeta, cellCnf: CellConfig): ServiceHandle
   return new Map(Object.entries(eventHandlers));
 }
 
-async function createContainer(cellMeta: CellMeta, cellConfig: CellConfig): Promise<Container> {
-  let providers = cellMeta.providers
+async function createDriverContainer(driverMeta: CellMeta): Promise<Container> {
+  let providers = driverMeta.providers
     .filter(provider => typeof provider !== 'string') as GenericProvider[];
 
-  cellMeta.providers.forEach(provider => {
+  driverMeta.providers.forEach(provider => {
     if (typeof provider !== 'string') {
       return;
     }
@@ -68,26 +68,7 @@ async function createContainer(cellMeta: CellMeta, cellConfig: CellConfig): Prom
 
   const container = new Container();
   container.addProviders(providers);
-  container.addModules(cellMeta.imports);
-  container.addProvider({
-    token: CellContext,
-    useValue: await resolveCellCtx(container, cellConfig),
-  });
+  container.addModules(driverMeta.imports);
 
   return container;
-}
-
-async function resolveCellCtx(
-  container: Container,
-  cellConfig: CellConfig,
-): Promise<CellContext> {
-  const extModule = new Container();
-  extModule.addProvider(CellContext);
-  const cellCtx: CellContext = await container.resolve(CellContext, {
-    extModule,
-  });
-
-  freezeProperty(cellCtx, 'cellName', cellConfig.name);
-
-  return cellCtx;
 }

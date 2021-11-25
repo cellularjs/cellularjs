@@ -1,8 +1,5 @@
-import {
-  getResolvedCell, ServiceHandler,
-  CellContext, IRQ,
-  Errors,
-} from '..';
+import { getResolvedCell, ServiceHandler, CellContext, IRQ } from '..';
+import { Errors } from '../internal';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
 import { getServiceMeta } from '../utils';
@@ -36,13 +33,14 @@ export async function resolveServiceHandler(
   // DO: check event scope constraint
   scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
   const serviceProviders = getServiceProviders(DestServiceHandler);
-  const providers: GenericProvider<any>[] = [
+  const globalProviders: GenericProvider<any>[] = [
     ...serviceProviders,
     { token: IRQ, useValue: irq },
+    { token: CellContext, useValue: destResolvedCell.cellContext },
   ];
 
   const global = new Container();
-  global.addProviders(providers)
+  global.addProviders(globalProviders)
   const eventHandler = await resolvedDriver.container.resolve<ServiceHandler>(
     DestServiceHandler, { global },
   );
@@ -52,7 +50,7 @@ export async function resolveServiceHandler(
     return eventHandler;
   }
 
-  return resolveProxyInstance(resolvedDriver, providers, proxyClasses, eventHandler);
+  return resolveProxyInstance(resolvedDriver, globalProviders, proxyClasses, eventHandler);
 }
 
 async function resolveProxyInstance(

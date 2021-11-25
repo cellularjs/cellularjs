@@ -1,4 +1,5 @@
 import { GenericProvider, ImportableCnf, Container } from '@cellularjs/di';
+import { CellContext } from './';
 
 type ClassType<T> = { new(...args: any[]): T };
 
@@ -174,6 +175,8 @@ export interface ResolvedCell {
   cellConfig: CellConfig;
 
   drivers: Map<string, ResolvedDriver>;
+
+  cellContext: CellContext;
 }
 
 export type NetworkOptions = {

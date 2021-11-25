@@ -43,7 +43,6 @@ describe('IRQ:', () => {
 
     expect(message !== newMessage).to.true;
     expect(newMessage.header.foo).to.eq(2);
-    console.log(newMessage.header)
     expect(newMessage.header.bar).to.not.undefined;
   });
 
