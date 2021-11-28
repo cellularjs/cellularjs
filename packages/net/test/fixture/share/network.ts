@@ -5,6 +5,7 @@ import { IMSCell } from '../app/ims'
 import { AuthHttpDriver } from '../remote-drivers/auth/http';
 import { GoogleAuth } from '../remote-drivers/gg-auth';
 import { UserCell } from '../cells/user';
+import { WebpackCell } from '../cells/webpack';
 
 export const authCellCnf: CellConfig = {
   name: 'Auth',
@@ -33,13 +34,18 @@ export const imsCellCnf: CellConfig = {
   name: 'IMS',
   space: 'neverwood',
   driver: IMSCell,
-
 };
 
 export const userCellCnf: CellConfig = {
   name: 'User',
   space: 'neverland',
   driver: UserCell,
+};
+
+export const webpackCellCnf: CellConfig = {
+  name: 'Webpack',
+  space: 'neverland',
+  driver: WebpackCell,
 };
 
 export const imsNetwork: NetworkConfig = [

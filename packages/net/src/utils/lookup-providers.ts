@@ -12,6 +12,17 @@ export function scanForProviders(basePath: string) {
   return providers;
 }
 
+export function scanForProviders3(exportssss: any) {
+  const providers = [];
+  exportssss.forEach(exports => {
+    Object.keys(exports).map(propKey => handleExportProp(
+      exports, propKey, providers,
+    ));
+  })
+
+  return providers;
+}
+
 function handleExportProp(moduleExports, propKey, providers: any[]): void {
   const exportProp = moduleExports[propKey];
 

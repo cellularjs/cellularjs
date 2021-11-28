@@ -2,7 +2,7 @@ import { Container, GenericProvider } from '@cellularjs/di';
 import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
 import { Errors } from '../internal';
 import { ResolvedDriver, ServiceHandlerMap } from '../type';
-import { getCellMeta, scanForServiceHandler, scanForProviders } from '../utils';
+import { getCellMeta, scanForServiceHandler, registServiceHandlerFromModules, scanForProviders, scanForProviders3 } from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {
   const drivers = new Map<string, ResolvedDriver>();
@@ -42,28 +42,35 @@ async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<Resolved
 }
 
 function resolveListener(cellMeta: CellMeta, cellCnf: CellConfig): ServiceHandlerMap {
-  if (typeof cellMeta.listen === 'object') {
-    return new Map(Object.entries(cellMeta.listen));
-  }
+  const eventHandlers = {};
 
   // string will be treated as a path to folder containing event handler.
+  if (typeof cellMeta.listen === 'string') {
+    scanForServiceHandler(cellMeta.listen, cellCnf, eventHandlers);
+    return new Map(Object.entries(eventHandlers));
+  }
 
-  const eventHandlers = {};
-  scanForServiceHandler(cellMeta.listen, cellCnf, eventHandlers);
+  if (Array.isArray(cellMeta.listen)) {
+    registServiceHandlerFromModules(cellMeta.listen, cellCnf, eventHandlers);
+    return new Map(Object.entries(eventHandlers));
+  }
 
-  return new Map(Object.entries(eventHandlers));
+  return new Map(Object.entries(cellMeta.listen));
 }
 
 async function createDriverContainer(driverMeta: CellMeta): Promise<Container> {
   let providers = driverMeta.providers
-    .filter(provider => typeof provider !== 'string') as GenericProvider[];
+    .filter(provider => !Array.isArray(provider) && typeof provider !== 'string') as GenericProvider[];
 
   driverMeta.providers.forEach(provider => {
-    if (typeof provider !== 'string') {
+    if (typeof provider === 'string') {
+      providers = providers.concat(scanForProviders(provider));
       return;
     }
 
-    providers = providers.concat(scanForProviders(provider));
+    if (Array.isArray(provider)) {
+      providers = providers.concat(scanForProviders3(provider))
+    }
   })
 
   const container = new Container();
