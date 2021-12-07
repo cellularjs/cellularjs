@@ -50,6 +50,13 @@ export class Container extends ContainerBag {
   }
 
   /**
+   * Remove provider from this container by token.
+   */
+  public remove(token: Token) {
+    this._providers.delete(token);
+  }
+
+  /**
    * Resolve value by token.
    */
   public resolve = resolve;
