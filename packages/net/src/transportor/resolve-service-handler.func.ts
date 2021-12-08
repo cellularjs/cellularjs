@@ -1,9 +1,9 @@
+import { Container } from '@cellularjs/di';
 import { getResolvedCell, ServiceHandler, CellContext, IRQ } from '..';
 import { Errors } from '../internal';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
 import { getServiceMeta } from '../utils';
-import { Container, GenericProvider } from '@cellularjs/di';
 import { ResolvedDriver } from 'type';
 
 export async function resolveServiceHandler(
@@ -32,17 +32,15 @@ export async function resolveServiceHandler(
 
   // DO: check event scope constraint
   scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
-  const serviceProviders = getServiceProviders(DestServiceHandler);
-  const globalProviders: GenericProvider<any>[] = [
-    ...serviceProviders,
+
+  const extModule = new Container();
+  extModule.addProviders([
+    ...getServiceProviders(DestServiceHandler),
     { token: IRQ, useValue: irq },
     { token: CellContext, useValue: destResolvedCell.cellContext },
-  ];
-
-  const global = new Container();
-  global.addProviders(globalProviders)
+  ])
   const eventHandler = await resolvedDriver.container.resolve<ServiceHandler>(
-    DestServiceHandler, { global },
+    DestServiceHandler, { extModule },
   );
 
   const proxyClasses = getServiceProxies(DestServiceHandler);
@@ -50,25 +48,25 @@ export async function resolveServiceHandler(
     return eventHandler;
   }
 
-  return resolveProxyInstance(resolvedDriver, globalProviders, proxyClasses, eventHandler);
+  return resolveProxyInstance(resolvedDriver, extModule, proxyClasses, eventHandler);
 }
 
 async function resolveProxyInstance(
   resolvedDriver: ResolvedDriver,
-  providers: GenericProvider<any>[],
+  extModule: Container,
   proxyClasses: { new(...args: any[]): ServiceHandler }[],
   eventHandler: ServiceHandler,
 ) {
   let proxyInstance: ServiceHandler;
 
   for (let i = 0; i < proxyClasses.length; i++) {
+    extModule.remove(ServiceHandler)
     const proxyClass = proxyClasses[i];
-    const extModule = new Container();
 
-    extModule.addProviders(providers.concat([
+    extModule.addProviders([
       { token: ServiceHandler, useValue: proxyInstance || eventHandler },
       { token: proxyClass, useClass: proxyClass },
-    ]));
+    ]);
 
     proxyInstance = await resolvedDriver.container.resolve(proxyClass, { extModule });
   }

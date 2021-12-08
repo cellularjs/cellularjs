@@ -2,7 +2,7 @@ import { Service } from '../../../../../src';
 import { BarRequest } from '../request/bar.request'
 
 @Service({
-  scope: 'publish'
+  scope: 'publish',
 })
 export class FooService {
   constructor(

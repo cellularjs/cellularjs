@@ -15,6 +15,6 @@ import * as fooServiceModule from './services/foo.service'
   // Simulate result bundle by bundler(eg: webpack)
   // It is same as below code:
   // listen: './services',
-  listen: [fooServiceModule] as any
+  listen: [fooServiceModule] as any,
 })
 export class WebpackCell {}
