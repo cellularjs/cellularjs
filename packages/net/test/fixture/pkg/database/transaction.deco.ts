@@ -8,6 +8,7 @@ export const Transaction = () => service => {
       token: Session,
       useFunc: (connector: Connector) => connector.getSession(),
       deps: [Connector],
+      cycle: 'permanent',
     },
   ]);
 
