@@ -119,4 +119,19 @@ describe('Container - resolve:', () => {
 
     expect(foo1 !== foo2).to.be.true;
   });
+
+  it('can not make use of permanent cycle if value is resolved in async', async () => {
+    container.addProvider({
+      token: Container,
+      useClass: Container,
+    });
+
+    const [firstContainer, secondContainer] = await Promise.all([
+      container.resolve(Container),
+      container.resolve(Container),
+    ]);
+
+    expect(firstContainer).to.instanceOf(Container);
+    expect(firstContainer !== secondContainer).to.true;
+  })
 });

@@ -7,11 +7,16 @@ export async function resolveConstructorArgs(
   target: ClassType,
   options: ResolveOptions,
 ): Promise<any[]> {
-  const args = getParamTypes(target).map(
-    (type, index) => resolveArg(this, target, options, type, index),
-  );
+  const resolvedValues = []
+  const paramTypes = getParamTypes(target);
 
-  return Promise.all(args);
+  for (let i = 0; i < paramTypes.length; i++) {
+    resolvedValues.push(
+      await resolveArg(this, target, options, paramTypes[i], i),
+    );
+  }
+
+  return resolvedValues;
 }
 
 async function resolveArg(

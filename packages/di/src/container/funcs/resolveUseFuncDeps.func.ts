@@ -6,11 +6,18 @@ export async function resolveUseFuncDeps(
   deps: ClassifiedUseFuncDep[],
   options: ResolveOptions,
 ): Promise<any[]> {
-  const resolvingDeps = deps.map(dep =>
-    dep.shouldResolve
-      ? this.resolve(dep.value(), options)
-      : dep.value,
-  );
+  const resolvedValues = [];
 
-  return Promise.all(resolvingDeps);
+  for (let i = 0; i < deps.length; i++) {
+    const dep = deps[i];
+
+    if (!dep.shouldResolve) {
+      resolvedValues.push(dep.value);
+      continue;
+    }
+
+    resolvedValues.push(await this.resolve(dep.value(), options));
+  }
+
+  return resolvedValues;
 }

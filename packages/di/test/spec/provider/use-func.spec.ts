@@ -78,4 +78,41 @@ describe('Provider - useFunc', () => {
 
     expect(firstContainer === secondContainer).to.true;
   });
+
+  it('will resolve dependencies declared in useFunc provider one by one', async () => {
+    container.addProviders([
+      {
+        token: Container,
+        useClass: Container,
+        cycle: 'permanent',
+      },
+      {
+        token: 'foo',
+        useFunc: (val1, val2) => [val1, val2],
+        deps: [Container, Container],
+      },
+    ]);
+
+    const [val1, val2] = await container.resolve('foo');
+
+    expect(val1 === val2).to.true;
+  })
+
+  it('will create new value for same type of provider if it is not declared as permanent', async () => {
+    container.addProviders([
+      {
+        token: Container,
+        useClass: Container,
+      },
+      {
+        token: 'foo',
+        useFunc: (val1, val2) => [val1, val2],
+        deps: [Container, Container],
+      },
+    ]);
+
+    const [val1, val2] = await container.resolve('foo');
+
+    expect(val1 !== val2).to.true;
+  })
 });
