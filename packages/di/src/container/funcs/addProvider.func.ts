@@ -3,7 +3,7 @@ import { Errors } from '../../consts/error.const';
 import { GenericProvider, ProviderHasToken } from '../../types';
 import { classifyProvider } from '../../utils';
 
-export function addProvider<T>(this: Container, genericProvider: GenericProvider<T>) {
+export async function addProvider<T>(this: Container, genericProvider: GenericProvider<T>) {
   const token = (<ProviderHasToken>genericProvider).token ||  genericProvider;
   if (this._providers.has(token)) {
     throw Errors.DuplicateToken(token);
@@ -13,7 +13,7 @@ export function addProvider<T>(this: Container, genericProvider: GenericProvider
 
   // make sure module exists when resolving useModule provider
   if (adjustedProvider.useModule !== undefined) {
-    this._addModuleToMap(adjustedProvider.useModule);
+    await this._addModuleToMap(adjustedProvider.useModule);
   }
 
   this._providers.set(adjustedProvider.token, adjustedProvider);

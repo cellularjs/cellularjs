@@ -3,7 +3,7 @@ import { Errors, ClassType } from '../../internal'
 import { getModuleMeta } from '../../utils';
 import { moduleMap } from '../props/module-map.static'
 
-export function addModuleToMap(this: Container, moduleClass: ClassType): void {
+export async function addModuleToMap(this: Container, moduleClass: ClassType) {
   if (moduleMap.has(moduleClass)) {
     return;
   }
@@ -15,9 +15,9 @@ export function addModuleToMap(this: Container, moduleClass: ClassType): void {
 
   const module = new Container();
 
-  module._addExportServicesAsProviders(moduleMeta.exports);
-  module.addProviders(moduleMeta.providers);
-  module.addModules(moduleMeta.imports);
+  await module._addExportServicesAsProviders(moduleMeta.exports);
+  await module.addProviders(moduleMeta.providers);
+  await module.addModules(moduleMeta.imports);
 
   moduleMap.set(moduleClass, module);
 }

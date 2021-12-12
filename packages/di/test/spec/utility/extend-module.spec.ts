@@ -18,7 +18,7 @@ describe('Utility - extend module: extend, override module', () => {
   });
 
   it('can inherit all providers from parent module', async () => {
-    container.addModule({
+    await container.addModule({
       extModule: JwtModule,
     });
 
@@ -29,7 +29,7 @@ describe('Utility - extend module: extend, override module', () => {
 
   it('can add more provider without affect parent module', async () => {
     // can add more provider ...
-    container.addModule(MongoModule.config({
+    await container.addModule(MongoModule.config({
       mongoUrl: 'neverland', user: 'guest', password: '********',
     }));
 
@@ -42,7 +42,7 @@ describe('Utility - extend module: extend, override module', () => {
 
     // without affecting parent module
     const newContaier = new Container();
-    newContaier.addModule(MongoModule);
+    await newContaier.addModule(MongoModule);
 
     try {
       await newContaier.resolve(MongoService);
@@ -54,7 +54,7 @@ describe('Utility - extend module: extend, override module', () => {
   });
 
   it('can override provider from parent module', async () => {
-    container.addModule({
+    await container.addModule({
       extModule: MongoModule,
       providers: [
         { token: Connection, useValue: 'new value' },
@@ -67,7 +67,7 @@ describe('Utility - extend module: extend, override module', () => {
   });
 
   it('can inherit all imports config from parent module', async () => {
-    container.addModule({
+    await container.addModule({
       extModule: AuthModule,
     });
 
@@ -79,14 +79,14 @@ describe('Utility - extend module: extend, override module', () => {
   it('can add more module to imports config', async () => {
     // container have extend module can resolve JwtSignService
     const containerHaveCustomHash = new Container();
-    containerHaveCustomHash.addModule(JwtModule.withSignService());
+    await containerHaveCustomHash.addModule(JwtModule.withSignService());
 
     const jwtSignService = await containerHaveCustomHash.resolve<JwtSignService>(JwtSignService);
     jwtSignService.sign('run without crash');
 
     // container have no extend module can not resolve JwtSignService
     const containerHaveNoCustomHash = new Container();
-    containerHaveNoCustomHash.addModule(JwtModule);
+    await containerHaveNoCustomHash.addModule(JwtModule);
 
     const errorFunc = () => containerHaveNoCustomHash.resolve(JwtSignService);
 
@@ -96,7 +96,7 @@ describe('Utility - extend module: extend, override module', () => {
   });
 
   it('can inherit all exports config from parent module', async () => {
-    container.addModule({
+    await container.addModule({
       extModule: JwtModule,
     });
 
@@ -109,7 +109,7 @@ describe('Utility - extend module: extend, override module', () => {
     @Module({})
     class DummyModule { }
 
-    container.addModule({
+    await container.addModule({
       extModule: DummyModule,
       exports: [JwtModule],
     });
@@ -129,7 +129,7 @@ describe('Utility - extend module: extend, override module', () => {
       }
     }
 
-    container.addModule({
+    await container.addModule({
       extModule: DummyModule,
       exports: [DummyService],
     });

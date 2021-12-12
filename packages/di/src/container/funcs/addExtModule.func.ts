@@ -2,28 +2,30 @@ import { Container } from '../../';
 import { ExtModuleMeta, ClassType } from '../../types';
 import { getModuleMeta } from '../../utils';
 
-export function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
-  this.addModule(extModuleMeta.extModule);
+export async function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
+  await this.addModule(extModuleMeta.extModule);
 
   const extModule = new Container();
-  extModule.addProviders(extModuleMeta.providers);
+  await extModule.addProviders(extModuleMeta.providers);
 
-  (extModuleMeta.exports || []).forEach(exportCnf => {
+  const exports = extModuleMeta.exports || [];
+  for (let i = 0; i < exports.length; i++) {
+    const exportCnf = exports[i];
     const moduleMeta = getModuleMeta(exportCnf as ClassType);
     if (moduleMeta) {
-      this.addModule(exportCnf);
-      return;
+      await this.addModule(exportCnf);
+      continue;
     }
 
-    this.addProvider({
+    await this.addProvider({
       token: exportCnf,
       useModule: extModuleMeta.extModule,
     });
 
-    extModule.addProvider(exportCnf as ClassType);
-  });
+    await extModule.addProvider(exportCnf as ClassType);
+  }
 
-  extModule.addModules(extModuleMeta.imports);
+  await extModule.addModules(extModuleMeta.imports);
 
   this._extModules.set(extModuleMeta.extModule, extModule);
 }

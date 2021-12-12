@@ -10,7 +10,7 @@ describe('Provider - useExisting', () => {
   });
 
   it('will resolve value with exist provider', async () => {
-    container.addProviders([
+    await container.addProviders([
       { token: 'pong', useValue: 'pong' },
       { token: 'ping', useExisting: 'pong' },
     ]);
@@ -21,7 +21,7 @@ describe('Provider - useExisting', () => {
   });
 
   it('will throw NoProviderForToken if token in useExisting is not defined', async () => {
-    container.addProviders([
+    await container.addProviders([
       { token: 'bar', useValue: 'bar' },
       { token: 'foo', useExisting: 'foobar' },
     ]);

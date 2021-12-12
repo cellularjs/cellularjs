@@ -11,7 +11,7 @@ describe('Annotation - Injectable(): decorate a class to make its dependencies i
   });
 
   it('can decorate a class to make its dependencies in constructor become injectable', async () => {
-    container.addProviders([
+    await container.addProviders([
       { token: Connection, useClass: Connection },
       { token: 'mongoUrl', useValue: 'mongodb://neverland' },
       { token: 'mongoUsr', useValue: 'guest' },

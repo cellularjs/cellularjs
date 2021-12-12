@@ -19,7 +19,7 @@ describe('Container - resolve:', () => {
 
   it('can resolve global providers', async () => {
     const global = new Container();
-    global.addProviders([
+    await global.addProviders([
       { token: 'foo', useValue: 'global' },
     ])
 
@@ -30,7 +30,7 @@ describe('Container - resolve:', () => {
       ) { }
     }
 
-    container.addProvider({ token: FooBar, useClass: FooBar });
+    await container.addProvider({ token: FooBar, useClass: FooBar });
 
     const foobar = await container.resolve<FooBar>(FooBar, { global });
     expect(foobar.foo).to.equal('global');
@@ -38,7 +38,7 @@ describe('Container - resolve:', () => {
 
   it('global provider has lower priority than normal providers', async () => {
     const global = new Container();
-    global.addProviders([
+    await global.addProviders([
       { token: 'foo', useValue: 'global' },
     ])
 
@@ -49,7 +49,7 @@ describe('Container - resolve:', () => {
       ) { }
     }
 
-    container.addProviders([
+    await container.addProviders([
       { token: FooBar, useClass: FooBar },
       { token: 'foo', useValue: 'foo' },
     ]);
@@ -60,7 +60,7 @@ describe('Container - resolve:', () => {
 
   it('global provider has lower priority than ref module(~ extend module)', async () => {
     const global = new Container();
-    global.addProviders([
+    await global.addProviders([
       { token: 'foo', useValue: 'global' },
     ]);
 
@@ -82,7 +82,7 @@ describe('Container - resolve:', () => {
       }
     }
 
-    container.addModule(FooModule.extend());
+    await container.addModule(FooModule.extend());
 
     const foobar = await container.resolve<FooBar>(FooBar, { global });
     expect(foobar.foo).to.equal('foo');
@@ -91,7 +91,7 @@ describe('Container - resolve:', () => {
   it('create only one value for provider has cycle is permanent when resolving value in sync', async () => {
     class Foo { }
 
-    container.addProvider({
+    await container.addProvider({
       token: Foo,
       useClass: Foo,
       cycle: 'permanent',
@@ -106,7 +106,7 @@ describe('Container - resolve:', () => {
   it('create other value when resolving value in async even if provider\'s cycle is permanent', async () => {
     class Foo { }
 
-    container.addProvider({
+    await container.addProvider({
       token: Foo,
       useClass: Foo,
       cycle: 'permanent',
@@ -121,7 +121,7 @@ describe('Container - resolve:', () => {
   });
 
   it('can not make use of permanent cycle if value is resolved in async', async () => {
-    container.addProvider({
+    await container.addProvider({
       token: Container,
       useClass: Container,
     });

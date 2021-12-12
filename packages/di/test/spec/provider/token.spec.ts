@@ -13,14 +13,14 @@ beforeEach(() => {
 
 describe('Provider - token: unique identifier for provider inside a container', () => {
   it('can be a string', async () => {
-    container.addProvider({ token: 'foo', useValue: 'bar' });
+    await container.addProvider({ token: 'foo', useValue: 'bar' });
 
     expect(await container.resolve('foo')).to.equal('bar');
   });
 
   it('can be a number', async () => {
-    container.addProvider({ token: 1, useValue: 'foo' });
-    container.addProvider({ token: 1.1, useValue: 'bar' });
+    await container.addProvider({ token: 1, useValue: 'foo' });
+    await container.addProvider({ token: 1.1, useValue: 'bar' });
 
     expect(await container.resolve(1)).to.equal('foo');
     expect(await container.resolve(1.1)).to.equal('bar');
@@ -28,7 +28,7 @@ describe('Provider - token: unique identifier for provider inside a container', 
 
   it('can be an object', async () => {
     const foo = {}, bar = {};
-    container.addProviders([
+    await container.addProviders([
       { token: foo, useValue: 'foo' },
       { token: bar, useValue: 'bar' },
     ]);
@@ -39,39 +39,45 @@ describe('Provider - token: unique identifier for provider inside a container', 
 
   it('can be a Symbol', async () => {
     const symToken = Symbol();
-    container.addProvider({ token: symToken, useValue: 'bar' });
+    await container.addProvider({ token: symToken, useValue: 'bar' });
 
     const actualResult = await container.resolve(symToken);
     expect(actualResult).to.equal('bar');
   });
 
   it('can be a class', async () => {
-    container.addProvider({ token: MongoService, useValue: 'foo' });
+    await container.addProvider({ token: MongoService, useValue: 'foo' });
 
     const actualResult = await container.resolve(MongoService);
 
     expect(actualResult).to.equal('foo');
   });
 
-  it('can not be duplicated', () => {
+  it('can not be duplicated', async () => {
     const addProviderFunc = () => container.addProvider({ token: 'foo', useValue: 'foo' });
-    addProviderFunc();
+    await addProviderFunc();
 
-    expect(addProviderFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.DuplicateToken);
+    try {
+      await addProviderFunc();
+
+      expect(true).to.be.false;
+    } catch(err) {
+      expect(err.code).to.eql(DiErrorCode.DuplicateToken)
+    }
   });
 
   it('can not use duplicate Symbol as token', async () => {
     const mockReq = { name: 'X', age: 99 };
-    const errorFunc = () => container.addProviders([
-      CreateProfileReq,
-      { token: request, useValue: mockReq },
-      { token: request, useValue: mockReq },
-    ]);
+    try {
+      await container.addProviders([
+        CreateProfileReq,
+        { token: request, useValue: mockReq },
+        { token: request, useValue: mockReq },
+      ]);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.DuplicateToken);
+      expect(true).to.be.false;
+    } catch (err) {
+      expect(err.code).to.eql(DiErrorCode.DuplicateToken);
+    }
   });
 });

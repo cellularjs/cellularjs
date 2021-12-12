@@ -14,7 +14,7 @@ describe('Annotation - Optional():', () => {
     }
 
     const container = new Container();
-    container.addProvider(FooWithoutOptional);
+    await container.addProvider(FooWithoutOptional);
 
     try {
       await container.resolve(FooWithoutOptional);
@@ -36,7 +36,7 @@ describe('Annotation - Optional():', () => {
     }
 
     const container = new Container();
-    container.addProvider(FooWithOptional);
+    await container.addProvider(FooWithOptional);
 
     const foo = await container.resolve<FooWithOptional>(FooWithOptional);
 
@@ -60,7 +60,7 @@ describe('Annotation - Optional():', () => {
     }
 
     const container = new Container();
-    container.addProviders([FooWithOptional, Bar]);
+    await container.addProviders([FooWithOptional, Bar]);
 
     try {
       await container.resolve<FooWithOptional>(FooWithOptional);

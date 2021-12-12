@@ -5,7 +5,7 @@ import { Container } from '../../../src';
 describe('Container - remove:', () => {
   it('can remove existing provider from container', async () => {
     const container = new Container();
-    container.addProviders([
+    await container.addProviders([
       { token: 'foo', useValue: 'bar' },
     ]);
 

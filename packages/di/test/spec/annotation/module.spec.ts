@@ -19,7 +19,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can use a class as useClass provider inside providers', async () => {
-    container.addModule(JwtModule);
+    await container.addModule(JwtModule);
 
     const jwtService = await container.resolve<JwtService>(JwtService);
 
@@ -27,7 +27,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can use useClass provider inside providers', async () => {
-    container.addModule(JwtModule);
+    await container.addModule(JwtModule);
 
     const jwtService = await container.resolve<JwtService>(JwtService);
 
@@ -35,7 +35,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can use useFunc provider inside providers', async () => {
-    container.addModule(JwtModule);
+    await container.addModule(JwtModule);
 
     const jwtService = await container.resolve<JwtService>(JwtService);
 
@@ -43,7 +43,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can use useValue provider inside providers', async () => {
-    container.addModule(JwtModule);
+    await container.addModule(JwtModule);
 
     const jwtService = await container.resolve<JwtService>(JwtService);
 
@@ -51,7 +51,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can import other modules', async () => {
-    container.addModule(AuthModule);
+    await container.addModule(AuthModule);
 
     const verifyHanlder = await container.resolve<Verify>(Verify);
 
@@ -60,7 +60,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
 
   it('can add an extend module', async () => {
     const createProfileData = { name: 'X', age: 999 };
-    container.addModule({
+    await container.addModule({
       extModule: UserModule,
       providers: [
         { token: request, useValue: createProfileData },
@@ -76,7 +76,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can not resolve provider that import from other module', async () => {
-    container.addModule(AuthModule);
+    await container.addModule(AuthModule);
 
     const errorFunc = () => container.resolve(JwtService);
 
@@ -86,7 +86,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can export services from module', async () => {
-    container.addModule(JwtModule);
+    await container.addModule(JwtModule);
 
     const jwtService = await container.resolve(JwtService);
 
@@ -94,7 +94,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can export other modules', async () => {
-    container.addModule(SharedModule);
+    await container.addModule(SharedModule);
 
     const jwtService = await container.resolve(JwtService);
 
@@ -102,32 +102,36 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   });
 
   it('can add a extend module into exports config', async () => {
-    container.addModule(SharedModule);
+    await container.addModule(SharedModule);
 
     const mongoService = await container.resolve(MongoService);
 
     expect(mongoService).to.instanceOf(MongoService);
   });
 
-  it('can not import a class has not been decorated by @Module annotation', () => {
-    const errorFunc = () => container.addModule(JwtService);
+  it('can not import a class has not been decorated by @Module annotation', async () => {
+    try {
+      await container.addModule(JwtService);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.InvalidModuleClass);
+      expect(true).to.be.false;
+    } catch (err) {
+      expect(err.code).to.eql(DiErrorCode.InvalidModuleClass)
+    }
   });
 
-  it('can not import same module because that module may export same service causing duplicate token', () => {
-    container.addModule(SharedModule);
+  it('can not import same module because that module may export same service causing duplicate token', async () => {
+    await container.addModule(SharedModule);
 
-    const errorFunc = () => container.addModule(SharedModule);
-  
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.DuplicateToken);
+    try {
+      await container.addModule(SharedModule);
+
+      expect(true).to.be.false;
+    } catch (err) {
+      expect(err.code).to.eql(DiErrorCode.DuplicateToken)
+    }
   });
 
-  it('service class can not exist in both providers and exports', () => {
+  it('service class can not exist in both providers and exports', async () => {
     class FooService { }
 
     @Module({
@@ -136,11 +140,13 @@ describe('Annotation - Module(): define modular dependency injection', () => {
     })
     class FooBarModule { }
 
-    const errorFunc = () => container.addModule(FooBarModule);
+    try {
+      await container.addModule(FooBarModule);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.DuplicateToken);
+      expect(true).to.be.false;
+    } catch (err) {
+      expect(err.code).to.eql(DiErrorCode.DuplicateToken);
+    }
   });
 
   it('there is no need to add service class into providers before using if it is also exported', async () => {
@@ -165,7 +171,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
     })
     class FooBarModule { }
 
-    container.addModule(FooBarModule);
+    await container.addModule(FooBarModule);
 
     const barService = await container.resolve<BarService>(BarService);
 

@@ -12,8 +12,8 @@ describe('Utility - has(): check if provider exists', () => {
     container = new Container();
   });
 
-  it('can check if provider exists in container', () => {
-    container.addModule(JwtModule);
+  it('can check if provider exists in container', async () => {
+    await container.addModule(JwtModule);
 
     expect(container.has(JwtService)).to.true;
     expect(container.has(MongoService)).to.false;

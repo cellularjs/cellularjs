@@ -15,7 +15,7 @@ describe('Annotation - Inject(): inject dependency base on token', () => {
   });
 
   it('can use string as token', async () => {
-    container.addProviders([
+    await container.addProviders([
       Connection,
       { token: 'mongoUrl', useValue: 'neverland' },
       { token: 'mongoUsr', useValue: 'guest' },
@@ -31,7 +31,7 @@ describe('Annotation - Inject(): inject dependency base on token', () => {
 
   it('can use Symbol as token', async () => {
     const mockReq = { name: 'X', age: 99 };
-    container.addProviders([
+    await container.addProviders([
       CreateProfileReq,
       { token: request, useValue: mockReq },
     ]);
@@ -42,7 +42,7 @@ describe('Annotation - Inject(): inject dependency base on token', () => {
   });
 
   it('can use class as token', async () => {
-    container.addProviders([
+    await container.addProviders([
       UserRepository,
       { token: MongoService, useValue: 'foobar' },
     ]);
@@ -53,7 +53,7 @@ describe('Annotation - Inject(): inject dependency base on token', () => {
   });
 
   it('have higher priority than type hint', async () => {
-    container.addProviders([
+    await container.addProviders([
       UserRepository,
       { token: MongoService, useValue: 'foobar' },
     ]);

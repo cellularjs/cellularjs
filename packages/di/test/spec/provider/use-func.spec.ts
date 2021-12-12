@@ -12,7 +12,7 @@ describe('Provider - useFunc', () => {
   });
 
   it('can resolve useFunc provider', async () => {
-    container.addProvider({
+    await container.addProvider({
       token: 'con',
       useFunc: () => new Container,
     });
@@ -21,13 +21,13 @@ describe('Provider - useFunc', () => {
   });
 
   it('can inject dependencies when resolving useFunc provider', async () => {
-    container.addProviders([
+    await container.addProviders([
       Container,
       CreateProfileReq,
       { token: request, useValue: { name: 'X', age: 999 } },
     ]);
 
-    container.addProvider({
+    await container.addProvider({
       token: 'strToken',
       useFunc: (...args) => args,
       deps: [
@@ -67,7 +67,7 @@ describe('Provider - useFunc', () => {
   });
 
   it('can cache resolved value when using useFunc provider with permanent cycle', async () => {
-    container.addProvider({
+    await container.addProvider({
       token: Container,
       useFunc: () => new Container(),
       cycle: 'permanent',
@@ -80,7 +80,7 @@ describe('Provider - useFunc', () => {
   });
 
   it('will resolve dependencies declared in useFunc provider one by one', async () => {
-    container.addProviders([
+    await container.addProviders([
       {
         token: Container,
         useClass: Container,
@@ -99,7 +99,7 @@ describe('Provider - useFunc', () => {
   })
 
   it('will create new value for same type of provider if it is not declared as permanent', async () => {
-    container.addProviders([
+    await container.addProviders([
       {
         token: Container,
         useClass: Container,

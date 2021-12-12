@@ -5,7 +5,7 @@ import { Container } from '../../../src';
 describe('Provider - useValue', () => {
   it('can pass any type of value to useValue provider', async () => {
     const container = new Container();
-    container.addProviders([
+    await container.addProviders([
       { token: 'string', useValue: 'string' },
       { token: 'number', useValue: 99 },
       { token: 'object', useValue: { foo: 'bar'} },

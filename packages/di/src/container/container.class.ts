@@ -21,8 +21,10 @@ export class Container extends ContainerBag {
   /**
    * Convenient method for adding multiple providers into this container.
    */
-  public addProviders(providers: GenericProvider[] = []): void {
-    providers.forEach(provider => this.addProvider(provider));
+  public async addProviders(providers: GenericProvider[] = []): Promise<void> {
+    for (let i = 0; i < providers.length; i++) {
+      await this.addProvider(providers[i]);
+    }
   }
 
   /**
@@ -33,8 +35,10 @@ export class Container extends ContainerBag {
   /**
    * Convenient method for adding multiple modules into this container.
    */
-  public addModules(modules: (ImportableCnf | ExportableCnf)[] = []) {
-    modules.forEach(module => this.addModule(module));
+  public async addModules(modules: (ImportableCnf | ExportableCnf)[] = []) {
+    for(let i = 0; i < modules.length; i++) {
+      await this.addModule(modules[i]);
+    }
   }
 
   /**

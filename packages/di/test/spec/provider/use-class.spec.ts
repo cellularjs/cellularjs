@@ -10,7 +10,7 @@ describe('Provider - class/useClass', () => {
   });
 
   it('can resolve value from useClass provider', async () => {
-    container.addProvider({
+    await container.addProvider({
       token: Container,
       useClass: Container,
     });
@@ -21,7 +21,7 @@ describe('Provider - class/useClass', () => {
   });
 
   it('can cache resolved value when using useClass provider with permanent cycle', async () => {
-    container.addProvider({
+    await container.addProvider({
       token: Container,
       useClass: Container,
       cycle: 'permanent',
@@ -42,7 +42,7 @@ describe('Provider - class/useClass', () => {
       ) { }
     }
 
-    container.addProviders([
+    await container.addProviders([
       Foo,
       {
         token: Container,
@@ -65,7 +65,7 @@ describe('Provider - class/useClass', () => {
       ) { }
     }
 
-    container.addProviders([
+    await container.addProviders([
       Foo,
       {
         token: Container,
@@ -79,7 +79,7 @@ describe('Provider - class/useClass', () => {
   })
 
   it('can resolve class as useClass provider', async () => {
-    container.addProvider(Container);
+    await container.addProvider(Container);
 
     expect(await container.resolve(Container)).to.instanceOf(Container);
   });

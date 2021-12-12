@@ -14,7 +14,7 @@ describe('Provider - useModule', () => {
   });
 
   it('can resolve provider from other module without importing into container', async () => {
-    container.addProviders([
+    await container.addProviders([
       { token: Md2Service, useModule: JwtModule },
       { token: Md5Service, useModule: JwtModule },
     ]);
@@ -34,13 +34,15 @@ describe('Provider - useModule', () => {
       .with.property('code', DiErrorCode.NoProviderForToken);
   });
 
-  it('can not use invalid module as argument for useModule', () => {
-    const errorFunc = () => container.addProviders([
-      { token: Md2Service, useModule: Md2Service },
-    ]);
+  it('can not use invalid module as argument for useModule', async () => {
+    try {
+      await container.addProviders([
+        { token: Md2Service, useModule: Md2Service },
+      ]);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.InvalidModuleClass);
+      expect(true).to.be.false;
+    } catch(err) {
+      expect(err.code).to.eql(DiErrorCode.InvalidModuleClass);
+    }
   });
 })
