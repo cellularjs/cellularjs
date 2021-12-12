@@ -33,7 +33,7 @@ async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<Resolved
   const listener = resolveListener(driverMeta, cellCnf);
   const driverContainer = await createDriverContainer(driverMeta);
 
-  driverContainer.addProviders(Array.from(listener.values()));
+  await driverContainer.addProviders(Array.from(listener.values()));
 
   return {
     listener,
@@ -74,8 +74,8 @@ async function createDriverContainer(driverMeta: CellMeta): Promise<Container> {
   })
 
   const container = new Container();
-  container.addProviders(providers);
-  container.addModules(driverMeta.imports);
+  await container.addProviders(providers);
+  await container.addModules(driverMeta.imports);
 
   return container;
 }

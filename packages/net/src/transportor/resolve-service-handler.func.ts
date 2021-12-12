@@ -34,7 +34,7 @@ export async function resolveServiceHandler(
   scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
 
   const extModule = new Container();
-  extModule.addProviders([
+  await extModule.addProviders([
     ...getServiceProviders(DestServiceHandler),
     { token: IRQ, useValue: irq },
     { token: CellContext, useValue: destResolvedCell.cellContext },
@@ -63,7 +63,7 @@ async function resolveProxyInstance(
     extModule.remove(ServiceHandler)
     const proxyClass = proxyClasses[i];
 
-    extModule.addProviders([
+    await extModule.addProviders([
       { token: ServiceHandler, useValue: proxyInstance || eventHandler },
       { token: proxyClass, useClass: proxyClass },
     ]);
