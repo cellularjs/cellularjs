@@ -6,7 +6,7 @@ import { Message } from './message';
  */
 export class IRS implements Message {
   readonly header: IrsHeader = {
-    status: 200000,
+    status: 200,
   };
 
   readonly body;

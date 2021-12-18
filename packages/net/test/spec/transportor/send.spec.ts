@@ -189,7 +189,7 @@ describe('Transportor - send(): send request', () => {
 
     const delegateSignInIrs = await send(delegateSignInIrq);
 
-    expect(delegateSignInIrs.header.status).to.equal(200000);
+    expect(delegateSignInIrs.header.status).to.equal(200);
   });
 
   it('if scope is publish, event handler is accessible from anonymous caller', async () => {
@@ -199,7 +199,7 @@ describe('Transportor - send(): send request', () => {
 
     const signInIrs = await send(signInIrq);
 
-    expect(signInIrs.header.status).to.equal(200000);
+    expect(signInIrs.header.status).to.equal(200);
   });
 
   it('if event handler don\'t specify scope then default scope is space', async () => {
