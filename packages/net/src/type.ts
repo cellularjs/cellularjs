@@ -89,8 +89,6 @@ export interface ServiceHandler {
   handle(): any | Promise<any>;
 }
 
-export class ServiceHandler { }
-
 /**
  * Cell config contain cell infomation. You can get a cell config by invoking
  * `getResolvedCell('cell name')`.

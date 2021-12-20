@@ -31,12 +31,14 @@ describe('Service helper - addServiceProxies():', () => {
     expect(rs.body.bar).to.true;
   });
 
-  it('proxies class can override previous result', async () => {
-    addServiceProxies(Original, [Foo, FooOverride]);
+  it('proxy will run from highest index', async () => {
+    addServiceProxies(Original, [Foo, FooOverride, Bar]);
 
     const irq = new IRQ({ to: 'Proxy:Original' });
-    const rs = await send(irq);
+    const rs = await send(irq, { throwOriginalError: true});
 
+    expect(rs.body.original).to.true;
     expect(rs.body.foo).to.false;
+    expect(rs.body.bar).to.true;
   });
 });

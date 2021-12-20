@@ -1,4 +1,4 @@
-import { ServiceHandler, IRS, Service } from '../../../src';
+import { ServiceHandler, IRS, Service, NextHandler } from '../../../src';
 
 @Service({
   scope: 'publish',
@@ -12,23 +12,22 @@ export class Original implements ServiceHandler {
 @Service()
 export class Foo implements ServiceHandler {
   constructor(
-    private handler: ServiceHandler,
+    private nextHandler: NextHandler,
   ) { }
 
   async handle() {
-    const rs = await this.handler.handle();
-
+    const rs = await this.nextHandler.handle();
     return new IRS({ ...rs.body, foo: true });
   }
 }
 @Service()
 export class FooOverride implements ServiceHandler {
   constructor(
-    private handler: ServiceHandler,
+    private nextHandler: NextHandler,
   ) { }
 
   async handle() {
-    const rs = await this.handler.handle();
+    const rs = await this.nextHandler.handle();
 
     return new IRS({ ...rs.body, foo: false });
   }
@@ -37,11 +36,11 @@ export class FooOverride implements ServiceHandler {
 @Service()
 export class Bar implements ServiceHandler {
   constructor(
-    private handler: ServiceHandler,
+    private nextHandler: NextHandler,
   ) { }
 
   async handle() {
-    const rs = await this.handler.handle();
+    const rs = await this.nextHandler.handle();
 
     return new IRS({ ...rs.body, bar: true });
   }

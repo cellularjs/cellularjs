@@ -1,10 +1,10 @@
 import { Container } from '@cellularjs/di';
 import { getResolvedCell, ServiceHandler, CellContext, IRQ } from '..';
-import { Errors } from '../internal';
+import { Errors, ResolvedDriver, ServiceHandlerClass } from '../internal';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
 import { getServiceMeta } from '../utils';
-import { ResolvedDriver } from 'type';
+import { NextHandler } from './next-handler'
 
 export async function resolveServiceHandler(
   irq: IRQ,
@@ -38,38 +38,53 @@ export async function resolveServiceHandler(
     ...getServiceProviders(DestServiceHandler),
     { token: IRQ, useValue: irq },
     { token: CellContext, useValue: destResolvedCell.cellContext },
-  ])
-  const eventHandler = await resolvedDriver.container.resolve<ServiceHandler>(
-    DestServiceHandler, { extModule },
-  );
+  ]);
 
-  const proxyClasses = getServiceProxies(DestServiceHandler);
-  if (!proxyClasses.length) {
-    return eventHandler;
-  }
-
-  return resolveProxyInstance(resolvedDriver, extModule, proxyClasses, eventHandler);
+  return getServiceHandler(DestServiceHandler, resolvedDriver, extModule);
 }
 
-async function resolveProxyInstance(
+async function getServiceHandler(
+  ServiceHandlerClass: ServiceHandlerClass,
   resolvedDriver: ResolvedDriver,
   extModule: Container,
-  proxyClasses: { new(...args: any[]): ServiceHandler }[],
-  eventHandler: ServiceHandler,
-) {
-  let proxyInstance: ServiceHandler;
+): Promise<ServiceHandler> {
+  const proxyClasses = getServiceProxies(ServiceHandlerClass);
 
-  for (let i = 0; i < proxyClasses.length; i++) {
-    extModule.remove(ServiceHandler)
-    const proxyClass = proxyClasses[i];
-
-    await extModule.addProviders([
-      { token: ServiceHandler, useValue: proxyInstance || eventHandler },
-      { token: proxyClass, useClass: proxyClass },
-    ]);
-
-    proxyInstance = await resolvedDriver.container.resolve(proxyClass, { extModule });
+  if (proxyClasses.length === 0) {
+    return await resolvedDriver.container.resolve(
+      ServiceHandlerClass, { extModule },
+    );
   }
 
-  return proxyInstance;
+  return getServiceHandlerWithProxy(
+    ServiceHandlerClass,
+    resolvedDriver,
+    extModule,
+    proxyClasses,
+  );
+}
+
+async function getServiceHandlerWithProxy(
+  ServiceHandlerClass: ServiceHandlerClass,
+  resolvedDriver: ResolvedDriver,
+  extModule: Container,
+  proxyClasses: ServiceHandlerClass[]
+): Promise<ServiceHandler> {
+  const nextHandler = new NextHandler(
+    ServiceHandlerClass,
+    proxyClasses,
+    extModule,
+    resolvedDriver,
+  );
+
+  await extModule.addProvider({
+    token: NextHandler,
+    useValue: nextHandler,
+  });
+
+  const serviceHandler: ServiceHandler = {
+    handle: () => nextHandler.handle(),
+  };
+
+  return serviceHandler;
 }
