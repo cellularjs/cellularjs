@@ -38,7 +38,7 @@ export class NextHandler {
       const nextProxy = await this.getNextProxy();
       const result = await nextProxy.handle();
 
-      return result instanceof IRS ? result : new IRS(result, { status: 200 });
+      return result instanceof IRS ? result : new IRS({ status: 200 }, result);
     }
 
     const { container } = this.resolvedDriver;
@@ -48,6 +48,6 @@ export class NextHandler {
 
     const result = await serviceHandler.handle();
 
-    return result instanceof IRS ? result : new IRS(result, { status: 200 });
+    return result instanceof IRS ? result : new IRS({ status: 200 }, result);
   }
 }

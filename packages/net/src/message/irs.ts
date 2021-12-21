@@ -12,8 +12,8 @@ export class IRS implements Message {
   readonly body;
 
   constructor(
-    body?: any,
     header: IrsHeader = {} as IrsHeader,
+    body?: any,
   ) {
     this.header = {
       ...this.header,
@@ -23,7 +23,7 @@ export class IRS implements Message {
   }
 
   withHeader(newHeader: IrsHeader) {
-    return new IRS(this.body, newHeader);
+    return new IRS(newHeader, this.body);
   }
 
   withHeaderItem(k: keyof IrsHeader, v): IRS {
@@ -32,18 +32,15 @@ export class IRS implements Message {
       [k]: v,
     };
 
-    return new IRS(this.body, newHeader);
+    return new IRS(newHeader, this.body);
   }
 
   withBody(newBody) {
-    return new IRS(newBody, this.header);
+    return new IRS(this.header, newBody);
   }
 
   static unexpectedError(): IRS {
-    const unexpectedRrrorIrs = new IRS(
-      undefined,
-      { status: 500 },
-    );
+    const unexpectedRrrorIrs = new IRS({ status: 500 });
 
     return unexpectedRrrorIrs;
   }

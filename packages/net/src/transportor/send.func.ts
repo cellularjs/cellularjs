@@ -18,7 +18,7 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
     const eventHandler = await resolveServiceHandler(irq, refererCell, driver);
     const irs = await eventHandler.handle();
 
-    requestCtx.irs = irs instanceof IRS ? irs : new IRS(irs, { status: 200 });
+    requestCtx.irs = irs instanceof IRS ? irs : new IRS({ status: 200 }, irs);
     transportEmitter.emit('success', requestCtx);
 
     return requestCtx.irs;

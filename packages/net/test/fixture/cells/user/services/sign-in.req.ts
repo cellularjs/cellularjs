@@ -8,7 +8,7 @@ export class DummySignInReq {
 
   constructor(irq: IRQ) {
     if (!irq.body.usr || !irq.body.pwd) {
-      throw new IRS(null, { status: 400 });
+      throw new IRS({ status: 400 });
     }
 
     Object.assign(this, irq.body);

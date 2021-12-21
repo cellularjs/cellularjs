@@ -3,9 +3,18 @@ import { ServiceHandler, IRS, Service, NextHandler } from '../../../src';
 @Service({
   scope: 'publish',
 })
-export class Original implements ServiceHandler {
+export class FooOriginal implements ServiceHandler {
   handle() {
-    return new IRS({ original: true });
+    return { original: true };
+  }
+}
+
+@Service({
+  scope: 'publish',
+})
+export class BarOriginal implements ServiceHandler {
+  handle() {
+    return new IRS({ status: 200}, { original: true });
   }
 }
 
@@ -17,7 +26,7 @@ export class Foo implements ServiceHandler {
 
   async handle() {
     const rs = await this.nextHandler.handle();
-    return new IRS({ ...rs.body, foo: true });
+    return { ...rs.body, foo: true };
   }
 }
 @Service()
@@ -29,7 +38,7 @@ export class FooOverride implements ServiceHandler {
   async handle() {
     const rs = await this.nextHandler.handle();
 
-    return new IRS({ ...rs.body, foo: false });
+    return { ...rs.body, foo: false };
   }
 }
 
@@ -42,7 +51,7 @@ export class Bar implements ServiceHandler {
   async handle() {
     const rs = await this.nextHandler.handle();
 
-    return new IRS({ ...rs.body, bar: true });
+    return new IRS({status: 200}, { ...rs.body, bar: true });
   }
 }
 

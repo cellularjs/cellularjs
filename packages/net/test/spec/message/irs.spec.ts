@@ -11,7 +11,7 @@ describe('IRS:', () => {
   });
 
   it('withHeader() will replace all old header', () => {
-    const message = new IRS(null, { foo: 1, bar: 1 });
+    const message = new IRS({ foo: 1, bar: 1 });
     const newMessage = message.withHeader({ foo: 2 });
 
     expect(message !== newMessage).to.true;
@@ -38,7 +38,7 @@ describe('IRS:', () => {
   });
 
   it('withHeaderItem() will replace specific header item', () => {
-    const message = new IRS(null, { foo: 1, bar: 1 });
+    const message = new IRS({ foo: 1, bar: 1 });
     const newMessage = message.withHeaderItem('foo', 2);
 
     expect(message !== newMessage).to.true;
