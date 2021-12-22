@@ -1,38 +1,44 @@
-import { getInjectable } from '@cellularjs/di'
+import { getInjectable } from '@cellularjs/di';
 import { scanJs } from './';
 
-export function scanForProviders(basePath: string) {
-  const providers = [];
-  scanJs(basePath, (exports) => {
-    Object.keys(exports).map(propKey => handleExportProp(
-      exports, propKey, providers,
-    ));
+export function scanDirForProviders(basePath: string) {
+  let providers = [];
+
+  scanJs(basePath, module => {
+    const newProviders = extractProvidersFromObj(module);
+    providers = providers.concat(newProviders);
   });
 
   return providers;
 }
 
-export function scanForProviders3(exportssss: any) {
-  const providers = [];
-  exportssss.forEach(exports => {
-    Object.keys(exports).map(propKey => handleExportProp(
-      exports, propKey, providers,
-    ));
-  })
+export function scanModulesForProviders(modules: any[]) {
+  let providers = [];
+
+  modules.forEach(module => {
+    const newProviders = extractProvidersFromObj(module);
+    providers = providers.concat(newProviders);
+  });
 
   return providers;
 }
 
-function handleExportProp(moduleExports, propKey, providers: any[]): void {
-  const exportProp = moduleExports[propKey];
+function extractProvidersFromObj(obj) {
+  const providers = [];
 
-  if (typeof exportProp !== 'function') {
-    return;
-  }
+  Object.keys(obj).forEach(key => {
+    const prop = obj[key];
 
-  if (!getInjectable(exportProp)) {
-    return;
-  }
+    if (typeof prop !== 'function') {
+      return;
+    }
 
-  providers.push(exportProp);
+    if (!getInjectable(prop)) {
+      return;
+    }
+
+    providers.push(prop);
+  });
+
+  return providers;
 }

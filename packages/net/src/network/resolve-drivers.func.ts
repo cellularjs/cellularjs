@@ -2,7 +2,10 @@ import { Container, GenericProvider } from '@cellularjs/di';
 import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
 import { Errors } from '../internal';
 import { ResolvedDriver, ServiceHandlerMap } from '../type';
-import { getCellMeta, scanForServiceHandler, registServiceHandlerFromModules, scanForProviders, scanForProviders3 } from '../utils';
+import {
+  getCellMeta, scanForServiceHandler, registServiceHandlerFromModules,
+  scanDirForProviders, scanModulesForProviders,
+} from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {
   const drivers = new Map<string, ResolvedDriver>();
@@ -64,12 +67,12 @@ async function createDriverContainer(driverMeta: CellMeta): Promise<Container> {
 
   driverMeta.providers.forEach(provider => {
     if (typeof provider === 'string') {
-      providers = providers.concat(scanForProviders(provider));
+      providers = providers.concat(scanDirForProviders(provider));
       return;
     }
 
     if (Array.isArray(provider)) {
-      providers = providers.concat(scanForProviders3(provider))
+      providers = providers.concat(scanModulesForProviders(provider))
     }
   })
 
