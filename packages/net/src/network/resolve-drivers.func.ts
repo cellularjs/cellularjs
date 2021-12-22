@@ -3,7 +3,7 @@ import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
 import { Errors } from '../internal';
 import { ResolvedDriver, ServiceHandlerMap } from '../type';
 import {
-  getCellMeta, scanForServiceHandler, registServiceHandlerFromModules,
+  getCellMeta, scanDirForServiceHandler, scanModulesForServiceHandler,
   scanDirForProviders, scanModulesForProviders,
 } from '../utils';
 
@@ -28,13 +28,13 @@ export async function resolveDrivers(cellConfig: CellConfig) {
 }
 
 async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<ResolvedDriver> {
-  const driverMeta = getCellMeta(driverClass);
-  if (!driverMeta) {
+  const cellMeta = getCellMeta(driverClass);
+  if (!cellMeta) {
     throw Errors.InvalidDriverClass(cellCnf.name);
   }
 
-  const listener = resolveListener(driverMeta, cellCnf);
-  const driverContainer = await createDriverContainer(driverMeta);
+  const listener = resolveListener(cellMeta, cellCnf);
+  const driverContainer = await createDriverContainer(cellMeta);
 
   await driverContainer.addProviders(Array.from(listener.values()));
 
@@ -49,36 +49,59 @@ function resolveListener(cellMeta: CellMeta, cellCnf: CellConfig): ServiceHandle
 
   // string will be treated as a path to folder containing event handler.
   if (typeof cellMeta.listen === 'string') {
-    scanForServiceHandler(cellMeta.listen, cellCnf, eventHandlers);
+    scanDirForServiceHandler(cellMeta.listen, (serviceName, newService) => {
+      if (eventHandlers[serviceName]) {
+        throw Errors.DuplicateServiceHandlerName(serviceName, cellCnf.name);
+      }
+
+      eventHandlers[serviceName] = newService;
+    });
+
     return new Map(Object.entries(eventHandlers));
   }
 
   if (Array.isArray(cellMeta.listen)) {
-    registServiceHandlerFromModules(cellMeta.listen, cellCnf, eventHandlers);
+    scanModulesForServiceHandler(cellMeta.listen, (serviceName, newService) => {
+      if (eventHandlers[serviceName]) {
+        throw Errors.DuplicateServiceHandlerName(serviceName, cellCnf.name);
+      }
+
+      eventHandlers[serviceName] = newService;
+    });
+
     return new Map(Object.entries(eventHandlers));
   }
 
   return new Map(Object.entries(cellMeta.listen));
 }
 
-async function createDriverContainer(driverMeta: CellMeta): Promise<Container> {
-  let providers = driverMeta.providers
-    .filter(provider => !Array.isArray(provider) && typeof provider !== 'string') as GenericProvider[];
+async function createDriverContainer(cellMeta: CellMeta): Promise<Container> {
+  const driverContainer = new Container();
 
-  driverMeta.providers.forEach(provider => {
+  await driverContainer.addProviders(extractUsableProviders(cellMeta));
+  await driverContainer.addModules(cellMeta.imports);
+
+  return driverContainer;
+}
+
+function extractUsableProviders(cellMeta: CellMeta) {
+  let usableProviders = <GenericProvider[]>cellMeta
+    .providers
+    .filter(provider =>
+      typeof provider !== 'string' &&
+      !Array.isArray(provider),
+    );
+
+  cellMeta.providers.forEach(provider => {
     if (typeof provider === 'string') {
-      providers = providers.concat(scanDirForProviders(provider));
+      usableProviders = usableProviders.concat(scanDirForProviders(provider));
       return;
     }
 
     if (Array.isArray(provider)) {
-      providers = providers.concat(scanModulesForProviders(provider))
+      usableProviders = usableProviders.concat(scanModulesForProviders(provider))
     }
-  })
+  });
 
-  const container = new Container();
-  await container.addProviders(providers);
-  await container.addModules(driverMeta.imports);
-
-  return container;
+  return usableProviders;
 }

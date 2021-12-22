@@ -5,7 +5,7 @@ import { IMSCell } from '../app/ims'
 import { AuthHttpDriver } from '../remote-drivers/auth/http';
 import { GoogleAuth } from '../remote-drivers/gg-auth';
 import { UserCell } from '../cells/user';
-import { WebpackCell } from '../cells/webpack';
+import { BundlerCell, BundlerCellWithDuplicateService } from '../cells/bundler';
 
 export const authCellCnf: CellConfig = {
   name: 'Auth',
@@ -42,10 +42,15 @@ export const userCellCnf: CellConfig = {
   driver: UserCell,
 };
 
-export const webpackCellCnf: CellConfig = {
-  name: 'Webpack',
+export const bundlerCellCnf: CellConfig = {
+  name: 'Bundler',
   space: 'neverland',
-  driver: WebpackCell,
+  driver: BundlerCell,
+};
+
+export const bundlerCellWithDuplicateServiceCnf: CellConfig = {
+  name: 'Bundler',
+  driver: BundlerCellWithDuplicateService,
 };
 
 export const imsNetwork: NetworkConfig = [

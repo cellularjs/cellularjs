@@ -2,7 +2,7 @@ import 'mocha';
 import { expect } from 'chai';
 import { createNetWork, getResolvedCell, ErrorCode, send, IRQ } from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
-import { userCellCnf, webpackCellCnf } from '../../fixture/share/network';
+import { userCellCnf, bundlerCellCnf, bundlerCellWithDuplicateServiceCnf } from '../../fixture/share/network';
 
 describe('Network - createNetwork:', () => {
   beforeEach(async () => {
@@ -28,11 +28,21 @@ describe('Network - createNetwork:', () => {
   });
 
   it('can support bundler such as webpack', async () => {
-    await createNetWork([webpackCellCnf]);
+    await createNetWork([bundlerCellCnf]);
 
-    const irq = new IRQ({ to: 'Webpack:FooService' });
+    const irq = new IRQ({ to: 'Bundler:FooService' });
     const irs = await send(irq);
 
-    expect(irs.body).to.equals('Webpack:FooService')
+    expect(irs.body).to.equals('Bundler:FooService')
+  });
+
+  it('can throw error if service is duplicated', async () => {
+    try {
+      await createNetWork([bundlerCellWithDuplicateServiceCnf]);
+
+      expect(true).to.false;
+    } catch (err) {
+      expect(err.code).to.equal(ErrorCode.DuplicateServiceHandlerName)
+    }
   });
 });
