@@ -1,4 +1,4 @@
-import { Service, ServiceHandler, IRS } from '../../../../../src';
+import { Service, ServiceHandler } from '../../../../../src';
 
 @Service()
 export class DummyService implements ServiceHandler {

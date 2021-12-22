@@ -1,4 +1,4 @@
-import { Service, ServiceHandler, IRS } from '../../../../../src';
+import { Service, ServiceHandler } from '../../../../../src';
 
 @Service({ scope: 'space' })
 export class SendMail implements ServiceHandler {

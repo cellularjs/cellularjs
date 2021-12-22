@@ -33,7 +33,7 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('will throw IRS object if it throw IRS object', async () => {
+  it('will re-throw IRS object if client throw it', async () => {
     try {
       const irq = new IRQ({ to: 'User:CreateProfile' });
       await send(irq);

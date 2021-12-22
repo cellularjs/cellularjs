@@ -68,7 +68,7 @@ async function getServiceHandlerWithProxy(
   ServiceHandlerClass: ServiceHandlerClass,
   resolvedDriver: ResolvedDriver,
   extModule: Container,
-  proxyClasses: ServiceHandlerClass[]
+  proxyClasses: ServiceHandlerClass[],
 ): Promise<ServiceHandler> {
   const nextHandler = new NextHandler(
     ServiceHandlerClass,
