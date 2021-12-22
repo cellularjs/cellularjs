@@ -17,5 +17,8 @@
   "types": "./dist/",
   "peerDependencies": {
     "@cellularjs/di": "file:../di"
+  },
+  "dependencies": {
+    "emittery": "^0.10.0"
   }
 }

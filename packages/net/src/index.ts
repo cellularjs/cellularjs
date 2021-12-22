@@ -5,5 +5,5 @@ export { CellConfig, CellMeta, NetworkConfig, ServiceHandler, ResolvedCell } fro
 export { CLL_CELL_OPTS, CLL_SERVICE_OPTS, LOCAL_DRIVER } from './key';
 export { Cell, Service } from './decorator';
 export { getResolvedCell, createNetWork } from './network';
-export { send, transportEmitter, NextHandler } from './transportor';
+export { send, transportListener, TransportListener, NextHandler } from './transportor';
 export { IRQ, IRS } from './message';

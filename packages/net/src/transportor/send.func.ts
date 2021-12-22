@@ -1,5 +1,5 @@
 import { IRQ, IRS, LOCAL_DRIVER } from '..';
-import { transportEmitter } from './transport-emitter';
+import { emitTransportEvent } from './transport-emitter';
 import { resolveServiceHandler } from './resolve-service-handler.func';
 import { RequestContext } from './request-context';
 import { RequestOptions } from './type';
@@ -13,19 +13,21 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
   requestCtx.reqOpts = reqOpts;
 
   try {
-    transportEmitter.emit('start', requestCtx);
+    await emitTransportEvent('start', requestCtx);
 
     const eventHandler = await resolveServiceHandler(irq, refererCell, driver);
     const irs = await eventHandler.handle();
 
     requestCtx.irs = irs instanceof IRS ? irs : new IRS({ status: 200 }, irs);
-    transportEmitter.emit('success', requestCtx);
+
+    await emitTransportEvent('success', requestCtx);
 
     return requestCtx.irs;
   } catch (error) {
     requestCtx.originalError = error;
     requestCtx.irs = error instanceof IRS ? error : IRS.unexpectedError();
-    transportEmitter.emit('fail', requestCtx);
+
+    await emitTransportEvent('fail', requestCtx);
 
     if (throwOriginalError) throw error;
 

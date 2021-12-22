@@ -1,3 +1,3 @@
 export { send } from './send.func';
-export { transportEmitter } from './transport-emitter';
+export { transportListener, TransportListener } from './transport-emitter';
 export { NextHandler } from './next-handler';
