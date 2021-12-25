@@ -45,31 +45,31 @@ async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<Resolved
 }
 
 function resolveListener(cellMeta: CellMeta, cellCnf: CellConfig): ServiceHandlerMap {
-  const eventHandlers = {};
+  const serviceHandlers = {};
 
-  // string will be treated as a path to folder containing event handler.
+  // string will be treated as a path to folder containing service handler.
   if (typeof cellMeta.listen === 'string') {
     scanDirForServiceHandler(cellMeta.listen, (serviceName, newService) => {
-      if (eventHandlers[serviceName]) {
+      if (serviceHandlers[serviceName]) {
         throw Errors.DuplicateServiceHandlerName(serviceName, cellCnf.name);
       }
 
-      eventHandlers[serviceName] = newService;
+      serviceHandlers[serviceName] = newService;
     });
 
-    return new Map(Object.entries(eventHandlers));
+    return new Map(Object.entries(serviceHandlers));
   }
 
   if (Array.isArray(cellMeta.listen)) {
     scanModulesForServiceHandler(cellMeta.listen, (serviceName, newService) => {
-      if (eventHandlers[serviceName]) {
+      if (serviceHandlers[serviceName]) {
         throw Errors.DuplicateServiceHandlerName(serviceName, cellCnf.name);
       }
 
-      eventHandlers[serviceName] = newService;
+      serviceHandlers[serviceName] = newService;
     });
 
-    return new Map(Object.entries(eventHandlers));
+    return new Map(Object.entries(serviceHandlers));
   }
 
   return new Map(Object.entries(cellMeta.listen));

@@ -16,7 +16,7 @@ export type ServiceScope = keyof typeof ServiceScopeMap;
  */
 export interface ServiceMeta {
   /**
-   * Scope define accessibility for event handler. It make event handler look
+   * Scope define accessibility for service handler. It make service handler look
    * like a method in a class with access modifier.
    * 
    * - "publish": accessible from anywhere.
@@ -51,22 +51,22 @@ export interface CellMeta {
 
   /**
    * If argument is a string, it will be treated as a path to a folder. It
-   * will scan that folder(include sub folder) to get event handler automatically.
+   * will scan that folder(include sub folder) to get service handler automatically.
    * Service name in this case will be same as class name.<br/>
-   * *Example: `"./events"`*<br/>
+   * *Example: `"./services"`*<br/>
    * 
-   * You can also define key-pair of event name and event handler class.<br/>
+   * You can also define key-pair of service name and service handler class.<br/>
    * *Example:*<br/>
    * ```
    * {
-   *   SignUp, // short type, class name is event name.
+   *   SignUp, // short type, class name is service name.
    *   "any string": SignIn, // explicit type.
    * }
    * ```
    * 
    * _CellularJS support many type but it is better to use a consistent type._
    */
-  listen: string | { [eventName: string]: ClassType<ServiceHandler> };
+  listen: string | { [serviceName: string]: ClassType<ServiceHandler> };
 }
 
 /**

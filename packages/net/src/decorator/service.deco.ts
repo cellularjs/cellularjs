@@ -2,7 +2,7 @@ import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta } from '../internal';
 import { CLL_SERVICE_OPTS } from '..';
 
 /**
- * Mark a class as event handler.
+ * Mark a class as service handler.
  */
 export const Service = (serviceMeta?: ServiceMeta) => (target) => {
   const meta = serviceMeta || {};

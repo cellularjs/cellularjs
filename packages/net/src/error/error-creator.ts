@@ -11,8 +11,8 @@ export const Errors= {
     ErrorCode.InvalidDriverClass,
   ),
 
-  DuplicateServiceHandlerName: (eventName, cellName) => new NetError(
-    `Service handler name for '${eventName}' is duplicated in '${cellName}' cell`,
+  DuplicateServiceHandlerName: (serviceName, cellName) => new NetError(
+    `Service handler name for '${serviceName}' is duplicated in '${cellName}' cell`,
     ErrorCode.DuplicateServiceHandlerName,
   ),
 

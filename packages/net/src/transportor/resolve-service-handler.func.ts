@@ -11,7 +11,7 @@ export async function resolveServiceHandler(
   refererCell: CellContext,
   driver: string,
 ): Promise<ServiceHandler> {
-  const [destCellName, eventName] = irq.header.to.split(':');
+  const [destCellName, serviceName] = irq.header.to.split(':');
   const destResolvedCell = getResolvedCell(destCellName);
 
   if (!destResolvedCell) {
@@ -23,14 +23,14 @@ export async function resolveServiceHandler(
     throw Errors.NoResolvedDriver(driver, irq.header.to);
   }
 
-  const DestServiceHandler = resolvedDriver.listener.get(eventName);
+  const DestServiceHandler = resolvedDriver.listener.get(serviceName);
   if (!DestServiceHandler) {
     throw Errors.NoServiceHandler(driver, irq.header.to);
   }
 
   const serviceMeta = getServiceMeta(DestServiceHandler);
 
-  // DO: check event scope constraint
+  // DO: check service scope constraint
   scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
 
   const extModule = new Container();
