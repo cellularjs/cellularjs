@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, send, IRQ, ErrorCode, IRS } from '../../../src';
+import { createNetWork, send, IRQ, NetErrorCode, IRS } from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
 import { imsNetwork } from '../../fixture/share/network'
 
@@ -29,7 +29,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.NoResolvedCell);
+      expect(err.code).to.equal(NetErrorCode.NoResolvedCell);
     }
   });
 
@@ -69,7 +69,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.NoResolvedDriver);
+      expect(err.code).to.equal(NetErrorCode.NoResolvedDriver);
     }
   });
 
@@ -89,7 +89,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.NoServiceHandler);
+      expect(err.code).to.equal(NetErrorCode.NoServiceHandler);
     }
   });
 
@@ -113,7 +113,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.OtherCellAccessPrivateService);
+      expect(err.code).to.equal(NetErrorCode.OtherCellAccessPrivateService);
     }
   });
 
@@ -127,7 +127,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.AnonymousAccessPrivateService);
+      expect(err.code).to.equal(NetErrorCode.AnonymousAccessPrivateService);
     }
   });
 
@@ -150,7 +150,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.SpaceScopeForbidden);
+      expect(err.code).to.equal(NetErrorCode.SpaceScopeForbidden);
     }
   });
 
@@ -164,7 +164,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.AnonymousAccessSpaceService);
+      expect(err.code).to.equal(NetErrorCode.AnonymousAccessSpaceService);
     }
   });
 
@@ -178,7 +178,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.SpaceScopeForbidden);
+      expect(err.code).to.equal(NetErrorCode.SpaceScopeForbidden);
     }
   });
 
@@ -212,7 +212,7 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.SpaceScopeForbidden);
+      expect(err.code).to.equal(NetErrorCode.SpaceScopeForbidden);
     }
   });
 });

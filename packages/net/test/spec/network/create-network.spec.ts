@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, getResolvedCell, ErrorCode, send, IRQ } from '../../../src';
+import { createNetWork, getResolvedCell, NetErrorCode, send, IRQ } from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
 import { userCellCnf, bundlerCellCnf, bundlerCellWithDuplicateServiceCnf } from '../../fixture/share/network';
 
@@ -23,7 +23,7 @@ describe('Network - createNetwork:', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.DuplicateCellName)
+      expect(err.code).to.equal(NetErrorCode.DuplicateCellName)
     }
   });
 
@@ -42,7 +42,7 @@ describe('Network - createNetwork:', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.DuplicateServiceHandlerName)
+      expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName)
     }
   });
 });

@@ -1,6 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import { LOCAL_DRIVER, createNetWork, getResolvedCell, ErrorCode, Cell } from '../../../../src';
+import { LOCAL_DRIVER, createNetWork, getResolvedCell, NetErrorCode, Cell } from '../../../../src';
 import { cleanNetwork } from '../../../../src/internal';
 import { userCellCnf, authCellCnf, dummyCellCnf } from '../../../fixture/share/network';
 import { CreateProfile } from '../../../fixture/cells/user/events/create-profile.event';
@@ -44,7 +44,7 @@ describe('Decorator - @Cell annotation - listen property:', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(ErrorCode.DuplicateServiceHandlerName)
+      expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName)
     }
   });
 

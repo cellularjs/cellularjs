@@ -1,5 +1,5 @@
 export { CellContext } from './cell-context';
-export { ErrorCode, NetError } from './error';
+export { NetErrorCode, NetError } from './error';
 export { addServiceProviders, addServiceProxies } from './service-helper';
 export { CellConfig, CellMeta, NetworkConfig, ServiceHandler, ServiceHandlerClass, ResolvedCell } from './type';
 export { LOCAL_DRIVER } from './key';

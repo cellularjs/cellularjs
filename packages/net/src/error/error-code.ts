@@ -1,4 +1,4 @@
-export enum ErrorCode {
+export enum NetErrorCode {
   DuplicateCellName = 'NET_DUPLICATE_CELL_NAME',
   InvalidDriverClass = 'NET_INVALID_DRIVER_CLASS',
   DuplicateServiceHandlerName = 'NET_DUPLICATE_SERVICE_HANDLER_NAME',
