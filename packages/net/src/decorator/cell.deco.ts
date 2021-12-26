@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { CellMeta } from '..';
-import { CLL_CELL_OPTS } from '..';
+import { CLL_CELL_OPTS } from '../internal';
 
 /**
  * Config cell with meta data.

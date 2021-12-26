@@ -1,5 +1,4 @@
-import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta } from '../internal';
-import { CLL_SERVICE_OPTS } from '..';
+import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta, CLL_SERVICE_OPTS } from '../internal';
 
 /**
  * Mark a class as service handler.
