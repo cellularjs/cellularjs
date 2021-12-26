@@ -1,4 +1,4 @@
-import * as Emittery from 'emittery';
+import Emittery from 'emittery';
 import { RequestContext } from './request-context';
 
 type RequestListener = (ctx: RequestContext) => Promise<any> | any;
