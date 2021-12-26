@@ -2,18 +2,14 @@
   "name": "placeholder",
   "private": true,
   "scripts": {
-    "start": "webpack",
-    "dev": "cellular",
-    "dev-all": "cellular watch -folder ./$gateway",
-    "run": "node ./dist/http/index.js"
+    "dev": "cellular dev --entry halo",
+    "build": "cellular build -e halo"
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
-    "@types/node": "^16.11.10",
-    "@types/pg": "^8.6.1",
-    "@types/webpack": "^5.28.0"
+    "@types/node": "^16.11.10"
   }
 }

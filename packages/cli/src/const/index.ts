@@ -7,3 +7,6 @@ export const PackageInstallCommands = {
   [PackageManager.YARN]: 'yarn',
   [PackageManager.NPM]: 'npm i',
 }
+
+
+export const cellularConfigFile = 'cellular.ts';

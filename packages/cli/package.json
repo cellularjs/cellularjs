@@ -9,11 +9,11 @@
     ".": "./dist/index.js"
   },
   "bin": {
-    "cellular": "./dist/index.js"
+    "cellular": "./dist/cmd/index.js"
   },
   "scripts": {
     "build": "tsc -b ./tsconfig.build.json",
-    "dev": "ts-node ./src/index.ts"
+    "dev": "ts-node ./src/cmd/index.ts"
   },
   "author": "Great Elephant",
   "license": "MIT",
@@ -22,10 +22,19 @@
     "chalk": "4",
     "clui": "^0.3.6",
     "commander": "^8.3.0",
+    "dotenv-flow-webpack": "^1.1.0",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
+    "nodemon-webpack-plugin": "^4.7.0",
     "tmp-promise": "^3.0.3",
-    "validate-npm-package-name": "^3.0.0"
+    "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
+    "tsconfig-paths-webpack-plugin": "^3.5.2",
+    "typescript": "^4.5.4",
+    "validate-npm-package-name": "^3.0.0",
+    "webpack": "^5.65.0",
+    "webpack-node-externals": "^3.0.0",
+    "webpackbar": "^5.0.2"
   },
   "devDependencies": {
     "@types/clui": "^0.3.1",
