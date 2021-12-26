@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "bootstrap": "lerna bootstrap && lerna exec yarn",
     "cmd:lint": "eslint --ext .ts -c .eslintrc.js ./packages/**/src/**/*.ts  ./packages/**/test/**/*.ts --fix"
   },
   "husky": {
