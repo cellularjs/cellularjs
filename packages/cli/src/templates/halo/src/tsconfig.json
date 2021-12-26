@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "rootDir": "./",
+    "baseUrl": "./src",
+    "sourceMap": true,
+    "removeComments": false,
+    "module": "commonjs",
+    "target": "es2017",
+    "declaration": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "types": [
+      "node"
+    ],
+    "lib": [
+      "es7"
+    ],
+    "moduleResolution": "node",
+  },
+  "includes": [
+    "./src/**/*",
+    "./tests/**/*"
+  ]
+}

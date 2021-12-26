@@ -1,0 +1,35 @@
+{
+  "name": "@cellularjs/cli",
+  "version": "0.0.0",
+  "description": "Modular dependency injection",
+  "keywords": [
+    "cellularjs cli"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "bin": {
+    "cellular": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -b ./tsconfig.build.json",
+    "dev": "ts-node ./src/index.ts"
+  },
+  "author": "Great Elephant",
+  "license": "MIT",
+  "types": "./dist/",
+  "dependencies": {
+    "chalk": "4",
+    "clui": "^0.3.6",
+    "commander": "^8.3.0",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.2.0",
+    "tmp-promise": "^3.0.3",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/clui": "^0.3.1",
+    "@types/fs-extra": "^9.0.13",
+    "@types/inquirer": "^8.1.3"
+  }
+}
