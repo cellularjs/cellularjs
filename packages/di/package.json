@@ -9,8 +9,7 @@
     "modular dependency injection"
   ],
   "exports": {
-    ".": "./dist/index.js",
-    "./": "./dist/"
+    ".": "./dist/index.js"
   },
   "scripts": {
     "prepublishOnly": "npm run build",
