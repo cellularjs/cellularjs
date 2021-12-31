@@ -7,7 +7,6 @@ import { CellularConfig } from '../';
 import { cellularConfigFile } from '../const'
 import { getBaseConfig } from '../const/webpack.config'
 
-// cellular dev -e http -f ./src/$gateway/http/index.ts
 function handleDevCmd(entryName: string) {
   const configFilePath = path.resolve(process.cwd(), cellularConfigFile);
   if (!fse.existsSync(configFilePath)) {
@@ -21,7 +20,7 @@ function handleDevCmd(entryName: string) {
     return console.log(chalk.red(`There is no entry name "${entryName}", let check entry field in "${cellularConfigFile}"!`));
   }
 
-  let webpackConfig = getBaseConfig();
+  let webpackConfig = getBaseConfig(entryName);
   webpackConfig.entry = { [entryName]: path.resolve(process.cwd(), entryPath) };
 
   if (cellularCnf.webpack) {

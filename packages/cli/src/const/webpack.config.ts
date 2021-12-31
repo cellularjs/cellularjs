@@ -9,7 +9,7 @@ import { cellTransformer } from './utillity/cell-transformer'
 
 const bundleFile = 'index.js'
 
-export function getBaseConfig() {
+export function getBaseConfig(entryName: string) {
   const baseWebpackConfig: Configuration = {
     context: path.resolve(process.cwd()),
     target: 'node',
@@ -17,8 +17,8 @@ export function getBaseConfig() {
     devtool: 'source-map',
     watch: true,
     output: {
-      path: path.resolve(process.cwd(), 'dist'),
-      filename: `[name]/${bundleFile}`,
+      path: path.resolve(process.cwd(), 'dist', entryName),
+      filename: bundleFile,
     },
     optimization: {
       minimize: false,
