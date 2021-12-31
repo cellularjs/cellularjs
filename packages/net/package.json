@@ -15,7 +15,7 @@
   "license": "MIT",
   "types": "./dist/",
   "peerDependencies": {
-    "@cellularjs/di": "file:../di"
+    "@cellularjs/di": "0.0.0"
   },
   "dependencies": {
     "emittery": "^0.10.0"
