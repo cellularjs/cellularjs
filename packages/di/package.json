@@ -8,6 +8,9 @@
     "dependency injection",
     "modular dependency injection"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./dist/index.js"
   },

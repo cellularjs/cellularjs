@@ -5,6 +5,9 @@
   "exports": {
     ".": "./dist/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "tsc -b ./tsconfig.build.json",

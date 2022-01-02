@@ -5,6 +5,9 @@
   "keywords": [
     "cellularjs cli"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "exports": {
     ".": "./dist/index.js"
   },
@@ -12,6 +15,7 @@
     "cellular": "./dist/cmd/index.js"
   },
   "scripts": {
+    "prepublishOnly": "npm run build",
     "build": "tsc -b ./tsconfig.build.json && npm run copy_templates",
     "dev": "ts-node ./src/cmd/index.ts",
     "copy_templates": "node ./scripts/copy-templates.js"

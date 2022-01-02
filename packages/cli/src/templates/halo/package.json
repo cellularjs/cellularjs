@@ -6,7 +6,10 @@
     "build": "cellular build -e halo"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "@cellularjs/cli": "0.0.0",
+    "@cellularjs/di": "0.0.0",
+    "@cellularjs/net": "0.0.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",

@@ -5,8 +5,10 @@
     "packages/*"
   ],
   "scripts": {
+    "version": "npm run sync_version",
     "bootstrap": "lerna bootstrap && lerna exec yarn",
-    "cmd:lint": "eslint --ext .ts -c .eslintrc.js ./packages/**/src/**/*.ts  ./packages/**/test/**/*.ts --fix"
+    "cmd:lint": "eslint --ext .ts -c .eslintrc.js ./packages/**/src/**/*.ts  ./packages/**/test/**/*.ts --fix",
+    "sync_version": "node ./scripts/sync-version.js"
   },
   "husky": {
     "hooks": {
