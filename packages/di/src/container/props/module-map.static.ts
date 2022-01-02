@@ -3,7 +3,7 @@ import { ClassType } from '../../internal';
 
 /**
  * Module map, or container map. It know all modules that were imported before.
- * 
+ *
  * ```ts
  * // Module map look like this:
  * const ModuleMap = {
@@ -29,4 +29,4 @@ import { ClassType } from '../../internal';
  * };
  * ```
  */
-export const moduleMap = new Map<(ClassType), Container>();
+export const moduleMap = new Map<ClassType, Container>();

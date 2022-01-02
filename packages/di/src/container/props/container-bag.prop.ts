@@ -1,5 +1,5 @@
-import { Container } from '../../'
-import { Token, ClassifiedProvider, ClassType } from '../../internal'
+import { Container } from '../../';
+import { Token, ClassifiedProvider, ClassType } from '../../internal';
 
 export class ContainerBag {
   /**

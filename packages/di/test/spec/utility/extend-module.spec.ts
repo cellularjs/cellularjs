@@ -29,9 +29,13 @@ describe('Utility - extend module: extend, override module', () => {
 
   it('can add more provider without affect parent module', async () => {
     // can add more provider ...
-    await container.addModule(MongoModule.config({
-      mongoUrl: 'neverland', user: 'guest', password: '********',
-    }));
+    await container.addModule(
+      MongoModule.config({
+        mongoUrl: 'neverland',
+        user: 'guest',
+        password: '********',
+      }),
+    );
 
     const mongoService = await container.resolve<MongoService>(MongoService);
     const conn = mongoService.connection;
@@ -47,7 +51,6 @@ describe('Utility - extend module: extend, override module', () => {
     try {
       await newContaier.resolve(MongoService);
       throw new Error();
-
     } catch (err) {
       expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
     }
@@ -56,9 +59,7 @@ describe('Utility - extend module: extend, override module', () => {
   it('can override provider from parent module', async () => {
     await container.addModule({
       extModule: MongoModule,
-      providers: [
-        { token: Connection, useValue: 'new value' },
-      ],
+      providers: [{ token: Connection, useValue: 'new value' }],
     });
 
     const mongoService = await container.resolve<MongoService>(MongoService);
@@ -81,7 +82,8 @@ describe('Utility - extend module: extend, override module', () => {
     const containerHaveCustomHash = new Container();
     await containerHaveCustomHash.addModule(JwtModule.withSignService());
 
-    const jwtSignService = await containerHaveCustomHash.resolve<JwtSignService>(JwtSignService);
+    const jwtSignService =
+      await containerHaveCustomHash.resolve<JwtSignService>(JwtSignService);
     jwtSignService.sign('run without crash');
 
     // container have no extend module can not resolve JwtSignService
@@ -107,7 +109,7 @@ describe('Utility - extend module: extend, override module', () => {
 
   it('can add more module to exports config', async () => {
     @Module({})
-    class DummyModule { }
+    class DummyModule {}
 
     await container.addModule({
       extModule: DummyModule,
@@ -121,7 +123,7 @@ describe('Utility - extend module: extend, override module', () => {
 
   it('can add more service to exports config', async () => {
     @Module({})
-    class DummyModule { }
+    class DummyModule {}
 
     class DummyService {
       run() {

@@ -6,7 +6,7 @@ export function resolve<T>(
   token: Token,
   options: ResolveOptions = {},
 ): Promise<T> {
-  // B1: extModule has highest priority, so check it first. 
+  // B1: extModule has highest priority, so check it first.
   const { extModule, global } = options;
   if (extModule?.has(token)) {
     return extModule._resolveWithParentModule<T>(token, this, global);

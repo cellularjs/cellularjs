@@ -3,8 +3,11 @@ import { Errors } from '../../consts/error.const';
 import { GenericProvider, ProviderHasToken } from '../../types';
 import { classifyProvider } from '../../utils';
 
-export async function addProvider<T>(this: Container, genericProvider: GenericProvider<T>) {
-  const token = (<ProviderHasToken>genericProvider).token ||  genericProvider;
+export async function addProvider<T>(
+  this: Container,
+  genericProvider: GenericProvider<T>,
+) {
+  const token = (<ProviderHasToken>genericProvider).token || genericProvider;
   if (this._providers.has(token)) {
     throw Errors.DuplicateToken(token);
   }

@@ -23,13 +23,21 @@ const initQuestions: QuestionCollection = [
 
       const validateRs = validateProjectName(projectName);
       if (!validateRs.validForNewPackages) {
-        console.log(chalk.red(' (Project name must follow npm package name rules - eg: my-project)'));
+        console.log(
+          chalk.red(
+            ' (Project name must follow npm package name rules - eg: my-project)',
+          ),
+        );
         return false;
       }
 
       const targetFolderPath = path.resolve(process.cwd(), projectName);
       if (fse.pathExistsSync(targetFolderPath)) {
-        console.log(chalk.red(` ("${targetFolderPath}" is exists, you need to use another name!)`));
+        console.log(
+          chalk.red(
+            ` ("${targetFolderPath}" is exists, you need to use another name!)`,
+          ),
+        );
         return false;
       }
 
@@ -42,14 +50,14 @@ const initQuestions: QuestionCollection = [
     type: 'list',
     choices: [
       { name: 'yarn', value: PackageManager.YARN },
-      { name: 'npm', value: PackageManager.NPM }
+      { name: 'npm', value: PackageManager.NPM },
     ],
   },
   {
     message: 'Are you ready:',
     name: 'ready',
     type: 'confirm',
-    default: false
+    default: false,
   },
 ];
 
@@ -57,13 +65,13 @@ type InitAnswer = {
   packageManager: PackageManager;
   projectName: string;
   ready: boolean;
-}
+};
 
 const handleInit = async () => {
   const initAnswer = await prompt<InitAnswer>(initQuestions);
 
   if (!initAnswer.ready) {
-    console.log(chalk.yellow('Stopped!'))
+    console.log(chalk.yellow('Stopped!'));
     return;
   }
 
@@ -80,20 +88,20 @@ const handleInit = async () => {
   const tmpProjectPath = path.resolve(tmpDir.path, projectName);
 
   // 2:
-  createProjectStructure(tmpDir.path, projectName)
+  createProjectStructure(tmpDir.path, projectName);
   console.log(`Project structure created ${logSymbols.success}`);
 
   // 3:
   await installPackage(tmpProjectPath, packageManager);
-  console.log(`Package installed ${logSymbols.success}`)
+  console.log(`Package installed ${logSymbols.success}`);
 
   // 4:
   await finalize(tmpProjectPath, newProjectPath);
   // await tmpDir.cleanup();
 
   console.log();
-  console.log('Done, let create your first commit 🐘');
-}
+  console.log('Done, let tweak and create your first commit 🐘');
+};
 
 function finalize(tmpProjectPath, newProjectPath) {
   const spinner = new Spinner('Finalizing...');
@@ -108,7 +116,7 @@ function finalize(tmpProjectPath, newProjectPath) {
     } finally {
       spinner.stop();
     }
-  })
+  });
 }
 
 // cellular init
@@ -123,6 +131,6 @@ export const initCmd = new Command('init')
         return;
       }
 
-      console.log(err)
+      console.log(err);
     }
   });

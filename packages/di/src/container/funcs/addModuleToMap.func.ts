@@ -33,9 +33,12 @@ async function createModuleListener(moduleClass, newModule: Container) {
     { token: ModuleRef, useValue: newModule },
   ]);
 
-  const moduleListener = await tempContainer.resolve<ModuleWithListener>(moduleClass, {
-    extModule: newModule,
-  });
+  const moduleListener = await tempContainer.resolve<ModuleWithListener>(
+    moduleClass,
+    {
+      extModule: newModule,
+    },
+  );
 
   if (moduleListener.onInit) {
     await moduleListener.onInit();

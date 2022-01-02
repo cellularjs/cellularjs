@@ -15,14 +15,14 @@ export function installPackage(cwd: string, packageManager: PackageManager) {
       shell: true,
     });
 
-    spawnProcess.on('exit', code => {
+    spawnProcess.on('exit', (code) => {
       spinner.stop();
 
       if (code === 0) {
         return resolve(code);
       }
 
-      reject({ msg: `Failed to install package ${logSymbols.error}` })
+      reject({ msg: `Failed to install package ${logSymbols.error}` });
     });
-  })
+  });
 }

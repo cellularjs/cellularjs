@@ -3,8 +3,11 @@ import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
 import { Errors } from '../internal';
 import { ResolvedDriver, ServiceHandlerMap } from '../type';
 import {
-  getCellMeta, scanDirForServiceHandler, scanModulesForServiceHandler,
-  scanDirForProviders, scanModulesForProviders,
+  getCellMeta,
+  scanDirForServiceHandler,
+  scanModulesForServiceHandler,
+  scanDirForProviders,
+  scanModulesForProviders,
 } from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {
@@ -16,18 +19,23 @@ export async function resolveDrivers(cellConfig: CellConfig) {
     return drivers.set(LOCAL_DRIVER, driver);
   }
 
-  const resolveDriverTasks = Object.keys(cellConfig.driver).map(async driver => {
-    const driverClass = cellConfig.driver[driver];
+  const resolveDriverTasks = Object.keys(cellConfig.driver).map(
+    async (driver) => {
+      const driverClass = cellConfig.driver[driver];
 
-    drivers.set(driver, await resolveDriver(cellConfig, driverClass));
-  });
+      drivers.set(driver, await resolveDriver(cellConfig, driverClass));
+    },
+  );
 
   await Promise.all(resolveDriverTasks);
 
   return drivers;
 }
 
-async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<ResolvedDriver> {
+async function resolveDriver(
+  cellCnf: CellConfig,
+  driverClass,
+): Promise<ResolvedDriver> {
   const cellMeta = getCellMeta(driverClass);
   if (!cellMeta) {
     throw Errors.InvalidDriverClass(cellCnf.name);
@@ -44,7 +52,10 @@ async function resolveDriver(cellCnf: CellConfig, driverClass): Promise<Resolved
   };
 }
 
-function resolveListener(cellMeta: CellMeta, cellCnf: CellConfig): ServiceHandlerMap {
+function resolveListener(
+  cellMeta: CellMeta,
+  cellCnf: CellConfig,
+): ServiceHandlerMap {
   const serviceHandlers = {};
 
   // string will be treated as a path to folder containing service handler.
@@ -85,21 +96,22 @@ async function createDriverContainer(cellMeta: CellMeta): Promise<Container> {
 }
 
 function extractUsableProviders(cellMeta: CellMeta) {
-  let usableProviders = <GenericProvider[]>cellMeta
-    .providers
-    .filter(provider =>
-      typeof provider !== 'string' &&
-      !Array.isArray(provider),
-    );
+  let usableProviders = <GenericProvider[]>(
+    cellMeta.providers.filter(
+      (provider) => typeof provider !== 'string' && !Array.isArray(provider),
+    )
+  );
 
-  cellMeta.providers.forEach(provider => {
+  cellMeta.providers.forEach((provider) => {
     if (typeof provider === 'string') {
       usableProviders = usableProviders.concat(scanDirForProviders(provider));
       return;
     }
 
     if (Array.isArray(provider)) {
-      usableProviders = usableProviders.concat(scanModulesForProviders(provider))
+      usableProviders = usableProviders.concat(
+        scanModulesForProviders(provider),
+      );
     }
   });
 

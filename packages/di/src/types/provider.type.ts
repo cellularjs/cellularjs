@@ -1,4 +1,4 @@
-import { Container } from '../'
+import { Container } from '../';
 import { CycleTypeMap } from '../consts/cycle.const';
 import { DiResolvers } from '../consts/di-resolver.const';
 import { ClassType, CycleType, Token, FuncType, ValueType } from './';
@@ -26,7 +26,9 @@ export interface UseModuleProvider extends ProviderHasToken {
   useModule: ClassType;
 }
 
-export interface UseClassProvider<T> extends ProviderHasToken, ProviderHasCycle {
+export interface UseClassProvider<T>
+  extends ProviderHasToken,
+    ProviderHasCycle {
   /**
    * Use a class to resolve dependency value.
    */
@@ -41,7 +43,7 @@ export interface UseFuncProvider<T> extends ProviderHasToken, ProviderHasCycle {
 
   /**
    * List dependencies required by useFunc.
-   * 
+   *
    * ***Notice**:
    * - Dependencies order must be same as useFunc parameters order.
    * - Class will be use as token for provider, so you need to define its provider.
@@ -64,12 +66,12 @@ export interface UseExistingProvider extends ProviderHasToken {
 }
 
 export type GenericProvider<T = any> =
-  UseModuleProvider |
-  UseClassProvider<T> |
-  ClassType<T> |
-  UseFuncProvider<T> |
-  UseValueProvider<T> |
-  UseExistingProvider;
+  | UseModuleProvider
+  | UseClassProvider<T>
+  | ClassType<T>
+  | UseFuncProvider<T>
+  | UseValueProvider<T>
+  | UseExistingProvider;
 
 /**
  * @package
@@ -96,10 +98,10 @@ export interface ResolveOptions {
 
   /**
    * Global container.
-   * 
+   *
    * When there is no provider matching with the given token,
    * it will find provider from this global container.
-   * 
+   *
    * _Note:_ global container has lower priority than normal container.
    */
   global?: Container;

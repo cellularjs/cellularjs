@@ -5,9 +5,9 @@ import nodeExternals from 'webpack-node-externals';
 import WebpackBar from 'webpackbar';
 import NodemonPlugin from 'nodemon-webpack-plugin';
 import DotenvFlow from 'dotenv-flow-webpack';
-import { cellTransformer } from './utillity/cell-transformer'
+import { cellTransformer } from './utillity/cell-transformer';
 
-const bundleFile = 'index.js'
+const bundleFile = 'index.js';
 
 export function getBaseConfig(entryName: string) {
   const baseWebpackConfig: Configuration = {
@@ -37,23 +37,19 @@ export function getBaseConfig(entryName: string) {
                   };
                 },
               },
-            }
+            },
           ],
-        }
-      ]
+        },
+      ],
     },
     externalsPresets: { node: true },
     externals: [nodeExternals()],
-    plugins: [
-      new WebpackBar(),
-      new DotenvFlow(),
-      new NodemonPlugin(),
-    ],
+    plugins: [new WebpackBar(), new DotenvFlow(), new NodemonPlugin()],
     resolve: {
       extensions: ['.ts'],
       plugins: [new TsconfigPathsPlugin()],
     },
-    stats: 'verbose'
+    stats: 'verbose',
   };
 
   return baseWebpackConfig;

@@ -5,9 +5,7 @@ import { Session, DatabaseConfig } from './key';
 export class PoolHolder {
   private pool: Session[] = [];
 
-  constructor(
-    config: DatabaseConfig,
-  ) {
+  constructor(config: DatabaseConfig) {
     for (let i = 0; i < config.poolSize; i++) {
       this.pool.push(new Session());
     }

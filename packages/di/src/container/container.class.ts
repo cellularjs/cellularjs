@@ -1,21 +1,21 @@
 import { GenericProvider, Token, ExportableCnf, ImportableCnf } from '../types';
-import { DiResolvers } from '../consts/di-resolver.const'
-import { ContainerBag } from './props/container-bag.prop'
-import { addExtModule } from './funcs/addExtModule.func'
-import { addModuleToMap } from './funcs/addModuleToMap.func'
-import { addModule } from './funcs/addModule.func'
-import { addProvider } from './funcs/addProvider.func'
-import { addExportServicesAsProviders } from './funcs/addExportServicesAsProviders.func'
-import { addModuleExports } from './funcs/addModuleExports.func'
-import { resolve } from './funcs/resolve.func'
-import { resolveUseFuncDeps } from './funcs/resolveUseFuncDeps.func'
-import { resolveWithParentModule } from './funcs/resolveWithParentModule.func'
-import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func'
-import { resolveUseModuleProvider } from './funcs/resolveUseModuleProvider.func'
-import { resolveUseClassProvider } from './funcs/resolveUseClassProvider.func'
-import { resolveUseFuncProvider } from './funcs/resolveUseFuncProvider.func'
-import { resolveUseValueProvider } from './funcs/resolveUseValueProvider.func'
-import { resolveUseExistingProvider } from './funcs/resolveUseExistingProvider.func'
+import { DiResolvers } from '../consts/di-resolver.const';
+import { ContainerBag } from './props/container-bag.prop';
+import { addExtModule } from './funcs/addExtModule.func';
+import { addModuleToMap } from './funcs/addModuleToMap.func';
+import { addModule } from './funcs/addModule.func';
+import { addProvider } from './funcs/addProvider.func';
+import { addExportServicesAsProviders } from './funcs/addExportServicesAsProviders.func';
+import { addModuleExports } from './funcs/addModuleExports.func';
+import { resolve } from './funcs/resolve.func';
+import { resolveUseFuncDeps } from './funcs/resolveUseFuncDeps.func';
+import { resolveWithParentModule } from './funcs/resolveWithParentModule.func';
+import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func';
+import { resolveUseModuleProvider } from './funcs/resolveUseModuleProvider.func';
+import { resolveUseClassProvider } from './funcs/resolveUseClassProvider.func';
+import { resolveUseFuncProvider } from './funcs/resolveUseFuncProvider.func';
+import { resolveUseValueProvider } from './funcs/resolveUseValueProvider.func';
+import { resolveUseExistingProvider } from './funcs/resolveUseExistingProvider.func';
 
 export class Container extends ContainerBag {
   /**
@@ -36,7 +36,7 @@ export class Container extends ContainerBag {
    * Convenient method for adding multiple modules into this container.
    */
   public async addModules(modules: (ImportableCnf | ExportableCnf)[] = []) {
-    for(let i = 0; i < modules.length; i++) {
+    for (let i = 0; i < modules.length; i++) {
       await this.addModule(modules[i]);
     }
   }

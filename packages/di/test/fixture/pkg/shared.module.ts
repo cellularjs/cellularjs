@@ -1,5 +1,5 @@
 import { Module } from '../../../src';
-import { AuthModule } from './auth/auth.module'
+import { AuthModule } from './auth/auth.module';
 import { JwtModule } from './jwt/jwt.module';
 import { MongoModule } from './mongo/mongo.module';
 
@@ -14,4 +14,4 @@ import { MongoModule } from './mongo/mongo.module';
     }),
   ],
 })
-export class SharedModule { }
+export class SharedModule {}

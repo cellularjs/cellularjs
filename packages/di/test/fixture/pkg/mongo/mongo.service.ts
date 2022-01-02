@@ -3,9 +3,7 @@ import { Connection } from './connection';
 
 @Injectable()
 export class MongoService {
-  constructor(
-    public connection: Connection,
-  ) { }
+  constructor(public connection: Connection) {}
 
   insert(record) {
     return {

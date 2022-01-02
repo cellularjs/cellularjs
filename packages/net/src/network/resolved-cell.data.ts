@@ -1,4 +1,3 @@
-
 import { ResolvedCell } from '../type';
 
 const resolvedCells = new Map<string, ResolvedCell>();

@@ -9,4 +9,4 @@ import { RenderHtml } from './events/render-html.event';
   imports: [JwtModule],
   listen: { CacheHtml, DelegateSendMail, DelegateUnlockAccount, RenderHtml },
 })
-export class IMSCell { }
+export class IMSCell {}

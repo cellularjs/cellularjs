@@ -2,9 +2,12 @@ import 'mocha';
 import { expect } from 'chai';
 import { Container, DiErrorCode, forwardRef } from '../../../src';
 import {
-  FooWithoutForwardRef, FooWithForwardRef, Bar,
-  useFuncProviderWithForwardRef, useFuncProviderWithoutForwardRef,
-} from '../../fixture/circular-dependency-injection'
+  FooWithoutForwardRef,
+  FooWithForwardRef,
+  Bar,
+  useFuncProviderWithForwardRef,
+  useFuncProviderWithoutForwardRef,
+} from '../../fixture/circular-dependency-injection';
 
 describe('forwardRef', () => {
   it('can not resolve circular dependency with normal dependency declaration', async () => {
@@ -31,7 +34,9 @@ describe('forwardRef', () => {
       { token: Bar, useClass: Bar },
       { token: FooWithForwardRef, useClass: FooWithForwardRef },
     ]);
-    const fooWithForwardRef = await container.resolve<FooWithForwardRef>(FooWithForwardRef);
+    const fooWithForwardRef = await container.resolve<FooWithForwardRef>(
+      FooWithForwardRef,
+    );
 
     expect(fooWithForwardRef.bar instanceof Bar).to.be.true;
   });
@@ -58,12 +63,12 @@ describe('forwardRef', () => {
     expect(bar instanceof Bar).to.true;
   });
 
-  it('use returned value from forwardRef\'s callback(declare in useFunc\'s deps) as a token', async () => {
+  it("use returned value from forwardRef's callback(declare in useFunc's deps) as a token", async () => {
     const container = new Container();
     await container.addProviders([
       { token: 'foo', useValue: 'it is a token' },
-      { token: 'bar', useFunc: bar => bar, deps: [forwardRef(() => 'foo')] },
-      { token: 'foobar', useFunc: foobar => foobar, deps: ['foobar'] },
+      { token: 'bar', useFunc: (bar) => bar, deps: [forwardRef(() => 'foo')] },
+      { token: 'foobar', useFunc: (foobar) => foobar, deps: ['foobar'] },
     ]);
 
     const bar = await container.resolve('bar');

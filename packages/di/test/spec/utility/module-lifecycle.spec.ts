@@ -30,10 +30,12 @@ describe('Module life cycle', () => {
     @Module({})
     class ModuleWithOnInit implements OnInit {
       onInit() {
-        return new Promise(resolve => setTimeout(() => {
-          called = true;
-          resolve(1);
-        }, 10));
+        return new Promise((resolve) =>
+          setTimeout(() => {
+            called = true;
+            resolve(1);
+          }, 10),
+        );
       }
     }
 
@@ -46,14 +48,10 @@ describe('Module life cycle', () => {
     let value;
 
     @Module({
-      providers: [
-        { token: 'key', useValue: 'value' },
-      ],
+      providers: [{ token: 'key', useValue: 'value' }],
     })
     class YourModule {
-      constructor(
-        @Inject('key') resolvedValue,
-      ) {
+      constructor(@Inject('key') resolvedValue) {
         value = resolvedValue;
       }
     }
@@ -67,14 +65,10 @@ describe('Module life cycle', () => {
     let value;
 
     @Module({
-      providers: [
-        { token: 'key', useValue: 'value' },
-      ],
+      providers: [{ token: 'key', useValue: 'value' }],
     })
     class ModuleWithOnInit implements OnInit {
-      constructor(
-        private moduleRef: ModuleRef,
-      ) { }
+      constructor(private moduleRef: ModuleRef) {}
 
       async onInit() {
         value = await this.moduleRef.resolve('key');

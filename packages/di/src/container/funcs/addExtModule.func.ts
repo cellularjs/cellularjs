@@ -2,7 +2,10 @@ import { Container } from '../../';
 import { ExtModuleMeta, ClassType } from '../../types';
 import { getModuleMeta } from '../../utils';
 
-export async function addExtModule(this: Container, extModuleMeta: ExtModuleMeta) {
+export async function addExtModule(
+  this: Container,
+  extModuleMeta: ExtModuleMeta,
+) {
   await this.addModule(extModuleMeta.extModule);
 
   const extModule = new Container();

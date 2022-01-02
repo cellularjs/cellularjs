@@ -21,5 +21,4 @@ describe('CellConfig - cell space:', () => {
     expect(imsCell.cellConfig.space === userCell.cellConfig.space).to.false;
     expect(imsCell.spaceId === userCell.spaceId).to.false;
   });
-
 });

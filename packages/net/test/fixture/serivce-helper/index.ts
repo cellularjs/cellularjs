@@ -14,15 +14,13 @@ export class FooOriginal implements ServiceHandler {
 })
 export class BarOriginal implements ServiceHandler {
   handle() {
-    return new IRS({ status: 200}, { original: true });
+    return new IRS({ status: 200 }, { original: true });
   }
 }
 
 @Service()
 export class Foo implements ServiceHandler {
-  constructor(
-    private nextHandler: NextHandler,
-  ) { }
+  constructor(private nextHandler: NextHandler) {}
 
   async handle() {
     const rs = await this.nextHandler.handle();
@@ -31,9 +29,7 @@ export class Foo implements ServiceHandler {
 }
 @Service()
 export class FooOverride implements ServiceHandler {
-  constructor(
-    private nextHandler: NextHandler,
-  ) { }
+  constructor(private nextHandler: NextHandler) {}
 
   async handle() {
     const rs = await this.nextHandler.handle();
@@ -44,26 +40,24 @@ export class FooOverride implements ServiceHandler {
 
 @Service()
 export class Bar implements ServiceHandler {
-  constructor(
-    private nextHandler: NextHandler,
-  ) { }
+  constructor(private nextHandler: NextHandler) {}
 
   async handle() {
     const rs = await this.nextHandler.handle();
 
-    return new IRS({status: 200}, { ...rs.body, bar: true });
+    return new IRS({ status: 200 }, { ...rs.body, bar: true });
   }
 }
 
 export class Session {
-  injected() { }
+  injected() {}
 }
 
 @Service({
   scope: 'publish',
 })
 export class EditFooService implements ServiceHandler {
-  constructor(private session: Session) { }
+  constructor(private session: Session) {}
 
   handle() {
     this.session.injected();

@@ -21,9 +21,7 @@ describe('IRS:', () => {
 
   it('withHeader() is chainable', () => {
     const message = new IRS();
-    const newMessage = message
-      .withHeader({ foo: 1 })
-      .withHeader({ foo: 2 });
+    const newMessage = message.withHeader({ foo: 1 }).withHeader({ foo: 2 });
 
     expect(message !== newMessage).to.true;
     expect(newMessage.header.foo).to.eq(2);
@@ -48,7 +46,9 @@ describe('IRS:', () => {
 
   it('withHeaderItem() is chainable', () => {
     const message = new IRS();
-    const newMessage = message.withHeaderItem('foo', 1).withHeaderItem('foo', 2);
+    const newMessage = message
+      .withHeaderItem('foo', 1)
+      .withHeaderItem('foo', 2);
 
     expect(message !== newMessage).to.true;
     expect(newMessage.header.foo).to.eq(2);

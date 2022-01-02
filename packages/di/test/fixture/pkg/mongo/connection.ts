@@ -6,5 +6,5 @@ export class Connection {
     @Inject('mongoUrl') public mongoUrl,
     @Inject('mongoUsr') public mongoUsr,
     @Inject('mongoPwd') public mongoPwd,
-  ) { }
+  ) {}
 }

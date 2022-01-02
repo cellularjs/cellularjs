@@ -20,20 +20,24 @@ export function scanRelTsFiles(dir: string, relativeDir: string): string[] {
         continue;
       }
 
-      const file = listNewFiles[i];
-      const isValidTsFile =
-        file.lastIndexOf('.js') + 3 === file.length ||
-        (file.lastIndexOf('.d.ts') === -1 && file.lastIndexOf('.ts') + 3 === file.length);
-
-      if (!isValidTsFile) {
+      const fileName = listNewFiles[i];
+      if (!isValidTsFile(fileName)) {
         continue;
       }
 
-      listFiles.push(prefix + '/' + listNewFiles[i])
+      listFiles.push(prefix + '/' + listNewFiles[i]);
     }
-  }
+  };
 
   scanFolder(dir, relativeDir);
 
   return listFiles;
+}
+
+function isValidTsFile(fileName: string) {
+  return (
+    fileName.lastIndexOf('.js') + 3 === fileName.length ||
+    (fileName.lastIndexOf('.d.ts') === -1 &&
+      fileName.lastIndexOf('.ts') + 3 === fileName.length)
+  );
 }

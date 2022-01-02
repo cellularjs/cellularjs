@@ -39,7 +39,7 @@ describe('Provider - class/useClass', () => {
       constructor(
         public firstContainer: Container,
         public secondContainer: Container,
-      ) { }
+      ) {}
     }
 
     await container.addProviders([
@@ -54,7 +54,7 @@ describe('Provider - class/useClass', () => {
     const foo = await container.resolve<Foo>(Foo);
 
     expect(foo.firstContainer === foo.secondContainer).to.true;
-  })
+  });
 
   it('will create new value for same type of provider if it is not declared as permanent', async () => {
     @Injectable()
@@ -62,7 +62,7 @@ describe('Provider - class/useClass', () => {
       constructor(
         public firstContainer: Container,
         public secondContainer: Container,
-      ) { }
+      ) {}
     }
 
     await container.addProviders([
@@ -76,7 +76,7 @@ describe('Provider - class/useClass', () => {
     const foo = await container.resolve<Foo>(Foo);
 
     expect(foo.firstContainer !== foo.secondContainer).to.true;
-  })
+  });
 
   it('can resolve class as useClass provider', async () => {
     await container.addProvider(Container);

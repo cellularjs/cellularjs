@@ -1,7 +1,13 @@
 import { expect } from 'chai';
-import { createNetWork, transportListener, TransportListener, send, IRQ } from '../../../src';
+import {
+  createNetWork,
+  transportListener,
+  TransportListener,
+  send,
+  IRQ,
+} from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
-import { imsNetwork } from '../../fixture/share/network'
+import { imsNetwork } from '../../fixture/share/network';
 
 describe('Transportor - transportListener', () => {
   beforeEach(async () => {
@@ -15,7 +21,7 @@ describe('Transportor - transportListener', () => {
 
   it('is an instance of EventEmitter', () => {
     expect(transportListener).to.be.instanceOf(TransportListener);
-  })
+  });
 
   it('can listen to "start" event when there is new requst with `on` method', async () => {
     let call = 0;
@@ -48,7 +54,7 @@ describe('Transportor - transportListener', () => {
   it('can listen to "start" event when there is new request with `once` method', async () => {
     let call = 0;
 
-    transportListener.once('start', async ctx => {
+    transportListener.once('start', async (ctx) => {
       expect(ctx.irq).not.undefined;
       expect(ctx.irs).undefined;
       expect(ctx.reqOpts).not.undefined;
@@ -76,7 +82,7 @@ describe('Transportor - transportListener', () => {
   it('can listen to "success" event when request is fulfilled with `on` method', async () => {
     let call = 0;
 
-    transportListener.on('success', async ctx => {
+    transportListener.on('success', async (ctx) => {
       expect(ctx.irq).not.undefined;
       expect(ctx.irs).not.undefined;
       expect(ctx.reqOpts).not.undefined;
@@ -151,11 +157,11 @@ describe('Transportor - transportListener', () => {
 
     try {
       await send(new IRQ({ to: 'Auth:NotExist' }));
-    } catch { }
-  
+    } catch {}
+
     try {
       await send(new IRQ({ to: 'Auth:NotExist' }));
-    } catch { }
+    } catch {}
 
     expect(call).to.be.eql(4);
   });
@@ -182,11 +188,11 @@ describe('Transportor - transportListener', () => {
 
     try {
       await send(new IRQ({ to: 'Auth:NotExist' }));
-    } catch { }
-  
+    } catch {}
+
     try {
       await send(new IRQ({ to: 'Auth:NotExist' }));
-    } catch { }
+    } catch {}
 
     expect(call).to.be.eql(2);
   });

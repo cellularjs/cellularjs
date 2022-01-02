@@ -1,24 +1,34 @@
 import { afterEach } from 'mocha';
 import { expect } from 'chai';
-import { createNetWork, addServiceProxies, Cell, send, IRQ } from '../../../src';
+import {
+  createNetWork,
+  addServiceProxies,
+  Cell,
+  send,
+  IRQ,
+} from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
-import { FooOriginal, BarOriginal, Foo, FooOverride, Bar } from '../../fixture/serivce-helper';
+import {
+  FooOriginal,
+  BarOriginal,
+  Foo,
+  FooOverride,
+  Bar,
+} from '../../fixture/serivce-helper';
 
 describe('Service helper - addServiceProxies():', () => {
   beforeEach(async () => {
     @Cell({
       listen: { FooOriginal, BarOriginal },
     })
-    class LocalDriver { }
+    class LocalDriver {}
 
-    await createNetWork([
-      { name: 'Proxy', driver: LocalDriver },
-    ]);
+    await createNetWork([{ name: 'Proxy', driver: LocalDriver }]);
   });
 
   afterEach(async () => {
     await cleanNetwork();
-  })
+  });
 
   it('can use multiple proxies class', async () => {
     addServiceProxies(FooOriginal, [Foo, Bar]);

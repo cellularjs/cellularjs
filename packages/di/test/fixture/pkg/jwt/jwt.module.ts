@@ -22,6 +22,6 @@ export class JwtModule {
       extModule: JwtModule,
       imports: [CustomHashModule],
       exports: [JwtSignService],
-    }
+    };
   }
 }

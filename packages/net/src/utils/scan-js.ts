@@ -6,9 +6,7 @@ type ResolveFactory = (data: { [key: string]: any }) => void;
 export function scanJs(basePath: string, onResolve: ResolveFactory): void {
   const files = readdirSync(basePath);
 
-  files.forEach(file => handleFile(
-    basePath, file, onResolve,
-  ));
+  files.forEach((file) => handleFile(basePath, file, onResolve));
 }
 
 function handleFile(basePath, file, onResolve: ResolveFactory): void {
@@ -22,7 +20,8 @@ function handleFile(basePath, file, onResolve: ResolveFactory): void {
 
   const isValidJsFile =
     file.lastIndexOf('.js') + 3 === file.length ||
-    (file.lastIndexOf('.d.ts') === -1 && file.lastIndexOf('.ts') + 3 === file.length);
+    (file.lastIndexOf('.d.ts') === -1 &&
+      file.lastIndexOf('.ts') + 3 === file.length);
 
   if (!isValidJsFile) return;
 

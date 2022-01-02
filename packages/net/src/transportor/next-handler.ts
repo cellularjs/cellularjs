@@ -1,5 +1,10 @@
 import { Container } from '@cellularjs/di';
-import { ServiceHandler, ServiceHandlerClass, ResolvedDriver, IRS } from '../internal';
+import {
+  ServiceHandler,
+  ServiceHandlerClass,
+  ResolvedDriver,
+  IRS,
+} from '../internal';
 
 /**
  * Instead of resolve all handlers/proxies and it's dependencies at once.
@@ -43,7 +48,8 @@ export class NextHandler {
 
     const { container } = this.resolvedDriver;
     const serviceHandler: ServiceHandler = await container.resolve(
-      this.ServiceHandlerClass, { extModule: this.extModule },
+      this.ServiceHandlerClass,
+      { extModule: this.extModule },
     );
 
     const result = await serviceHandler.handle();

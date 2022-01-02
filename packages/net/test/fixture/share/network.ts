@@ -1,7 +1,7 @@
 import { CellConfig, NetworkConfig } from '../../../src';
 import { AuthCell } from '../cells/auth';
-import { DummyCell } from '../cells/dummy'
-import { IMSCell } from '../app/ims'
+import { DummyCell } from '../cells/dummy';
+import { IMSCell } from '../app/ims';
 import { AuthHttpDriver } from '../remote-drivers/auth/http';
 import { GoogleAuth } from '../remote-drivers/gg-auth';
 import { UserCell } from '../cells/user';

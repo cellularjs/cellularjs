@@ -1,1 +1,1 @@
-export { scopeContraints } from './scope-constaint'
+export { scopeContraints } from './scope-constaint';

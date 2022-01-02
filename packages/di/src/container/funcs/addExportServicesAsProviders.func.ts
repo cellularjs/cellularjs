@@ -2,7 +2,10 @@ import { getModuleMeta } from '../../utils';
 import { ClassType, ExportableCnf } from '../../types';
 import { Container, ExtModuleMeta } from '../../';
 
-export async function addExportServicesAsProviders(this: Container, exports: ExportableCnf[] = []): Promise<void> {
+export async function addExportServicesAsProviders(
+  this: Container,
+  exports: ExportableCnf[] = [],
+): Promise<void> {
   for (let i = 0; i < exports.length; i++) {
     const exportCnf = exports[i];
 

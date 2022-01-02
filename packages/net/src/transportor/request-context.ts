@@ -1,5 +1,5 @@
 import { IRQ, IRS } from '..';
-import { RequestOptions } from './type'
+import { RequestOptions } from './type';
 
 export interface RequestContext {
   irq: IRQ;
@@ -9,4 +9,4 @@ export interface RequestContext {
   [extKey: string]: any;
 }
 
-export class RequestContext { }
+export class RequestContext {}

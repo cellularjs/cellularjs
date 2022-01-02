@@ -2,19 +2,21 @@ import { CellContext, CellConfig } from '..';
 import { Errors } from '../internal';
 import { NetworkConfig, ResolvedCell } from '../type';
 import { uniqId, freezeProperty } from '../utils';
-import { resolveDrivers } from './resolve-drivers.func'
-import { setResolvedCell } from './resolved-cell.data'
+import { resolveDrivers } from './resolve-drivers.func';
+import { setResolvedCell } from './resolved-cell.data';
 
-export async function createNetWork(networkConfig: NetworkConfig): Promise<void[]> {
+export async function createNetWork(
+  networkConfig: NetworkConfig,
+): Promise<void[]> {
   preventDuplicateCell(networkConfig);
 
-  return Promise.all(networkConfig.map(
-    cellConfig => resolveCell(cellConfig),
-  ));
+  return Promise.all(
+    networkConfig.map((cellConfig) => resolveCell(cellConfig)),
+  );
 }
 
 function preventDuplicateCell(networkConfig: NetworkConfig) {
-  const allCellNames = networkConfig.map(cellConfig => cellConfig.name);
+  const allCellNames = networkConfig.map((cellConfig) => cellConfig.name);
 
   allCellNames.every((cellName, i) => {
     if (allCellNames.indexOf(cellName) === i) {

@@ -1,4 +1,4 @@
-import { Container, Token  } from '../..';
+import { Container, Token } from '../..';
 
 export function resolveWithParentModule<T>(
   this: Container,

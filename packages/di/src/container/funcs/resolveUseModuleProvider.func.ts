@@ -1,6 +1,6 @@
-import { Container, ResolveOptions } from '../..'
-import { ClassifiedProvider } from '../../internal'
-import { moduleMap } from '../props/module-map.static'
+import { Container, ResolveOptions } from '../..';
+import { ClassifiedProvider } from '../../internal';
+import { moduleMap } from '../props/module-map.static';
 
 export function resolveUseModuleProvider<T>(
   this: Container,
@@ -14,8 +14,5 @@ export function resolveUseModuleProvider<T>(
   }
 
   const extModule = this._extModules.get(provider.useModule);
-  return moduleFromMap.resolve(
-    provider.token,
-    { ...options, extModule },
-  );
+  return moduleFromMap.resolve(provider.token, { ...options, extModule });
 }

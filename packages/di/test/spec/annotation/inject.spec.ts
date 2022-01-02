@@ -47,7 +47,9 @@ describe('Annotation - Inject(): inject dependency base on token', () => {
       { token: MongoService, useValue: 'foobar' },
     ]);
 
-    const postRepository = await container.resolve<UserRepository>(UserRepository);
+    const postRepository = await container.resolve<UserRepository>(
+      UserRepository,
+    );
 
     expect(postRepository.mongoService).to.equal('foobar');
   });
@@ -58,7 +60,9 @@ describe('Annotation - Inject(): inject dependency base on token', () => {
       { token: MongoService, useValue: 'foobar' },
     ]);
 
-    const postRepository = await container.resolve<UserRepository>(UserRepository);
+    const postRepository = await container.resolve<UserRepository>(
+      UserRepository,
+    );
 
     expect(postRepository.mongoService instanceof MongoService).to.false;
   });

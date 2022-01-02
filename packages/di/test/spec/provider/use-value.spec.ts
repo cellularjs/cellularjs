@@ -8,11 +8,11 @@ describe('Provider - useValue', () => {
     await container.addProviders([
       { token: 'string', useValue: 'string' },
       { token: 'number', useValue: 99 },
-      { token: 'object', useValue: { foo: 'bar'} },
+      { token: 'object', useValue: { foo: 'bar' } },
     ]);
 
     expect(await container.resolve('string')).to.equal('string');
     expect(await container.resolve('number')).to.equal(99);
-    expect(await container.resolve('object')).to.eqls({ foo: 'bar'});
+    expect(await container.resolve('object')).to.eqls({ foo: 'bar' });
   });
 });

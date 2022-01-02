@@ -4,9 +4,7 @@ import { MongoService } from './mongo.service';
 
 @Module({
   providers: [Connection],
-  exports: [
-    MongoService,
-  ],
+  exports: [MongoService],
 })
 export class MongoModule {
   static config({ mongoUrl, user, password }): ExtModuleMeta {

@@ -7,10 +7,7 @@ import { CreateProfileReq } from './services/create-profile.req';
 import { UserRepository } from './services/user.repository';
 
 @Module({
-  providers: [
-    CreateProfileReq,
-    UserRepository,
-  ],
+  providers: [CreateProfileReq, UserRepository],
   imports: [
     AuthModule,
     MongoModule.config({
@@ -19,9 +16,6 @@ import { UserRepository } from './services/user.repository';
       password: '********',
     }),
   ],
-  exports: [
-    CreateProfile,
-    UpdateProfile,
-  ],
+  exports: [CreateProfile, UpdateProfile],
 })
-export class UserModule { }
+export class UserModule {}

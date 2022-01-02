@@ -5,6 +5,6 @@ export interface DatabaseConfig {
   poolSize: number;
 }
 
-export class DatabaseConfig { }
+export class DatabaseConfig {}
 
-export class Session { }
+export class Session {}

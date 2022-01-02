@@ -27,7 +27,8 @@ describe('Provider - token: unique identifier for provider inside a container', 
   });
 
   it('can be an object', async () => {
-    const foo = {}, bar = {};
+    const foo = {},
+      bar = {};
     await container.addProviders([
       { token: foo, useValue: 'foo' },
       { token: bar, useValue: 'bar' },
@@ -54,15 +55,16 @@ describe('Provider - token: unique identifier for provider inside a container', 
   });
 
   it('can not be duplicated', async () => {
-    const addProviderFunc = () => container.addProvider({ token: 'foo', useValue: 'foo' });
+    const addProviderFunc = () =>
+      container.addProvider({ token: 'foo', useValue: 'foo' });
     await addProviderFunc();
 
     try {
       await addProviderFunc();
 
       expect(true).to.be.false;
-    } catch(err) {
-      expect(err.code).to.eql(DiErrorCode.DuplicateToken)
+    } catch (err) {
+      expect(err.code).to.eql(DiErrorCode.DuplicateToken);
     }
   });
 

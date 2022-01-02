@@ -9,7 +9,7 @@ export class JwtSignService {
     public customHashService: CustomHashService,
     public jwtService: JwtService,
     public md5Service: Md5Service,
-  ) { }
+  ) {}
 
   sign(str: string) {
     return this.customHashService.hash(str);

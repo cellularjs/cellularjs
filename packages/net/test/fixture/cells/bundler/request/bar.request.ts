@@ -3,7 +3,5 @@ import { IRQ } from '../../../../../src';
 
 @Injectable()
 export class BarRequest {
-  constructor(
-    public irq: IRQ,
-  ) { }
+  constructor(public irq: IRQ) {}
 }

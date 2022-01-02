@@ -1,6 +1,12 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Module, Container, DiErrorCode, Injectable, getModuleMeta } from '../../../src';
+import {
+  Module,
+  Container,
+  DiErrorCode,
+  Injectable,
+  getModuleMeta,
+} from '../../../src';
 import { JwtModule } from '../../fixture/pkg/jwt/jwt.module';
 import { JwtService } from '../../fixture/pkg/jwt/jwt.service';
 import { MongoService } from '../../fixture/pkg/mongo/mongo.service';
@@ -62,9 +68,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
     const createProfileData = { name: 'X', age: 999 };
     await container.addModule({
       extModule: UserModule,
-      providers: [
-        { token: request, useValue: createProfileData },
-      ],
+      providers: [{ token: request, useValue: createProfileData }],
     });
 
     const createProfile = await container.resolve<CreateProfile>(CreateProfile);
@@ -115,7 +119,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
 
       expect(true).to.be.false;
     } catch (err) {
-      expect(err.code).to.eql(DiErrorCode.InvalidModuleClass)
+      expect(err.code).to.eql(DiErrorCode.InvalidModuleClass);
     }
   });
 
@@ -127,18 +131,18 @@ describe('Annotation - Module(): define modular dependency injection', () => {
 
       expect(true).to.be.false;
     } catch (err) {
-      expect(err.code).to.eql(DiErrorCode.DuplicateToken)
+      expect(err.code).to.eql(DiErrorCode.DuplicateToken);
     }
   });
 
   it('service class can not exist in both providers and exports', async () => {
-    class FooService { }
+    class FooService {}
 
     @Module({
       providers: [FooService],
       exports: [FooService],
     })
-    class FooBarModule { }
+    class FooBarModule {}
 
     try {
       await container.addModule(FooBarModule);
@@ -156,9 +160,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
 
     @Injectable()
     class BarService {
-      constructor(
-        private fooService: FooService,
-      ) { }
+      constructor(private fooService: FooService) {}
 
       runFoo = () => this.fooService.run();
 
@@ -169,7 +171,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
       // providers: [FooService], There is no need to do this.
       exports: [FooService, BarService],
     })
-    class FooBarModule { }
+    class FooBarModule {}
 
     await container.addModule(FooBarModule);
 

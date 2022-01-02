@@ -9,7 +9,7 @@ export class IRQ implements Message {
   public readonly body;
 
   /**
-   * @param header  
+   * @param header
    * - to(string): destination request will go
    */
   constructor(header: IrqHeader, body?: { [key: string]: any }) {
@@ -25,7 +25,7 @@ export class IRQ implements Message {
     const newHeader = {
       ...this.header,
       [k]: v,
-    }
+    };
     return new IRQ(newHeader, this.body);
   }
 

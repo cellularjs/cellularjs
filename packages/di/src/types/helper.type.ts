@@ -1,4 +1,4 @@
-export type ClassType<T = any> = { new(...args: any[]): T };
+export type ClassType<T = any> = { new (...args: any[]): T };
 
 export type FuncType<T> = (...args: any[]) => T;
 

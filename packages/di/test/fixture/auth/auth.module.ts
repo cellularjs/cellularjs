@@ -1,13 +1,11 @@
 import { Module } from '../../../src';
-import { JwtModule } from '../pkg/jwt/jwt.module'
+import { JwtModule } from '../pkg/jwt/jwt.module';
 import { MongoModule } from '../pkg/mongo/mongo.module';
 import { Verify } from './events/verify';
 import { AuthRepository } from './services/auth.repository';
 
 @Module({
-  providers: [
-    AuthRepository,
-  ],
+  providers: [AuthRepository],
   imports: [
     JwtModule,
     MongoModule.config({
@@ -18,4 +16,4 @@ import { AuthRepository } from './services/auth.repository';
   ],
   exports: [Verify],
 })
-export class AuthModule { }
+export class AuthModule {}

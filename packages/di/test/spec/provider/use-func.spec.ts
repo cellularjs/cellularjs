@@ -14,7 +14,7 @@ describe('Provider - useFunc', () => {
   it('can resolve useFunc provider', async () => {
     await container.addProvider({
       token: 'con',
-      useFunc: () => new Container,
+      useFunc: () => new Container(),
     });
 
     expect(await container.resolve('con')).to.instanceOf(Container);
@@ -34,8 +34,12 @@ describe('Provider - useFunc', () => {
         CreateProfileReq,
         Container,
         new Container(),
-        function nameFunc() { return 'nameFunc'; },
-        function () { return 'anonFunc' },
+        function nameFunc() {
+          return 'nameFunc';
+        },
+        function () {
+          return 'anonFunc';
+        },
         () => 'arrowFunc',
         'a string',
         9999,
@@ -96,7 +100,7 @@ describe('Provider - useFunc', () => {
     const [val1, val2] = await container.resolve('foo');
 
     expect(val1 === val2).to.true;
-  })
+  });
 
   it('will create new value for same type of provider if it is not declared as permanent', async () => {
     await container.addProviders([
@@ -114,5 +118,5 @@ describe('Provider - useFunc', () => {
     const [val1, val2] = await container.resolve('foo');
 
     expect(val1 !== val2).to.true;
-  })
+  });
 });

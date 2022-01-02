@@ -11,7 +11,7 @@ export async function resolveUseClassProvider(
     return this._resolvedValues.get(provider.token);
   }
 
-  const args = await this._resolveConstructorArgs(provider.useClass, options)
+  const args = await this._resolveConstructorArgs(provider.useClass, options);
   const resolvedValue = Reflect.construct(provider.useClass, args);
 
   if (provider.cycle === PermanentCycle) {

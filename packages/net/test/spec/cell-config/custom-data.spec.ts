@@ -14,13 +14,10 @@ describe('CellConfig - cell custom data:', () => {
       foo: 'bar',
     };
 
-    await createNetWork([
-      { ...userCellCnf, customData },
-    ]);
+    await createNetWork([{ ...userCellCnf, customData }]);
 
     const resolvedCell = getResolvedCell('User');
 
     expect(resolvedCell.cellConfig.customData).to.eqls(customData);
   });
-
 });

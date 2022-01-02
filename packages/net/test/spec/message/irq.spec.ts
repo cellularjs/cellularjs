@@ -21,9 +21,7 @@ describe('IRQ:', () => {
 
   it('withHeader() is chainable', () => {
     const message = new IRQ(null, null);
-    const newMessage = message
-      .withHeader({ foo: 1 })
-      .withHeader({ foo: 2 });
+    const newMessage = message.withHeader({ foo: 1 }).withHeader({ foo: 2 });
 
     expect(message !== newMessage).to.true;
     expect(newMessage.header.foo).to.eq(2);

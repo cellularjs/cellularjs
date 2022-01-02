@@ -41,8 +41,8 @@ describe('Provider - useModule', () => {
       ]);
 
       expect(true).to.be.false;
-    } catch(err) {
+    } catch (err) {
       expect(err.code).to.eql(DiErrorCode.InvalidModuleClass);
     }
   });
-})
+});

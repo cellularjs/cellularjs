@@ -4,7 +4,7 @@ import { Errors, ResolvedDriver, ServiceHandlerClass } from '../internal';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
 import { getServiceMeta } from '../utils';
-import { NextHandler } from './next-handler'
+import { NextHandler } from './next-handler';
 
 export async function resolveServiceHandler(
   irq: IRQ,
@@ -51,9 +51,9 @@ async function getServiceHandler(
   const proxyClasses = getServiceProxies(ServiceHandlerClass);
 
   if (proxyClasses.length === 0) {
-    return await resolvedDriver.container.resolve(
-      ServiceHandlerClass, { extModule },
-    );
+    return await resolvedDriver.container.resolve(ServiceHandlerClass, {
+      extModule,
+    });
   }
 
   return getServiceHandlerWithProxy(

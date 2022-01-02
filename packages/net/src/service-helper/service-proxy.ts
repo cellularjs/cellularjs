@@ -2,7 +2,10 @@ import { ServiceHandlerClass } from '../internal';
 
 let serviceProxies = new Map<any, ServiceHandlerClass[]>();
 
-export function addServiceProxies(service: ServiceHandlerClass, newProxies: ServiceHandlerClass[]) {
+export function addServiceProxies(
+  service: ServiceHandlerClass,
+  newProxies: ServiceHandlerClass[],
+) {
   const proxies = serviceProxies.get(service) || [];
   serviceProxies.set(service, proxies.concat(newProxies));
 }

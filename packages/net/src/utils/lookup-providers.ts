@@ -4,7 +4,7 @@ import { scanJs } from './';
 export function scanDirForProviders(basePath: string) {
   let providers = [];
 
-  scanJs(basePath, module => {
+  scanJs(basePath, (module) => {
     const newProviders = extractProvidersFromObj(module);
     providers = providers.concat(newProviders);
   });
@@ -15,7 +15,7 @@ export function scanDirForProviders(basePath: string) {
 export function scanModulesForProviders(modules: any[]) {
   let providers = [];
 
-  modules.forEach(module => {
+  modules.forEach((module) => {
     const newProviders = extractProvidersFromObj(module);
     providers = providers.concat(newProviders);
   });
@@ -26,7 +26,7 @@ export function scanModulesForProviders(modules: any[]) {
 function extractProvidersFromObj(obj) {
   const providers = [];
 
-  Object.keys(obj).forEach(key => {
+  Object.keys(obj).forEach((key) => {
     const prop = obj[key];
 
     if (typeof prop !== 'function') {

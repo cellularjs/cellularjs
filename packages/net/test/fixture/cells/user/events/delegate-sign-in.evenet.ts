@@ -1,10 +1,14 @@
-import { Service, ServiceHandler, send, IRQ, CellContext } from '../../../../../src';
+import {
+  Service,
+  ServiceHandler,
+  send,
+  IRQ,
+  CellContext,
+} from '../../../../../src';
 
 @Service({ scope: 'publish' })
 export class DelegateSignIn implements ServiceHandler {
-  constructor(
-    private ctx: CellContext,
-  ) { }
+  constructor(private ctx: CellContext) {}
 
   handle() {
     const signInIrq = new IRQ({ to: 'Auth:SignIn' });

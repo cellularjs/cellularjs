@@ -10,7 +10,7 @@ export const Cell = (rawCellMeta: CellMeta) => (target) => {
     ...rawCellMeta,
     providers: rawCellMeta.providers || [],
   };
-  
+
   const stackArr = new Error().stack.split('\n');
 
   // hard code
@@ -31,18 +31,15 @@ export const Cell = (rawCellMeta: CellMeta) => (target) => {
     );
   }
 
-  cellDriverMeta.providers = cellDriverMeta.providers.map(provider => {
+  cellDriverMeta.providers = cellDriverMeta.providers.map((provider) => {
     if (typeof provider === 'string') {
-      return path.resolve(
-        basePath,
-        provider,
-      );
+      return path.resolve(basePath, provider);
     }
 
     return provider;
-  })
+  });
 
   Reflect.defineMetadata(CLL_CELL_OPTS, cellDriverMeta, target);
 
   return target;
-}
+};

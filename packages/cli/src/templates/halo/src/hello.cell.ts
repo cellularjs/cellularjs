@@ -8,4 +8,4 @@ import { SayHelloCmd } from './say-hello.cmd';
 @Cell({
   listen: { SayHelloCmd },
 })
-export class HelloCell { }
+export class HelloCell {}

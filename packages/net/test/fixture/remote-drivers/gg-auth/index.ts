@@ -1,6 +1,6 @@
 import { Cell } from '../../../../src';
 
 @Cell({
-  listen: { },
+  listen: {},
 })
-export class GoogleAuth { }
+export class GoogleAuth {}

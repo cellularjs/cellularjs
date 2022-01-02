@@ -4,4 +4,4 @@ import { UserService } from './user.service';
 @Module({
   exports: [UserService],
 })
-export class AuthModule { }
+export class AuthModule {}

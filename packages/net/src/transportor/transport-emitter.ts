@@ -24,7 +24,10 @@ export class TransportListener {
   }
 }
 
-export async function emitTransportEvent(event: RequestEvent, ctx: RequestContext) {
+export async function emitTransportEvent(
+  event: RequestEvent,
+  ctx: RequestContext,
+) {
   await emitter.emitSerial(event, ctx);
 }
 
@@ -32,7 +35,7 @@ export async function emitTransportEvent(event: RequestEvent, ctx: RequestContex
  * IMPORTANT: `transportListener` is a **GLOBAL** object. That mean listener(callback)
  * will be able to listen to every request events from different cells. So it is only suitable for
  * "global" tasks such as logging request,... and code should be placed at common place(Eg: `$share` folder).
- * 
+ *
  * OTHER: If you want to modify/add behaviour for specific service, have a look at
  * [service proxy](https://cellularjs.com/docs/foundation/net/service#41-addserviceproxies).
  */

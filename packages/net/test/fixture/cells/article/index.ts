@@ -12,4 +12,4 @@ import { DatabaseModule } from '../../pkg/database/database.module';
   ],
   listen: './services',
 })
-export class ArticleCell { }
+export class ArticleCell {}

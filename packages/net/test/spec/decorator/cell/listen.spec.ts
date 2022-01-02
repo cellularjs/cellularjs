@@ -1,8 +1,18 @@
 import 'mocha';
 import { expect } from 'chai';
-import { LOCAL_DRIVER, createNetWork, getResolvedCell, NetErrorCode, Cell } from '../../../../src';
+import {
+  LOCAL_DRIVER,
+  createNetWork,
+  getResolvedCell,
+  NetErrorCode,
+  Cell,
+} from '../../../../src';
 import { cleanNetwork } from '../../../../src/internal';
-import { userCellCnf, authCellCnf, dummyCellCnf } from '../../../fixture/share/network';
+import {
+  userCellCnf,
+  authCellCnf,
+  dummyCellCnf,
+} from '../../../fixture/share/network';
 import { CreateProfile } from '../../../fixture/cells/user/events/create-profile.event';
 import { SignIn } from '../../../fixture/cells/auth/events/sign-in.event';
 import { LockAccount } from '../../../fixture/cells/auth/events/sub/another-sub/lock-account';
@@ -18,7 +28,8 @@ describe('Decorator - @Cell annotation - listen property:', () => {
     const resolvedCell = getResolvedCell('User');
     const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
-    const createProfileServiceHandler = localDriver.listener.get('CreateProfile');
+    const createProfileServiceHandler =
+      localDriver.listener.get('CreateProfile');
 
     expect(createProfileServiceHandler === CreateProfile).to.true;
   });
@@ -44,23 +55,25 @@ describe('Decorator - @Cell annotation - listen property:', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName)
+      expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName);
     }
   });
 
   it('will throw error if listen path is not exist', async () => {
     try {
       @Cell({ listen: './not-exist' })
-      class FooCell { }
+      class FooCell {}
 
-      await createNetWork([{
-        name: 'Foo',
-        driver: FooCell,
-      }]);
+      await createNetWork([
+        {
+          name: 'Foo',
+          driver: FooCell,
+        },
+      ]);
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal('ENOENT')
+      expect(err.code).to.equal('ENOENT');
     }
   });
 });

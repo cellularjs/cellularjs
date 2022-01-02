@@ -1,6 +1,12 @@
 import 'mocha';
 import { expect } from 'chai';
-import { CellConfig, LOCAL_DRIVER, createNetWork, getResolvedCell, NetErrorCode } from '../../../src';
+import {
+  CellConfig,
+  LOCAL_DRIVER,
+  createNetWork,
+  getResolvedCell,
+  NetErrorCode,
+} from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
 import { authCellCnf, userCellCnf } from '../../fixture/share/network';
 
@@ -21,7 +27,7 @@ describe('CellConfig - cell driver:', () => {
       await createNetWork([invalidCellClassCnf]);
 
       expect(true).to.false;
-    } catch(err) {
+    } catch (err) {
       expect(err.code).to.equal(NetErrorCode.InvalidDriverClass);
     }
   });

@@ -4,13 +4,11 @@ import { Container, Optional, Injectable, DiErrorCode } from '../../../src';
 
 describe('Annotation - Optional():', () => {
   it('will throw NoProviderForToken if there is no Optional', async () => {
-    class Bar { }
+    class Bar {}
 
     @Injectable()
     class FooWithoutOptional {
-      constructor(
-        public bar: Bar,
-      ) { }
+      constructor(public bar: Bar) {}
     }
 
     const container = new Container();
@@ -21,18 +19,16 @@ describe('Annotation - Optional():', () => {
 
       expect(true).false;
     } catch (err) {
-      expect(err.code).to.equal(DiErrorCode.NoProviderForToken)
+      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
     }
   });
 
   it('can prevent throwing NoProviderForToken error', async () => {
-    class Bar { }
+    class Bar {}
 
     @Injectable()
     class FooWithOptional {
-      constructor(
-        @Optional() public bar: Bar,
-      ) { }
+      constructor(@Optional() public bar: Bar) {}
     }
 
     const container = new Container();
@@ -45,18 +41,16 @@ describe('Annotation - Optional():', () => {
   });
 
   it('can not prevent throwing error if that error is not NoProviderForToken error', async () => {
-    const errorMsg = 'error X'
+    const errorMsg = 'error X';
     class Bar {
       constructor() {
-        throw errorMsg
+        throw errorMsg;
       }
     }
 
     @Injectable()
     class FooWithOptional {
-      constructor(
-        @Optional() public bar: Bar,
-      ) { }
+      constructor(@Optional() public bar: Bar) {}
     }
 
     const container = new Container();

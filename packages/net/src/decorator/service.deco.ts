@@ -1,4 +1,9 @@
-import { ServiceMeta, ServiceScopeMap, AjustedServiceMeta, CLL_SERVICE_OPTS } from '../internal';
+import {
+  ServiceMeta,
+  ServiceScopeMap,
+  AjustedServiceMeta,
+  CLL_SERVICE_OPTS,
+} from '../internal';
 
 /**
  * Mark a class as service handler.
@@ -14,4 +19,4 @@ export const Service = (serviceMeta?: ServiceMeta) => (target) => {
   Reflect.defineMetadata(CLL_SERVICE_OPTS, adjustedMeta, target);
 
   return target;
-}
+};

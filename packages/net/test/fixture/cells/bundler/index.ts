@@ -1,6 +1,6 @@
 import { Cell } from '../../../../src';
 import * as barRequest from './request/bar.request';
-import * as fooService from './services/foo.service'
+import * as fooService from './services/foo.service';
 
 @Cell({
   providers: [
@@ -17,9 +17,9 @@ import * as fooService from './services/foo.service'
   // listen: './services',
   listen: [fooService] as any,
 })
-export class BundlerCell { }
+export class BundlerCell {}
 
 @Cell({
   listen: [fooService, fooService] as any,
 })
-export class BundlerCellWithDuplicateService { }
+export class BundlerCellWithDuplicateService {}

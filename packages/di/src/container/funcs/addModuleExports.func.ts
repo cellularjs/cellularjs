@@ -2,7 +2,11 @@ import { Container } from '../../';
 import { ClassType, ExportableCnf, ExtModuleMeta } from '../../types';
 import { getModuleMeta } from '../../utils';
 
-export async function addModuleExports(this: Container, moduleClass: ClassType, exports: ExportableCnf[] = []) {
+export async function addModuleExports(
+  this: Container,
+  moduleClass: ClassType,
+  exports: ExportableCnf[] = [],
+) {
   for (let i = 0; i < exports.length; i++) {
     const exportCnf = exports[i];
     const moduleMeta = getModuleMeta(<ClassType>exportCnf);

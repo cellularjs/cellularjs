@@ -3,9 +3,7 @@ import { JwtService } from '../../pkg/jwt/jwt.service';
 
 @Injectable()
 export class Verify {
-  constructor(
-    private jwtService: JwtService,
-  ) {}
+  constructor(private jwtService: JwtService) {}
 
   async handle() {
     return this.jwtService.verify('pass');

@@ -7,10 +7,12 @@ export class CreateProfile {
   constructor(
     private createProfileReq: CreateProfileReq,
     private userRepository: UserRepository,
-  ) { }
+  ) {}
 
   async handle() {
-    const savedProfile = this.userRepository.createProfile(this.createProfileReq);
+    const savedProfile = this.userRepository.createProfile(
+      this.createProfileReq,
+    );
     return savedProfile;
   }
 }

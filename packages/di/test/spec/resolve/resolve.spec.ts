@@ -1,6 +1,13 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Container, DiErrorCode, Injectable, Inject, Module, ExtModuleMeta } from '../../../src';
+import {
+  Container,
+  DiErrorCode,
+  Injectable,
+  Inject,
+  Module,
+  ExtModuleMeta,
+} from '../../../src';
 
 let container: Container;
 
@@ -19,15 +26,11 @@ describe('Container - resolve:', () => {
 
   it('can resolve global providers', async () => {
     const global = new Container();
-    await global.addProviders([
-      { token: 'foo', useValue: 'global' },
-    ])
+    await global.addProviders([{ token: 'foo', useValue: 'global' }]);
 
     @Injectable()
     class FooBar {
-      constructor(
-        @Inject('foo') public foo,
-      ) { }
+      constructor(@Inject('foo') public foo) {}
     }
 
     await container.addProvider({ token: FooBar, useClass: FooBar });
@@ -38,15 +41,11 @@ describe('Container - resolve:', () => {
 
   it('global provider has lower priority than normal providers', async () => {
     const global = new Container();
-    await global.addProviders([
-      { token: 'foo', useValue: 'global' },
-    ])
+    await global.addProviders([{ token: 'foo', useValue: 'global' }]);
 
     @Injectable()
     class FooBar {
-      constructor(
-        @Inject('foo') public foo,
-      ) { }
+      constructor(@Inject('foo') public foo) {}
     }
 
     await container.addProviders([
@@ -60,15 +59,11 @@ describe('Container - resolve:', () => {
 
   it('global provider has lower priority than ref module(~ extend module)', async () => {
     const global = new Container();
-    await global.addProviders([
-      { token: 'foo', useValue: 'global' },
-    ]);
+    await global.addProviders([{ token: 'foo', useValue: 'global' }]);
 
     @Injectable()
     class FooBar {
-      constructor(
-        @Inject('foo') public foo,
-      ) { }
+      constructor(@Inject('foo') public foo) {}
     }
 
     @Module({})
@@ -89,7 +84,7 @@ describe('Container - resolve:', () => {
   });
 
   it('create only one value for provider has cycle is permanent when resolving value in sync', async () => {
-    class Foo { }
+    class Foo {}
 
     await container.addProvider({
       token: Foo,
@@ -103,8 +98,8 @@ describe('Container - resolve:', () => {
     expect(foo1 === foo2).to.be.true;
   });
 
-  it('create other value when resolving value in async even if provider\'s cycle is permanent', async () => {
-    class Foo { }
+  it("create other value when resolving value in async even if provider's cycle is permanent", async () => {
+    class Foo {}
 
     await container.addProvider({
       token: Foo,
@@ -133,5 +128,5 @@ describe('Container - resolve:', () => {
 
     expect(firstContainer).to.instanceOf(Container);
     expect(firstContainer !== secondContainer).to.true;
-  })
+  });
 });

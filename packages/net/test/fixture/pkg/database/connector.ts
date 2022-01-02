@@ -3,9 +3,7 @@ import { PoolHolder } from './pool-holder';
 
 @Injectable()
 export class Connector {
-  constructor(
-    private poolHolder: PoolHolder,
-  ) { }
+  constructor(private poolHolder: PoolHolder) {}
 
   getSession() {
     return this.poolHolder.getSession();

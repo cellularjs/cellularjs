@@ -11,11 +11,11 @@ export class JwtService {
     private md5Service: Md5Service,
     private sha1Service: Sha1Service,
     private sha256Service: Sha256Service,
-  ) { }
+  ) {}
 
   verify(token) {
     if (token !== 'pass') {
-      return false
+      return false;
     }
 
     return true;

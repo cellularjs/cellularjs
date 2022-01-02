@@ -1,6 +1,6 @@
 import { Container, ResolveOptions } from '../../';
 import { ClassifiedProvider } from '../../internal';
-import { PermanentCycle } from '../../consts/cycle.const'
+import { PermanentCycle } from '../../consts/cycle.const';
 
 export async function resolveUseFuncProvider<T>(
   this: Container,

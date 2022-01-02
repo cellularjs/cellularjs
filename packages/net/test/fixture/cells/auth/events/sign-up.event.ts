@@ -1,16 +1,18 @@
 import {
-  Service, ServiceHandler, IRQ, IRS, CellContext, send,
+  Service,
+  ServiceHandler,
+  IRQ,
+  IRS,
+  CellContext,
+  send,
 } from '../../../../../src';
 
 @Service({ scope: 'publish' })
 export class SignUp implements ServiceHandler {
-  constructor(
-    private irq: IRQ,
-    private ctx: CellContext,
-  ) { }
+  constructor(private irq: IRQ, private ctx: CellContext) {}
 
   async handle(): Promise<IRS> {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve) => {
       const createProfileIrq = new IRQ(
         { to: 'User:CreateProfile' },
         this.irq.body,
@@ -20,7 +22,7 @@ export class SignUp implements ServiceHandler {
         refererCell: this.ctx,
       });
 
-      resolve(createProfileIrs)
+      resolve(createProfileIrs);
     });
   }
 }
@@ -29,4 +31,4 @@ export class SignUp implements ServiceHandler {
 export const DummyConst = 0;
 
 // Ignored when scanning folder for event handler because it is not decorated by @Service.
-export class SignIn { }
+export class SignIn {}

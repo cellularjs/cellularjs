@@ -1,1 +1,1 @@
-export class JwtService { }
+export class JwtService {}

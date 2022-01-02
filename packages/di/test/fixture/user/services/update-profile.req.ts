@@ -7,9 +7,7 @@ export class UpdateProfileReq {
   readonly name;
   readonly age;
 
-  constructor(
-    @Inject(request) req,
-  ) {
+  constructor(@Inject(request) req) {
     Object.assign(this, req);
   }
 }

@@ -2,7 +2,7 @@ import 'mocha';
 import { expect } from 'chai';
 import { createNetWork, send, IRQ, NetErrorCode, IRS } from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
-import { imsNetwork } from '../../fixture/share/network'
+import { imsNetwork } from '../../fixture/share/network';
 
 describe('Transportor - send(): send request', () => {
   beforeEach(async () => {
@@ -11,7 +11,7 @@ describe('Transportor - send(): send request', () => {
 
   afterEach(async () => {
     await cleanNetwork();
-  })
+  });
 
   it('will throw error in case of sending request to non-exist cell', async () => {
     try {
@@ -94,19 +94,17 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is private, it is accessible from owner cell', async () => {
-    const renderHtmlIrq = new IRQ(
-      { to: 'IMS:RenderHtml' },
-    );
+    const renderHtmlIrq = new IRQ({ to: 'IMS:RenderHtml' });
 
-    const renderHtmlIrs = await send(renderHtmlIrq, { throwOriginalError: true });
+    const renderHtmlIrs = await send(renderHtmlIrq, {
+      throwOriginalError: true,
+    });
 
     expect(renderHtmlIrs.body.cached).to.equal(true);
   });
 
   it('if event handler scope is private, it is not accessible from other cells', async () => {
-    const renderHtmlIrq = new IRQ(
-      { to: 'User:DelegateCacheHtml' },
-    );
+    const renderHtmlIrq = new IRQ({ to: 'User:DelegateCacheHtml' });
 
     try {
       await send(renderHtmlIrq, { throwOriginalError: true });
@@ -118,9 +116,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is private, it is not accessible from anonymous caller', async () => {
-    const cacheHtmlIrq = new IRQ(
-      { to: 'IMS:CacheHtml' },
-    );
+    const cacheHtmlIrq = new IRQ({ to: 'IMS:CacheHtml' });
 
     try {
       await send(cacheHtmlIrq, { throwOriginalError: true });
@@ -141,9 +137,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is not accessible from cells having different space', async () => {
-    const irq = new IRQ(
-      { to: 'IMS:DelegateSendMail' },
-    );
+    const irq = new IRQ({ to: 'IMS:DelegateSendMail' });
 
     try {
       await send(irq, { throwOriginalError: true });
@@ -155,9 +149,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is not accessible from anonymous caller', async () => {
-    const irq = new IRQ(
-      { to: 'User:SendMail' },
-    );
+    const irq = new IRQ({ to: 'User:SendMail' });
 
     try {
       await send(irq, { throwOriginalError: true });
@@ -168,10 +160,8 @@ describe('Transportor - send(): send request', () => {
     }
   });
 
-  it('if event handler scope is space, it is not accessible from cells that don\'t have same space', async () => {
-    const irq = new IRQ(
-      { to: 'IMS:DelegateSendMail' },
-    );
+  it("if event handler scope is space, it is not accessible from cells that don't have same space", async () => {
+    const irq = new IRQ({ to: 'IMS:DelegateSendMail' });
 
     try {
       await send(irq, { throwOriginalError: true });
@@ -183,9 +173,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if scope is publish, event handler is accessible from every cells', async () => {
-    const delegateSignInIrq = new IRQ(
-      { to: 'User:DelegateSignIn' },
-    );
+    const delegateSignInIrq = new IRQ({ to: 'User:DelegateSignIn' });
 
     const delegateSignInIrs = await send(delegateSignInIrq);
 
@@ -193,19 +181,17 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if scope is publish, event handler is accessible from anonymous caller', async () => {
-    const signInIrq = new IRQ(
-      { to: 'Auth:SignIn' },
-    );
+    const signInIrq = new IRQ({ to: 'Auth:SignIn' });
 
     const signInIrs = await send(signInIrq);
 
     expect(signInIrs.header.status).to.equal(200);
   });
 
-  it('if event handler don\'t specify scope then default scope is space', async () => {
-    const delegateUnlockAccountIrq = new IRQ(
-      { to: 'IMS:DelegateUnlockAccount' },
-    );
+  it("if event handler don't specify scope then default scope is space", async () => {
+    const delegateUnlockAccountIrq = new IRQ({
+      to: 'IMS:DelegateUnlockAccount',
+    });
 
     try {
       await send(delegateUnlockAccountIrq, { throwOriginalError: true });

@@ -15,7 +15,11 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
   try {
     await emitTransportEvent('start', requestCtx);
 
-    const serviceHandler = await resolveServiceHandler(irq, refererCell, driver);
+    const serviceHandler = await resolveServiceHandler(
+      irq,
+      refererCell,
+      driver,
+    );
     const irs = await serviceHandler.handle();
 
     requestCtx.irs = irs instanceof IRS ? irs : new IRS({ status: 200 }, irs);
@@ -45,5 +49,5 @@ function ajustOptions(rawOpts: RequestOptions) {
   return {
     ...rawOpts,
     driver: rawOpts.driver || LOCAL_DRIVER,
-  }
+  };
 }

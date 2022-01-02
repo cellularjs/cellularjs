@@ -3,7 +3,10 @@ import { ServiceHandlerClass } from '../internal';
 
 let serviceProviders = new Map<any, GenericProvider[]>();
 
-export function addServiceProviders(service: ServiceHandlerClass, newProviders: GenericProvider[]) {
+export function addServiceProviders(
+  service: ServiceHandlerClass,
+  newProviders: GenericProvider[],
+) {
   const providers = serviceProviders.get(service) || [];
   serviceProviders.set(service, providers.concat(newProviders));
 }

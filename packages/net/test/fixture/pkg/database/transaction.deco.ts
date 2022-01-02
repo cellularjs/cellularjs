@@ -1,8 +1,8 @@
-import { addServiceProviders } from '../../../../src'
+import { addServiceProviders } from '../../../../src';
 import { Session } from './key';
 import { Connector } from './connector';
 
-export const Transaction = () => service => {
+export const Transaction = () => (service) => {
   addServiceProviders(service, [
     {
       token: Session,
@@ -13,4 +13,4 @@ export const Transaction = () => service => {
   ]);
 
   return service;
-}
+};

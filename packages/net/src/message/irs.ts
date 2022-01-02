@@ -11,14 +11,11 @@ export class IRS implements Message {
 
   readonly body;
 
-  constructor(
-    header: IrsHeader = {} as IrsHeader,
-    body?: any,
-  ) {
+  constructor(header: IrsHeader = {} as IrsHeader, body?: any) {
     this.header = {
       ...this.header,
       ...header,
-    }
+    };
     this.body = body;
   }
 

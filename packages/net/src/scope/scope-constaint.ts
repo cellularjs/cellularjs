@@ -1,6 +1,8 @@
 import {
   getResolvedCell,
-  CellContext, ResolvedCell, Errors,
+  CellContext,
+  ResolvedCell,
+  Errors,
   ServiceScopeMap,
 } from '../internal';
 
@@ -8,9 +10,12 @@ export const scopeContraints = {
   [ServiceScopeMap.private]: privateContraint,
   [ServiceScopeMap.space]: spaceConstaint,
   [ServiceScopeMap.publish]: () => {},
-}
+};
 
-function privateContraint(targetResolvedCell: ResolvedCell, refererCell?: CellContext) {
+function privateContraint(
+  targetResolvedCell: ResolvedCell,
+  refererCell?: CellContext,
+) {
   if (!refererCell) {
     throw Errors.AnonymousAccessPrivateService();
   }
@@ -22,7 +27,10 @@ function privateContraint(targetResolvedCell: ResolvedCell, refererCell?: CellCo
   }
 }
 
-function spaceConstaint(targetResolvedCell: ResolvedCell, refererCell?: CellContext) {
+function spaceConstaint(
+  targetResolvedCell: ResolvedCell,
+  refererCell?: CellContext,
+) {
   if (!refererCell) {
     throw Errors.AnonymousAccessSpaceService();
   }

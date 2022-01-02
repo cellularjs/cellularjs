@@ -1,8 +1,18 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, getResolvedCell, NetErrorCode, send, IRQ } from '../../../src';
+import {
+  createNetWork,
+  getResolvedCell,
+  NetErrorCode,
+  send,
+  IRQ,
+} from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
-import { userCellCnf, bundlerCellCnf, bundlerCellWithDuplicateServiceCnf } from '../../fixture/share/network';
+import {
+  userCellCnf,
+  bundlerCellCnf,
+  bundlerCellWithDuplicateServiceCnf,
+} from '../../fixture/share/network';
 
 describe('Network - createNetwork:', () => {
   beforeEach(async () => {
@@ -23,7 +33,7 @@ describe('Network - createNetwork:', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(NetErrorCode.DuplicateCellName)
+      expect(err.code).to.equal(NetErrorCode.DuplicateCellName);
     }
   });
 
@@ -33,7 +43,7 @@ describe('Network - createNetwork:', () => {
     const irq = new IRQ({ to: 'Bundler:FooService' });
     const irs = await send(irq);
 
-    expect(irs.body).to.equals('Bundler:FooService')
+    expect(irs.body).to.equals('Bundler:FooService');
   });
 
   it('can throw error if service is duplicated', async () => {
@@ -42,7 +52,7 @@ describe('Network - createNetwork:', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName)
+      expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName);
     }
   });
 });

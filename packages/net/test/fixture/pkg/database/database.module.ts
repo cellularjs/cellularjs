@@ -4,18 +4,14 @@ import { DatabaseConfig } from './key';
 import { Connector } from './connector';
 
 @Module({
-  providers: [
-    { token: PoolHolder, useClass: PoolHolder },
-  ],
+  providers: [{ token: PoolHolder, useClass: PoolHolder }],
   exports: [Connector],
 })
 export class DatabaseModule {
   static config(config: DatabaseConfig): ExtModuleMeta {
     return {
       extModule: DatabaseModule,
-      providers: [
-        { token: DatabaseConfig, useValue: config },
-      ],
+      providers: [{ token: DatabaseConfig, useValue: config }],
     };
   }
 }

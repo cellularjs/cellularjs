@@ -16,7 +16,9 @@ describe('Decorator - @Cell annotation - imports property:', () => {
     const resolvedCell = getResolvedCell('User');
     const localDriver = resolvedCell.drivers.get(LOCAL_DRIVER);
 
-    const jwtService = await localDriver.container.resolve<JwtService>(JwtService);
+    const jwtService = await localDriver.container.resolve<JwtService>(
+      JwtService,
+    );
 
     expect(jwtService).to.instanceOf(JwtService);
   });

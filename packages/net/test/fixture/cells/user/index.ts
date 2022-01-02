@@ -7,11 +7,8 @@ import { SendMail } from './events/send-mail.event';
 import { RenderHTML } from './helpers/render-html.helper';
 
 @Cell({
-  providers: [
-    './services',
-    RenderHTML,
-  ],
+  providers: ['./services', RenderHTML],
   imports: [JwtModule],
   listen: { CreateProfile, DelegateCacheHtml, DelegateSignIn, SendMail },
 })
-export class UserCell { }
+export class UserCell {}

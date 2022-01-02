@@ -3,4 +3,4 @@ import { Cell } from '../../../../src';
 @Cell({
   listen: './events',
 })
-export class DummyCell { }
+export class DummyCell {}

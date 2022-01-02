@@ -4,4 +4,4 @@ import { JwtService } from './jwt.service';
 @Module({
   exports: [JwtService],
 })
-export class JwtModule { }
+export class JwtModule {}

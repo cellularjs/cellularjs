@@ -20,9 +20,7 @@ const helloNetwork: NetworkConfig = [
       res.status(irs.header.status).send(irs.body);
     };
 
-    send(helloIrq)
-      .then(onComplete)
-      .catch(onComplete);
+    send(helloIrq).then(onComplete).catch(onComplete);
   });
 
   await createNetWork(helloNetwork);

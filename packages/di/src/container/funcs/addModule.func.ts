@@ -1,9 +1,17 @@
 import { Container } from '../../';
 import { Errors } from '../../consts/error.const';
-import { ClassType, ImportableCnf, ExportableCnf, ExtModuleMeta } from '../../types';
+import {
+  ClassType,
+  ImportableCnf,
+  ExportableCnf,
+  ExtModuleMeta,
+} from '../../types';
 import { getModuleMeta } from '../../utils';
 
-export async function addModule(this: Container, moduleCnf: ImportableCnf | ExportableCnf): Promise<void> {
+export async function addModule(
+  this: Container,
+  moduleCnf: ImportableCnf | ExportableCnf,
+): Promise<void> {
   if ((moduleCnf as ExtModuleMeta).extModule) {
     return this._addExtModule(moduleCnf as ExtModuleMeta);
   }

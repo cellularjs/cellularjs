@@ -4,7 +4,7 @@ import { ModuleMeta } from '../';
 /**
  * Config module with meta data.
  */
-export const Module = (moduleMeta: ModuleMeta) => target => {
+export const Module = (moduleMeta: ModuleMeta) => (target) => {
   Reflect.defineMetadata(CLL_MODULE, moduleMeta, target);
   return target;
-}
+};
