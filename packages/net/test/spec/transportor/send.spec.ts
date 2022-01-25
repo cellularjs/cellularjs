@@ -40,16 +40,8 @@ describe('Transportor - send(): send request', () => {
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.header.status === 400).to.true;
-    }
-
-    try {
-      const irq = new IRQ({ to: 'User:CreateProfile' });
-      await send(irq);
-
-      expect(true).to.false;
-    } catch (err) {
       expect(err).to.instanceOf(IRS);
+      expect(err.header.status === 400).to.true;
     }
   });
 

@@ -69,9 +69,6 @@ export interface CellMeta {
   listen: string | { [serviceName: string]: ClassType<ServiceHandler> };
 }
 
-/**
- * Draft
- */
 export type IrqHeader = {
   to?: `${string}:${string}`;
 

@@ -5,16 +5,14 @@ import { Message } from './message';
  * Cellular Internal Request
  */
 export class IRQ implements Message {
-  public readonly header: IrqHeader;
-  public readonly body;
+  public readonly body: any;
 
   /**
    * @param header
    * - to(string): destination request will go
    */
-  constructor(header: IrqHeader, body?: { [key: string]: any }) {
-    this.header = header || {};
-    this.body = body || {};
+  constructor(public readonly header: IrqHeader, body?: any) {
+    this.body = body === undefined ? {} : body;
   }
 
   withHeader(newHeader) {

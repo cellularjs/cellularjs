@@ -2,6 +2,16 @@ import { expect } from 'chai';
 import { IRS } from '../../../src';
 
 describe('IRS:', () => {
+  it('default header value of IRS should be a success response', () => {
+    const irs = new IRS();
+    expect(irs.header).to.eql({ status: 200 });
+  });
+
+  it('default body value of IRS is undefined', () => {
+    const irs = new IRS();
+    expect(irs.body).to.be.undefined;
+  });
+
   it('withHeader() can create new message instance', () => {
     const message = new IRS();
     const newMessage = message.withHeader({ foo: 'bar' });

@@ -2,6 +2,14 @@ import { expect } from 'chai';
 import { IRQ } from '../../../src';
 
 describe('IRQ:', () => {
+  it('default body value of IRQ is an empty object', () => {
+    const irs1 = new IRQ({ to: 'Foo:Bar' });
+    const irs2 = new IRQ({ to: 'Foo:Bar' }, undefined);
+
+    expect(irs1.body).to.be.eqls({});
+    expect(irs2.body).to.be.eqls({});
+  });
+
   it('withHeader() can create new message instance', () => {
     const message = new IRQ(null, null);
     const newMessage = message.withHeader({ foo: 'bar' });
@@ -36,7 +44,7 @@ describe('IRQ:', () => {
   });
 
   it('withHeaderItem() will replace specific header item', () => {
-    const message = new IRQ({ foo: 1, bar: 1 });
+    const message = new IRQ({ to: 'foo:bar', foo: 1, bar: 1 });
     const newMessage = message.withHeaderItem('foo', 2);
 
     expect(message !== newMessage).to.true;
