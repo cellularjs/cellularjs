@@ -5,6 +5,7 @@ import { IMSCell } from '../app/ims';
 import { AuthHttpDriver } from '../remote-drivers/auth/http';
 import { GoogleAuth } from '../remote-drivers/gg-auth';
 import { UserCell } from '../cells/user';
+import { MailerCell } from '../cells/mailer';
 import { BundlerCell, BundlerCellWithDuplicateService } from '../cells/bundler';
 
 export const authCellCnf: CellConfig = {
@@ -42,6 +43,12 @@ export const userCellCnf: CellConfig = {
   driver: UserCell,
 };
 
+export const mailerCellCnf: CellConfig = {
+  name: 'Mailer',
+  space: 'neverland',
+  driver: MailerCell,
+};
+
 export const bundlerCellCnf: CellConfig = {
   name: 'Bundler',
   space: 'neverland',
@@ -58,4 +65,5 @@ export const imsNetwork: NetworkConfig = [
   googleAuthCnf,
   imsCellCnf,
   userCellCnf,
+  mailerCellCnf,
 ];

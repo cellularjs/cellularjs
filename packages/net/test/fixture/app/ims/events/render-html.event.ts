@@ -16,6 +16,6 @@ export class RenderHtml implements ServiceHandler {
   handle(): Promise<IRS> {
     const cacheHtmlIrq = new IRQ({ to: 'IMS:CacheHtml' });
 
-    return send(cacheHtmlIrq, { refererCell: this.ctx });
+    return send(cacheHtmlIrq.withHeaderItem('referer', this.ctx.cellName));
   }
 }

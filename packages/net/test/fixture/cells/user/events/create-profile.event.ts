@@ -15,8 +15,8 @@ export class CreateProfile implements ServiceHandler {
   ) {}
 
   async handle() {
-    const sendMailIrq = new IRQ({ to: 'User:SendMail' });
-    await send(sendMailIrq, { refererCell: this.ctx });
+    const sendMailIrq = new IRQ({ to: 'Mailer:SendMail' });
+    await send(sendMailIrq.withHeaderItem('referer', this.ctx.cellName));
 
     return { newUser: this.createProfileReq.usr };
   }

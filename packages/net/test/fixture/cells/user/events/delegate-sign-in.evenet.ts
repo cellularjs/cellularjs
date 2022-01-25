@@ -13,6 +13,6 @@ export class DelegateSignIn implements ServiceHandler {
   handle() {
     const signInIrq = new IRQ({ to: 'Auth:SignIn' });
 
-    return send(signInIrq, { refererCell: this.ctx });
+    return send(signInIrq.withHeaderItem('referer', this.ctx.cellName));
   }
 }

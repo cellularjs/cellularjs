@@ -149,7 +149,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   it('if event handler scope is space, it is not accessible from anonymous caller', async () => {
-    const irq = new IRQ({ to: 'User:SendMail' });
+    const irq = new IRQ({ to: 'Mailer:SendMail' });
 
     try {
       await send(irq, { throwOriginalError: true });

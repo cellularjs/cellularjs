@@ -1,4 +1,4 @@
-import { Service } from '@cellularjs/net';
+import { Service } from '../../../../../src';
 import { Session, Transaction } from '../../../pkg/database';
 
 @Transaction()

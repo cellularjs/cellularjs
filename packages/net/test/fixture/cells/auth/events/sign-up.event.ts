@@ -18,9 +18,9 @@ export class SignUp implements ServiceHandler {
         this.irq.body,
       );
 
-      const createProfileIrs = await send(createProfileIrq, {
-        refererCell: this.ctx,
-      });
+      const createProfileIrs = await send(
+        createProfileIrq.withHeaderItem('referer', this.ctx.cellName),
+      );
 
       resolve(createProfileIrs);
     });

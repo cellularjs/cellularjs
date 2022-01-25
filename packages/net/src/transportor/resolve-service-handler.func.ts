@@ -8,7 +8,6 @@ import { NextHandler } from './next-handler';
 
 export async function resolveServiceHandler(
   irq: IRQ,
-  refererCell: CellContext,
   driver: string,
 ): Promise<ServiceHandler> {
   const [destCellName, serviceName] = irq.header.to.split(':');
@@ -31,7 +30,7 @@ export async function resolveServiceHandler(
   const serviceMeta = getServiceMeta(DestServiceHandler);
 
   // DO: check service scope constraint
-  scopeContraints[serviceMeta.scope](destResolvedCell, refererCell);
+  scopeContraints[serviceMeta.scope](destResolvedCell, irq.header.referer);
 
   const extModule = new Container();
   await extModule.addProviders([

@@ -6,7 +6,7 @@ import { RequestOptions } from './type';
 
 export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
   const reqOpts = ajustOptions(rawOpts);
-  const { refererCell, throwOriginalError, driver } = reqOpts;
+  const { throwOriginalError, driver } = reqOpts;
 
   const requestCtx = new RequestContext();
   requestCtx.irq = irq;
@@ -15,11 +15,7 @@ export async function send(irq: IRQ, rawOpts?: RequestOptions): Promise<IRS> {
   try {
     await emitTransportEvent('start', requestCtx);
 
-    const serviceHandler = await resolveServiceHandler(
-      irq,
-      refererCell,
-      driver,
-    );
+    const serviceHandler = await resolveServiceHandler(irq, driver);
     const irs = await serviceHandler.handle();
 
     requestCtx.irs = irs instanceof IRS ? irs : new IRS({ status: 200 }, irs);

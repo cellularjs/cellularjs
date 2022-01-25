@@ -74,6 +74,12 @@ export interface CellMeta {
  */
 export type IrqHeader = {
   to?: `${string}:${string}`;
+
+  /**
+   * The name of cell that this request come from.
+   */
+  referer?: string;
+
   [key: string]: any;
 };
 
