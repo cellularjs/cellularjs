@@ -93,16 +93,27 @@ export interface ClassifiedUseFuncDep {
 }
 
 export interface ResolveOptions {
-  // This stuff may be hidden from client later(alpha).
+  /**
+   * `extModule` is a container object that is a "child" of this container.
+   *
+   * _Note:_ `extModule` has higher priority than parent module,
+   * so it can override parent module providers.
+   * ```
+   * extModule > nornal container > global
+   * ```
+   */
   extModule?: Container;
 
   /**
    * Global container.
    *
-   * When there is no provider matching with the given token,
+   * If there is no provider matching with the given token,
    * it will find provider from this global container.
    *
    * _Note:_ global container has lower priority than normal container.
+   * ```
+   * extModule > nornal container > global
+   * ```
    */
   global?: Container;
 }
