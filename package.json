@@ -6,10 +6,12 @@
   ],
   "scripts": {
     "prepare": "husky install",
-    "version": "npm run sync_version",
+    "version": "npm run cmd:sync_version",
     "bootstrap": "lerna bootstrap && lerna exec yarn",
     "cmd:lint": "eslint --ext .ts -c .eslintrc.js ./packages/**/src/**/*.ts  ./packages/**/test/**/*.ts --fix",
-    "sync_version": "node ./scripts/sync-version.js"
+    "cmd:sync_version": "node ./scripts/sync-version.js",
+    "build": "lerna run build",
+    "semver": "lerna version --conventional-commits --force-publish --no-push"
   },
   "lint-staged": {
     "*.ts": "eslint --ext .ts -c .eslintrc.js --fix"
