@@ -3,6 +3,8 @@ import { createNetWork, send, IRQ, IRS } from '@cellularjs/net';
 import { NetworkConfig } from '@cellularjs/net';
 import { HelloCell } from './hello.cell';
 
+const nodePort = process.env.NODE_PORT;
+
 const helloNetwork: NetworkConfig = [
   {
     name: 'Hello',
@@ -25,5 +27,7 @@ const helloNetwork: NetworkConfig = [
 
   await createNetWork(helloNetwork);
 
-  app.listen(3001, () => console.log('Ready for http request (port: 3001)'));
+  app.listen(nodePort, () =>
+    console.log(`Halo gateway: ready for http request (port: ${nodePort})`),
+  );
 })();
