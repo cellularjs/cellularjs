@@ -182,11 +182,4 @@ export interface ResolvedCell {
   cellContext: CellContext;
 }
 
-export type NetworkOptions = {
-  /**
-   * Number of worker will be spawned when creating network.
-   */
-  worker?: number;
-};
-
 export type ServiceHandlerClass = { new (...args: any[]): ServiceHandler };
