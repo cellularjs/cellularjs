@@ -9,6 +9,8 @@
     "version": "npm run cmd:sync_version",
     "bootstrap": "lerna bootstrap && lerna exec yarn",
     "cmd:lint": "eslint --ext .ts -c .eslintrc.js ./packages/**/src/**/*.ts  ./packages/**/test/**/*.ts --fix",
+    "cmd:test": "lerna run test",
+    "cmd:coverage": "lerna run code-coverage",
     "cmd:sync_version": "node ./scripts/sync-version.js",
     "build": "lerna run build",
     "semver": "lerna version --conventional-commits --force-publish --no-push"
