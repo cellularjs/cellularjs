@@ -25,7 +25,10 @@ export async function addModuleToMap(this: Container, moduleClass: ClassType) {
 }
 
 // TODO: rename
-async function createModuleListener(moduleClass, newModule: Container) {
+async function createModuleListener(
+  moduleClass: ClassType,
+  newModule: Container,
+) {
   const tempContainer = new Container();
 
   await tempContainer.addProviders([
