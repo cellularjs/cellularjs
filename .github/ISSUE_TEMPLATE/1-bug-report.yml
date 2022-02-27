@@ -1,0 +1,22 @@
+name: Bug report
+description: You find out a bug 🐞, please make a report to help us improve it.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks you for your report. Can you please fill the below information to help us fix this bug.
+  - type: textarea
+    attributes:
+      label: Step to reproduce this bug?
+      description: Please tell us details information for reproducing this bug(If possible, please provide a github repository that can reproduce this bug).
+  - type: textarea
+    attributes:
+      label: What actually happened?
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: What is your expected behavior?
+  - type: textarea
+    attributes:
+      label: Do you have any additional information for us(optional)?
