@@ -1,0 +1,22 @@
+name: Feature request
+description: You want to change current behavior or add new thing, please tell us.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks you for your feature request. To make a better framework for our community, we need your suggestion.
+  - type: textarea
+    attributes:
+      label: What problem do you have?
+      description: Please tell us your problem, our community may suggest better solution to this problem.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: How this feature can help you?
+      description: Please tell us the reason to add this feature, how it work, how it is important to you or our community.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Do you have any additional information for us(optional)?
