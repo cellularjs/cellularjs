@@ -1,4 +1,6 @@
 {
   "editor.tabSize": 2,
   "files.eol": "\n",
+  // use typescript from node_modules for type hint
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }
