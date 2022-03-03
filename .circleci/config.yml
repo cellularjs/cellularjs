@@ -36,7 +36,4 @@ jobs:
 workflows:
   build-workflow:
     jobs:
-      - test:
-          filters:
-            branches:
-              only: develop
+      - test
