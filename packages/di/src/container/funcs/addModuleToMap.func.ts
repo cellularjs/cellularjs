@@ -16,7 +16,7 @@ export async function addModuleToMap(this: Container, moduleClass: ClassType) {
   const newModule = new Container();
 
   await newModule.addProviders(moduleMeta.providers);
-  await newModule._addExportServicesAsProviders(moduleMeta.exports);
+  await newModule._addExports(moduleMeta.exports);
   await newModule.addModules(moduleMeta.imports);
 
   moduleMap.set(moduleClass, newModule);
