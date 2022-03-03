@@ -21,6 +21,14 @@ export async function addExportServicesAsProviders(
       continue;
     }
 
-    await this.addProvider(<ClassType>exportCnf);
+    await addClassAsProvider.call(this, exportCnf);
   }
+}
+
+async function addClassAsProvider(this: Container, exportCnf: ClassType) {
+  if (this.has(exportCnf)) {
+    return;
+  }
+
+  await this.addProvider(exportCnf);
 }
