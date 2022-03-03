@@ -135,24 +135,6 @@ describe('Annotation - Module(): define modular dependency injection', () => {
     }
   });
 
-  it('service class can not exist in both providers and exports', async () => {
-    class FooService {}
-
-    @Module({
-      providers: [FooService],
-      exports: [FooService],
-    })
-    class FooBarModule {}
-
-    try {
-      await container.addModule(FooBarModule);
-
-      expect(true).to.be.false;
-    } catch (err) {
-      expect(err.code).to.eql(DiErrorCode.DuplicateToken);
-    }
-  });
-
   it('there is no need to add service class into providers before using if it is also exported', async () => {
     class FooService {
       run = () => 'fooService';
