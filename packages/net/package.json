@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/net",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "",
   "exports": {
     ".": "./dist/index.js"
@@ -18,10 +18,10 @@
   "license": "MIT",
   "types": "./dist/",
   "devDependencies": {
-    "@cellularjs/di": "^0.1.2"
+    "@cellularjs/di": "^0.2.0"
   },
   "peerDependencies": {
-    "@cellularjs/di": "^0.1.2"
+    "@cellularjs/di": "^0.2.0"
   },
   "dependencies": {
     "emittery": "^0.10.0"

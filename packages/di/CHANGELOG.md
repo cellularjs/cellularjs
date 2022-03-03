@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/cellularjs/cellularjs/compare/v0.1.2...v0.2.0) (2022-03-03)
+
+
+* feat(di)!: make better service interoperability for extModule ([87f183e](https://github.com/cellularjs/cellularjs/commit/87f183e97afdd0e6e818edcc5423604deea22b3c))
+* feat(di)!: first step to make better service interoperability ([f6c064b](https://github.com/cellularjs/cellularjs/commit/f6c064bf6ccca43e31cd2cee0eeee1796633d75f))
+
+
+### BREAKING CHANGES
+
+* same as #5
+* Correctly, breaking behavior. At previous version, if client code declare a service in both `exports` and `providers`, it will cause error. So this new behavior will not make current code of client crash.
+
+
+
+
+
+
 ## [0.1.2](https://github.com/cellularjs/cellularjs/compare/v0.1.1...v0.1.2) (2022-02-26)
 
 **Note:** Version bump only for package @cellularjs/di
