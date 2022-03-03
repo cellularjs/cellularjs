@@ -1,20 +1,22 @@
 import { Container } from '../../';
 import { ExtModuleMeta, ClassType } from '../../types';
 import { getModuleMeta } from '../../utils';
+import { addExportClassAsProvider } from './addExportClassAsProvider.func';
 
 export async function addExtModule(
   this: Container,
   extModuleMeta: ExtModuleMeta,
 ) {
-  await this.addModule(extModuleMeta.extModule);
-
   const extModule = new Container();
+  const exports = extModuleMeta.exports || [];
+
+  await this.addModule(extModuleMeta.extModule);
   await extModule.addProviders(extModuleMeta.providers);
 
-  const exports = extModuleMeta.exports || [];
   for (let i = 0; i < exports.length; i++) {
     const exportCnf = exports[i];
     const moduleMeta = getModuleMeta(exportCnf as ClassType);
+
     if (moduleMeta) {
       await this.addModule(exportCnf);
       continue;
@@ -25,7 +27,7 @@ export async function addExtModule(
       useModule: extModuleMeta.extModule,
     });
 
-    await extModule.addProvider(exportCnf as ClassType);
+    await addExportClassAsProvider.call(extModule, exportCnf);
   }
 
   await extModule.addModules(extModuleMeta.imports);

@@ -1,34 +1,25 @@
 import { getModuleMeta } from '../../utils';
 import { ClassType, ExportableCnf } from '../../types';
-import { Container, ExtModuleMeta } from '../../';
+import { Container, ExtModuleMeta } from '../..';
+import { addExportClassAsProvider } from './addExportClassAsProvider.func';
 
-export async function addExportServicesAsProviders(
+export async function addExports(
   this: Container,
   exports: ExportableCnf[] = [],
 ): Promise<void> {
   for (let i = 0; i < exports.length; i++) {
     const exportCnf = exports[i];
 
-    // TODO: add test for better TEST COVERAGE.
     if ((<ExtModuleMeta>exportCnf).extModule) {
       await this._addExtModule(<ExtModuleMeta>exportCnf);
       continue;
     }
 
-    // TODO: add test for better TEST COVERAGE.
     if (getModuleMeta(<ClassType>exportCnf)) {
       await this.addModule(exportCnf);
       continue;
     }
 
-    await addClassAsProvider.call(this, exportCnf);
+    await addExportClassAsProvider.call(this, exportCnf);
   }
-}
-
-async function addClassAsProvider(this: Container, exportCnf: ClassType) {
-  if (this.has(exportCnf)) {
-    return;
-  }
-
-  await this.addProvider(exportCnf);
 }

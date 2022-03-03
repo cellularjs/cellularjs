@@ -5,7 +5,7 @@ import { addExtModule } from './funcs/addExtModule.func';
 import { addModuleToMap } from './funcs/addModuleToMap.func';
 import { addModule } from './funcs/addModule.func';
 import { addProvider } from './funcs/addProvider.func';
-import { addExportServicesAsProviders } from './funcs/addExportServicesAsProviders.func';
+import { addExports } from './funcs/addExports.func';
 import { addModuleExports } from './funcs/addModuleExports.func';
 import { resolve } from './funcs/resolve.func';
 import { resolveUseFuncDeps } from './funcs/resolveUseFuncDeps.func';
@@ -74,7 +74,7 @@ export class Container extends ContainerBag {
   /**
    * Add service classes from ExportableCnf[] into container as providers.
    */
-  protected _addExportServicesAsProviders = addExportServicesAsProviders;
+  protected _addExports = addExports;
 
   protected _resolveWithParentModule = resolveWithParentModule;
 
