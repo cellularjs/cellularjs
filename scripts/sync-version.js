@@ -13,6 +13,7 @@ const projectPaths = [
   path.resolve(__dirname, '..', 'packages', 'net'),
   path.resolve(__dirname, '..', 'packages', 'di'),
   path.resolve(__dirname, '..', 'packages', 'cli'),
+  path.resolve(__dirname, '..', 'packages', 'express-proxy'),
 ];
 
 function syncPackageVersion(packageJsonPath) {
