@@ -11,14 +11,20 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellularjs/cellularjs.git"
+  },
+  "homepage": "https://github.com/cellularjs/cellularjs#readme",
   "exports": {
     ".": "./dist/index.js"
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "tsc -b ./tsconfig.build.json",
+    "build": "npm run clean && tsc -b ./tsconfig.build.json",
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
-    "code-coverage": "nyc npm test"
+    "code-coverage": "nyc npm test",
+    "clean": "rimraf ./dist"
   },
   "author": "Great Elephant",
   "license": "MIT",
