@@ -69,8 +69,10 @@ export interface CellMeta {
   listen: string | { [serviceName: string]: ClassType<ServiceHandler> };
 }
 
+export type ToTargetHeader = `${string}:${string}`;
+
 export type IrqHeader = {
-  to?: `${string}:${string}`;
+  to?: ToTargetHeader;
 
   /**
    * The name of cell that this request come from.
