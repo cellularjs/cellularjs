@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cellularjs/cellularjs/compare/v0.2.0...v0.3.0) (2022-03-05)
+
+
+### Features
+
+* **net:** public ToTargetHeader interface ([936afbb](https://github.com/cellularjs/cellularjs/commit/936afbbbb40b10ea274a73ca9f091a064028e76c))
+
+
+
+
+
+
 # [0.2.0](https://github.com/cellularjs/cellularjs/compare/v0.1.2...v0.2.0) (2022-03-03)
 
 **Note:** Version bump only for package @cellularjs/net
