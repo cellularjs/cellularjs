@@ -8,6 +8,7 @@ export {
   ServiceHandler,
   ServiceHandlerClass,
   ResolvedCell,
+  ToTargetHeader,
 } from './type';
 export { LOCAL_DRIVER } from './key';
 export { Cell, Service } from './decorator';
