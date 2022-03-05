@@ -20,7 +20,6 @@
     ".": "./dist/index.js"
   },
   "scripts": {
-    "prepublishOnly": "npm run build",
     "build": "npm run clean && tsc -b ./tsconfig.build.json",
     "test": "mocha -r ts-node/register test/**/*.spec.ts",
     "code-coverage": "nyc npm test",
