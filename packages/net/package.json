@@ -28,13 +28,8 @@
   "author": "Great Elephant",
   "license": "MIT",
   "types": "./dist/",
-  "devDependencies": {
-    "@cellularjs/di": "^0.3.0"
-  },
-  "peerDependencies": {
-    "@cellularjs/di": "^0.3.0"
-  },
   "dependencies": {
+    "@cellularjs/di": "^0.3.0",
     "emittery": "^0.10.0"
   }
 }
