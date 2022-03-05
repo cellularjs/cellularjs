@@ -1,7 +1,5 @@
 # <div align="center">@cellularjs/express-proxy</div><sub>🐘</sub>
 
-_(For more information, please visit https://cellularjs.com/docs/how-to%20wiki/env%20variable)_
-
 ## 1. Example
 **Example 1:** create a proxy for JSON api.
 ```ts
