@@ -1,13 +1,24 @@
 {
   "name": "@cellularjs/net",
   "version": "0.2.0",
-  "description": "",
+  "description": "CellularJS Net",
+  "keywords": [
+    "cellularjs",
+    "virtual network",
+    "hybrid microservices",
+    "hybrid architecture"
+  ],
   "exports": {
     ".": "./dist/index.js"
   },
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellularjs/cellularjs.git"
+  },
+  "homepage": "https://github.com/cellularjs/cellularjs#readme",
   "scripts": {
     "prepublishOnly": "npm run build",
     "build": "tsc -b ./tsconfig.build.json",

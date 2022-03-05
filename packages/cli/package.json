@@ -1,13 +1,19 @@
 {
   "name": "@cellularjs/cli",
   "version": "0.2.0",
-  "description": "Modular dependency injection",
+  "description": "CellularJS CLI",
   "keywords": [
+    "cellularjs",
     "cellularjs cli"
   ],
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellularjs/cellularjs.git"
+  },
+  "homepage": "https://github.com/cellularjs/cellularjs#readme",
   "exports": {
     ".": "./dist/index.js"
   },
@@ -16,9 +22,10 @@
   },
   "scripts": {
     "prepublishOnly": "npm run build",
-    "build": "tsc -b ./tsconfig.build.json && npm run copy_templates",
+    "build": "npm run clean && tsc -b ./tsconfig.build.json && npm run copy_templates",
     "dev": "ts-node ./src/cmd/index.ts",
-    "copy_templates": "node ./scripts/copy-templates.js"
+    "copy_templates": "node ./scripts/copy-templates.js",
+    "clean": "rimraf ./dist"
   },
   "author": "Great Elephant",
   "license": "MIT",
