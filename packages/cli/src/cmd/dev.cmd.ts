@@ -4,9 +4,9 @@ import chalk from 'chalk';
 import { getCellularConfig } from '../helper/get-cellular-config';
 import { getWebpackConfig } from '../helper/get-webpack-config';
 
-function handleDevCmd(entryName: string) {
+function handleDevCmd(entries: string[]) {
   const cellularCnf = getCellularConfig();
-  const webpackConfig = getWebpackConfig(cellularCnf, entryName, 'development');
+  const webpackConfig = getWebpackConfig(cellularCnf, entries, 'development');
 
   webpack(webpackConfig, (err, stats) => {
     if (err || stats.hasErrors()) {
@@ -17,7 +17,7 @@ function handleDevCmd(entryName: string) {
 
 export const devCmd = new Command('dev')
   .option(
-    '-e, --entry <name>',
+    '-e, --entry [name...]',
     'Entry name, it is declared inside file "cellular.ts"',
   )
   .action((args) => {

@@ -8,14 +8,14 @@ import { cellTransformer } from './cell-transformer';
 
 const bundleFile = 'index.js';
 
-export function getBaseWebpackConfig(entryName: string) {
+export function getBaseWebpackConfig() {
   const baseWebpackConfig: Configuration = {
     context: path.resolve(process.cwd()),
     target: 'node',
     devtool: 'source-map',
     output: {
-      path: path.resolve(process.cwd(), 'dist', entryName),
-      filename: bundleFile,
+      path: path.resolve(process.cwd(), 'dist'),
+      filename: `[name]/${bundleFile}`,
     },
     module: {
       rules: [

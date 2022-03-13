@@ -11,16 +11,21 @@ type WebpackMode = 'none' | 'development' | 'production';
 
 export function getWebpackConfig(
   cellularCnf: CellularConfig,
-  entryName: string,
+  entries: string[],
   mode: WebpackMode,
 ) {
-  const baseWebpackConfig = getBaseWebpackConfig(entryName);
+  const webpackEntry = {};
+  entries.forEach((entryName) => {
+    webpackEntry[entryName] = getEntryAbsPath(cellularCnf, entryName);
+  });
+
+  const baseWebpackConfig = getBaseWebpackConfig();
   const webpackConfig: Configuration = {
     ...baseWebpackConfig,
     mode,
     watch: mode === 'development',
     optimization: { minimize: mode === 'production' },
-    entry: { [entryName]: getEntryAbsPath(cellularCnf, entryName) },
+    entry: webpackEntry,
     plugins: getDefaultPlugins(baseWebpackConfig, mode),
   };
 
