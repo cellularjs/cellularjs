@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cellularjs/cellularjs/compare/v0.3.0...v0.4.0) (2022-03-13)
+
+
+### Features
+
+* **cli:** support run dev/build with multilpe entries [#9](https://github.com/cellularjs/cellularjs/issues/9) ([f654202](https://github.com/cellularjs/cellularjs/commit/f654202c32704aa929186f444a86369c931181c7))
+
+
+
+
+
 # [0.3.0](https://github.com/cellularjs/cellularjs/compare/v0.2.0...v0.3.0) (2022-03-05)
 
 **Note:** Version bump only for package @cellularjs/cli
