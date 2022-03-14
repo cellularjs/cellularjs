@@ -1,15 +1,8 @@
-import {
-  Service,
-  ServiceHandler,
-  IRQ,
-  IRS,
-  CellContext,
-  send,
-} from '../../../../../src';
+import { Service, ServiceHandler, IRQ, IRS, send } from '../../../../../src';
 
 @Service({ scope: 'publish' })
 export class SignUp implements ServiceHandler {
-  constructor(private irq: IRQ, private ctx: CellContext) {}
+  constructor(private irq: IRQ) {}
 
   async handle(): Promise<IRS> {
     return new Promise(async (resolve) => {
@@ -19,7 +12,7 @@ export class SignUp implements ServiceHandler {
       );
 
       const createProfileIrs = await send(
-        createProfileIrq.withHeaderItem('referer', this.ctx.cellName),
+        createProfileIrq.withHeaderItem('referer', this.irq.header.to),
       );
 
       resolve(createProfileIrs);

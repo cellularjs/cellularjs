@@ -75,9 +75,9 @@ export type IrqHeader = {
   to?: ToTargetHeader;
 
   /**
-   * The name of cell that this request come from.
+   * The name of "cell:service" that this request come from.
    */
-  referer?: string;
+  referer?: ToTargetHeader;
 
   [key: string]: any;
 };

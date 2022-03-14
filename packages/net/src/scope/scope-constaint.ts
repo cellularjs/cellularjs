@@ -3,6 +3,7 @@ import {
   Errors,
   ServiceScopeMap,
   getResolvedCell,
+  ToTargetHeader,
 } from '../internal';
 
 export const scopeContraints = {
@@ -13,12 +14,13 @@ export const scopeContraints = {
 
 function privateContraint(
   targetResolvedCell: ResolvedCell,
-  refererCell?: string,
+  referer?: ToTargetHeader,
 ) {
-  if (!refererCell) {
+  if (!referer) {
     throw Errors.AnonymousAccessPrivateService();
   }
 
+  const refererCell = referer.split(':')[0];
   const refererResolvedCell = getResolvedCell(refererCell);
 
   if (refererResolvedCell.cellId !== targetResolvedCell.cellId) {
@@ -28,12 +30,13 @@ function privateContraint(
 
 function spaceConstaint(
   targetResolvedCell: ResolvedCell,
-  refererCell?: string,
+  referer?: ToTargetHeader,
 ) {
-  if (!refererCell) {
+  if (!referer) {
     throw Errors.AnonymousAccessSpaceService();
   }
 
+  const refererCell = referer.split(':')[0];
   const refererResolvedCell = getResolvedCell(refererCell);
 
   if (refererResolvedCell.spaceId !== targetResolvedCell.spaceId) {
