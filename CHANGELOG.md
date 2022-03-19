@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cellularjs/cellularjs/compare/v0.4.0...v0.5.0) (2022-03-19)
+
+
+### Features
+
+* **net:** add service name into referer header of IRQ ([aeb0a04](https://github.com/cellularjs/cellularjs/commit/aeb0a04cd2c568d6c09c86c6e11be67ecdf8cdd9)), closes [#11](https://github.com/cellularjs/cellularjs/issues/11)
+
+
+
+
+
+
 # [0.4.0](https://github.com/cellularjs/cellularjs/compare/v0.3.0...v0.4.0) (2022-03-13)
 
 
