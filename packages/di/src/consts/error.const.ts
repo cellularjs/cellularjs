@@ -1,9 +1,9 @@
 import { getVarName } from '../utils';
 
 export enum DiErrorCode {
-  NoProviderForToken = 'DI_NO_PROVIDER_FOR_TOKEN',
-  DuplicateToken = 'DI_DUPLICATE_TOKEN',
-  InvalidModuleClass = 'DI_INVALID_MODULE_CLASS',
+  NoProviderForToken = 'NO_PROVIDER_FOR_TOKEN',
+  DuplicateToken = 'DUPLICATE_TOKEN',
+  InvalidModuleClass = 'INVALID_MODULE_CLASS',
 }
 
 export class DiError extends Error {
