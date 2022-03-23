@@ -1,0 +1,33 @@
+{
+  "name": "@cellularjs/worker",
+  "version": "0.4.0",
+  "description": "CellularJS Worker",
+  "keywords": [
+    "cellularjs worker",
+    "multithreading",
+    "worker threads"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellularjs/cellularjs.git"
+  },
+  "homepage": "https://cellularjs.com",
+  "scripts": {
+    "build": "npm run clean && tsc -b ./tsconfig.build.json",
+    "test": "mocha --timeout 600000 -r ts-node/register test/spec/**/*.spec.ts",
+    "code-coverage": "nyc npm test",
+    "clean": "rimraf ./dist"
+  },
+  "author": "Great Elephant",
+  "license": "MIT",
+  "types": "./dist/",
+  "dependencies": {
+    "@cellularjs/net": "^0.5.0"
+  }
+}
