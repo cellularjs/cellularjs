@@ -6,6 +6,7 @@ import {
   DiErrorCode,
   Injectable,
   getModuleMeta,
+  DiError,
 } from '../../../src';
 import { JwtModule } from '../../fixture/pkg/jwt/jwt.module';
 import { JwtService } from '../../fixture/pkg/jwt/jwt.service';
@@ -119,6 +120,7 @@ describe('Annotation - Module(): define modular dependency injection', () => {
 
       expect(true).to.be.false;
     } catch (err) {
+      expect(err).to.instanceOf(DiError);
       expect(err.code).to.eql(DiErrorCode.InvalidModuleClass);
     }
   });
