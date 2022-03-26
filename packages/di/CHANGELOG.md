@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cellularjs/cellularjs/compare/v0.5.0...v0.6.0) (2022-03-26)
+
+
+### Features
+
+* **di:** make error code cleaner ([53b1300](https://github.com/cellularjs/cellularjs/commit/53b1300699d932f625dd45195f842a5dc5c2a4d9))
+
+
+
+
+
+
 # [0.5.0](https://github.com/cellularjs/cellularjs/compare/v0.4.0...v0.5.0) (2022-03-19)
 
 **Note:** Version bump only for package @cellularjs/di
