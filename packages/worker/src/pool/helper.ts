@@ -1,15 +1,15 @@
 import { Worker as NodeJSWorker } from 'worker_threads';
 import { MessageType, Thread, Pool, Worker, WorkerMessage } from '../internal';
 import { Errors } from '../error';
-import { DEFAULT_CLUSTER, MINIMUM_WORKER } from '../const';
+import { DEFAULT_POOL, MINIMUM_WORKER } from '../const';
 
-const clusters = new Map<string | symbol, Pool>();
+const pools = new Map<string | symbol, Pool>();
 
-interface ClusterOptions {
+interface PoolOptions {
   /**
-   * Unique cluster name.
+   * Unique pool name.
    *
-   * If cluster name is not provided, CellularJS will give it a default name.
+   * If pool name is not provided, CellularJS will give it a default name.
    */
   name?: string;
 
@@ -26,8 +26,15 @@ interface ClusterOptions {
   // resourceLimits?: ResourceLimits;
 }
 
-export async function createCluster(options: ClusterOptions) {
-  if (!Thread.isMainThread) throw Errors.CreateClusterFromChildThread();
+/**
+ * Create thread pool for specific worker script.
+ *
+ * After pool is initialized, you can use `transfer` to exchange message.
+ *
+ * @see https://cellularjs.com/docs/foundation/worker/usage#2-transfer-irq-to-net-worker.
+ */
+export async function createPool(options: PoolOptions) {
+  if (!Thread.isMainThread) throw Errors.CreatePoolFromChildThread();
 
   options.minThread = Number.isInteger(options.minThread)
     ? options.minThread
@@ -37,15 +44,15 @@ export async function createCluster(options: ClusterOptions) {
     throw Errors.MinThread();
   }
 
-  const clusterName = options.name || DEFAULT_CLUSTER;
-  if (clusters.has(clusterName)) {
-    throw Errors.ClusterNameDuplicated(clusterName);
+  const poolName = options.name || DEFAULT_POOL;
+  if (pools.has(poolName)) {
+    throw Errors.PoolNameDuplicated(poolName);
   }
 
-  clusters.set(clusterName, await createWorkerPool(options));
+  pools.set(poolName, await createWorkerPool(options));
 }
 
-async function createWorkerPool(options: ClusterOptions) {
+async function createWorkerPool(options: PoolOptions) {
   const pool = new Pool();
 
   for (let i = 0; i < options.minThread; i++) {
@@ -56,7 +63,7 @@ async function createWorkerPool(options: ClusterOptions) {
   return pool;
 }
 
-function createNetWorker(options: ClusterOptions): Promise<Worker> {
+function createNetWorker(options: PoolOptions): Promise<Worker> {
   return new Promise((resolve, reject) => {
     const nodeJsWorker = new NodeJSWorker(options.script);
 
@@ -75,17 +82,17 @@ function createNetWorker(options: ClusterOptions): Promise<Worker> {
   });
 }
 
-export function getPool(clusterName: string = DEFAULT_CLUSTER) {
-  return clusters.get(clusterName);
+export function getPool(poolName: string = DEFAULT_POOL) {
+  return pools.get(poolName);
 }
 
-export async function cleanAllClusters() {
-  const clusterArr = Array.from(clusters);
+export async function cleanAllPools() {
+  const poolArr = Array.from(pools);
 
-  for (let i = 0; i < clusterArr.length; i++) {
-    const [clusterName, pool] = clusterArr[i];
+  for (let i = 0; i < poolArr.length; i++) {
+    const [poolName, pool] = poolArr[i];
 
     pool && (await pool.drain());
-    clusters.delete(clusterName);
+    pools.delete(poolName);
   }
 }

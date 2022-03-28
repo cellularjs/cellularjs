@@ -8,21 +8,21 @@ import {
 } from '../internal';
 import { Worker } from '../pool';
 import { Errors } from '../error';
-import { DEFAULT_CLUSTER } from '../const';
+import { DEFAULT_POOL } from '../const';
 
 interface TransferOptions {
   /**
-   * The name of cluster that you want to transfer irq message.
+   * The name of pool that you want to transfer irq message.
    *
-   * If there is no cluster is specified, it will use default cluster name.
+   * If there is no pool is specified, it will use default pool.
    */
-  cluster?: string;
+  pool?: string;
 
   // transferList
 }
 
 /**
- * Transfer `IRQ` and get `IRS`
+ * Transfer `IRQ` to a pool and get back `IRS`.
  */
 export async function transfer(
   irq: IRQ,
@@ -32,11 +32,11 @@ export async function transfer(
     throw Errors.TransferFromChildThread();
   }
 
-  const clusterName = options?.cluster || DEFAULT_CLUSTER;
-  const pool = getPool(clusterName);
+  const poolName = options?.pool || DEFAULT_POOL;
+  const pool = getPool(poolName);
 
   if (!pool) {
-    throw Errors.ClusterIsNotExists(clusterName);
+    throw Errors.PoolIsNotExists(poolName);
   }
 
   const worker = await pool.waitForIdleWorker();

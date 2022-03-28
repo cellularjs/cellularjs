@@ -1,6 +1,6 @@
 require('ts-node/register');
-const { createCluster } = require('../../src');
+const { createPool } = require('../../src');
 
-createCluster({
+createPool({
   script: 'script-is-not-important-here',
 });

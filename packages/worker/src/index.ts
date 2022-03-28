@@ -1,2 +1,2 @@
 export { initNetWorker, transfer } from './net';
-export { createCluster } from './cluster';
+export { createPool } from './pool';

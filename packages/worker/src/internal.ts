@@ -2,7 +2,7 @@
  * IMPORTANT: this file is for internal use only, DO NOT import this file from external package.
  */
 
-export * from './cluster';
+export * from './pool';
 export * from './const';
 export * from './error';
 export * from './net';
