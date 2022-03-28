@@ -4,21 +4,21 @@ sidebar_position: 3
 
 # API
 
-## 1. createCluster
-You can invoke this function from **main thread** to create a cluster of net-workers.  
-_(You also need to use [initNetWorker](/docs/foundation/worker/x.%20API#2-initnetworker) from child thread to complete creating cluster)._
+## 1. createPool
+You can invoke this function from **main thread** to create a pool of net-workers.  
+_(You also need to use [initNetWorker](/docs/foundation/worker/x.%20API#2-initnetworker) from child thread to complete creating pool)._
 
 ```ts
-function createCluster(options: ClusterOptions): Promise<void>;
+function createPool(options: PoolOptions): Promise<void>;
 ```
 
-**`ClusterOptions`** includes:
+**`PoolOptions`** includes:
 
-| Name      | Type   | Required | Default          | Description                                        |
-|-----------|--------|----------|------------------|----------------------------------------------------|
-| script    | string | True     |                  | Path to worker script.                             |
-| name      | string | False    | 'cll:df_cluster' | Unique cluster name.                               |
-| minThread | number | False    | 1                | The minimum number of threads will be initialized. |
+| Name      | Type   | Required | Default       | Description                                        |
+|-----------|--------|----------|---------------|----------------------------------------------------|
+| script    | string | True     |               | Path to worker script.                             |
+| name      | string | False    | 'cll:df_pool' | Unique pool name.                                  |
+| minThread | number | False    | 1             | The minimum number of threads will be initialized. |
 
 ## 2. initNetWorker
 ```ts
@@ -35,9 +35,9 @@ function transfer(irq: IRQ, options?: TransferOptions): Promise<IRS>;
 
 **`TransferOptions`** includes:
 
-| Name    | Type   | Required | Default          | Description                                     |
-|---------|--------|----------|------------------|-------------------------------------------------|
-| cluster | string | False    | 'cll:df_cluster' | The name of cluster you want to transfer IRQ to |
+| Name | Type   | Required | Default       | Description                                  |
+|------|--------|----------|---------------|----------------------------------------------|
+| pool | string | False    | 'cll:df_pool' | The name of pool you want to transfer IRQ to |
 
 ```ts
 import { IRQ } from '@cellularjs/net';

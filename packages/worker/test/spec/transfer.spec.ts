@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import * as path from 'path';
 import sinon from 'sinon';
 import { IRQ } from '@cellularjs/net';
-import { createCluster, transfer } from '../../src';
-import { cleanAllClusters, WorkerErrorCode, Thread } from '../../src/internal';
+import { createPool, transfer } from '../../src';
+import { cleanAllPools, WorkerErrorCode, Thread } from '../../src/internal';
 
 const workerScript = path.resolve(
   __dirname,
@@ -17,25 +17,25 @@ const workerScript = path.resolve(
 describe('transfer:', () => {
   afterEach(async () => {
     sinon.restore();
-    await cleanAllClusters();
+    await cleanAllPools();
   });
 
   it('throw error if client transfer message from child thread', async () => {
-    await createCluster({ script: workerScript });
+    await createPool({ script: workerScript });
     const irq = await transfer(new IRQ({ to: 'Foo:UserTransfer' }));
 
     expect(irq.body).to.true;
   });
 
-  it('throw error if specified cluster is not exists', async () => {
+  it('throw error if specified pool is not exists', async () => {
     try {
       await transfer(new IRQ({ to: 'Any:Any' }), {
-        cluster: 'not-exist',
+        pool: 'not-exist',
       });
 
       expect(true).to.false;
     } catch (err) {
-      expect(err.code).to.eql(WorkerErrorCode.ClusterIsNotExists);
+      expect(err.code).to.eql(WorkerErrorCode.PoolIsNotExists);
     }
   });
 
@@ -51,24 +51,24 @@ describe('transfer:', () => {
     }
   });
 
-  it('can specify cluster for transfering message', async () => {
-    await createCluster({ name: 'hey', script: workerScript });
+  it('can specify pool for transfering message', async () => {
+    await createPool({ name: 'hey', script: workerScript });
     const irq = await transfer(new IRQ({ to: 'Foo:BarService' }), {
-      cluster: 'hey',
+      pool: 'hey',
     });
 
     expect(irq.body).to.eqls('BarService');
   });
 
   it('can send IRQ and get success IRS', async () => {
-    await createCluster({ script: workerScript });
+    await createPool({ script: workerScript });
     const irq = await transfer(new IRQ({ to: 'Foo:BarService' }));
 
     expect(irq.body).to.eqls('BarService');
   });
 
   it('can wait for available thread to run', async () => {
-    await createCluster({ script: workerScript, minThread: 2 });
+    await createPool({ script: workerScript, minThread: 2 });
     const [irq1, irq2, irq3] = await Promise.all([
       transfer(new IRQ({ to: 'Foo:BarService' })),
       transfer(new IRQ({ to: 'Foo:BarService' })),
@@ -82,7 +82,7 @@ describe('transfer:', () => {
 
   it('can send IRQ and get error IRS', async () => {
     try {
-      await createCluster({ script: workerScript });
+      await createPool({ script: workerScript });
       await transfer(new IRQ({ to: 'Foo:ErrorService' }));
 
       expect(true).to.false;

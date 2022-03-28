@@ -8,22 +8,22 @@ export const Errors = {
       WorkerErrorCode.MinThread,
     ),
 
-  ClusterNameDuplicated: (clusterName: string | symbol) =>
+  PoolNameDuplicated: (poolName: string | symbol) =>
     new WorkerError(
-      `Cluster name for "${String(clusterName)}" is duplicated`,
-      WorkerErrorCode.ClusterNameDuplicated,
+      `Pool name for "${String(poolName)}" is duplicated`,
+      WorkerErrorCode.PoolNameDuplicated,
     ),
 
-  ClusterIsNotExists: (clusterName: string | symbol) =>
+  PoolIsNotExists: (poolName: string | symbol) =>
     new WorkerError(
-      `Cluster named "${String(clusterName)}" is not exists`,
-      WorkerErrorCode.ClusterIsNotExists,
+      `Pool named "${String(poolName)}" is not exists`,
+      WorkerErrorCode.PoolIsNotExists,
     ),
 
-  CreateClusterFromChildThread: () =>
+  CreatePoolFromChildThread: () =>
     new WorkerError(
-      `Can not create cluster from child thread`,
-      WorkerErrorCode.CreateClusterFromChildThread,
+      `Can not create pool from child thread`,
+      WorkerErrorCode.CreatePoolFromChildThread,
     ),
 
   TransferFromChildThread: () =>
