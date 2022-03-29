@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cellularjs/cellularjs/compare/v0.6.0...v0.7.0) (2022-03-29)
+
+
+### Features
+
+* move cellularjs.com to cellularjs [#15](https://github.com/cellularjs/cellularjs/issues/15) ([628f4f2](https://github.com/cellularjs/cellularjs/commit/628f4f264766e411b54c24849c4a4155fd877865))
+* **worker:** rename cluster to pool ([4129ed5](https://github.com/cellularjs/cellularjs/commit/4129ed51ec43f5ce9b460a2860fa392f17daa23b))
+
+
+
+
+
 # [0.6.0](https://github.com/cellularjs/cellularjs/compare/v0.5.0...v0.6.0) (2022-03-26)
 
 
