@@ -8,4 +8,9 @@ export const PackageInstallCommands = {
   [PackageManager.NPM]: 'npm i',
 };
 
+export const RunDevCommands = {
+  [PackageManager.YARN]: 'yarn dev',
+  [PackageManager.NPM]: 'npm run dev',
+};
+
 export const cellularConfigFile = 'cellular.ts';
