@@ -7,7 +7,7 @@ import chalk from 'chalk';
 import { Spinner } from 'clui';
 import * as tmp from 'tmp-promise';
 import logSymbols from 'log-symbols';
-import { PackageManager } from '../const';
+import { PackageManager, RunDevCommands } from '../const';
 import { createProjectStructure, installPackage } from '../task';
 
 const initQuestions: QuestionCollection = [
@@ -101,6 +101,10 @@ const handleInit = async () => {
 
   console.log();
   console.log('Done, let tweak and create your first commit 🐘');
+  console.log();
+  console.log(`Run dev:`);
+  console.log(`$ cd ./${projectName}`);
+  console.log(`$ ${RunDevCommands[packageManager]}`);
 };
 
 function finalize(tmpProjectPath, newProjectPath) {
