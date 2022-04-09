@@ -15,11 +15,11 @@ export async function addModuleToMap(this: Container, moduleClass: ClassType) {
 
   const newModule = new Container();
 
+  moduleMap.set(moduleClass, newModule);
+
   await newModule.addProviders(moduleMeta.providers);
   await newModule._addExports(moduleMeta.exports);
   await newModule.addModules(moduleMeta.imports);
-
-  moduleMap.set(moduleClass, newModule);
 
   await createModuleListener(moduleClass, newModule);
 }
