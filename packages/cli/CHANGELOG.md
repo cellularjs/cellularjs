@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/cellularjs/cellularjs/compare/v0.7.0...v0.7.1) (2022-04-09)
+
+
+### Bug Fixes
+
+* **cli:** add missing code for running dev command ([0f1630c](https://github.com/cellularjs/cellularjs/commit/0f1630c902cf111e662c65bff7ca7a1da85b14ef))
+* **cli:** remove redundant tsconfig from halo template ([c366379](https://github.com/cellularjs/cellularjs/commit/c3663797b01cfe0984038bcc4fdb37219ad88ed6))
+
+
+### Features
+
+* **cli:** add basic note for running sample dev server ([dab40ac](https://github.com/cellularjs/cellularjs/commit/dab40ac983fb0a4d4c7a8215223cf7bd36cab1bd))
+
+
+
+
+
 # [0.7.0](https://github.com/cellularjs/cellularjs/compare/v0.6.0...v0.7.0) (2022-03-29)
 
 **Note:** Version bump only for package @cellularjs/cli
