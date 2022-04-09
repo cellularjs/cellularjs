@@ -79,4 +79,22 @@ describe('Module life cycle', () => {
 
     expect(value).to.eq('value');
   });
+
+  it('onInit should run only one time', async () => {
+    let onInitCalled = 0;
+
+    @Module({})
+    class ModuleFoo implements OnInit {
+      onInit() {
+        onInitCalled += 1;
+      }
+    }
+
+    await Promise.all([
+      container.addModule(ModuleFoo),
+      container.addModule(ModuleFoo),
+    ]);
+
+    expect(onInitCalled).to.eq(1);
+  });
 });
