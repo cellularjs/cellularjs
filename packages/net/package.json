@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/net",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "CellularJS Net",
   "keywords": [
     "cellularjs",
@@ -29,7 +29,7 @@
   "license": "MIT",
   "types": "./dist/",
   "dependencies": {
-    "@cellularjs/di": "^0.7.2",
+    "@cellularjs/di": "^0.7.3",
     "emittery": "^0.10.0"
   }
 }
