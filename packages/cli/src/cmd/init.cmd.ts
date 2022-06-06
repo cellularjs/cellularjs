@@ -53,28 +53,15 @@ const initQuestions: QuestionCollection = [
       { name: 'npm', value: PackageManager.NPM },
     ],
   },
-  {
-    message: 'Are you ready:',
-    name: 'ready',
-    type: 'confirm',
-    default: false,
-  },
 ];
 
 type InitAnswer = {
   packageManager: PackageManager;
   projectName: string;
-  ready: boolean;
 };
 
 const handleInit = async () => {
   const initAnswer = await prompt<InitAnswer>(initQuestions);
-
-  if (!initAnswer.ready) {
-    console.log(chalk.yellow('Stopped!'));
-    return;
-  }
-
   const { projectName, packageManager } = initAnswer;
   const newProjectPath = path.resolve(process.cwd(), projectName);
 
