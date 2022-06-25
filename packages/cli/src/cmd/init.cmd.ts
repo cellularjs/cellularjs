@@ -100,7 +100,7 @@ function finalize(tmpProjectPath, newProjectPath) {
 
   return new Promise(async (resolve, reject) => {
     try {
-      await fse.copy(tmpProjectPath, newProjectPath);
+      await fse.move(tmpProjectPath, newProjectPath);
       resolve(1);
     } catch (e) {
       reject({ msg: `Failed to create project` });
