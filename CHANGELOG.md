@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/cellularjs/cellularjs/compare/v0.7.3...v0.7.4) (2022-06-26)
+
+
+### Features
+
+* **cli:** remove redundant question ([57ecf6e](https://github.com/cellularjs/cellularjs/commit/57ecf6efdb1cfae7bb48612c0d9651c6a0c01580))
+
+
+### Performance Improvements
+
+* **cli:** use move instead of copy project for better performance ([a25d134](https://github.com/cellularjs/cellularjs/commit/a25d134034e38e936002c665920411e9c75e61ee))
+
+
+
+
+
+
 ## [0.7.3](https://github.com/cellularjs/cellularjs/compare/v0.7.2...v0.7.3) (2022-05-12)
 
 **Note:** Version bump only for package cellularjs

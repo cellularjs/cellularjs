@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/di",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "Modular dependency injection",
   "keywords": [
     "cellularjs",
