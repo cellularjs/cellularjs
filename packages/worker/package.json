@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/worker",
-  "version": "0.7.4",
+  "version": "0.8.0-alpha.0",
   "description": "CellularJS Worker",
   "keywords": [
     "cellularjs worker",
@@ -28,6 +28,6 @@
   "license": "MIT",
   "types": "./dist/",
   "dependencies": {
-    "@cellularjs/net": "^0.7.4"
+    "@cellularjs/net": "^0.8.0-alpha.0"
   }
 }

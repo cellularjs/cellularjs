@@ -7,12 +7,12 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "@cellularjs/di": "^0.7.4",
-    "@cellularjs/net": "^0.7.4"
+    "@cellularjs/di": "^0.8.0-alpha.0",
+    "@cellularjs/net": "^0.8.0-alpha.0"
   },
   "devDependencies": {
-    "@cellularjs/cli": "^0.7.4",
-    "@cellularjs/env": "^0.7.4",
+    "@cellularjs/cli": "^0.8.0-alpha.0",
+    "@cellularjs/env": "^0.8.0-alpha.0",
     "@types/express": "^4.17.13",
     "@types/node": "^16.11.10"
   }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0-alpha.0](https://github.com/cellularjs/cellularjs/compare/v0.7.4...v0.8.0-alpha.0) (2022-06-29)
+
+
+### Features
+
+* **di:** add clearModuleMap for testing purpose ([f970c6d](https://github.com/cellularjs/cellularjs/commit/f970c6dd24e5dd6378cd1504a3c560ae20fa22b0)), closes [#31](https://github.com/cellularjs/cellularjs/issues/31)
+
+
+
+
+
 ## [0.7.4](https://github.com/cellularjs/cellularjs/compare/v0.7.3...v0.7.4) (2022-06-26)
 
 **Note:** Version bump only for package @cellularjs/di

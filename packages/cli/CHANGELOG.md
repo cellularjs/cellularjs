@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0-alpha.0](https://github.com/cellularjs/cellularjs/compare/v0.7.4...v0.8.0-alpha.0) (2022-06-29)
+
+
+### Features
+
+* **cli:** add @cellularjs/env into halo template ([b0fbc5b](https://github.com/cellularjs/cellularjs/commit/b0fbc5bec0020534969a28b183d77810ee2b04ac))
+
+
+
+
+
 ## [0.7.4](https://github.com/cellularjs/cellularjs/compare/v0.7.3...v0.7.4) (2022-06-26)
 
 
