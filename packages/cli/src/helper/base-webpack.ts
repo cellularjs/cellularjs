@@ -3,7 +3,6 @@ import { Configuration } from 'webpack';
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 import WebpackBar from 'webpackbar';
-import DotenvFlow from 'dotenv-flow-webpack';
 import { cellTransformer } from './cell-transformer';
 
 const bundleFile = 'index.js';
@@ -38,7 +37,7 @@ export function getBaseWebpackConfig() {
     },
     externalsPresets: { node: true },
     externals: [nodeExternals()],
-    plugins: [new WebpackBar(), new DotenvFlow()],
+    plugins: [new WebpackBar()],
     resolve: {
       extensions: ['.ts'],
       plugins: [new TsconfigPathsPlugin()],
