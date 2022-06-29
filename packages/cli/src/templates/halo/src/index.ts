@@ -1,9 +1,9 @@
 import * as express from 'express';
 import { createNetWork, send, IRQ, IRS } from '@cellularjs/net';
 import { NetworkConfig } from '@cellularjs/net';
+import { env } from '@cellularjs/env';
 import { HelloCell } from './hello.cell';
-
-const nodePort = process.env.NODE_PORT;
+import { Env } from './env';
 
 const helloNetwork: NetworkConfig = [
   {
@@ -27,7 +27,9 @@ const helloNetwork: NetworkConfig = [
 
   await createNetWork(helloNetwork);
 
-  app.listen(nodePort, () =>
-    console.log(`Halo gateway: ready for http request (port: ${nodePort})`),
+  app.listen(env<Env>().NODE_PORT, () =>
+    console.log(
+      `Halo gateway: ready for http request (port: ${env<Env>().NODE_PORT})`,
+    ),
   );
 })();
