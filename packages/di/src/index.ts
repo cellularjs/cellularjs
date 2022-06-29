@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-export { Container } from './container';
+export { Container, clearModuleMap } from './container';
 export { Inject, Injectable, Module, Optional } from './decorators';
 export { DiError, DiErrorCode } from './consts/error.const';
 export { forwardRef } from './forward-ref';
