@@ -33,7 +33,6 @@
     "chalk": "4",
     "clui": "^0.3.6",
     "commander": "^8.3.0",
-    "dotenv-flow-webpack": "^1.1.0",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
     "nodemon-webpack-plugin": "^4.7.0",
