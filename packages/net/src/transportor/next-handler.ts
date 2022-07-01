@@ -56,4 +56,15 @@ export class NextHandler {
 
     return result instanceof IRS ? result : new IRS({ status: 200 }, result);
   }
+
+  /**
+   * "Extend module" inside `NextHandler` object is a temporary container/module that
+   * mean providers in this container will exists in a single **internal** request only.
+   *
+   * Use case: you can use `extModule` to add temporary data such as logged-in user data.
+   * @example https://cellularjs.com/docs/how-to%20wiki/auth
+   */
+  getExtModule() {
+    return this.extModule;
+  }
 }
