@@ -91,7 +91,7 @@ export class EnvModule implements OnInit {
       throw Errors.InvokeConfigMultipleTimes();
     }
 
-    parsedEnv = require('dotenv-flow').config().parsed;
+    parsedEnv = require('dotenv-flow').config({ silent: true }).parsed;
 
     return {
       extModule: EnvModule,
