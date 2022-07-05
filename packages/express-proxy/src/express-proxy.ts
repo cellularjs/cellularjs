@@ -6,10 +6,14 @@ export function expressProxy(
   baseProxyCnf: ProxyConfig,
   transporter: Transporter,
 ) {
-  return (proxyTo: ToTargetHeader, subProxyCnf?: Partial<ProxyConfig>) =>
-    async (req: Request, res: Response, next: NextFunction) => {
-      const inputTransform =
-        subProxyCnf?.inputTransform || baseProxyCnf.inputTransform;
+  return (proxyTo: ToTargetHeader, subProxyCnf?: Partial<ProxyConfig>) => {
+    const inputTransform =
+      subProxyCnf?.inputTransform || baseProxyCnf.inputTransform;
+
+    const outputTransform =
+      subProxyCnf?.outputTransform || baseProxyCnf.outputTransform;
+
+    return async (req: Request, res: Response, next: NextFunction) => {
       const irq = inputTransform(req, proxyTo);
 
       let irs: IRS;
@@ -20,9 +24,7 @@ export function expressProxy(
         irs = err;
       }
 
-      const outputTransform =
-        subProxyCnf?.outputTransform || baseProxyCnf.outputTransform;
-
       outputTransform({ req, res, next }, { irq, irs });
     };
+  };
 }
