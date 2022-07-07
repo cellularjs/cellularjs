@@ -5,7 +5,7 @@ import { Container } from '../container';
  *
  * **Usage:**
  * ```ts
- * import { Module, OnInit } from '@cellularjs/di';
+ * import { Module, OnInit, ModuleRef } from '@cellularjs/di';
  *
  * @Module({
  *   providers: [
@@ -14,7 +14,7 @@ import { Container } from '../container';
  * })
  * export class YourModule implements OnInit {
  *   constructor(
- *     private thisModule: ThisModule;
+ *     private thisModule: ModuleRef;
  *   ) { }
  *
  *   async onInit() {
