@@ -37,6 +37,6 @@ export async function emitTransportEvent(
  * "global" tasks such as logging request,... and code should be placed at common place(Eg: `$share` folder).
  *
  * OTHER: If you want to modify/add behaviour for specific service, have a look at
- * [service proxy](https://cellularjs.com/docs/foundation/net/service#41-addserviceproxies).
+ * [service proxy](https://cellularjs.com/docs/foundation/net/service/#41-service-proxy).
  */
 export const transportListener = new TransportListener();
