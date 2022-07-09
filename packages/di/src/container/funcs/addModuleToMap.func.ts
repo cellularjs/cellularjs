@@ -1,7 +1,6 @@
 import { Container, ModuleRef, ModuleWithListener } from '../../';
-import { Errors, ClassType } from '../../internal';
+import { Errors, ClassType, moduleMap } from '../../internal';
 import { getModuleMeta } from '../../utils';
-import { moduleMap } from '../props/module-map.static';
 
 export async function addModuleToMap(this: Container, moduleClass: ClassType) {
   if (moduleMap.has(moduleClass)) {

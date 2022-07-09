@@ -1,6 +1,5 @@
 import { Container, ResolveOptions } from '../..';
-import { ClassifiedProvider } from '../../internal';
-import { moduleMap } from '../props/module-map.static';
+import { ClassifiedProvider, moduleMap } from '../../internal';
 
 export function resolveUseModuleProvider<T>(
   this: Container,
