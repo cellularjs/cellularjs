@@ -1,5 +1,4 @@
-import { Container } from '../../';
-import { ClassType } from '../../internal';
+import { ClassType, Container } from './internal';
 
 /**
  * Module map, or container map. It know all modules that were imported before.
