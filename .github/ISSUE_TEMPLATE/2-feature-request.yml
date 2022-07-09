@@ -13,10 +13,4 @@ body:
       required: true
   - type: textarea
     attributes:
-      label: How this feature can help you?
-      description: Please tell us the reason to add this feature, how it work, how it is important to you or our community.
-    validations:
-      required: true
-  - type: textarea
-    attributes:
       label: Do you have any additional information for us(optional)?
