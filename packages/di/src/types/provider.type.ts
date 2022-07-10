@@ -122,6 +122,8 @@ export interface ResolveOptions {
    * ```
    * extModule > nornal container > global
    * ```
+   *
+   * @deprecated For internal use only.
    */
   global?: Container;
 }
