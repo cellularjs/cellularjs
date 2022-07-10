@@ -36,6 +36,7 @@ export async function innerResolve<T>(
       global,
     );
     tracer.clear(traceIdx);
+    delete extModule._parentModule;
 
     return resolvedValue;
   }
