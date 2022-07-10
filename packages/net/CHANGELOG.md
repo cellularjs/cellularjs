@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/cellularjs/cellularjs/compare/v0.8.0...v0.9.0) (2022-07-10)
+
+
+### Features
+
+* **di, net:** show dependency paths when NoProviderForToken error occurs [#43](https://github.com/cellularjs/cellularjs/issues/43) ([63b35e1](https://github.com/cellularjs/cellularjs/commit/63b35e19f06f63ceabc9596cdd0b6625d5943e51))
+* **net:** expose getExtModule from NextHandler [#35](https://github.com/cellularjs/cellularjs/issues/35) ([c39e330](https://github.com/cellularjs/cellularjs/commit/c39e330fa745958784430b6ddf20d0b66e20e134))
+
+
+
+
+
+
 # [0.8.0](https://github.com/cellularjs/cellularjs/compare/v0.8.0-alpha.0...v0.8.0) (2022-07-02)
 
 **Note:** Version bump only for package @cellularjs/net
