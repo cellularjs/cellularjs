@@ -131,4 +131,30 @@ describe('Container - resolve:', () => {
     expect(firstContainer).to.instanceOf(Container);
     expect(firstContainer !== secondContainer).to.true;
   });
+
+  it('parent module will be removed from extModule after resolving', async () => {
+    const parent = new Container();
+    await parent.addProvider({
+      token: 'foo',
+      useValue: 'foo',
+    });
+
+    const extModule = new Container();
+    await extModule.addProvider({
+      token: 'bar',
+      useValue: 'bar',
+    });
+
+    // parent will be copied into extModule as _parentModule at this step.
+    await parent.resolve('bar', { extModule });
+
+    // make sure _parentModule will be removed from extModule after resolving value at previous step.
+    try {
+      await extModule.resolve('foo');
+
+      expect(true).false;
+    } catch (err) {
+      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
+    }
+  });
 });
