@@ -1,17 +1,21 @@
-import { Container, ResolveOptions } from '../..';
-import { ClassifiedProvider, moduleMap } from '../../internal';
+import { Container } from '../..';
+import {
+  ClassifiedProvider,
+  InnerResolveOptions,
+  moduleMap,
+} from '../../internal';
 
 export function resolveUseModuleProvider<T>(
   this: Container,
   provider: ClassifiedProvider,
-  options: ResolveOptions,
+  options: InnerResolveOptions,
 ): Promise<T> {
   const moduleFromMap = moduleMap.get(provider.useModule);
 
   if (!this._extModules.has(provider.useModule)) {
-    return moduleFromMap.resolve(provider.token, options);
+    return moduleFromMap._innerResolve(provider.token, options);
   }
 
   const extModule = this._extModules.get(provider.useModule);
-  return moduleFromMap.resolve(provider.token, { ...options, extModule });
+  return moduleFromMap._innerResolve(provider.token, { ...options, extModule });
 }

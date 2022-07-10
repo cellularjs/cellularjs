@@ -27,11 +27,13 @@ describe('Provider - useModule', () => {
     md2Service.hash('run without crash');
     md5Service.hash('run without crash');
 
-    const errorFunc = () => container.resolve(Sha1Service);
+    try {
+      await container.resolve(Sha1Service);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.NoProviderForToken);
+      expect(true).false;
+    } catch (err) {
+      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
+    }
   });
 
   it('can not use invalid module as argument for useModule', async () => {

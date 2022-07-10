@@ -18,7 +18,7 @@ export async function addModule(
 
   const moduleMeta = getModuleMeta(moduleCnf as ClassType);
   if (!moduleMeta) {
-    throw Errors.InvalidModuleClass(moduleCnf);
+    throw Errors.InvalidModuleClass(moduleCnf as ClassType);
   }
 
   await this._addModuleExports(moduleCnf as ClassType, moduleMeta.exports);

@@ -1,7 +1,15 @@
+import { Tracer } from '../tracer';
 import { Container } from '../';
 import { CycleTypeMap } from '../consts/cycle.const';
 import { DiResolvers } from '../consts/di-resolver.const';
-import { ClassType, CycleType, Token, FuncType, ValueType } from './';
+import {
+  ClassType,
+  CycleType,
+  Token,
+  FuncType,
+  ValueType,
+  ResolveTrace,
+} from './';
 
 export interface ProviderHasCycle {
   /**
@@ -116,4 +124,8 @@ export interface ResolveOptions {
    * ```
    */
   global?: Container;
+}
+
+export interface InnerResolveOptions extends ResolveOptions {
+  tracer?: Tracer<ResolveTrace>;
 }
