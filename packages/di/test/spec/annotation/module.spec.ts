@@ -83,11 +83,13 @@ describe('Annotation - Module(): define modular dependency injection', () => {
   it('can not resolve provider that import from other module', async () => {
     await container.addModule(AuthModule);
 
-    const errorFunc = () => container.resolve(JwtService);
+    try {
+      await container.resolve(JwtService);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.NoProviderForToken);
+      expect(true).false;
+    } catch (err) {
+      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
+    }
   });
 
   it('can export services from module', async () => {

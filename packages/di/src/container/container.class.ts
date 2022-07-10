@@ -13,7 +13,7 @@ import { addModule } from './funcs/addModule.func';
 import { addProvider } from './funcs/addProvider.func';
 import { addExports } from './funcs/addExports.func';
 import { addModuleExports } from './funcs/addModuleExports.func';
-import { resolve } from './funcs/resolve.func';
+import { innerResolve, resolve } from './funcs/resolve.func';
 import { resolveUseFuncDeps } from './funcs/resolveUseFuncDeps.func';
 import { resolveWithParentModule } from './funcs/resolveWithParentModule.func';
 import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func';
@@ -97,6 +97,8 @@ export class Container {
    * Resolve value by token.
    */
   public resolve = resolve;
+
+  protected _innerResolve = innerResolve;
 
   protected _addExtModule = addExtModule;
 

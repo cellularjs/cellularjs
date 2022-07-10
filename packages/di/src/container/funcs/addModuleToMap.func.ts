@@ -12,7 +12,7 @@ export async function addModuleToMap(this: Container, moduleClass: ClassType) {
     throw Errors.InvalidModuleClass(moduleClass);
   }
 
-  const newModule = new Container();
+  const newModule = new Container(moduleClass);
 
   moduleMap.set(moduleClass, newModule);
 

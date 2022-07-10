@@ -1,10 +1,10 @@
-import { Container, ResolveOptions } from '../..';
-import { ClassifiedUseFuncDep } from '../../internal';
+import { Container } from '../..';
+import { ClassifiedUseFuncDep, InnerResolveOptions } from '../../internal';
 
 export async function resolveUseFuncDeps(
   this: Container,
   deps: ClassifiedUseFuncDep[],
-  options: ResolveOptions,
+  options: InnerResolveOptions,
 ): Promise<any[]> {
   const resolvedValues = [];
 
@@ -16,7 +16,7 @@ export async function resolveUseFuncDeps(
       continue;
     }
 
-    resolvedValues.push(await this.resolve(dep.value(), options));
+    resolvedValues.push(await this._innerResolve(dep.value(), options));
   }
 
   return resolvedValues;

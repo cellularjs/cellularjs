@@ -42,7 +42,7 @@ async function resolveDriver(
   }
 
   const listener = resolveListener(cellMeta, cellCnf);
-  const driverContainer = await createDriverContainer(cellMeta);
+  const driverContainer = await createDriverContainer(cellMeta, driverClass);
 
   await driverContainer.addProviders(Array.from(listener.values()));
 
@@ -86,8 +86,11 @@ function resolveListener(
   return new Map(Object.entries(cellMeta.listen));
 }
 
-async function createDriverContainer(cellMeta: CellMeta): Promise<Container> {
-  const driverContainer = new Container();
+async function createDriverContainer(
+  cellMeta: CellMeta,
+  driverClass,
+): Promise<Container> {
+  const driverContainer = new Container(driverClass);
 
   await driverContainer.addProviders(extractUsableProviders(cellMeta));
   await driverContainer.addModules(cellMeta.imports);

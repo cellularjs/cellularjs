@@ -1,5 +1,5 @@
-import { Container, ResolveOptions, DiError, DiErrorCode } from '../../';
-import { ClassType } from '../../internal';
+import { Container, DiError, DiErrorCode } from '../../';
+import { ClassType, InnerResolveOptions } from '../../internal';
 import {
   getParamTypes,
   getForwardRefCallback,
@@ -9,14 +9,14 @@ import {
 export async function resolveConstructorArgs(
   this: Container,
   target: ClassType,
-  options: ResolveOptions,
+  options: InnerResolveOptions,
 ): Promise<any[]> {
   const resolvedValues = [];
   const paramTypes = getParamTypes(target);
 
   for (let i = 0; i < paramTypes.length; i++) {
     resolvedValues.push(
-      await resolveArg(this, target, options, paramTypes[i], i),
+      await resolveArg.call(this, target, options, paramTypes[i], i),
     );
   }
 
@@ -24,9 +24,9 @@ export async function resolveConstructorArgs(
 }
 
 async function resolveArg(
-  self: Container,
+  this: Container,
   target: ClassType,
-  options: ResolveOptions,
+  options: InnerResolveOptions,
   type,
   index,
 ) {
@@ -34,7 +34,7 @@ async function resolveArg(
   const paramType = forwardRefCallback ? forwardRefCallback() : type;
 
   try {
-    return await self.resolve(paramType, options);
+    return await this._innerResolve(paramType, options);
   } catch (err) {
     if (type === undefined) {
       throw err;

@@ -90,11 +90,13 @@ describe('Utility - extend module: extend, override module', () => {
     const containerHaveNoCustomHash = new Container();
     await containerHaveNoCustomHash.addModule(JwtModule);
 
-    const errorFunc = () => containerHaveNoCustomHash.resolve(JwtSignService);
+    try {
+      await container.resolve(JwtSignService);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.NoProviderForToken);
+      expect(true).false;
+    } catch (err) {
+      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
+    }
   });
 
   it('can inherit all exports config from parent module', async () => {

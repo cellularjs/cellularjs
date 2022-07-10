@@ -17,11 +17,13 @@ beforeEach(() => {
 
 describe('Container - resolve:', () => {
   it('can not resole value by token that is not exist', async () => {
-    const errorFunc = () => container.resolve(123);
+    try {
+      await container.resolve(123);
 
-    expect(errorFunc)
-      .to.throw()
-      .with.property('code', DiErrorCode.NoProviderForToken);
+      expect(true).false;
+    } catch (err) {
+      expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
+    }
   });
 
   it('can resolve global providers', async () => {
