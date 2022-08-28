@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cellularjs/cellularjs/compare/v0.7.2...v0.10.0) (2022-08-28)
+
+
+### Bug Fixes
+
+* **di:** _parentModule is not removed from extModule after resolving value [#42](https://github.com/cellularjs/cellularjs/issues/42) ([c20adae](https://github.com/cellularjs/cellularjs/commit/c20adae363da50e0d93018151ddb38dad7c43c78))
+
+
+### Features
+
+* **di, net:** show dependency paths when NoProviderForToken error occurs [#43](https://github.com/cellularjs/cellularjs/issues/43) ([63b35e1](https://github.com/cellularjs/cellularjs/commit/63b35e19f06f63ceabc9596cdd0b6625d5943e51))
+* **di:** add clearModuleMap for testing purpose ([f970c6d](https://github.com/cellularjs/cellularjs/commit/f970c6dd24e5dd6378cd1504a3c560ae20fa22b0)), closes [#31](https://github.com/cellularjs/cellularjs/issues/31)
+
+
+
+
+
+
 ## [0.9.4](https://github.com/cellularjs/cellularjs/compare/v0.9.3...v0.9.4) (2022-08-28)
 
 **Note:** Version bump only for package @cellularjs/di

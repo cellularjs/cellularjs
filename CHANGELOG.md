@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cellularjs/cellularjs/compare/v0.7.2...v0.10.0) (2022-08-28)
+
+
+### Bug Fixes
+
+* **cli:** show error information when installing packages [#46](https://github.com/cellularjs/cellularjs/issues/46) ([12894ee](https://github.com/cellularjs/cellularjs/commit/12894ee0c147a801deecc95adb9ca125054ec4fd))
+* **di:** _parentModule is not removed from extModule after resolving value [#42](https://github.com/cellularjs/cellularjs/issues/42) ([c20adae](https://github.com/cellularjs/cellularjs/commit/c20adae363da50e0d93018151ddb38dad7c43c78))
+* **env:** keep dotenv-flow silent [#36](https://github.com/cellularjs/cellularjs/issues/36) ([d4d777d](https://github.com/cellularjs/cellularjs/commit/d4d777db47c59558fce31d24df3b0bb04e2ae943))
+
+
+### Features
+
+* **cli:** add @cellularjs/env into halo template ([b0fbc5b](https://github.com/cellularjs/cellularjs/commit/b0fbc5bec0020534969a28b183d77810ee2b04ac))
+* **cli:** remove redundant question ([57ecf6e](https://github.com/cellularjs/cellularjs/commit/57ecf6efdb1cfae7bb48612c0d9651c6a0c01580))
+* **di, net:** show dependency paths when NoProviderForToken error occurs [#43](https://github.com/cellularjs/cellularjs/issues/43) ([63b35e1](https://github.com/cellularjs/cellularjs/commit/63b35e19f06f63ceabc9596cdd0b6625d5943e51))
+* **di:** add clearModuleMap for testing purpose ([f970c6d](https://github.com/cellularjs/cellularjs/commit/f970c6dd24e5dd6378cd1504a3c560ae20fa22b0)), closes [#31](https://github.com/cellularjs/cellularjs/issues/31)
+* **env:** add env package ([53394af](https://github.com/cellularjs/cellularjs/commit/53394affdf3025d50eda9b4ca9b9261124343533)), closes [#31](https://github.com/cellularjs/cellularjs/issues/31)
+* **net:** expose getExtModule from NextHandler [#35](https://github.com/cellularjs/cellularjs/issues/35) ([c39e330](https://github.com/cellularjs/cellularjs/commit/c39e330fa745958784430b6ddf20d0b66e20e134))
+
+
+### Performance Improvements
+
+* **cli:** use move instead of copy project for better performance ([a25d134](https://github.com/cellularjs/cellularjs/commit/a25d134034e38e936002c665920411e9c75e61ee))
+
+
+
+
+
+
 ## [0.9.4](https://github.com/cellularjs/cellularjs/compare/v0.9.3...v0.9.4) (2022-08-28)
 
 **Note:** Version bump only for package cellularjs

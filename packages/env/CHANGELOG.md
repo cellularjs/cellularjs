@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cellularjs/cellularjs/compare/v0.7.2...v0.10.0) (2022-08-28)
+
+
+### Bug Fixes
+
+* **env:** keep dotenv-flow silent [#36](https://github.com/cellularjs/cellularjs/issues/36) ([d4d777d](https://github.com/cellularjs/cellularjs/commit/d4d777db47c59558fce31d24df3b0bb04e2ae943))
+
+
+### Features
+
+* **env:** add env package ([53394af](https://github.com/cellularjs/cellularjs/commit/53394affdf3025d50eda9b4ca9b9261124343533)), closes [#31](https://github.com/cellularjs/cellularjs/issues/31)
+
+
+
+
+
+
 ## [0.9.4](https://github.com/cellularjs/cellularjs/compare/v0.9.3...v0.9.4) (2022-08-28)
 
 **Note:** Version bump only for package @cellularjs/env
