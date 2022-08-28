@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/cellularjs/cellularjs/compare/v0.9.0...v0.9.1) (2022-08-28)
+
+
+### Bug Fixes
+
+* **cli:** show error information when installing packages [#46](https://github.com/cellularjs/cellularjs/issues/46) ([12894ee](https://github.com/cellularjs/cellularjs/commit/12894ee0c147a801deecc95adb9ca125054ec4fd))
+
+
+
+
+
+
 # [0.9.0](https://github.com/cellularjs/cellularjs/compare/v0.8.0...v0.9.0) (2022-07-10)
 
 

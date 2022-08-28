@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/env",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "CellularJS Env",
   "keywords": [
     "cellularjs",
@@ -28,7 +28,7 @@
   "license": "MIT",
   "types": "./dist/",
   "dependencies": {
-    "@cellularjs/di": "^0.9.0",
+    "@cellularjs/di": "^0.9.1",
     "dotenv-flow": "^3.2.0"
   }
 }
