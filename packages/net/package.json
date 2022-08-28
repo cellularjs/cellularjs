@@ -8,9 +8,7 @@
     "hybrid microservices",
     "hybrid architecture"
   ],
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
   },

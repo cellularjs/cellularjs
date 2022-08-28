@@ -14,9 +14,7 @@
     "url": "git+https://github.com/cellularjs/cellularjs.git"
   },
   "homepage": "https://github.com/cellularjs/cellularjs#readme",
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "main": "dist/index.js",
   "bin": {
     "cellular": "./dist/cmd/index.js"
   },

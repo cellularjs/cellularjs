@@ -16,9 +16,7 @@
     "url": "git+https://github.com/cellularjs/cellularjs.git"
   },
   "homepage": "https://github.com/cellularjs/cellularjs#readme",
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc -b ./tsconfig.build.json",
     "test": "mocha -r ts-node/register test/**/*.spec.ts",

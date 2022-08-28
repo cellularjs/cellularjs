@@ -7,9 +7,7 @@
     "multithreading",
     "worker threads"
   ],
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "main": "dist/index.js",
   "publishConfig": {
     "access": "public"
   },

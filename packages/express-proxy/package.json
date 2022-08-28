@@ -4,9 +4,7 @@
   "description": "CellularJS's built-in extension for ExpressJS",
   "author": "Great Elephant",
   "license": "MIT",
-  "exports": {
-    ".": "./dist/index.js"
-  },
+  "main": "dist/index.js",
   "types": "./dist/",
   "publishConfig": {
     "access": "public"
