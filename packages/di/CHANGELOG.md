@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.3](https://github.com/cellularjs/cellularjs/compare/v0.10.0...v0.10.3) (2022-10-06)
+
+
+### Bug Fixes
+
+* **di:** correct check variable is ES6 class [#51](https://github.com/cellularjs/cellularjs/issues/51) ([26cb9d2](https://github.com/cellularjs/cellularjs/commit/26cb9d2c9c9652895488de08b6f804272c79fd90))
+
+
+
+
+
+
 ## [0.10.2](https://github.com/cellularjs/cellularjs/compare/v0.10.1...v0.10.2) (2022-08-28)
 
 **Note:** Version bump only for package @cellularjs/di
