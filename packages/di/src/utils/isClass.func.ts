@@ -1,3 +1,4 @@
 export function isClass(aVar) {
-  return typeof aVar === 'function' && /^\s*class\s+/.test(aVar.toString());
+  // https://github.com/miguelmota/is-class/blob/master/is-class.js
+  return typeof aVar === 'function' && /^class[\s{]/.test(aVar.toString());
 }
