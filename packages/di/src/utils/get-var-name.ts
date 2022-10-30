@@ -1,3 +1,6 @@
+/**
+ * @since 0.1.0
+ */
 export function getVarName(aVar) {
   if (aVar && aVar.name) return aVar.name;
 

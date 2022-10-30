@@ -1,78 +1,60 @@
 import { Container, Token, ResolveOptions } from '../../';
-import {
-  Errors,
-  ResolveTrace,
-  DiResolvers,
-  InnerResolveOptions,
-} from '../../internal';
+import { Errors, ResolveTrace, Provider } from '../../internal';
 import { Tracer } from '../../tracer';
+import { DiCycle } from '../../consts/cycle.const';
 
 export async function resolve<T>(
   this: Container,
   token: Token,
-  rawOptions: ResolveOptions = {},
+  options: ResolveOptions = {},
 ): Promise<T> {
-  const options: InnerResolveOptions = {
-    ...rawOptions,
-    tracer: new Tracer<ResolveTrace>(),
-  };
+  if (this._resolvedValues.has(token)) {
+    return this._resolvedValues.get(token);
+  }
 
-  return this._innerResolve(token, options);
-}
+  if (!options.tracer) {
+    options.tracer = new Tracer<ResolveTrace>();
+  }
 
-export async function innerResolve<T>(
-  this: Container,
-  token: Token,
-  options: InnerResolveOptions,
-): Promise<T> {
-  const { extModule, global, tracer } = options;
-  const traceIdx = tracer.log({ module: this.getModuleClass(), token });
+  const { extModule, parentModule, tracer, global } = options;
+  const traceIdx = tracer.log({ module: this.moduleClass, token });
 
   // B1: extModule has highest priority, so check it first.
-  if (extModule?.has(token)) {
-    const resolvedValue = await extModule._resolveWithParentModule<T>(
-      token,
-      this,
-      global,
-    );
-    tracer.clear(traceIdx);
-    delete extModule._parentModule;
-
-    return resolvedValue;
-  }
+  if (extModule?.has(token))
+    return await extModule.resolve<T>(token, { parentModule: this, tracer });
 
   // B2: if provider for this token exists in this container,
   // use normalized resolver to resolve it.
   const provider = this._providers.get(token);
-  if (provider) {
-    const isUseModule = provider.resolver === DiResolvers.useModuleResolver;
-
-    isUseModule && tracer.clear(traceIdx);
-    const resolvedValue = await this[provider.resolver].call(
-      this,
-      provider,
-      options,
-    );
-    !isUseModule && tracer.clear(traceIdx);
-
-    return resolvedValue;
-  }
+  if (provider) return resolveProvider.call(this, traceIdx, provider, options);
 
   // B3: provider for this token exists in parent module.
-  if (this._parentModule?.has(token)) {
-    const resolvedValue = await this._parentModule._innerResolve<T>(
-      token,
-      options,
-    );
-    tracer.clear(traceIdx);
-    return resolvedValue;
-  }
+  if (parentModule?.has(token))
+    return await parentModule.resolve<T>(token, options);
 
   // B4: provider for this token exists in global module.
   if (global?.has(token)) {
-    return global._innerResolve(token, { tracer });
+    return global.resolve(token, { tracer });
   }
 
   // B5:
   throw Errors.NoProviderForToken(token, tracer);
+}
+
+async function resolveProvider(
+  this: Container,
+  traceIdx: number,
+  provider: Provider,
+  options: ResolveOptions,
+) {
+  const { tracer } = options;
+  const resolvedValue = await provider.resolver(this, provider, options);
+
+  if (provider.cycle === DiCycle.permanent) {
+    this._resolvedValues.set(provider.token, resolvedValue);
+  }
+
+  tracer.clear(traceIdx);
+
+  return resolvedValue;
 }

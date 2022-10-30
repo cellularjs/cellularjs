@@ -1,7 +1,7 @@
-import { Container } from '../../';
+import { Container } from '../..';
 import { ExtModuleMeta, ClassType } from '../../types';
 import { getModuleMeta } from '../../utils';
-import { addExportClassAsProvider } from './addExportClassAsProvider.func';
+import { addExportClassAsProvider } from './add-export-class-as-provider.func';
 
 export async function addExtModule(
   this: Container,

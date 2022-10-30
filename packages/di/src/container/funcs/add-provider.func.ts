@@ -1,8 +1,13 @@
-import { Container } from '../../';
+import { useModuleResolver } from '../../core-resolver/use-module.resolver';
+import { Container } from '../..';
 import { Errors } from '../../consts/error.const';
 import { GenericProvider, ProviderHasToken } from '../../types';
 import { classifyProvider } from '../../utils';
+import { addModuleToMap } from './add-module-to-map.func';
 
+/**
+ * @since 0.1.0
+ */
 export async function addProvider<T>(
   this: Container,
   genericProvider: GenericProvider<T>,
@@ -12,12 +17,12 @@ export async function addProvider<T>(
     throw Errors.DuplicateToken(token);
   }
 
-  const adjustedProvider = classifyProvider(genericProvider);
+  const provider = classifyProvider(genericProvider);
 
   // make sure module exists when resolving useModule provider
-  if (adjustedProvider.useModule !== undefined) {
-    await this._addModuleToMap(adjustedProvider.useModule);
+  if (provider.resolver === useModuleResolver) {
+    await addModuleToMap.call(this, provider.meta.useModule);
   }
 
-  this._providers.set(adjustedProvider.token, adjustedProvider);
+  this._providers.set(provider.token, provider);
 }

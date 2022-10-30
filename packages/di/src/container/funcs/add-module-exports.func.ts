@@ -1,4 +1,4 @@
-import { Container } from '../../';
+import { Container } from '../..';
 import { ClassType, ExportableCnf, ExtModuleMeta } from '../../types';
 import { getModuleMeta } from '../../utils';
 

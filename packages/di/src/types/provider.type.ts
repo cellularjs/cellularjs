@@ -1,6 +1,6 @@
 import { Tracer } from '../tracer';
 import { Container } from '../';
-import { CycleTypeMap } from '../consts/cycle.const';
+import { DiCycle } from '../consts/cycle.const';
 import { DiResolvers } from '../consts/di-resolver.const';
 import {
   ClassType,
@@ -80,6 +80,7 @@ export type GenericProvider<T = any> =
   | UseFuncProvider<T>
   | UseValueProvider<T>
   | UseExistingProvider;
+// | Provider;
 
 /**
  * @package
@@ -92,7 +93,7 @@ export interface ClassifiedProvider<T = any> extends ProviderHasToken {
   useValue?: ValueType<T>;
   useExisting?: Token;
   deps?: ClassifiedUseFuncDep[];
-  cycle?: CycleTypeMap;
+  cycle?: DiCycle;
 }
 
 export interface ClassifiedUseFuncDep {
@@ -112,6 +113,10 @@ export interface ResolveOptions {
    */
   extModule?: Container;
 
+  parentModule?: Container;
+
+  tracer?: Tracer;
+
   /**
    * Global container.
    *
@@ -123,7 +128,7 @@ export interface ResolveOptions {
    * extModule > nornal container > global
    * ```
    *
-   * @deprecated For internal use only.
+   * @deprecated It will be removed in the near future.
    */
   global?: Container;
 }
