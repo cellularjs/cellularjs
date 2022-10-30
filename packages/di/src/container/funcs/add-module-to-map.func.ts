@@ -1,7 +1,11 @@
-import { Container, ModuleRef, ModuleWithListener } from '../../';
+import { Container, ModuleRef, ModuleWithListener } from '../..';
 import { Errors, ClassType, moduleMap } from '../../internal';
 import { getModuleMeta } from '../../utils';
+import { addExports } from './add-exports.func';
 
+/**
+ * @since 0.1.0
+ */
 export async function addModuleToMap(this: Container, moduleClass: ClassType) {
   if (moduleMap.has(moduleClass)) {
     return;
@@ -17,14 +21,13 @@ export async function addModuleToMap(this: Container, moduleClass: ClassType) {
   moduleMap.set(moduleClass, newModule);
 
   await newModule.addProviders(moduleMeta.providers);
-  await newModule._addExports(moduleMeta.exports);
+  await addExports.call(newModule, moduleMeta.exports);
   await newModule.addModules(moduleMeta.imports);
 
-  await createModuleListener(moduleClass, newModule);
+  await finalizeInitModule(moduleClass, newModule);
 }
 
-// TODO: rename
-async function createModuleListener(
+async function finalizeInitModule(
   moduleClass: ClassType,
   newModule: Container,
 ) {
@@ -35,14 +38,10 @@ async function createModuleListener(
     { token: ModuleRef, useValue: newModule },
   ]);
 
-  const moduleListener = await tempContainer.resolve<ModuleWithListener>(
+  const moduleInstance = await tempContainer.resolve<ModuleWithListener>(
     moduleClass,
-    {
-      extModule: newModule,
-    },
+    { extModule: newModule },
   );
 
-  if (moduleListener.onInit) {
-    await moduleListener.onInit();
-  }
+  moduleInstance.onInit && (await moduleInstance.onInit());
 }

@@ -1,8 +1,14 @@
 import { getModuleMeta } from '../../utils';
 import { ClassType, ExportableCnf } from '../../types';
 import { Container, ExtModuleMeta } from '../..';
-import { addExportClassAsProvider } from './addExportClassAsProvider.func';
+import { addExportClassAsProvider } from './add-export-class-as-provider.func';
+import { addExtModule } from './add-ext-module.func';
 
+/**
+ * Add service classes from ExportableCnf[] into container as providers.
+ *
+ * @since 0.2.0
+ */
 export async function addExports(
   this: Container,
   exports: ExportableCnf[] = [],
@@ -11,7 +17,7 @@ export async function addExports(
     const exportCnf = exports[i];
 
     if ((<ExtModuleMeta>exportCnf).extModule) {
-      await this._addExtModule(<ExtModuleMeta>exportCnf);
+      await addExtModule.call(this, <ExtModuleMeta>exportCnf);
       continue;
     }
 

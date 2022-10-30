@@ -8,6 +8,9 @@ export enum DiErrorCode {
   InvalidModuleClass = 'INVALID_MODULE_CLASS',
 }
 
+/**
+ * @since 0.1.0
+ */
 export class DiError extends Error {
   constructor(message: string, public code: DiErrorCode) {
     super(message);
@@ -31,6 +34,8 @@ export const Errors = {
 
   NoProviderForToken: (token: Token, tracer: Tracer<ResolveTrace>) => {
     const traces = tracer.getTraces();
+    traces.shift();
+
     let errorMsg = `There is no provider for ${getVarName(token)}`;
 
     const depPaths = traces.map(
@@ -42,7 +47,7 @@ export const Errors = {
         }`,
     );
 
-    if (depPaths.length > 1) {
+    if (depPaths.length) {
       errorMsg += `\n    Dependency paths: ${depPaths.join(' => ')}`;
     }
 

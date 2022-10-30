@@ -2,27 +2,18 @@ import {
   GenericProvider,
   Token,
   ExportableCnf,
-  ClassifiedProvider,
   ImportableCnf,
   ClassType,
 } from '../types';
-import { DiResolvers } from '../consts/di-resolver.const';
-import { addExtModule } from './funcs/addExtModule.func';
-import { addModuleToMap } from './funcs/addModuleToMap.func';
-import { addModule } from './funcs/addModule.func';
-import { addProvider } from './funcs/addProvider.func';
-import { addExports } from './funcs/addExports.func';
-import { addModuleExports } from './funcs/addModuleExports.func';
-import { innerResolve, resolve } from './funcs/resolve.func';
-import { resolveUseFuncDeps } from './funcs/resolveUseFuncDeps.func';
-import { resolveWithParentModule } from './funcs/resolveWithParentModule.func';
-import { resolveConstructorArgs } from './funcs/resolveConstructorArgs.func';
-import { resolveUseModuleProvider } from './funcs/resolveUseModuleProvider.func';
-import { resolveUseClassProvider } from './funcs/resolveUseClassProvider.func';
-import { resolveUseFuncProvider } from './funcs/resolveUseFuncProvider.func';
-import { resolveUseValueProvider } from './funcs/resolveUseValueProvider.func';
-import { resolveUseExistingProvider } from './funcs/resolveUseExistingProvider.func';
+import { addModule } from './funcs/add-module.func';
+import { addProvider } from './funcs/add-provider.func';
+import { resolve } from './funcs/resolve.func';
+import { Provider } from '../internal';
 
+/**
+ * @see https://cellularjs.com/docs/foundation/dependency-injection/basic-usage
+ * @since 0.1.0
+ */
 export class Container {
   /**
    * A store for cached resolved values.
@@ -32,7 +23,7 @@ export class Container {
   /**
    * List of providers containing information for how to create dependency value.
    */
-  protected _providers = new Map<Token, ClassifiedProvider>();
+  protected _providers = new Map<Token, Provider>();
 
   /**
    * List of modules that current module/container use as reference for resolving
@@ -40,19 +31,26 @@ export class Container {
    */
   protected _extModules = new Map<ClassType, Container>();
 
+  constructor(protected moduleClass?: ClassType) {}
+
   /**
-   * `_parentModule` is a module that this module extend from.
+   * @since 0.11.0
    */
-  protected _parentModule: Container;
+  public hasExtModule(moduleClass: ClassType) {
+    return this._extModules.has(moduleClass);
+  }
 
-  constructor(private moduleClass?: ClassType) {}
-
-  public getModuleClass() {
-    return this.moduleClass;
+  /**
+   * @since 0.11.0
+   */
+  public getExtModule(moduleClass: ClassType) {
+    return this._extModules.get(moduleClass);
   }
 
   /**
    * Convenient method for adding multiple providers into this container.
+   *
+   * @since 0.1.0
    */
   public async addProviders(providers: GenericProvider[] = []): Promise<void> {
     for (let i = 0; i < providers.length; i++) {
@@ -62,11 +60,15 @@ export class Container {
 
   /**
    * Add a provider into this container for resolving dependency later.
+   *
+   * @since 0.1.0
    */
   public addProvider = addProvider;
 
   /**
    * Convenient method for adding multiple modules into this container.
+   *
+   * @since 0.1.0
    */
   public async addModules(modules: (ImportableCnf | ExportableCnf)[] = []) {
     for (let i = 0; i < modules.length; i++) {
@@ -76,11 +78,15 @@ export class Container {
 
   /**
    * Add a module into this container.
+   *
+   * @since 0.1.0
    */
   public addModule = addModule;
 
   /**
    * Check if a provider with given token exists in this container.
+   *
+   * @since 0.1.0
    */
   public has(token: Token): boolean {
     return this._providers.has(token);
@@ -88,6 +94,8 @@ export class Container {
 
   /**
    * Remove provider from this container by token.
+   *
+   * @since 0.1.0
    */
   public remove(token: Token) {
     this._providers.delete(token);
@@ -95,35 +103,8 @@ export class Container {
 
   /**
    * Resolve value by token.
+   *
+   * @since 0.1.0
    */
   public resolve = resolve;
-
-  protected _innerResolve = innerResolve;
-
-  protected _addExtModule = addExtModule;
-
-  protected _addModuleToMap = addModuleToMap;
-
-  protected _addModuleExports = addModuleExports;
-
-  /**
-   * Add service classes from ExportableCnf[] into container as providers.
-   */
-  protected _addExports = addExports;
-
-  protected _resolveWithParentModule = resolveWithParentModule;
-
-  protected _resolveConstructorArgs = resolveConstructorArgs;
-
-  protected _resolveUseFuncArgs = resolveUseFuncDeps;
-
-  protected [DiResolvers.useModuleResolver] = resolveUseModuleProvider;
-
-  protected [DiResolvers.useClassResolver] = resolveUseClassProvider;
-
-  protected [DiResolvers.useFuncResolver] = resolveUseFuncProvider;
-
-  protected [DiResolvers.useValueResolver] = resolveUseValueProvider;
-
-  protected [DiResolvers.useExistingResolver] = resolveUseExistingProvider;
 }

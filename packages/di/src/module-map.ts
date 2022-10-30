@@ -1,4 +1,5 @@
-import { ClassType, Container } from './internal';
+import { Container } from './container';
+import { ClassType } from './internal';
 
 /**
  * Module map, or container map. It know all modules that were imported before.
@@ -8,34 +9,37 @@ import { ClassType, Container } from './internal';
  * const ModuleMap = {
  *   ModuleA: {
  *     _providers: {
- *       ServiceA: { token: ServiceA, useClass: ServiceA, resolver: 1 },
+ *       ServiceA: { token: ServiceA, meta: { useClass: ServiceA }, resolver: function },
  *     },
  *   },
  *   ModuleB: {
  *     _providers: {
- *       ServiceA: { token: ServiceA, useModule: ModuleA, resolver: 0 },
- *       ServiceB: { token: ServiceB, useClass: ServiceB, resolver: 1 },
+ *       ServiceA: { token: ServiceA, meta: { useModule: ModuleA }, resolver: function },
+ *       ServiceB: { token: ServiceB, meta: { useClass: ServiceB }, resolver: function },
  *     },
  *     _extModules: {
  *       ModuleA: {
  *         _providers: {
- *           "config": { token: "config", useValue: "******", resolver: 3 },
- *           ReservedService: { token: ReservedService, useClass: ReservedService, resolver: 1 },
+ *           "config": { token: "config", meta: { useValue: "******" }, resolver: function },
+ *           ReservedService: { token: ReservedService, meta: { useClass: ReservedService }, resolver: function },
  *         },
  *       },
  *     },
  *   },
  * };
  * ```
+ *
+ * @since 0.1.0
  */
 export const moduleMap = new Map<ClassType, Container>();
 
 /**
- * IMPORTANT: this function can make @cellularjs/di work incorrectly,
- * it should be used for development only(like unit testing).
+ * _**IMPORTANT**: this function can make @cellularjs/di work incorrectly,
+ * it should be used for development only(like unit testing)._
  *
  * @deprecated This function is not deprecated, it is just to denote
- * that you should not use this function.
+ * that you should not use this function in production.
+ * @since 0.9.0
  */
 export function clearModuleMap() {
   console.log(
