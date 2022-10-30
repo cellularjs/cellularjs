@@ -2,14 +2,7 @@ import { Tracer } from '../tracer';
 import { Container } from '../';
 import { DiCycle } from '../consts/cycle.const';
 import { DiResolvers } from '../consts/di-resolver.const';
-import {
-  ClassType,
-  CycleType,
-  Token,
-  FuncType,
-  ValueType,
-  ResolveTrace,
-} from './';
+import { ClassType, CycleType, Token, FuncType, ValueType } from './';
 
 export interface ProviderHasCycle {
   /**
@@ -131,8 +124,4 @@ export interface ResolveOptions {
    * @deprecated It will be removed in the near future.
    */
   global?: Container;
-}
-
-export interface InnerResolveOptions extends ResolveOptions {
-  tracer?: Tracer<ResolveTrace>;
 }
