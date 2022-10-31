@@ -109,19 +109,4 @@ export interface ResolveOptions {
   parentModule?: Container;
 
   tracer?: Tracer;
-
-  /**
-   * Global container.
-   *
-   * If there is no provider matching with the given token,
-   * it will find provider from this global container.
-   *
-   * _Note:_ global container has lower priority than normal container.
-   * ```
-   * extModule > nornal container > global
-   * ```
-   *
-   * @deprecated It will be removed in the near future.
-   */
-  global?: Container;
 }

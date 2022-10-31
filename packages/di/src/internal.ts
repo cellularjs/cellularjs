@@ -8,3 +8,4 @@ export * from './utils';
 export * from './types';
 export * from './module-map';
 export * from './provider';
+export * from './global-module';

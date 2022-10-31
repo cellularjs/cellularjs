@@ -1,13 +1,6 @@
 import 'mocha';
 import { expect } from 'chai';
-import {
-  Container,
-  DiErrorCode,
-  Injectable,
-  Inject,
-  Module,
-  ExtModuleMeta,
-} from '../../../src';
+import { Container, DiErrorCode } from '../../../src';
 
 let container: Container;
 
@@ -24,65 +17,6 @@ describe('Container - resolve:', () => {
     } catch (err) {
       expect(err.code).to.equal(DiErrorCode.NoProviderForToken);
     }
-  });
-
-  it('can resolve global providers', async () => {
-    const global = new Container();
-    await global.addProviders([{ token: 'foo', useValue: 'global' }]);
-
-    @Injectable()
-    class FooBar {
-      constructor(@Inject('foo') public foo) {}
-    }
-
-    await container.addProvider({ token: FooBar, useClass: FooBar });
-
-    const foobar = await container.resolve<FooBar>(FooBar, { global });
-    expect(foobar.foo).to.equal('global');
-  });
-
-  it('global provider has lower priority than normal providers', async () => {
-    const global = new Container();
-    await global.addProviders([{ token: 'foo', useValue: 'global' }]);
-
-    @Injectable()
-    class FooBar {
-      constructor(@Inject('foo') public foo) {}
-    }
-
-    await container.addProviders([
-      { token: FooBar, useClass: FooBar },
-      { token: 'foo', useValue: 'foo' },
-    ]);
-
-    const foobar = await container.resolve<FooBar>(FooBar, { global });
-    expect(foobar.foo).to.equal('foo');
-  });
-
-  it('global provider has lower priority than ref module(~ extend module)', async () => {
-    const global = new Container();
-    await global.addProviders([{ token: 'foo', useValue: 'global' }]);
-
-    @Injectable()
-    class FooBar {
-      constructor(@Inject('foo') public foo) {}
-    }
-
-    @Module({})
-    class FooModule {
-      static extend(): ExtModuleMeta {
-        return {
-          extModule: FooModule,
-          providers: [{ token: 'foo', useValue: 'foo' }],
-          exports: [FooBar],
-        };
-      }
-    }
-
-    await container.addModule(FooModule.extend());
-
-    const foobar = await container.resolve<FooBar>(FooBar, { global });
-    expect(foobar.foo).to.equal('foo');
   });
 
   it('create only one value for provider has cycle is permanent when resolving value in sync', async () => {

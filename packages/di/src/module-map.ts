@@ -36,16 +36,8 @@ export const moduleMap = new Map<ClassType, Container>();
 /**
  * _**IMPORTANT**: this function can make @cellularjs/di work incorrectly,
  * it should be used for development only(like unit testing)._
- *
- * @deprecated This function is not deprecated, it is just to denote
- * that you should not use this function in production.
  * @since 0.9.0
  */
 export function clearModuleMap() {
-  console.log(
-    '"clearModuleMap" is invoked, this function can make @cellularjs/di work incorrectly, ' +
-      'it should be used for development only(like unit testing).',
-  );
-
   moduleMap.clear();
 }
