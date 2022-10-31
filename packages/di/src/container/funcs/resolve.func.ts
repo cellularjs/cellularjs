@@ -1,5 +1,10 @@
 import { Container, Token, ResolveOptions } from '../../';
-import { Errors, ResolveTrace, Provider } from '../../internal';
+import {
+  Errors,
+  ResolveTrace,
+  Provider,
+  getGlobalModule,
+} from '../../internal';
 import { Tracer } from '../../tracer';
 import { DiCycle } from '../../consts/cycle.const';
 
@@ -12,11 +17,9 @@ export async function resolve<T>(
     return this._resolvedValues.get(token);
   }
 
-  if (!options.tracer) {
-    options.tracer = new Tracer<ResolveTrace>();
-  }
+  if (!options.tracer) options.tracer = new Tracer<ResolveTrace>();
 
-  const { extModule, parentModule, tracer, global } = options;
+  const { extModule, parentModule, tracer } = options;
   const traceIdx = tracer.log({ module: this.moduleClass, token });
 
   // B1: extModule has highest priority, so check it first.
@@ -33,8 +36,9 @@ export async function resolve<T>(
     return await parentModule.resolve<T>(token, options);
 
   // B4: provider for this token exists in global module.
-  if (global?.has(token)) {
-    return global.resolve(token, { tracer });
+  const globalModule = getGlobalModule();
+  if (globalModule.has(token)) {
+    return globalModule.resolve(token, { tracer });
   }
 
   // B5:
