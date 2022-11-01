@@ -19,7 +19,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run clean && tsc -b ./tsconfig.build.json",
-    "test": "mocha -r ts-node/register test/**/*.spec.ts",
+    "test": "mocha -r ts-node/register test/spec/**/*.spec.ts",
     "code-coverage": "nyc npm test",
     "clean": "rimraf ./dist"
   },
