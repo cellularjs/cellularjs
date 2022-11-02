@@ -1,6 +1,5 @@
-import { ClassifiedUseFuncDep, Provider } from '../internal';
-import { ResolveOptions } from '../internal';
-import { Container } from '../container/container.class';
+import { ClassifiedUseFuncDep, Provider, ResolveOptions } from '../internal';
+import { Container } from '../container';
 
 type UseFuncProvider = Provider<{
   useFunc: (...args: any[]) => any;
@@ -17,9 +16,8 @@ export async function useFuncResolver<T>(
     provider.meta.deps,
     options,
   );
-  const resolvedValue = await provider.meta.useFunc(...useFuncArgs);
 
-  return resolvedValue;
+  return await provider.meta.useFunc(...useFuncArgs);
 }
 
 async function resolveUseFuncDeps(

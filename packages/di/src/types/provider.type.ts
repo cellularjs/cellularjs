@@ -1,7 +1,6 @@
 import { Tracer } from '../tracer';
 import { Container } from '../';
 import { DiCycle } from '../consts/cycle.const';
-import { DiResolvers } from '../consts/di-resolver.const';
 import { ClassType, CycleType, Token, FuncType, ValueType } from './';
 
 export interface ProviderHasCycle {
@@ -79,7 +78,6 @@ export type GenericProvider<T = any> =
  * @package
  */
 export interface ClassifiedProvider<T = any> extends ProviderHasToken {
-  resolver: DiResolvers;
   useModule?: ClassType;
   useClass?: ClassType<T>;
   useFunc?: FuncType<T>;
@@ -101,12 +99,23 @@ export interface ResolveOptions {
    * _Note:_ `extModule` has higher priority than parent module,
    * so it can override parent module providers.
    * ```
-   * extModule > nornal container > global
+   * extModule > normal module > global module
    * ```
+   * @since 0.1.0
    */
   extModule?: Container;
 
+  /**
+   * @since 0.11.0
+   */
   parentModule?: Container;
 
+  /**
+   * For now, `Tracer` is not public(via index) and API may be changed.
+   *
+   * _**(Please don't try to import and use it.)**_
+   *
+   * @since 0.11.0
+   */
   tracer?: Tracer;
 }
