@@ -1,4 +1,6 @@
 {
+  "editor.tabSize": 2,
+  "files.eol": "\n",
   "javascript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
   "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
 }
