@@ -14,6 +14,11 @@ import { useClassResolver } from '../core-resolver/use-class.resolver';
 import { useFuncResolver } from '../core-resolver/use-func.resolver';
 import { useExistingResolver } from '../core-resolver/use-existing.resolver';
 import { useValueResolver } from '../core-resolver/use-value.resolver';
+import { getProxies } from '../proxy';
+import {
+  useProxyResolver,
+  UseProxyResolverMeta,
+} from '../core-resolver/use-proxy.resolver';
 
 /**
  * Classify provider into useModule, useClass, useFunc, useValue provider,...
@@ -38,11 +43,24 @@ export function classifyProvider<T>(
   }
 
   if (rawProvider.useClass !== undefined) {
-    return new Provider({
+    const useClassProvider = new Provider({
       cycle,
       token: rawProvider.token,
       resolver: useClassResolver,
       meta: { useClass: rawProvider.useClass },
+    });
+
+    const proxiesCnfs = getProxies(rawProvider.token);
+
+    if (!proxiesCnfs.length) {
+      return useClassProvider;
+    }
+
+    return new Provider<UseProxyResolverMeta>({
+      token: useClassProvider.token,
+      cycle: useClassProvider.cycle,
+      meta: { proxiesCnfs, targetProvider: useClassProvider },
+      resolver: useProxyResolver,
     });
   }
 
