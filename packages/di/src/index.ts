@@ -7,6 +7,7 @@ export { forwardRef } from './forward-ref';
 export { getModuleMeta, getInjectable } from './utils';
 export { ModuleRef } from './tokens';
 export { setGlobalProviders, setGlobalModules } from './global-module';
+export { addProxy, ProxyConfig, ProxyHandler, ProxyContext } from './proxy';
 export {
   ModuleMeta,
   ExtModuleMeta,
