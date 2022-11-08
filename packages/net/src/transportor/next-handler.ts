@@ -9,6 +9,9 @@ import {
 /**
  * Instead of resolve all handlers/proxies and it's dependencies at once.
  * `NextHandler` allow you to resolve and run next (proxy/service) handler lazily.
+ *
+ * @deprecated it will be remove in the near future, let use
+ * [@cellularjs/di proxy](https://cellularjs.com/docs/foundation/dependency-injection/basic-usage#3-proxy) instead.
  */
 export class NextHandler {
   private currentIndex: number;
