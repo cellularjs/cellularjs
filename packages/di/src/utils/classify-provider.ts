@@ -50,7 +50,7 @@ export function classifyProvider<T>(
       meta: { useClass: rawProvider.useClass },
     });
 
-    const proxiesCnfs = getProxies(rawProvider.token);
+    const proxiesCnfs = getProxies(rawProvider.useClass);
 
     if (!proxiesCnfs.length) {
       return useClassProvider;

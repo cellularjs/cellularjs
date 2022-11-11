@@ -1,3 +1,4 @@
+import 'mocha';
 import { expect } from 'chai';
 import {
   addProxy,
@@ -6,7 +7,7 @@ import {
   Injectable,
   ProxyContext,
   ProxyHandler,
-} from '../../src';
+} from '../../../src';
 
 describe('Proxy:', () => {
   beforeEach(clearModuleMap);
@@ -24,6 +25,23 @@ describe('Proxy:', () => {
     const container = new Container();
     await container.addProvider(Tree);
     const rs = await container.resolve(Tree);
+
+    expect(rs).to.eq('SUPER PROTECTOR');
+  });
+
+  it('It will use useClass(instead of token) as a key for storing & retrieving proxies', async () => {
+    class Tree {}
+    class SuperProtector implements ProxyHandler {
+      handle() {
+        return 'SUPER PROTECTOR';
+      }
+    }
+
+    addProxy(Tree, { proxy: SuperProtector });
+
+    const container = new Container();
+    await container.addProvider({ token: 'token', useClass: Tree });
+    const rs = await container.resolve('token');
 
     expect(rs).to.eq('SUPER PROTECTOR');
   });
