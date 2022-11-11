@@ -10,7 +10,7 @@ import {
   setGlobalProviders,
   setGlobalModules,
   DiErrorCode,
-} from '../../src';
+} from '../../../src';
 
 describe('Global module/provider specification:', () => {
   beforeEach(clearModuleMap);
