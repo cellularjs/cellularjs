@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/cellularjs/cellularjs/compare/v0.10.2...v0.11.0) (2022-11-12)
+
+
+### Bug Fixes
+
+* **di:** correct check variable is ES6 class [#51](https://github.com/cellularjs/cellularjs/issues/51) ([26cb9d2](https://github.com/cellularjs/cellularjs/commit/26cb9d2c9c9652895488de08b6f804272c79fd90))
+* **di:** use useClass as a key for storing and retrieving proxy ([8c8ef2f](https://github.com/cellularjs/cellularjs/commit/8c8ef2f1b82c3baf16c39c959f2098b50cfba8fd))
+
+
+### Features
+
+* **di:** restructure ([bbecead](https://github.com/cellularjs/cellularjs/commit/bbecead862f4f1c83c3f52f438d56b47eab95e61))
+* **di:** support for global module [#60](https://github.com/cellularjs/cellularjs/issues/60) ([673c8ba](https://github.com/cellularjs/cellularjs/commit/673c8ba98c0a7c1a4a7332590c8beca09107ba65))
+* **di:** support for proxy [#65](https://github.com/cellularjs/cellularjs/issues/65) ([27fd95e](https://github.com/cellularjs/cellularjs/commit/27fd95ed5b1d256540484da334c38be01a2898a4))
+
+
+
+
+
+
 ## [0.10.3](https://github.com/cellularjs/cellularjs/compare/v0.10.0...v0.10.3) (2022-10-06)
 
 
