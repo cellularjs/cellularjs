@@ -1,6 +1,5 @@
 export { CellContext } from './cell-context';
 export { NetErrorCode, NetError } from './error';
-export { addServiceProviders, addServiceProxies } from './service-helper';
 export {
   CellConfig,
   CellMeta,
@@ -13,10 +12,5 @@ export {
 export { LOCAL_DRIVER } from './key';
 export { Cell, Service } from './decorator';
 export { getResolvedCell, createNetWork } from './network';
-export {
-  send,
-  transportListener,
-  TransportListener,
-  NextHandler,
-} from './transportor';
+export { send, transportListener, TransportListener } from './transporter';
 export { IRQ, IRS } from './message';
