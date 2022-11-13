@@ -4,7 +4,7 @@ import { ServiceHandlerClass } from '../internal';
 let serviceProviders = new Map<any, GenericProvider[]>();
 
 /**
- * @deprecated it will be remove in the near future.
+ * @since 0.1.0
  */
 export function addServiceProviders(
   service: ServiceHandlerClass,
@@ -15,14 +15,14 @@ export function addServiceProviders(
 }
 
 /**
- * @deprecated it will be remove in the near future.
+ * @since 0.1.0
  */
 export function getServiceProviders(service: ServiceHandlerClass) {
   return serviceProviders.get(service) || [];
 }
 
 /**
- * @deprecated it will be remove in the near future.
+ * @since 0.1.0
  */
 export function cleanServiceProviders() {
   serviceProviders = new Map();
