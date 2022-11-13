@@ -10,8 +10,7 @@ import {
  * Instead of resolve all handlers/proxies and it's dependencies at once.
  * `NextHandler` allow you to resolve and run next (proxy/service) handler lazily.
  *
- * @deprecated it will be remove in the near future, let use
- * [@cellularjs/di proxy](https://cellularjs.com/docs/foundation/dependency-injection/basic-usage#3-proxy) instead.
+ * @since 0.1.0
  */
 export class NextHandler {
   private currentIndex: number;
@@ -40,6 +39,8 @@ export class NextHandler {
 
   /**
    * Resolve next proxy/service dependencies and run.
+   *
+   * @since 0.1.0
    */
   async handle() {
     if (this.currentIndex > -1) {
@@ -65,7 +66,9 @@ export class NextHandler {
    * mean providers in this container will exists in a single **internal** request only.
    *
    * Use case: you can use `extModule` to add temporary data such as logged-in user data.
+   *
    * @example https://cellularjs.com/docs/how-to%20wiki/auth
+   * @since 0.1.0
    */
   getExtModule() {
     return this.extModule;

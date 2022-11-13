@@ -3,8 +3,7 @@ import { ServiceHandlerClass } from '../internal';
 let serviceProxies = new Map<any, ServiceHandlerClass[]>();
 
 /**
- * @deprecated it will be remove in the near future, let use
- * [@cellularjs/di proxy](https://cellularjs.com/docs/foundation/dependency-injection/basic-usage#3-proxy) instead.
+ * @since 0.1.0
  */
 export function addServiceProxies(
   service: ServiceHandlerClass,
@@ -15,16 +14,14 @@ export function addServiceProxies(
 }
 
 /**
- * @deprecated it will be remove in the near future, let use
- * [@cellularjs/di proxy](https://cellularjs.com/docs/foundation/dependency-injection/basic-usage#3-proxy) instead.
+ * @since 0.1.0
  */
 export function getServiceProxies(service: ServiceHandlerClass) {
   return serviceProxies.get(service) || [];
 }
 
 /**
- * @deprecated it will be remove in the near future, let use
- * [@cellularjs/di proxy](https://cellularjs.com/docs/foundation/dependency-injection/basic-usage#3-proxy) instead.
+ * @since 0.1.0
  */
 export function cleanServiceProxies() {
   serviceProxies = new Map();
