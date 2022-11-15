@@ -1,0 +1,8 @@
+/test
+/scripts
+/src
+/tsconfig.json
+/tsconfig.build.json
+/coverage
+.nyc_output
+.nycrc

@@ -1,0 +1,27 @@
+{
+  "name": "@cellularjs/logger",
+  "version": "0.11.0",
+  "description": "CellularJS Logger",
+  "keywords": [
+    "cellularjs logger",
+    "logger"
+  ],
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellularjs/cellularjs.git"
+  },
+  "homepage": "https://github.com/cellularjs/cellularjs#readme",
+  "scripts": {
+    "build": "npm run clean && tsc -b ./tsconfig.build.json",
+    "test": "mocha --timeout 600000 -r ts-node/register test/spec/**/*.spec.ts",
+    "code-coverage": "nyc npm test",
+    "clean": "rimraf ./dist"
+  },
+  "author": "Great Elephant",
+  "license": "MIT",
+  "types": "./dist/"
+}
