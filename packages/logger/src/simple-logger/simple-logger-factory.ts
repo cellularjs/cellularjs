@@ -14,9 +14,6 @@ export class SimpleLoggerFactory implements LoggerFactory {
    */
   getLogger(source: string, meta?: LogMeta): Logger {
     const activeLogger: Logger = this.rootLogger;
-    return activeLogger.from(source || activeLogger.getSource(), {
-      ...activeLogger.getMeta(),
-      ...meta,
-    });
+    return activeLogger.from(source || activeLogger.getSource(), meta);
   }
 }
