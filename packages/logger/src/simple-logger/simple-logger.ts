@@ -3,11 +3,11 @@ import { LogMessage, LogMeta } from '../logging';
 import { Logger } from '../logger';
 
 const logLevelName = {
-  [LogLevel.DEBUG]: 'debug',
-  [LogLevel.INFO]: 'info',
-  [LogLevel.WARN]: 'warn',
-  [LogLevel.ERROR]: 'error',
-  [LogLevel.FATAL]: 'fatal',
+  [LogLevel.DEBUG]: 'DEBUG',
+  [LogLevel.INFO]: 'INFO',
+  [LogLevel.WARN]: 'WARN',
+  [LogLevel.ERROR]: 'ERROR',
+  [LogLevel.FATAL]: 'FATAL',
 };
 
 /**
@@ -20,6 +20,7 @@ const logLevelName = {
  */
 export class SimpleLogger implements Logger {
   private level: LogLevel = LogLevel.INFO;
+
   private logMethodMap = {
     [LogLevel.DEBUG]: this.debug.bind(this),
     [LogLevel.INFO]: this.info.bind(this),
@@ -48,7 +49,9 @@ export class SimpleLogger implements Logger {
 
   from(source: string, meta?: LogMeta): Logger {
     const newLogger = new SimpleLogger(source, { ...this.meta, ...meta });
+
     newLogger.setLogLevel(this.level);
+
     return newLogger;
   }
 
