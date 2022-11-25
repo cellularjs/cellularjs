@@ -24,7 +24,7 @@ export function getWebpackConfig(
     ...baseWebpackConfig,
     mode,
     watch: mode === 'development',
-    optimization: { minimize: mode === 'production' },
+    optimization: { minimize: false },
     entry: webpackEntry,
     plugins: getDefaultPlugins(baseWebpackConfig, mode),
   };
