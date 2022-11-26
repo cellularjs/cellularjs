@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/cellularjs/cellularjs/compare/v0.10.2...v0.12.0) (2022-11-26)
+
+
+### Bug Fixes
+
+* **cli:** keep class/function name after running build by turn off minimizing [#76](https://github.com/cellularjs/cellularjs/issues/76) ([40ef6b8](https://github.com/cellularjs/cellularjs/commit/40ef6b830ddb84d63f7cf0ad11a14433da3d6944))
+
+
+
+
+
+
 # [0.11.0](https://github.com/cellularjs/cellularjs/compare/v0.10.2...v0.11.0) (2022-11-12)
 
 **Note:** Version bump only for package @cellularjs/cli
