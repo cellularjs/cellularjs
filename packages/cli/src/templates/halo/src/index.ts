@@ -1,4 +1,5 @@
 import * as express from 'express';
+import { getLogger } from '@cellularjs/logger';
 import { createNetWork, send, IRQ, IRS } from '@cellularjs/net';
 import { NetworkConfig } from '@cellularjs/net';
 import { env } from '@cellularjs/env';
@@ -16,7 +17,9 @@ const helloNetwork: NetworkConfig = [
 (async () => {
   const app = express();
 
-  app.get('/', (_, res) => {
+  app.get('/', (req, res) => {
+    getLogger('Express').info(`${req.url} - ${req.headers['user-agent']}`);
+
     const helloIrq = new IRQ({ to: 'Hello:SayHelloCmd' });
     const onComplete = (irs: IRS) => {
       res.status(irs.header.status).send(irs.body);
@@ -28,8 +31,8 @@ const helloNetwork: NetworkConfig = [
   await createNetWork(helloNetwork);
 
   app.listen(env<Env>().NODE_PORT, () =>
-    console.log(
-      `Halo gateway: ready for http request (port: ${env<Env>().NODE_PORT})`,
+    getLogger('Halo gateway').info(
+      `ready for http request (port: ${env<Env>().NODE_PORT})`,
     ),
   );
 })();
