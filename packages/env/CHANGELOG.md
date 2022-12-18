@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/cellularjs/cellularjs/compare/v0.12.0...v0.13.0) (2022-12-18)
+
+**Note:** Version bump only for package @cellularjs/env
+
+
+
+
+
+
 # [0.12.0](https://github.com/cellularjs/cellularjs/compare/v0.10.2...v0.12.0) (2022-11-26)
 
 **Note:** Version bump only for package @cellularjs/env
