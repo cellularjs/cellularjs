@@ -10,6 +10,10 @@ type RequestEvent = 'start' | 'success' | 'fail';
 
 const emitter = new Emittery();
 
+/**
+ * @see https://cellularjs.com/docs/foundation/net/transporter#4-request-lifecyle
+ * @since 0.1.0
+ */
 export class TransportListener {
   on(event: RequestEvent, listener: RequestListener) {
     emitter.on(event, listener);
@@ -38,5 +42,8 @@ export async function emitTransportEvent(
  *
  * OTHER: If you want to modify/add behaviour for specific service, have a look at
  * [service proxy](https://cellularjs.com/docs/foundation/net/service/#41-service-proxy).
+ *
+ * @see https://cellularjs.com/docs/foundation/net/transporter#4-request-lifecyle
+ * @since 0.1.0
  */
 export const transportListener = new TransportListener();

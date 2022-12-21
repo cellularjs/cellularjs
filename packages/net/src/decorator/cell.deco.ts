@@ -4,6 +4,9 @@ import { CLL_CELL_OPTS } from '../internal';
 
 /**
  * Config cell with meta data.
+ *
+ * @see https://cellularjs.com/docs/foundation/net/cell
+ * @since 0.1.0
  */
 export const Cell = (rawCellMeta: CellMeta) => (target) => {
   const cellDriverMeta: CellMeta = {

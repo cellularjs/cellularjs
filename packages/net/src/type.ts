@@ -69,6 +69,9 @@ export interface CellMeta {
   listen: string | { [serviceName: string]: ClassType<ServiceHandler> };
 }
 
+/**
+ * @see https://cellularjs.com/docs/foundation/net/internal-message#211-to
+ */
 export type ToTargetHeader = `${string}:${string}`;
 
 export type IrqHeader = {
