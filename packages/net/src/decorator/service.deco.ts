@@ -7,6 +7,9 @@ import {
 
 /**
  * Mark a class as service handler.
+ *
+ * @see https://cellularjs.com/docs/foundation/net/service
+ * @since 0.1.0
  */
 export const Service = (serviceMeta?: ServiceMeta) => (target) => {
   const meta = serviceMeta || {};
