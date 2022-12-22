@@ -1,11 +1,13 @@
 import 'mocha';
 import { expect } from 'chai';
+import { Module } from '@cellularjs/di';
 import {
   createNetWork,
   getResolvedCell,
   NetErrorCode,
   send,
   IRQ,
+  Cell,
 } from '../../../src';
 import { cleanNetwork } from '../../../src/internal';
 import {
@@ -54,5 +56,46 @@ describe('Network - createNetwork:', () => {
     } catch (err) {
       expect(err.code).to.equal(NetErrorCode.DuplicateServiceHandlerName);
     }
+  });
+
+  it('will create cell one by one', async () => {
+    // https://github.com/cellularjs/cellularjs/issues/83
+    const expectedImportOrder = ['RealTypeOrmModule', 'CommonModule'];
+    const actualImportOrder = [];
+
+    function initialize() {
+      @Module({})
+      class RealTypeOrmModule {
+        async onInit() {
+          return new Promise((resovle) =>
+            setTimeout(() => {
+              actualImportOrder.push('RealTypeOrmModule');
+              resovle(true);
+            }),
+          );
+        }
+      }
+      return RealTypeOrmModule;
+    }
+
+    @Module({ exports: [initialize()] })
+    class CommonModule {
+      onInit() {
+        actualImportOrder.push('CommonModule');
+      }
+    }
+
+    @Cell({ imports: [CommonModule], listen: {} })
+    class User {}
+
+    @Cell({ imports: [CommonModule], listen: {} })
+    class Article {}
+
+    await createNetWork([
+      { name: User.name, driver: User },
+      { name: Article.name, driver: Article },
+    ]);
+
+    expect(expectedImportOrder).deep.equal(actualImportOrder);
   });
 });

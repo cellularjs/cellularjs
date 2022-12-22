@@ -7,12 +7,12 @@ import { setResolvedCell } from './resolved-cell.data';
 
 export async function createNetWork(
   networkConfig: NetworkConfig,
-): Promise<void[]> {
+): Promise<void> {
   preventDuplicateCell(networkConfig);
 
-  return Promise.all(
-    networkConfig.map((cellConfig) => resolveCell(cellConfig)),
-  );
+  for (let i = 0; i < networkConfig.length; i++) {
+    await resolveCell(networkConfig[i]);
+  }
 }
 
 function preventDuplicateCell(networkConfig: NetworkConfig) {
