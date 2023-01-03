@@ -16,6 +16,7 @@ module.exports = {
       'singleQuote': true,
       'trailingComma': 'all',
       'bracketSpacing': true,
+      'endOfLine': 'lf',
     }],
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off',
