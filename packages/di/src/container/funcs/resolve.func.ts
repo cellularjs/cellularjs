@@ -8,7 +8,7 @@ import {
 import { Tracer } from '../../tracer';
 import { DiCycle } from '../../consts/cycle.const';
 
-export async function resolve<T>(
+export async function resolve<T = any>(
   this: Container,
   token: Token,
   options: ResolveOptions = {},
