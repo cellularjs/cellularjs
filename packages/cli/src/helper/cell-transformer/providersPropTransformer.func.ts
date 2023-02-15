@@ -1,14 +1,10 @@
-import * as path from 'path';
 import * as ts from 'typescript';
-import { scanRelTsFiles } from './scanRelTsFiles.func';
 import { CellMetaProps } from './cell.const';
+import { TS_FILE_REGEX_STR } from '../../const';
 
 const factory = ts.factory;
 
-export function providersPropTransformer(
-  node: ts.CallExpression,
-  pathOfCurrentFile,
-) {
+export function providersPropTransformer(node: ts.CallExpression) {
   if (!isIncludeProvidersProp(node)) {
     return node;
   }
@@ -26,22 +22,18 @@ export function providersPropTransformer(
   )).elements;
   const [strExp, otherExp] = separateExpression(providersElements);
 
-  let relTsFiles = [];
-  strExp
-    .map((str) => str.text)
-    .forEach((folder) => {
-      const targetFolder = path.join(pathOfCurrentFile, folder);
-      relTsFiles = relTsFiles.concat(scanRelTsFiles(targetFolder, folder));
-    });
-
   const providersExpression = factory.createArrayLiteralExpression(
-    relTsFiles.map((file) => {
-      return factory.createCallExpression(
-        factory.createIdentifier('require'),
+    strExp.map((exp) =>
+      factory.createCallExpression(
+        factory.createIdentifier('require.context'),
         undefined,
-        [factory.createStringLiteral(file)],
-      );
-    }),
+        [
+          factory.createStringLiteral(exp.text),
+          factory.createTrue(),
+          factory.createRegularExpressionLiteral(TS_FILE_REGEX_STR),
+        ],
+      ),
+    ),
   );
 
   const removedProvidersProperty = cellProvidersExpression.properties.filter(

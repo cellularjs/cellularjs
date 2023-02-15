@@ -1,4 +1,3 @@
-import * as path from 'path';
 import * as ts from 'typescript';
 import { listenPropTransformer } from './listenPropTransformer.func';
 import { providersPropTransformer } from './providersPropTransformer.func';
@@ -6,14 +5,9 @@ import { providersPropTransformer } from './providersPropTransformer.func';
 export const cellTransformer: ts.TransformerFactory<ts.SourceFile> = (
   context: ts.TransformationContext,
 ) => {
-  let pathOfCurrentFile: string;
-
   const transformCellDecorator = (node: ts.CallExpression) => {
-    let transformedNode = listenPropTransformer(node, pathOfCurrentFile);
-    transformedNode = providersPropTransformer(
-      transformedNode,
-      pathOfCurrentFile,
-    );
+    let transformedNode = listenPropTransformer(node);
+    transformedNode = providersPropTransformer(transformedNode);
     return transformedNode;
   };
 
@@ -30,9 +24,5 @@ export const cellTransformer: ts.TransformerFactory<ts.SourceFile> = (
     return ts.visitEachChild(node, (child) => visit(child), context);
   };
 
-  return (node: ts.SourceFile) => {
-    pathOfCurrentFile = path.dirname(node.fileName);
-
-    return ts.visitNode(node, visit);
-  };
+  return (node: ts.SourceFile) => ts.visitNode(node, visit);
 };

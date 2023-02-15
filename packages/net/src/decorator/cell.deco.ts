@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { CellMeta } from '..';
-import { CLL_CELL_OPTS } from '../internal';
+import { CLL_CELL_OPTS, NormalizedCellMeta } from '../internal';
 
 /**
  * Config cell with meta data.
@@ -9,12 +9,13 @@ import { CLL_CELL_OPTS } from '../internal';
  * @since 0.1.0
  */
 export const Cell = (rawCellMeta: CellMeta) => (target) => {
-  const cellDriverMeta: CellMeta = {
+  const cellDriverMeta: NormalizedCellMeta = {
     ...rawCellMeta,
     providers: rawCellMeta.providers || [],
-  };
+    imports: rawCellMeta.imports || [],
+  } as NormalizedCellMeta;
 
-  const stackArr = new Error().stack.split('\n');
+  const stackArr = new Error().stack?.split('\n') || [];
 
   // hard code
   const callerStackStr = stackArr[4];

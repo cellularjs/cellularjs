@@ -77,7 +77,7 @@ export interface CellMeta {
   // have any exports at all.
 
   /**
-   * If argument is a string, it will be treated as a path to a folder. It
+   * If argument is a string(need @cellularjs/cli), it will be treated as a path to a folder. It
    * will scan that folder(include sub folder) to get service handler automatically.
    * Service name in this case will be same as class name.<br/>
    * *Example: `"./services"`*<br/>
@@ -98,6 +98,25 @@ export interface CellMeta {
    */
   listen: string | { [serviceName: string]: ClassType<ServiceHandler> };
 }
+
+/**
+ * @since 0.13.4
+ */
+type NormalizedProvider =
+  | CellProviderConfig
+  | [__WebpackModuleApi.RequireContext];
+
+/**
+ * @since 0.13.4
+ */
+export type NormalizedCellMeta = {
+  providers: NormalizedProvider[];
+  imports: ImportableCnf[];
+  listen:
+    | string
+    | { [serviceName: string]: ClassType<ServiceHandler> }
+    | [__WebpackModuleApi.RequireContext];
+};
 
 /**
  * @see https://cellularjs.com/docs/foundation/net/internal-message#211-to
@@ -185,7 +204,7 @@ export interface CellConfig {
    * do it by yourself. With this kind of strategy, your ability is not limit by
    * @cellularjs/net.
    *
-   * You can define many type of drivers with key-pair object. If you pass a class,
+   * You can define any type of drivers with key-pair object. If you pass a class,
    * it will be treated as local driver.
    *
    * Example:
@@ -194,8 +213,8 @@ export interface CellConfig {
    * // or
    * {
    *   local: AuthLocal,
-   *   http: AuthHttp",
-   *   any: AuthAny",
+   *   http: AuthHttp,
+   *   anyKey: AuthAny,
    * }
    * ```
    *
@@ -281,6 +300,7 @@ export interface ResolvedCell {
   drivers: Map<string, ResolvedDriver>;
 
   /**
+   * @deprecated CellContext is useless, it will be removed in the near future.
    * @since 0.1.0
    */
   cellContext: CellContext;

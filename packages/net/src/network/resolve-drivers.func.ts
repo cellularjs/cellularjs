@@ -1,13 +1,14 @@
 import { Container, GenericProvider } from '@cellularjs/di';
-import { LOCAL_DRIVER, CellConfig, CellMeta } from '..';
+import { LOCAL_DRIVER, CellConfig } from '..';
 import { Errors } from '../internal';
-import { ResolvedDriver, ServiceHandlerMap } from '../type';
+import { NormalizedCellMeta, ResolvedDriver, ServiceHandlerMap } from '../type';
 import {
   getCellMeta,
   scanDirForServiceHandler,
   scanModulesForServiceHandler,
   scanDirForProviders,
   scanModulesForProviders,
+  importAll,
 } from '../utils';
 
 export async function resolveDrivers(cellConfig: CellConfig) {
@@ -53,7 +54,7 @@ async function resolveDriver(
 }
 
 function resolveListener(
-  cellMeta: CellMeta,
+  cellMeta: NormalizedCellMeta,
   cellCnf: CellConfig,
 ): ServiceHandlerMap {
   const serviceHandlers = {};
@@ -72,13 +73,16 @@ function resolveListener(
   }
 
   if (Array.isArray(cellMeta.listen)) {
-    scanModulesForServiceHandler(cellMeta.listen, (serviceName, newService) => {
-      if (serviceHandlers[serviceName]) {
-        throw Errors.DuplicateServiceHandlerName(serviceName, cellCnf.name);
-      }
+    scanModulesForServiceHandler(
+      importAll(cellMeta.listen[0]),
+      (serviceName, newService) => {
+        if (serviceHandlers[serviceName]) {
+          throw Errors.DuplicateServiceHandlerName(serviceName, cellCnf.name);
+        }
 
-      serviceHandlers[serviceName] = newService;
-    });
+        serviceHandlers[serviceName] = newService;
+      },
+    );
 
     return new Map(Object.entries(serviceHandlers));
   }
@@ -87,7 +91,7 @@ function resolveListener(
 }
 
 async function createDriverContainer(
-  cellMeta: CellMeta,
+  cellMeta: NormalizedCellMeta,
   driverClass,
 ): Promise<Container> {
   const driverContainer = new Container(driverClass);
@@ -98,7 +102,7 @@ async function createDriverContainer(
   return driverContainer;
 }
 
-function extractUsableProviders(cellMeta: CellMeta) {
+function extractUsableProviders(cellMeta: NormalizedCellMeta) {
   let usableProviders = <GenericProvider[]>(
     cellMeta.providers.filter(
       (provider) => typeof provider !== 'string' && !Array.isArray(provider),
@@ -113,7 +117,7 @@ function extractUsableProviders(cellMeta: CellMeta) {
 
     if (Array.isArray(provider)) {
       usableProviders = usableProviders.concat(
-        scanModulesForProviders(provider),
+        scanModulesForProviders(importAll(provider[0])),
       );
     }
   });

@@ -1,11 +1,10 @@
-import * as path from 'path';
 import * as ts from 'typescript';
-import { scanRelTsFiles } from './scanRelTsFiles.func';
 import { CellMetaProps } from './cell.const';
+import { TS_FILE_REGEX_STR } from '../../const';
 
 const factory = ts.factory;
 
-export const listenPropTransformer = (node, pathOfCurrentFile: string) => {
+export const listenPropTransformer = (node: ts.CallExpression) => {
   if (!isDefinedListenProperty(node)) {
     return node;
   }
@@ -23,16 +22,17 @@ export const listenPropTransformer = (node, pathOfCurrentFile: string) => {
     return node;
   }
 
-  const listenValue = listenInitializer.text;
-  const serviceDir = path.join(pathOfCurrentFile, listenValue);
-  const relTsFiles = scanRelTsFiles(serviceDir, listenValue);
-  const newListenExpressions = relTsFiles.map((filePath) =>
+  const newListenExpressions = [
     factory.createCallExpression(
-      factory.createIdentifier('require'),
+      factory.createIdentifier('require.context'),
       undefined,
-      [factory.createStringLiteral(filePath)],
+      [
+        factory.createStringLiteral(listenInitializer.text),
+        factory.createTrue(),
+        factory.createRegularExpressionLiteral(TS_FILE_REGEX_STR),
+      ],
     ),
-  );
+  ];
 
   // remove previous listen property and assign new value for it.
   const removedOldListen = cellMetaExpression.properties.filter(
