@@ -100,14 +100,14 @@ export interface CellMeta {
 }
 
 /**
- * @since 0.13.4
+ * @since 0.14.0
  */
 type NormalizedProvider =
   | CellProviderConfig
   | [__WebpackModuleApi.RequireContext];
 
 /**
- * @since 0.13.4
+ * @since 0.14.0
  */
 export type NormalizedCellMeta = {
   providers: NormalizedProvider[];
