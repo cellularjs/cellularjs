@@ -14,3 +14,10 @@ export const RunDevCommands = {
 };
 
 export const cellularConfigFile = 'cellular.ts';
+
+/**
+ * Eg:
+ * test.ts => OK
+ * test.d.ts => NO
+ */
+export const TS_FILE_REGEX_STR = '/(^.?|.[^d]|[^.]d|[^.][^d]).ts$/';

@@ -29,5 +29,8 @@
   "dependencies": {
     "@cellularjs/di": "^0.13.3",
     "emittery": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/webpack-env": "^1.18.0"
   }
 }
