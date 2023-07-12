@@ -4,6 +4,7 @@ import {
   ResolveTrace,
   Provider,
   getGlobalModule,
+  _TRACER_KEY,
 } from '../../internal';
 import { Tracer } from '../../tracer';
 import { DiCycle } from '../../consts/cycle.const';
@@ -17,14 +18,18 @@ export async function resolve<T = any>(
     return this._resolvedValues.get(token);
   }
 
-  if (!options.tracer) options.tracer = new Tracer<ResolveTrace>();
+  if (!options[_TRACER_KEY]) options[_TRACER_KEY] = new Tracer<ResolveTrace>();
 
-  const { extModule, parentModule, tracer } = options;
+  const { extModule, parentModule } = options;
+  const tracer = options[_TRACER_KEY];
   const traceIdx = tracer.log({ module: this.moduleClass, token });
 
   // B1: extModule has highest priority, so check it first.
   if (extModule?.has(token))
-    return await extModule.resolve<T>(token, { parentModule: this, tracer });
+    return await extModule.resolve<T>(token, {
+      parentModule: this,
+      [_TRACER_KEY]: tracer,
+    });
 
   // B2: if provider for this token exists in this container,
   // use normalized resolver to resolve it.
@@ -38,7 +43,7 @@ export async function resolve<T = any>(
   // B4: provider for this token exists in global module.
   const globalModule = getGlobalModule();
   if (globalModule.has(token)) {
-    return globalModule.resolve(token, { tracer });
+    return globalModule.resolve(token, { [_TRACER_KEY]: tracer });
   }
 
   // B5:
@@ -51,7 +56,7 @@ async function resolveProvider(
   provider: Provider,
   options: ResolveOptions,
 ) {
-  const { tracer } = options;
+  const tracer = options[_TRACER_KEY];
   const resolvedValue = await provider.resolver(this, provider, options);
 
   if (provider.cycle === DiCycle.permanent) {

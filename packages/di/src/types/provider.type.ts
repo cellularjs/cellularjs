@@ -92,6 +92,12 @@ export interface ClassifiedUseFuncDep {
   shouldResolve: boolean;
 }
 
+/**
+ * _DO NOT TRY TO IMPORT THIS KEY, IT IS **NOT** PUBLIC FOR EXTERNAL USE._
+ * @since 0.15.1
+ */
+export const _TRACER_KEY = Symbol('tracer');
+
 export interface ResolveOptions {
   /**
    * `extModule` is a container object that is a "child" of this container.
@@ -117,5 +123,5 @@ export interface ResolveOptions {
    *
    * @since 0.11.0
    */
-  tracer?: Tracer;
+  [_TRACER_KEY]?: Tracer;
 }
