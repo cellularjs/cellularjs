@@ -26,6 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'yarn'
+    - run: yarn --frozen-lockfile
     - run: yarn run bootstrap
     - run: yarn build
     - run: yarn cmd:coverage
