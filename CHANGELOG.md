@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github-hoangtv2101/cellularjs/cellularjs/compare/v0.15.0...v0.15.1) (2023-07-12)
+
+**Note:** Version bump only for package cellularjs
+
+
+
+
+
 # [0.15.0](https://github.com/cellularjs/cellularjs/compare/v0.13.3...v0.15.0) (2023-04-01)
 
 
