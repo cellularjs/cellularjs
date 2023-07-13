@@ -94,7 +94,7 @@ export interface ClassifiedUseFuncDep {
 
 /**
  * _DO NOT TRY TO IMPORT THIS KEY, IT IS **NOT** PUBLIC FOR EXTERNAL USE._
- * @since 0.15.1
+ * @since 0.15.2
  */
 export const _TRACER_KEY = Symbol('tracer');
 
