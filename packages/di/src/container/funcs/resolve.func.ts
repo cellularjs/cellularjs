@@ -5,6 +5,7 @@ import {
   Provider,
   getGlobalModule,
   _TRACER_KEY,
+  _PARENT_MODULE_KEY,
 } from '../../internal';
 import { Tracer } from '../../tracer';
 import { DiCycle } from '../../consts/cycle.const';
@@ -20,14 +21,15 @@ export async function resolve<T = any>(
 
   if (!options[_TRACER_KEY]) options[_TRACER_KEY] = new Tracer<ResolveTrace>();
 
-  const { extModule, parentModule } = options;
+  const { extModule } = options;
+  const parentModule = options[_PARENT_MODULE_KEY];
   const tracer = options[_TRACER_KEY];
   const traceIdx = tracer.log({ module: this.moduleClass, token });
 
   // B1: extModule has highest priority, so check it first.
   if (extModule?.has(token))
     return await extModule.resolve<T>(token, {
-      parentModule: this,
+      [_PARENT_MODULE_KEY]: this,
       [_TRACER_KEY]: tracer,
     });
 
