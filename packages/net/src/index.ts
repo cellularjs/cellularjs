@@ -1,4 +1,3 @@
-export { CellContext } from './cell-context';
 export { NetErrorCode, NetError } from './error';
 export { addServiceProviders, addServiceProxies } from './service-helper';
 export {
