@@ -98,6 +98,12 @@ export interface ClassifiedUseFuncDep {
  */
 export const _TRACER_KEY = Symbol('tracer');
 
+/**
+ * _DO NOT TRY TO IMPORT THIS KEY, IT IS **NOT** PUBLIC FOR EXTERNAL USE._
+ * @since 0.15.3
+ */
+export const _PARENT_MODULE_KEY = Symbol('parent_module');
+
 export interface ResolveOptions {
   /**
    * `extModule` is a container object that is a "child" of this container.
@@ -114,7 +120,7 @@ export interface ResolveOptions {
   /**
    * @since 0.11.0
    */
-  parentModule?: Container;
+  [_PARENT_MODULE_KEY]?: Container;
 
   /**
    * For now, `Tracer` is not public(via index) and API may be changed.
