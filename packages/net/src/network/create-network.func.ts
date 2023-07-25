@@ -1,7 +1,7 @@
-import { CellContext, CellConfig } from '..';
+import { CellConfig } from '..';
 import { Errors } from '../internal';
 import { NetworkConfig, ResolvedCell } from '../type';
-import { uniqId, freezeProperty } from '../utils';
+import { uniqId } from '../utils';
 import { resolveDrivers } from './resolve-drivers.func';
 import { setResolvedCell } from './resolved-cell.data';
 
@@ -33,16 +33,7 @@ async function resolveCell(cellConfig: CellConfig): Promise<void> {
     spaceId: uniqId(cellConfig.space),
     cellId: uniqId(cellConfig.name),
     cellConfig,
-    cellContext: createCellContext(cellConfig),
   };
 
   setResolvedCell(cellConfig.name, resolvedCell);
-}
-
-function createCellContext(cellConfig: CellConfig) {
-  const cellCtx = new CellContext();
-
-  freezeProperty(cellCtx, 'cellName', cellConfig.name);
-
-  return cellCtx;
 }

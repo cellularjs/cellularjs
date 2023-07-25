@@ -1,5 +1,5 @@
 import { Container } from '@cellularjs/di';
-import { getResolvedCell, ServiceHandler, CellContext, IRQ } from '..';
+import { getResolvedCell, ServiceHandler, IRQ } from '..';
 import { Errors, ResolvedDriver, ServiceHandlerClass } from '../internal';
 import { scopeContraints } from '../scope';
 import { getServiceProviders, getServiceProxies } from '../service-helper';
@@ -36,7 +36,6 @@ export async function resolveServiceHandler(
   await extModule.addProviders([
     ...getServiceProviders(DestServiceHandler),
     { token: IRQ, useValue: irq },
-    { token: CellContext, useValue: destResolvedCell.cellContext },
   ]);
 
   return getServiceHandler(DestServiceHandler, resolvedDriver, extModule);

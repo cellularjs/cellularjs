@@ -1,5 +1,4 @@
 import { GenericProvider, ImportableCnf, Container } from '@cellularjs/di';
-import { CellContext } from './';
 
 type ClassType<T> = { new (...args: any[]): T };
 
@@ -298,12 +297,6 @@ export interface ResolvedCell {
    * @since 0.1.0
    */
   drivers: Map<string, ResolvedDriver>;
-
-  /**
-   * @deprecated CellContext is useless, it will be removed in the near future.
-   * @since 0.1.0
-   */
-  cellContext: CellContext;
 }
 
 /**
