@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/cellularjs/cellularjs/compare/v0.10.3...v0.16.0) (2023-09-01)
+
+
+### Bug Fixes
+
+* **cli:** keep class/function name after running build by turn off minimizing [#76](https://github.com/cellularjs/cellularjs/issues/76) ([40ef6b8](https://github.com/cellularjs/cellularjs/commit/40ef6b830ddb84d63f7cf0ad11a14433da3d6944))
+
+
+### Features
+
+* **cli, net:** use webpack require.context to detect new file [#91](https://github.com/cellularjs/cellularjs/issues/91) ([96f0b8b](https://github.com/cellularjs/cellularjs/commit/96f0b8b822e6bdcacb9a79a27460e7d24a42c456))
+* **cli:** add @cellularjs/logger into the default template ([100536a](https://github.com/cellularjs/cellularjs/commit/100536a03bf46af45477b3b9597f71ab80ff4ca5))
+
+
+
+
+
+
 ## [0.15.2](https://github.com/cellularjs/cellularjs/compare/v0.15.0...v0.15.2) (2023-07-13)
 
 **Note:** Version bump only for package @cellularjs/cli

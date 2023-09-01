@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/cellularjs/cellularjs/compare/v0.10.3...v0.16.0) (2023-09-01)
+
+
+### Bug Fixes
+
+* **di:** use symbol to hide parentModule from external world ([9f23979](https://github.com/cellularjs/cellularjs/commit/9f239790ebe217a95238e11f898682c50d4a9bb9))
+* **di:** use symbol to hide tracer param instead of warning ([f73321f](https://github.com/cellularjs/cellularjs/commit/f73321f150b9a0e7cb880cf72b404443ccea7209))
+* **di:** use useClass as a key for storing and retrieving proxy ([8c8ef2f](https://github.com/cellularjs/cellularjs/commit/8c8ef2f1b82c3baf16c39c959f2098b50cfba8fd))
+
+
+### Features
+
+* **di:** restructure ([bbecead](https://github.com/cellularjs/cellularjs/commit/bbecead862f4f1c83c3f52f438d56b47eab95e61))
+* **di:** support for global module [#60](https://github.com/cellularjs/cellularjs/issues/60) ([673c8ba](https://github.com/cellularjs/cellularjs/commit/673c8ba98c0a7c1a4a7332590c8beca09107ba65))
+* **di:** support for proxy [#65](https://github.com/cellularjs/cellularjs/issues/65) ([27fd95e](https://github.com/cellularjs/cellularjs/commit/27fd95ed5b1d256540484da334c38be01a2898a4))
+
+
+
+
+
+
 ## [0.15.2](https://github.com/cellularjs/cellularjs/compare/v0.15.0...v0.15.2) (2023-07-13)
 
 

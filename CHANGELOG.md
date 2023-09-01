@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/cellularjs/cellularjs/compare/v0.10.3...v0.16.0) (2023-09-01)
+
+
+### Bug Fixes
+
+* **cli:** keep class/function name after running build by turn off minimizing [#76](https://github.com/cellularjs/cellularjs/issues/76) ([40ef6b8](https://github.com/cellularjs/cellularjs/commit/40ef6b830ddb84d63f7cf0ad11a14433da3d6944))
+* **di:** use symbol to hide parentModule from external world ([9f23979](https://github.com/cellularjs/cellularjs/commit/9f239790ebe217a95238e11f898682c50d4a9bb9))
+* **di:** use symbol to hide tracer param instead of warning ([f73321f](https://github.com/cellularjs/cellularjs/commit/f73321f150b9a0e7cb880cf72b404443ccea7209))
+* **di:** use useClass as a key for storing and retrieving proxy ([8c8ef2f](https://github.com/cellularjs/cellularjs/commit/8c8ef2f1b82c3baf16c39c959f2098b50cfba8fd))
+* new line issue [#85](https://github.com/cellularjs/cellularjs/issues/85) ([f57c461](https://github.com/cellularjs/cellularjs/commit/f57c4613ce8a0aed85c1ec9a821cfa68f42e9f5f))
+
+
+### Features
+
+* add logger package [#39](https://github.com/cellularjs/cellularjs/issues/39) ([ec8456c](https://github.com/cellularjs/cellularjs/commit/ec8456c48467200eff2836d678eff983e05f178f))
+* **cli, net:** use webpack require.context to detect new file [#91](https://github.com/cellularjs/cellularjs/issues/91) ([96f0b8b](https://github.com/cellularjs/cellularjs/commit/96f0b8b822e6bdcacb9a79a27460e7d24a42c456))
+* **cli:** add @cellularjs/logger into the default template ([100536a](https://github.com/cellularjs/cellularjs/commit/100536a03bf46af45477b3b9597f71ab80ff4ca5))
+* **di:** restructure ([bbecead](https://github.com/cellularjs/cellularjs/commit/bbecead862f4f1c83c3f52f438d56b47eab95e61))
+* **di:** support for global module [#60](https://github.com/cellularjs/cellularjs/issues/60) ([673c8ba](https://github.com/cellularjs/cellularjs/commit/673c8ba98c0a7c1a4a7332590c8beca09107ba65))
+* **di:** support for proxy [#65](https://github.com/cellularjs/cellularjs/issues/65) ([27fd95e](https://github.com/cellularjs/cellularjs/commit/27fd95ed5b1d256540484da334c38be01a2898a4))
+* **logger:** update log level name ([482b4f0](https://github.com/cellularjs/cellularjs/commit/482b4f0a405a38bfbff6247936ffc64cae9f56ea))
+
+
+
+
+
+
 ## [0.15.2](https://github-hoangtv2101/cellularjs/cellularjs/compare/v0.15.0...v0.15.2) (2023-07-13)
 
 
