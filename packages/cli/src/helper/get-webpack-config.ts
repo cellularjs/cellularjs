@@ -40,9 +40,16 @@ function getDefaultPlugins(
   baseWebpackConfig: Configuration,
   mode: WebpackMode,
 ) {
-  return mode === 'development'
-    ? [...baseWebpackConfig.plugins, new NodemonPlugin()]
-    : baseWebpackConfig.plugins;
+  if (mode !== 'development') {
+    return baseWebpackConfig.plugins;
+  }
+
+  return [
+    ...baseWebpackConfig.plugins,
+    new NodemonPlugin({
+      nodeArgs: ['--enable-source-maps'],
+    }),
+  ];
 }
 
 function overrideWebpackConfig(

@@ -15,6 +15,7 @@ export function getBaseWebpackConfig() {
     output: {
       path: path.resolve(process.cwd(), 'dist'),
       filename: `[name]/${bundleFile}`,
+      devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     },
     module: {
       rules: [
