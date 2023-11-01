@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/cellularjs/cellularjs/compare/v0.16.0...v0.17.0) (2023-11-01)
+
+
+### Features
+
+* **cli:** adding --enable-source-maps to make error stack trace better ([495defc](https://github.com/cellularjs/cellularjs/commit/495defcc24ae04192250bc2c421ffd42789778dc))
+
+
+
+
+
 # [0.16.0](https://github.com/cellularjs/cellularjs/compare/v0.10.3...v0.16.0) (2023-09-01)
 
 
