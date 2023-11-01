@@ -2,20 +2,9 @@ const childProcess = require('child_process');
 const fse = require('fs-extra');
 const path = require('path');
 
-const lernaConfig = fse.readJSONSync(path.resolve(
-  __dirname, '..', 'lerna.json'
-));
+const lernaConfig = fse.readJSONSync(path.resolve(`${__dirname}/../lerna.json`));
 
 const targetVersion = lernaConfig.version;
-const builtTemplatePackageJson = path.resolve(__dirname, '..', 'packages', 'cli', 'dist', 'templates', 'halo', 'package.json');
-const projectPaths = [
-  path.resolve(__dirname, '..', 'packages', 'cli', 'src', 'templates', 'halo'),
-  path.resolve(__dirname, '..', 'packages', 'net'),
-  path.resolve(__dirname, '..', 'packages', 'di'),
-  path.resolve(__dirname, '..', 'packages', 'env'),
-  path.resolve(__dirname, '..', 'packages', 'cli'),
-  path.resolve(__dirname, '..', 'packages', 'express-proxy'),
-];
 
 function syncPackageVersion(packageJsonPath) {
   const packageData = fse.readJSONSync(packageJsonPath, { encoding: 'utf-8' });
@@ -47,12 +36,9 @@ function syncPackageVersion(packageJsonPath) {
   fse.writeJSONSync(packageJsonPath, packageData, { encoding: 'utf-8', spaces: 2 });
 }
 
-syncPackageVersion(builtTemplatePackageJson);
+const packageJsonPath = path.resolve(`${__dirname}/../packages/cli/src/templates/halo/package.json`);
+syncPackageVersion(packageJsonPath);
 
-projectPaths.forEach(projectPath => {
-  const packageJsonPath = path.resolve(projectPath, 'package.json');
-  syncPackageVersion(packageJsonPath);
+childProcess.execSync(`git add .`);
 
-  childProcess.execSync(`git add ${packageJsonPath}`);
-});
-
+childProcess.execSync(`yarn build`);
