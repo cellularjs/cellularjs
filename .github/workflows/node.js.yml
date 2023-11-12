@@ -49,4 +49,7 @@ jobs:
     - run: yarn --frozen-lockfile
     - run: yarn run bootstrap
     - run: yarn build
-    - run: PG_URL=postgres://root:postgres@localhost:5432/postgres yarn cmd:coverage
+    - name: Code coverage
+      env:
+        PG_URL:postgres://root:postgres@localhost:5432/postgres
+      run: yarn cmd:coverage
