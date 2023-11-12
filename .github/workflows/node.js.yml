@@ -50,6 +50,6 @@ jobs:
     - run: yarn run bootstrap
     - run: yarn build
     - name: Code coverage
+      run: yarn cmd:coverage
       env:
         PG_URL:postgres://root:postgres@localhost:5432/postgres
-      run: yarn cmd:coverage
