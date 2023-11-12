@@ -39,6 +39,8 @@ jobs:
         ports:
           - 5432:5432
 
+    env:
+      PG_URL: postgres://root:postgres@localhost:5432/postgres
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -49,4 +51,4 @@ jobs:
     - run: yarn --frozen-lockfile
     - run: yarn run bootstrap
     - run: yarn build
-    - run: PG_URL=postgres://root:postgres@localhost:5432/postgres yarn cmd:coverage
+    - run: yarn cmd:coverage
