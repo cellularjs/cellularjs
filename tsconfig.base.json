@@ -15,7 +15,8 @@
       "es7"
     ],
     "types": [
-      "node"
+      "node",
+      "chai-as-promised"
     ],
     "moduleResolution": "node"
   }
