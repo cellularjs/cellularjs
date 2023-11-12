@@ -6,6 +6,7 @@ import {
 } from 'typeorm';
 import { Container, Module } from '@cellularjs/di';
 import { Repository, TypeOrmModule, getDataSource } from '../../../src';
+import { PG_URL } from '../../config';
 
 // ./user.data.ts
 @Entity()
@@ -25,8 +26,9 @@ class UserRepository {}
 @Module({
   exports: [
     TypeOrmModule.initialize({
-      type: 'better-sqlite3',
-      database: ':memory:',
+      url: PG_URL,
+      type: 'postgres',
+      synchronize: true,
     }),
   ],
 })
