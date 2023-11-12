@@ -11,8 +11,8 @@ describe('01 Repository', () => {
   it('01 - Throw error if register entity before initializing data source', async () => {
     try {
       await getUserRepository();
-    } catch (err) {
-      console.log(err);
+    } catch {
+      console.log('err');
     }
     // chai.expect(getUserRepository()).to.eventually.be.rejected('')
 
