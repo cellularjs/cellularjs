@@ -47,7 +47,7 @@ class SaveAnotherData {
 In this example, if you use PostgreSQL or MySQL, "Alice" will be saved, while "John Doe" won't. But if you use SQLite, all will be discarded([read more](https://github.com/typeorm/typeorm/issues/307#issuecomment-312289158))
 
 ## 3. Development
-Sample test command for running test on local:
+Sample command for running test on local:
 ```
 PG_URL=postgres://usr:pwd@localhost:5432/postgres yarn test
 ```
