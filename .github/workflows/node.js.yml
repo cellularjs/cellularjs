@@ -1,6 +1,9 @@
 # This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
 
+# Refs:
+# https://gist.github.com/RizkyRajitha/ca945c55ab09bcc2c7c150b2fed7db13
+
 name: Node.js CI
 
 on:
@@ -19,6 +22,23 @@ jobs:
         node-version: [16.x, 18.x, 19.x, 20.x, 21.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
+    services:
+      postgres:
+        image: postgres
+
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: root
+          POSTGRES_DB: postgres
+
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
@@ -29,4 +49,7 @@ jobs:
     - run: yarn --frozen-lockfile
     - run: yarn run bootstrap
     - run: yarn build
-    - run: yarn cmd:coverage
+    - name: Code coverage
+      run: yarn cmd:coverage
+      env:
+        PG_URL:postgres://root:postgres@localhost:5432/postgres

@@ -24,6 +24,6 @@ export function getServiceProviders(service: ServiceHandlerClass) {
 /**
  * @since 0.1.0
  */
-export function cleanServiceProviders() {
+export function clearServiceProviders() {
   serviceProviders = new Map();
 }
