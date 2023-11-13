@@ -60,7 +60,7 @@ interface EnvConfigOptions {
    *
    * // EnvModule.config({ token: YourEnv });
    *
-   * @Injectable()
+   * ⁣@Injectable()
    * class YourService {
    *   constructor(private env: YourEnv) { }
    *

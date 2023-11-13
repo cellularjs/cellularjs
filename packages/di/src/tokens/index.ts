@@ -8,7 +8,7 @@ import { Container } from '../container';
  * ```ts
  * import { Module, OnInit, ModuleRef } from '@cellularjs/di';
  *
- * @Module({
+ * ⁣@Module({
  *   providers: [
  *     { token: 'foo', useValue: 'bar' },
  *   ],
