@@ -1,10 +1,10 @@
 export {
   addServiceProviders,
-  cleanServiceProviders,
+  clearServiceProviders,
   getServiceProviders,
 } from './service-provider';
 export {
   addServiceProxies,
-  cleanServiceProxies,
+  clearServiceProxies,
   getServiceProxies,
 } from './service-proxy';

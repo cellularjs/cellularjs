@@ -7,7 +7,7 @@ import {
   NetErrorCode,
   Cell,
 } from '../../../../src';
-import { cleanNetwork } from '../../../../src/internal';
+import { clearNetwork } from '../../../../src/internal';
 import {
   userCellCnf,
   authCellCnf,
@@ -19,7 +19,7 @@ import { LockAccount } from '../../../fixture/cells/auth/events/sub/another-sub/
 
 describe('Decorator - @Cell annotation - listen property:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('listen can use key-value pair object for configuration', async () => {

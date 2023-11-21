@@ -6,7 +6,7 @@ import {
   send,
   IRQ,
 } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import { imsNetwork } from '../../fixture/share/network';
 
 describe('Transportor - transportListener', () => {
@@ -16,7 +16,7 @@ describe('Transportor - transportListener', () => {
 
   afterEach(async () => {
     transportListener.removeAllListeners();
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('is an instance of EventEmitter', () => {

@@ -9,7 +9,7 @@ import {
   IRQ,
   Cell,
 } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import {
   userCellCnf,
   bundlerCellCnf,
@@ -18,7 +18,7 @@ import {
 
 describe('Network - createNetwork:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can create network with cell configs', async () => {

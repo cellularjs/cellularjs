@@ -1,13 +1,13 @@
 import 'mocha';
 import { expect } from 'chai';
 import { LOCAL_DRIVER, createNetWork, getResolvedCell } from '../../../../src';
-import { cleanNetwork } from '../../../../src/internal';
+import { clearNetwork } from '../../../../src/internal';
 import { userCellCnf } from '../../../fixture/share/network';
 import { JwtService } from '../../../fixture/pkg/jwt/jwt.service';
 
 describe('Decorator - @Cell annotation - imports property:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can make use of @cellularjs/di to add module', async () => {

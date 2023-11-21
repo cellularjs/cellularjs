@@ -7,7 +7,7 @@ import {
   send,
   IRQ,
 } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import {
   FooOriginal,
   BarOriginal,
@@ -27,7 +27,7 @@ describe('Service helper - addServiceProxies():', () => {
   });
 
   afterEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can use multiple proxies class', async () => {

@@ -23,6 +23,6 @@ export function getServiceProxies(service: ServiceHandlerClass) {
 /**
  * @since 0.1.0
  */
-export function cleanServiceProxies() {
+export function clearServiceProxies() {
   serviceProxies = new Map();
 }

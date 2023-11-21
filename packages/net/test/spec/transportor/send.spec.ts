@@ -1,7 +1,7 @@
 import 'mocha';
 import { expect } from 'chai';
 import { createNetWork, send, IRQ, NetErrorCode, IRS } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import { imsNetwork } from '../../fixture/share/network';
 
 describe('Transportor - send(): send request', () => {
@@ -10,7 +10,7 @@ describe('Transportor - send(): send request', () => {
   });
 
   afterEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('will throw error in case of sending request to non-exist cell', async () => {
