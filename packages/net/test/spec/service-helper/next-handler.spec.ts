@@ -10,7 +10,7 @@ import {
   IRQ,
   NextHandler,
 } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 
 @Service({ scope: 'publish' })
 class BarService {
@@ -30,7 +30,7 @@ describe('NextHandler:', () => {
   });
 
   afterEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can invoke next proxy/service handler', async () => {

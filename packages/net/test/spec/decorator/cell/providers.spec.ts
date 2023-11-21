@@ -1,13 +1,13 @@
 import 'mocha';
 import { expect } from 'chai';
 import { LOCAL_DRIVER, createNetWork, getResolvedCell } from '../../../../src';
-import { cleanNetwork } from '../../../../src/internal';
+import { clearNetwork } from '../../../../src/internal';
 import { userCellCnf } from '../../../fixture/share/network';
 import { UserRepo } from '../../../fixture/cells/user/services/user.repo';
 
 describe('Decorator - @Cell annotation - providers property:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can make use of @cellularjs/di to add providers', async () => {

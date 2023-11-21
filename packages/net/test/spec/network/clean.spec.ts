@@ -1,22 +1,22 @@
 import 'mocha';
 import { expect } from 'chai';
 import { createNetWork, getResolvedCell } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import { userCellCnf } from '../../fixture/share/network';
 
-describe('Network - cleanNetwork:', () => {
+describe('Network - clearNetwork:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can run clean many times without any problem', async () => {
-    await cleanNetwork();
-    await cleanNetwork();
+    await clearNetwork();
+    await clearNetwork();
   });
 
   it('can remove resolved cells', async () => {
     await createNetWork([userCellCnf]);
-    await cleanNetwork();
+    await clearNetwork();
 
     const userCell = getResolvedCell('User');
     expect(userCell).to.undefined;

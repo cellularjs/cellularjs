@@ -6,7 +6,7 @@ import {
   send,
   IRQ,
 } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import { EditFooService, Session } from '../../fixture/serivce-helper';
 import { ArticleCell } from '../../fixture/cells/article';
 
@@ -21,7 +21,7 @@ describe('Service helper - addServiceProviders()', () => {
   });
 
   afterEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can add provider for resolving service handler', async () => {

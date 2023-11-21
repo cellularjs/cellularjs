@@ -7,12 +7,12 @@ import {
   getResolvedCell,
   NetErrorCode,
 } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import { authCellCnf, userCellCnf } from '../../fixture/share/network';
 
 describe('CellConfig - cell driver:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can not resolve driver which is not decorated by @Cell annotation', async () => {

@@ -1,12 +1,12 @@
 import 'mocha';
 import { expect } from 'chai';
 import { LOCAL_DRIVER, createNetWork, getResolvedCell } from '../../../src';
-import { cleanNetwork } from '../../../src/internal';
+import { clearNetwork } from '../../../src/internal';
 import { userCellCnf } from '../../fixture/share/network';
 
 describe('Network - getResolvedCell:', () => {
   beforeEach(async () => {
-    await cleanNetwork();
+    await clearNetwork();
   });
 
   it('can use cell name to get resolved cell', async () => {
