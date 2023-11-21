@@ -41,6 +41,37 @@ const path = require('path');
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'Q18Q0O73H0',
+
+        // Public API key: it is safe to commit it
+        apiKey: 'bd69740144a0312018def868f08a918a',
+
+        indexName: 'cellularjs',
+
+        // Optional: see doc section belowe
+        contextualSearch: true,
+
+        startUrls: ['https://cellularjs.com/'],
+        siteMaps: ['https://cellularjs.com/sitemap.xml'],
+        discoveryPatterns: ['https://cellularjs.com/**'],
+
+        // Optional: Specify domains wtehere the navigation should occur through window.location instead on history.push. Useful when our Algolia config crawls multiple documentation sites and we want to navigate with window.location.href to them.
+        // externalUrlRegex: 'external\\.com|domain\\.com',
+
+        // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl. You can use regexp or string in the `from` param. For example: localhost:3000 vs myCompany.com/docs
+        replaceSearchResultPathname: {
+          from: '/docs/', // or as RegExp: /\/docs\//
+          to: '/',
+        },
+
+        // Optional: Algolia search parameters
+        searchParameters: {},
+
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+      },
       navbar: {
         title: 'CellularJS',
         // logo: {
