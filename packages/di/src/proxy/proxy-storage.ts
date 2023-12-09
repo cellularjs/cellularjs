@@ -10,6 +10,9 @@ interface ProxyConfig {
 const _proxyStorage = new Map<Token, ProxyConfig[]>();
 
 /**
+ * Add a proxy that help modify resolved value.
+ *
+ * @see https://cellularjs.com/docs/foundation/dependency-injection/basic-usage#3-proxy
  * @since 0.11.0
  */
 export function addProxy(token: ClassType, proxyCnf: ProxyConfig) {
