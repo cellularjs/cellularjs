@@ -1,0 +1,39 @@
+{
+  "name": "@cellularjs/typeorm",
+  "version": "0.17.0",
+  "description": "CellularJS TypeORM",
+  "keywords": [
+    "cellularjs typeorm",
+    "typeorm",
+    "cellularjs"
+  ],
+  "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cellularjs/cellularjs.git"
+  },
+  "homepage": "https://cellularjs.com",
+  "scripts": {
+    "build": "npm run clean && tsc -b ./tsconfig.build.json",
+    "test_sample_cmd": "PG_URL=postgres://postgres:1@172.28.57.39:5432/postgres yarn test",
+    "test": "mocha --timeout 600000 -r ts-node/register test/setup.ts test/spec/**/*.spec.ts",
+    "code-coverage": "nyc npm test",
+    "clean": "rimraf ./dist"
+  },
+  "author": "Great Elephant",
+  "license": "MIT",
+  "types": "./dist/",
+  "dependencies": {
+    "@cellularjs/di": "^0.17.0",
+    "@cellularjs/net": "^0.17.0"
+  },
+  "devDependencies": {
+    "@types/chai-as-promised": "^7.1.8",
+    "chai-as-promised": "^7.1.1",
+    "pg": "^8.11.3",
+    "typeorm": "^0.3.17"
+  }
+}
