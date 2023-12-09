@@ -8,8 +8,8 @@ import {
   send,
   IRQ,
   Cell,
+  clearNetwork,
 } from '../../../src';
-import { clearNetwork } from '../../../src/internal';
 import {
   userCellCnf,
   bundlerCellCnf,

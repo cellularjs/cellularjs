@@ -1,7 +1,13 @@
 import 'mocha';
 import { expect } from 'chai';
-import { createNetWork, send, IRQ, NetErrorCode, IRS } from '../../../src';
-import { clearNetwork } from '../../../src/internal';
+import {
+  createNetWork,
+  send,
+  IRQ,
+  NetErrorCode,
+  IRS,
+  clearNetwork,
+} from '../../../src';
 import { imsNetwork } from '../../fixture/share/network';
 
 describe('Transportor - send(): send request', () => {

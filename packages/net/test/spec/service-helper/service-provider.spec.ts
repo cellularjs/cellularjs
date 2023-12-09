@@ -5,8 +5,8 @@ import {
   Cell,
   send,
   IRQ,
+  clearNetwork,
 } from '../../../src';
-import { clearNetwork } from '../../../src/internal';
 import { EditFooService, Session } from '../../fixture/serivce-helper';
 import { ArticleCell } from '../../fixture/cells/article';
 

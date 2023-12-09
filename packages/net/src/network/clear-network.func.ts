@@ -1,8 +1,17 @@
+import { clearModuleMap } from '@cellularjs/di';
 import { clearServiceProviders, clearServiceProxies } from '../service-helper';
-import { cleanResolvedCells } from './resolved-cell.data';
+import { clearResolvedCells } from './resolved-cell.data';
 
+/**
+ * Reset all stuff related to network:
+ * - cells
+ * - service providers
+ * - service proxy
+ * - module map
+ */
 export async function clearNetwork() {
-  cleanResolvedCells();
+  clearResolvedCells();
   clearServiceProviders();
   clearServiceProxies();
+  clearModuleMap();
 }

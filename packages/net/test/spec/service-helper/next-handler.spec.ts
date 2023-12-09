@@ -9,8 +9,8 @@ import {
   send,
   IRQ,
   NextHandler,
+  clearNetwork,
 } from '../../../src';
-import { clearNetwork } from '../../../src/internal';
 
 @Service({ scope: 'publish' })
 class BarService {

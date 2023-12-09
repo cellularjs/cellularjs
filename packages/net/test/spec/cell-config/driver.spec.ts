@@ -6,8 +6,8 @@ import {
   createNetWork,
   getResolvedCell,
   NetErrorCode,
+  clearNetwork,
 } from '../../../src';
-import { clearNetwork } from '../../../src/internal';
 import { authCellCnf, userCellCnf } from '../../fixture/share/network';
 
 describe('CellConfig - cell driver:', () => {
