@@ -6,8 +6,8 @@ import {
   getResolvedCell,
   NetErrorCode,
   Cell,
+  clearNetwork,
 } from '../../../../src';
-import { clearNetwork } from '../../../../src/internal';
 import {
   userCellCnf,
   authCellCnf,

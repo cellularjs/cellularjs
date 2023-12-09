@@ -6,8 +6,8 @@ import {
   Cell,
   send,
   IRQ,
+  clearNetwork,
 } from '../../../src';
-import { clearNetwork } from '../../../src/internal';
 import {
   FooOriginal,
   BarOriginal,

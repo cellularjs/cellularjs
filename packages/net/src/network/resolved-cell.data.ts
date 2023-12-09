@@ -10,6 +10,6 @@ export function getResolvedCell(cellName: string): ResolvedCell | undefined {
   return resolvedCells.get(cellName);
 }
 
-export function cleanResolvedCells() {
+export function clearResolvedCells() {
   resolvedCells.clear();
 }
