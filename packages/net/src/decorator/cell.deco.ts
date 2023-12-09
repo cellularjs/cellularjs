@@ -15,7 +15,7 @@ export const Cell = (rawCellMeta: CellMeta) => (target) => {
     imports: rawCellMeta.imports || [],
   } as NormalizedCellMeta;
 
-  const stackArr = new Error().stack?.split('\n') || [];
+  const stackArr = new Error().stack.split('\n');
 
   // hard code
   const callerStackStr = stackArr[4];
