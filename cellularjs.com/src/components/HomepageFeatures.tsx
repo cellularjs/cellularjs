@@ -59,7 +59,7 @@ const featureList: FeatureItem[] = [
         Virtual network and worker threads combine together make multithreading almost transparent.
       </>
     ),
-    readMore: '/docs/foundation/worker/overview',
+    readMore: '/docs/how-to%20wiki/worker',
     span: 4,
   },
 ];
