@@ -37,14 +37,14 @@ export interface UseClassProvider<T>
 
 export interface UseFuncProvider<T> extends ProviderHasToken, ProviderHasCycle {
   /**
-   * Use a function as factory to assemble dependency value.
+   * Use a function as a factory to assemble dependency value.
    */
   useFunc: FuncType<T>;
 
   /**
    * List dependencies required by useFunc.
    *
-   * ***Notice**:
+   * **Notice**:
    * - Dependencies order must be same as useFunc parameters order.
    * - Class will be use as token for provider, so you need to define its provider.
    */
