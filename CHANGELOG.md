@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github-hoangtv2101/cellularjs/cellularjs/compare/v0.17.0...v0.18.0) (2023-12-09)
+
+
+### Features
+
+* **cli:** exclude __tests__, *.spec.ts, *.test.ts when using auto loading ([d6ee159](https://github-hoangtv2101/cellularjs/cellularjs/commit/d6ee159d1cd49649e7f43048d365874066c95250))
+* **net:** publish clearNetwork function ([7427dae](https://github-hoangtv2101/cellularjs/cellularjs/commit/7427dae16b07354db34dccd7256d2ae11cce9391))
+* **typeorm:** add @cellularjs/typeorm [#73](https://github-hoangtv2101/cellularjs/cellularjs/issues/73) ([624d079](https://github-hoangtv2101/cellularjs/cellularjs/commit/624d07915e7e67b1e156c3f85a4b65fd381c27ae))
+
+
+
+
+
 # [0.17.0](https://github-hoangtv2101/cellularjs/cellularjs/compare/v0.16.0...v0.17.0) (2023-11-01)
 
 

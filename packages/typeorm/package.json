@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/typeorm",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "CellularJS TypeORM",
   "keywords": [
     "cellularjs typeorm",
@@ -27,8 +27,8 @@
   "license": "MIT",
   "types": "./dist/",
   "dependencies": {
-    "@cellularjs/di": "^0.17.0",
-    "@cellularjs/net": "^0.17.0"
+    "@cellularjs/di": "^0.18.0",
+    "@cellularjs/net": "^0.18.0"
   },
   "devDependencies": {
     "@types/chai-as-promised": "^7.1.8",
