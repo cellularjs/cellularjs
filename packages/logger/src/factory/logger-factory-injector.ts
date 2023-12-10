@@ -41,9 +41,9 @@ export function getLogger(source?: string, meta?: LogMeta): Logger {
 export function setLoggerFactory(loggerFactory: LoggerFactory) {
   if (!!_loggerFactory)
     throw new Error(
-      'Logger factory is existed:' +
-        '\n- other library or you code invoked `setLoggerFactory` before.' +
-        '\n- `getLogger` is invoked from lib or your code before `setLoggerFactory` is called.',
+      'Logger factory is registered:' +
+        '\n- another library or your code previously called `setLoggerFactor`y before.' +
+        '\n- either a library or your code called `getLogger` before `setLoggerFactory` is called',
     );
 
   _loggerFactory = loggerFactory;

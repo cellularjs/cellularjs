@@ -10,7 +10,7 @@ export interface LogMeta {
   /**
    * Log level.
    *
-   * _**(This is reserved meta key. You can use `logger.setLogLevel` to set log level for current logger instance).**_
+   * Note: This is a reserved meta key. To set the log level for this logger instance, please use `logger.setLogLevel`
    */
   level?: never;
 
@@ -22,7 +22,7 @@ export interface LogMeta {
   /**
    * Log message.
    *
-   * _**(This is reserved meta key).**_
+   * _**(This is a reserved meta key).**_
    */
   message?: never;
 
@@ -42,8 +42,8 @@ export interface LogMeta {
 
 export interface Logger {
   /**
-   * By default, log level is inherit from parent logger, this method allow you to
-   * set log level for current logger instance.
+   * By default, the log level is inherited from the parent logger. This method allows
+   * you to set the log level for the current logger instance.
    *
    * @since 0.12.0
    */
