@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/cellularjs/cellularjs/compare/v0.18.0...v0.18.1) (2023-12-16)
+
+
+### Bug Fixes
+
+* **typeorm:** correct entityMetadatasMap ([#123](https://github.com/cellularjs/cellularjs/issues/123)) ([45ca81f](https://github.com/cellularjs/cellularjs/commit/45ca81fbc5efeab79f824f7e57e81d8543735f3f)), closes [#122](https://github.com/cellularjs/cellularjs/issues/122)
+
+
+
+
+
 # [0.18.0](https://github.com/cellularjs/cellularjs/compare/v0.17.0...v0.18.0) (2023-12-09)
 
 
