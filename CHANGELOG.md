@@ -3,36 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [0.18.1](https://github.com/cellularjs/cellularjs/cellularjs/compare/v0.18.0...v0.18.1) (2023-12-16)
+## [0.18.1](https://github.com/cellularjs/cellularjs/compare/v0.18.0...v0.18.1) (2023-12-16)
 
 
 ### Bug Fixes
 
-* **typeorm:** correct entityMetadatasMap ([#123](https://github.com/cellularjs/cellularjs/cellularjs/issues/123)) ([45ca81f](https://github.com/cellularjs/cellularjs/cellularjs/commit/45ca81fbc5efeab79f824f7e57e81d8543735f3f)), closes [#122](https://github.com/cellularjs/cellularjs/cellularjs/issues/122)
+* **typeorm:** correct entityMetadatasMap ([#123](https://github.com/cellularjs/cellularjs/issues/123)) ([45ca81f](https://github.com/cellularjs/cellularjs/commit/45ca81fbc5efeab79f824f7e57e81d8543735f3f)), closes [#122](https://github.com/cellularjs/cellularjs/issues/122)
 
 
 
 
 
-# [0.18.0](https://github.com/cellularjs/cellularjs/cellularjs/compare/v0.17.0...v0.18.0) (2023-12-09)
-
-
-### Features
-
-* **cli:** exclude __tests__, *.spec.ts, *.test.ts when using auto loading ([d6ee159](https://github.com/cellularjs/cellularjs/cellularjs/commit/d6ee159d1cd49649e7f43048d365874066c95250))
-* **net:** publish clearNetwork function ([7427dae](https://github.com/cellularjs/cellularjs/cellularjs/commit/7427dae16b07354db34dccd7256d2ae11cce9391))
-* **typeorm:** add @cellularjs/typeorm [#73](https://github.com/cellularjs/cellularjs/cellularjs/issues/73) ([624d079](https://github.com/cellularjs/cellularjs/cellularjs/commit/624d07915e7e67b1e156c3f85a4b65fd381c27ae))
-
-
-
-
-
-# [0.17.0](https://github.com/cellularjs/cellularjs/cellularjs/compare/v0.16.0...v0.17.0) (2023-11-01)
+# [0.18.0](https://github.com/cellularjs/cellularjs/compare/v0.17.0...v0.18.0) (2023-12-09)
 
 
 ### Features
 
-* **cli:** adding --enable-source-maps to make error stack trace better ([495defc](https://github.com/cellularjs/cellularjs/cellularjs/commit/495defcc24ae04192250bc2c421ffd42789778dc))
+* **cli:** exclude __tests__, *.spec.ts, *.test.ts when using auto loading ([d6ee159](https://github.com/cellularjs/cellularjs/commit/d6ee159d1cd49649e7f43048d365874066c95250))
+* **net:** publish clearNetwork function ([7427dae](https://github.com/cellularjs/cellularjs/commit/7427dae16b07354db34dccd7256d2ae11cce9391))
+* **typeorm:** add @cellularjs/typeorm [#73](https://github.com/cellularjs/cellularjs/issues/73) ([624d079](https://github.com/cellularjs/cellularjs/commit/624d07915e7e67b1e156c3f85a4b65fd381c27ae))
+
+
+
+
+
+# [0.17.0](https://github.com/cellularjs/cellularjs/compare/v0.16.0...v0.17.0) (2023-11-01)
+
+
+### Features
+
+* **cli:** adding --enable-source-maps to make error stack trace better ([495defc](https://github.com/cellularjs/cellularjs/commit/495defcc24ae04192250bc2c421ffd42789778dc))
 
 
 
@@ -65,18 +65,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-## [0.15.2](https://github.com/cellularjs/cellularjs/cellularjs/compare/v0.15.0...v0.15.2) (2023-07-13)
+## [0.15.2](https://github.com/cellularjs/cellularjs/compare/v0.15.0...v0.15.2) (2023-07-13)
 
 
 ### Bug Fixes
 
-* **di:** use symbol to hide tracer param instead of warning ([f73321f](https://github.com/cellularjs/cellularjs/cellularjs/commit/f73321f150b9a0e7cb880cf72b404443ccea7209))
+* **di:** use symbol to hide tracer param instead of warning ([f73321f](https://github.com/cellularjs/cellularjs/commit/f73321f150b9a0e7cb880cf72b404443ccea7209))
 
 
 
 
 
-## [0.15.1](https://github.com/cellularjs/cellularjs/cellularjs/compare/v0.15.0...v0.15.1) (2023-07-12)
+## [0.15.1](https://github.com/cellularjs/cellularjs/compare/v0.15.0...v0.15.1) (2023-07-12)
 
 **Note:** Version bump only for package cellularjs
 
