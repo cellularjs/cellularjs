@@ -126,8 +126,8 @@ function getRealTypeOrmForFeature({ entities, source }: ForFeatureOpt) {
 
       // For typeorm >= 0.3.14
       dataSource.entityMetadatasMap &&
-        entityMetadatas.forEach((entityMeta, idx) => {
-          dataSource.entityMetadatasMap.set(entities[idx], entityMeta);
+        entityMetadatas.forEach((entityMeta) => {
+          dataSource.entityMetadatasMap.set(entityMeta.target, entityMeta);
         });
 
       if (dataSource.options.synchronize) {
