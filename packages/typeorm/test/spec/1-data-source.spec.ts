@@ -139,6 +139,46 @@ describe('1. DataSource', () => {
 
       expect(table).equal('tbl_user');
     });
+
+    it('Issue #122: set wrong entity for entityMetadatasMap', async () => {
+      // Arrange:
+      @Entity({ name: 'tbl_user_profile' })
+      class UserProfile {
+        @PrimaryColumn()
+        id: number;
+      }
+
+      @Entity({ name: 'tbl_user_registration' })
+      class UserRegistration {
+        @PrimaryColumn()
+        id: number;
+      }
+
+      @Module({
+        exports: [
+          TypeOrmModule.initialize({
+            type: 'postgres',
+            url: PG_URL,
+            synchronize: true,
+          }),
+          TypeOrmModule.forFeature({
+            entities: [UserRegistration, UserProfile],
+          }),
+        ],
+      })
+      class CommonModule {}
+
+      await container.addModule(CommonModule);
+
+      //
+      const entityMetadatasMap = getDataSource().entityMetadatasMap;
+      expect(entityMetadatasMap.get(UserRegistration).tableName).to.eq(
+        'tbl_user_registration',
+      );
+      expect(entityMetadatasMap.get(UserProfile).tableName).to.eq(
+        'tbl_user_profile',
+      );
+    });
   });
 
   describe('Multiple data sources', () => {
