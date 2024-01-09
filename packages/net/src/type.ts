@@ -76,7 +76,7 @@ export interface CellMeta {
   // have any exports at all.
 
   /**
-   * If argument is a string(need @cellularjs/cli), it will be treated as a path to a folder. It
+   * If argument is a string(need ⁣@cellularjs/cli), it will be treated as a path to a folder. It
    * will scan that folder(include sub folder) to get service handler automatically.
    * Service name in this case will be same as class name.<br/>
    * *Example: `"./services"`*<br/>
