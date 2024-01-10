@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cellularjs/cellularjs/compare/v0.17.0...v0.19.0) (2024-01-10)
+
+
+### Bug Fixes
+
+* **cli, net:** ignore test file ([#127](https://github.com/cellularjs/cellularjs/issues/127)) ([960371c](https://github.com/cellularjs/cellularjs/commit/960371cbbcb300ae5c8381a841fc16d4087b7e81))
+
+
+### Features
+
+* **cli:** exclude __tests__, *.spec.ts, *.test.ts when using auto loading ([d6ee159](https://github.com/cellularjs/cellularjs/commit/d6ee159d1cd49649e7f43048d365874066c95250))
+
+
+
+
+
+
 ## [0.18.1](https://github.com/cellularjs/cellularjs/compare/v0.18.0...v0.18.1) (2023-12-16)
 
 **Note:** Version bump only for package @cellularjs/cli

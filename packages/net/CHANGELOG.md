@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cellularjs/cellularjs/compare/v0.17.0...v0.19.0) (2024-01-10)
+
+
+### Bug Fixes
+
+* **cli, net:** ignore test file ([#127](https://github.com/cellularjs/cellularjs/issues/127)) ([960371c](https://github.com/cellularjs/cellularjs/commit/960371cbbcb300ae5c8381a841fc16d4087b7e81))
+
+
+### Features
+
+* **net:** publish clearNetwork function ([7427dae](https://github.com/cellularjs/cellularjs/commit/7427dae16b07354db34dccd7256d2ae11cce9391))
+
+
+
+
+
+
 ## [0.18.1](https://github.com/cellularjs/cellularjs/compare/v0.18.0...v0.18.1) (2023-12-16)
 
 **Note:** Version bump only for package @cellularjs/net
