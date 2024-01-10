@@ -28,6 +28,7 @@
   "license": "MIT",
   "types": "./dist/",
   "dependencies": {
+    "@cellularjs/net": "^0.18.1",
     "chalk": "4",
     "clui": "^0.3.6",
     "commander": "^8.3.0",

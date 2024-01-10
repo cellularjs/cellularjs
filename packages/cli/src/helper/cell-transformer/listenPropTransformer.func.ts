@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
+import { _UNSTABLE_TS_FILE_REGEX_STR } from '@cellularjs/net';
 import { CellMetaProps } from './cell.const';
-import { TS_FILE_REGEX_STR } from '../../const';
 
 const factory = ts.factory;
 
@@ -29,7 +29,7 @@ export const listenPropTransformer = (node: ts.CallExpression) => {
       [
         factory.createStringLiteral(listenInitializer.text),
         factory.createTrue(),
-        factory.createRegularExpressionLiteral(TS_FILE_REGEX_STR),
+        factory.createRegularExpressionLiteral(_UNSTABLE_TS_FILE_REGEX_STR),
       ],
     ),
   ];

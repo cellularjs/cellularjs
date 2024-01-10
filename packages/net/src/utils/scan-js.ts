@@ -1,5 +1,6 @@
 import { readdirSync, statSync } from 'fs';
 import * as path from 'path';
+import { validTsReg } from '../const';
 
 type ResolveFactory = (data: { [key: string]: any }) => void;
 
@@ -18,12 +19,7 @@ function handleFile(basePath, file, onResolve: ResolveFactory): void {
     return;
   }
 
-  const isValidJsFile =
-    file.lastIndexOf('.js') + 3 === file.length ||
-    (file.lastIndexOf('.d.ts') === -1 &&
-      file.lastIndexOf('.ts') + 3 === file.length);
-
-  if (!isValidJsFile) return;
+  if (!validTsReg.test(destPath)) return;
 
   onResolve(require(destPath));
 }

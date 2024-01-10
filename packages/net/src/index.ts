@@ -9,7 +9,7 @@ export {
   ResolvedCell,
   ToTargetHeader,
 } from './type';
-export { LOCAL_DRIVER } from './key';
+export { LOCAL_DRIVER, _UNSTABLE_TS_FILE_REGEX_STR } from './const';
 export { Cell, Service } from './decorator';
 export { getResolvedCell, createNetWork, clearNetwork } from './network';
 export {
