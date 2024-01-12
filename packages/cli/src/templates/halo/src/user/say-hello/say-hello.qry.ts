@@ -5,8 +5,8 @@
 import { Service, ServiceHandler } from '@cellularjs/net';
 
 @Service({ scope: 'publish' })
-export class SayHelloCmd implements ServiceHandler {
+export class SayHelloQry implements ServiceHandler {
   handle() {
-    return 'hello halo';
+    return 'hello';
   }
 }
