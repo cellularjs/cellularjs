@@ -2,7 +2,7 @@ import { CellularConfig } from '@cellularjs/cli';
 
 const cellularConfig: CellularConfig = {
   entry: {
-    halo: './src/index.ts',
+    http: './src/$app/http/index.ts',
   },
 };
 

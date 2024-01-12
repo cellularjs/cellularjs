@@ -2,19 +2,28 @@
   "name": "placeholder",
   "private": true,
   "scripts": {
-    "dev": "cellular dev --entry halo",
-    "build": "cellular build -e halo"
+    "dev": "cellular dev --entry http",
+    "test": "jest",
+    "test:e2e": "jest -c ./test/jest-e2e.config.js",
+    "build": "cellular build -e http"
   },
   "dependencies": {
-    "express": "^4.17.1",
     "@cellularjs/di": "^0.19.0",
-    "@cellularjs/net": "^0.19.0",
     "@cellularjs/env": "^0.19.0",
-    "@cellularjs/logger": "^0.19.0"
+    "@cellularjs/express-proxy": "^0.19.0",
+    "@cellularjs/logger": "^0.19.0",
+    "@cellularjs/net": "^0.19.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@cellularjs/cli": "^0.19.0",
     "@types/express": "^4.17.13",
-    "@types/node": "^16.11.10"
+    "@types/jest": "^29.5.11",
+    "@types/node": "^16.11.10",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1"
   }
 }
