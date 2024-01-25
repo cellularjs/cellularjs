@@ -1,5 +1,9 @@
 export { NetErrorCode, NetError } from './error';
-export { addServiceProviders, addServiceProxies } from './service-helper';
+export {
+  addServiceProviders,
+  addServiceProxies,
+  ServiceFactory,
+} from './service-helper';
 export {
   CellConfig,
   CellMeta,

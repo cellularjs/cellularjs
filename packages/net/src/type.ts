@@ -1,6 +1,7 @@
 import { GenericProvider, ImportableCnf, Container } from '@cellularjs/di';
+import { IRS } from './message';
 
-type ClassType<T> = { new (...args: any[]): T };
+export type ClassType<T> = { new (...args: any[]): T };
 
 /**
  * @since 0.1.0
@@ -153,6 +154,7 @@ export type IrsHeader = {
    * @since 0.1.0
    */
   status?: number;
+
   [key: string]: any;
 };
 
@@ -164,6 +166,13 @@ export type IrsHeader = {
  */
 export interface ServiceHandler {
   handle(): any | Promise<any>;
+}
+
+/**
+ * @since 0.20.0
+ */
+export interface ServiceHandlerNormalized {
+  handle(): Promise<IRS>;
 }
 
 /**
@@ -302,4 +311,4 @@ export interface ResolvedCell {
 /**
  * @since 0.1.0
  */
-export type ServiceHandlerClass = { new (...args: any[]): ServiceHandler };
+export type ServiceHandlerClass = ClassType<ServiceHandler>;

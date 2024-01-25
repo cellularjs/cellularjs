@@ -8,3 +8,5 @@ export {
   clearServiceProxies,
   getServiceProxies,
 } from './service-proxy';
+
+export { ServiceFactory } from './service-factory';
