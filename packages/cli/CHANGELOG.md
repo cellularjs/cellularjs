@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/cellularjs/cellularjs/compare/v0.20.0...v0.20.1) (2024-01-25)
+
+
+### Bug Fixes
+
+* **cli:** rename .gitignore into gitignore ([9fce84b](https://github.com/cellularjs/cellularjs/commit/9fce84babf7856ce8ba30b353e29fc572ae77061))
+
+
+
+
+
 # [0.20.0](https://github.com/cellularjs/cellularjs/compare/v0.19.0...v0.20.0) (2024-01-25)
 
 
