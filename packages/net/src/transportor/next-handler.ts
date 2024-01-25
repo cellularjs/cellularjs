@@ -1,11 +1,5 @@
 import { Container } from '@cellularjs/di';
-import {
-  ServiceHandler,
-  ServiceHandlerClass,
-  ResolvedDriver,
-  IRS,
-} from '../internal';
-
+import { ServiceHandler, ServiceHandlerClass, normalizeIrs } from '../internal';
 /**
  * Instead of resolve all handlers/proxies and it's dependencies at once.
  * `NextHandler` allow you to resolve and run next (proxy/service) handler lazily.
@@ -19,21 +13,20 @@ export class NextHandler {
     private ServiceHandlerClass: ServiceHandlerClass,
     private proxyClasses: ServiceHandlerClass[],
     private extModule: Container,
-    private resolvedDriver: ResolvedDriver,
+    private rootContainer: Container,
   ) {
     this.currentIndex = proxyClasses.length - 1;
   }
 
   private async getNextProxy(): Promise<ServiceHandler> {
-    const proxyClass = this.proxyClasses[this.currentIndex];
+    const { proxyClasses, rootContainer, extModule } = this;
+    const proxyClass = proxyClasses[this.currentIndex];
     this.currentIndex--;
 
     await this.extModule.addProvider(proxyClass);
 
-    const { container } = this.resolvedDriver;
-
-    return container.resolve(proxyClass, {
-      extModule: this.extModule,
+    return rootContainer.resolve(proxyClass, {
+      extModule,
     });
   }
 
@@ -47,18 +40,17 @@ export class NextHandler {
       const nextProxy = await this.getNextProxy();
       const result = await nextProxy.handle();
 
-      return result instanceof IRS ? result : new IRS({ status: 200 }, result);
+      return normalizeIrs(result);
     }
 
-    const { container } = this.resolvedDriver;
-    const serviceHandler: ServiceHandler = await container.resolve(
+    const serviceHandler: ServiceHandler = await this.rootContainer.resolve(
       this.ServiceHandlerClass,
       { extModule: this.extModule },
     );
 
     const result = await serviceHandler.handle();
 
-    return result instanceof IRS ? result : new IRS({ status: 200 }, result);
+    return normalizeIrs(result);
   }
 
   /**

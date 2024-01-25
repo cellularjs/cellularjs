@@ -1,6 +1,7 @@
 export * from './scan-js';
 export * from './lookup-service-handler';
 export * from './lookup-providers';
+export * from './normalize-irs';
 export * from './reflect-meta';
 export * from './uniq-id';
 

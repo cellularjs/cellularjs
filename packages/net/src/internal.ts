@@ -6,3 +6,4 @@ export * from './decorator';
 export * from './network';
 export * from './transportor';
 export * from './message';
+export * from './utils';
