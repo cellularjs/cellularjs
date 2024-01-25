@@ -1,6 +1,6 @@
 {
   "name": "@cellularjs/cli",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "description": "CellularJS CLI",
   "keywords": [
     "cellularjs",
@@ -28,7 +28,7 @@
   "license": "MIT",
   "types": "./dist/",
   "dependencies": {
-    "@cellularjs/net": "^0.19.0",
+    "@cellularjs/net": "^0.20.0",
     "chalk": "4",
     "clui": "^0.3.6",
     "commander": "^8.3.0",

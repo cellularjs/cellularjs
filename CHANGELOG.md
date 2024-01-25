@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/cellularjs/cellularjs/compare/v0.19.0...v0.20.0) (2024-01-25)
+
+
+### Features
+
+* **net:** add ServiceFactory ([#130](https://github.com/cellularjs/cellularjs/issues/130)) ([50538b3](https://github.com/cellularjs/cellularjs/commit/50538b3725c2fe2558024f740aafab7dbd8da1b2))
+* update hallo template ([#129](https://github.com/cellularjs/cellularjs/issues/129)) ([c852065](https://github.com/cellularjs/cellularjs/commit/c8520650b5c7c2f6345c98b0029310628573e73f))
+
+
+
+
+
+
 # [0.19.0](https://github.com/cellularjs/cellularjs/compare/v0.17.0...v0.19.0) (2024-01-10)
 
 
