@@ -19,6 +19,7 @@ node_modules
 
 # Testing
 coverage
+coverage-e2e
 
 # Build Outputs
 dist
