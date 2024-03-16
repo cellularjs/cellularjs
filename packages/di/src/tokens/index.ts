@@ -2,7 +2,7 @@ import { Container } from '../container';
 
 /**
  * This is a token, it will help you get current module(~ container) reference.
- * _(For now, `ModuleRef` is only available inside module class only.)_
+ * _(For now, `ModuleRef` is only available inside module class.)_
  *
  * **Usage:**
  * ```ts
