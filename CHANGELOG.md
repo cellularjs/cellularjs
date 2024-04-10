@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/cellularjs/cellularjs/compare/v0.20.1...v0.21.0) (2024-04-10)
+
+
+### Features
+
+* **cli:** config code coverage report for e2e testing ([#135](https://github.com/cellularjs/cellularjs/issues/135)) ([c8291f2](https://github.com/cellularjs/cellularjs/commit/c8291f2f97ee27a97f4f314318c17e73160dea70))
+* **typeorm:** setDefaultCatch, callback is required ([#138](https://github.com/cellularjs/cellularjs/issues/138)) ([2185717](https://github.com/cellularjs/cellularjs/commit/21857171705092e1f650bfebd15455fda157d8d0))
+
+
+
+
+
 ## [0.20.1](https://github.com/cellularjs/cellularjs/compare/v0.20.0...v0.20.1) (2024-01-25)
 
 

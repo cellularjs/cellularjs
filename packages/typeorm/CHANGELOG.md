@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/cellularjs/cellularjs/compare/v0.20.1...v0.21.0) (2024-04-10)
+
+
+### Features
+
+* **typeorm:** setDefaultCatch, callback is required ([#138](https://github.com/cellularjs/cellularjs/issues/138)) ([2185717](https://github.com/cellularjs/cellularjs/commit/21857171705092e1f650bfebd15455fda157d8d0))
+
+
+
+
+
 ## [0.20.1](https://github.com/cellularjs/cellularjs/compare/v0.20.0...v0.20.1) (2024-01-25)
 
 **Note:** Version bump only for package @cellularjs/typeorm
