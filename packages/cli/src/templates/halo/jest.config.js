@@ -3,6 +3,7 @@ module.exports = {
   rootDir: './src',
 
   testEnvironment: 'node',
+  testMatch: ['<rootDir>/**/*.{spec,test}.ts'],
 
   // Ref: https://stackoverflow.com/a/51174924
   moduleDirectories: ['node_modules', 'src'],

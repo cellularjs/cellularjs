@@ -3,7 +3,7 @@ module.exports = {
   rootDir: '..',
 
   testEnvironment: 'node',
-  testMatch: ['<rootDir>/test/**/*.spec.ts'],
+  testMatch: ['<rootDir>/test/**/*.{spec,test}.ts'],
 
   coverageProvider: 'v8',
   coverageDirectory: './coverage-e2e',
