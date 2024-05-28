@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.21.1](https://github.com/cellularjs/cellularjs/compare/v0.21.0...v0.21.1) (2024-05-28)
+
+
+### Bug Fixes
+
+* **cli:** halo template, techMatch for unit test must not match all files ([#140](https://github.com/cellularjs/cellularjs/issues/140)) ([96446ec](https://github.com/cellularjs/cellularjs/commit/96446ec8aa5190fc1612caf0dff0643099a76b10))
+
+
+
+
+
 # [0.21.0](https://github.com/cellularjs/cellularjs/compare/v0.20.1...v0.21.0) (2024-04-10)
 
 
